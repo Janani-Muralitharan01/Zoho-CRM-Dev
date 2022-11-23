@@ -1,0 +1,14 @@
+.accordion__button {
+  background-color: #3b3f42 !important;
+  color:#f4f4f4 !important;
+  cursor: pointer !important;
+  padding: 10px !important;
+  text-align: left !important;
+  border: none !important;
+  width:88.8% !important; 
+ 
+}
+.alignTwo{
+  display:grid;
+  grid-template-columns: auto auto;
+}
