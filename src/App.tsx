@@ -9,12 +9,16 @@ import SideBar from './components/layouts/Sidebar/sidebar';
 function App() {
   return (
     <div className="App">
+      {/* <DragDropContext onDragEnd={(result, provided) => {
+      // TODO: implement onDragEnd
+}     }> */}
      <div className="container">
           <nav><NavBar/></nav>
           <main><Dashboard/></main>
           <div id="sidebar"><SideBar/></div>
           <footer><Footer/></footer>
       </div>
+      {/* </DragDropContext> */}
     </div>
   );
 }

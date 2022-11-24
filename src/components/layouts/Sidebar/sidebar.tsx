@@ -8,132 +8,164 @@ import {
 import 'react-accessible-accordion/dist/fancy-example.css';
 import './sidebar.css'
 import ButtonOptions from '../../CommonModules/ButtonOptions/buttons';
+import singleline from '../../../assets/singleline.svg'
+import onetwothree from '../../../assets/123.svg'
+import autonum from '../../../assets/autonum.svg'
+import check from '../../../assets/check.svg'
+import currency from '../../../assets/currency.svg'
+import date from '../../../assets/date.svg'
+import dateandtime from '../../../assets/dateandtime.svg'
+import decimal from '../../../assets/decimal.svg'
+import fileupload from '../../../assets/fileupload.svg'
+import fx from '../../../assets/fx.svg'
+import imageupload from '../../../assets/imageupload.svg'
+import longint from '../../../assets/longint.svg'
+import lookup from '../../../assets/lookup.svg'
+import mail from '../../../assets/mail.svg'
+import multiline from '../../../assets/multiline.svg'
+import multiselect from '../../../assets/multiselect.svg'
+import multilookup from '../../../assets/multi-lookup.svg'
+import percent from '../../../assets/percent.svg'
+import phone from '../../../assets/phone.svg'
+import picklist from '../../../assets/picklist.svg'
+import user from '../../../assets/user.svg'
+import subform from '../../../assets/subform.svg'
+import url from '../../../assets/url.svg'
+import rect from '../../../assets/rect.svg'
+import { DragDropContext } from 'react-beautiful-dnd';
+
+
 
 const SideBar = () => {
 
   const buttonNames = [
     {
     names : 'Single Line',
-    icon : 'ab',
-    id : 1
+    icon : singleline,
+    id : 1,
     },
     {
       names : 'Multi-Line',
-      icon : 'ab',
+      icon :multiline ,
       id : 2,
     },
     {
       names : 'Email',
-      icon : 'ab',
+      icon : mail,
       id : 3,
     },
     {
       names : 'Phone',
-      icon : 'ab',
+      icon : phone,
       id : 4,
     },
     {
       names : 'Pick List',
-      icon : 'ab',
+      icon : picklist,
       id : 5,
     },
     {
       names : 'Multi-Select',
-      icon : 'ab',
+      icon : multiselect,
       id : 6,
     },
     {
       names : 'Date',
-      icon : 'ab',
+      icon : date,
       id : 7,
     },
     {
       names : 'Date/Time',
-      icon : 'ab',
+      icon : dateandtime,
       id : 8,
     },
     {
       names : 'Number',
-      icon : 'ab',
+      icon : onetwothree,
       id : 9,
 
     },
     {
       names : 'Auto-Number',
-      icon : 'ab',
+      icon : autonum,
       id : 10,
     },
     {
       names : 'Currency',
-      icon : 'ab',
+      icon : currency,
       id : 11,
     },
     {
       names : 'Decimal',
-      icon : 'ab',
+      icon : decimal,
       id : 12,
     },
     {
       names : 'Percent',
-      icon : 'ab',
+      icon : percent,
       id : 13,
     },
     {
       names : 'Long integer',
-      icon : 'ab',
+      icon : longint,
       id : 14,
     },
     {
       names : 'Checkbox',
-      icon : 'ab',
+      icon : check,
       id : 15,
     },
     {
       names : 'URL',
-      icon : 'ab',
+      icon : url,
       id : 16,
     },
     {
       names : 'Lookup',
-      icon : 'ab',
+      icon : lookup,
       id : 17,
     },
     {
       names : 'Formula',
-      icon : 'ab',
+      icon : fx,
       id : 18,
     },
     {
       names : 'User',
-      icon : 'ab',
+      icon : user,
       id : 19,
     },
     {
       names : 'File Upload',
-      icon : 'ab',
+      icon : fileupload,
       id : 20,
     },
     {
       names : 'Image Upload',
-      icon : 'ab',
+      icon : imageupload,
       id : 21,
     },
     {
       names : 'Multi-Select Lookup',
-      icon : 'ab',
+      icon : multilookup,
       id : 22,
     },
     {
       names : 'Subform',
-      icon : 'ab',
+      icon : subform,
       id : 23,
     },
     {
       names : 'NEW SECTION',
-      icon : 'ab',
+      icon : rect,
       id : 25,
     },
   ]
+
+
+  const updateMissinButton = () => {
+
+  }
 
   return (
   <div>
@@ -147,7 +179,9 @@ const SideBar = () => {
                 </AccordionItemHeading>
                 <AccordionItemPanel>
                 <div className="alignTwo">
-                {buttonNames.map(button=><ButtonOptions name={button.names} icon={button.icon}/>)}
+                {buttonNames.map(button=> 
+                  <ButtonOptions name={button.names} icon={button.icon} id={button.id}/>
+                 )}
                 </div>
                 </AccordionItemPanel>
             </AccordionItem>
