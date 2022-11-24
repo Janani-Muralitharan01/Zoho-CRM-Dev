@@ -1,0 +1,9 @@
+.designBox{
+    height:30px;
+    width:300px;
+    border-color: black;
+    border-width: 2px;
+    background-color: white;
+    border: 2px solid black;
+
+}

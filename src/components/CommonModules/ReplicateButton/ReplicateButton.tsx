@@ -1,3 +1,4 @@
+import './ReplicateButton.css'
 interface ReplicateButtonOptions {
     buttonName: string;
     icon: string;
@@ -6,9 +7,8 @@ interface ReplicateButtonOptions {
 
 const ReplicateButton: React.FC<ReplicateButtonOptions> = ({ buttonName, icon }) => {
     return (
-        <div>
+        <div className="designBox">
             {buttonName}
-            {icon}
         </div>
     )
 }

@@ -51,14 +51,14 @@ const ButtonOptions : React.FC<ButtonOptionsProps> = ({ name , icon}) => {
             <Draggable
                 onStart={(event, data) => onStart(event, data)}
                 onDrag={(event, data) => { console.log('end') }}
-                onStop={(event, data) => { setIsDragged(false) }}
+                onStop={(event, data) => { setIsDragged(true) }}
             >
                 <div>
+                {isDragged && <ReplicateButton buttonName={name} icon={icon} />}
                     {!isDragged && <div className="rectanglebox">
                         <img className="imagedesign height" src={icon}></img>
                         <div>{name}</div>
                     </div>}
-                    {isDragged && <ReplicateButton buttonName={name} icon={icon} />}
                 </div>
             </Draggable>
         </div>
