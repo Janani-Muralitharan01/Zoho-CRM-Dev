@@ -1,0 +1,41 @@
+.navbar{ 
+          display: flex;
+          justify-content: space-between;
+          padding: 4px;
+}
+.p-button {
+    /* margin-top: 22px; */
+    
+    display: inline-flex;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    align-items: center;
+    vertical-align: bottom;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    height: 40px;
+    /* background-color: linear-gradient(#fcfdff 0,#eaeef5 100%) no-repeat padding-box !important; */
+    background-color:#fcfff8 !important;
+    border-radius: 6px !important;
+    border: 1px solid #d0d4df !important;
+    padding: 6px 20px 7px !important;
+    color: black !important;
+}
+.standard{
+    
+          margin-left: 626px;
+          position: relative;
+          right: 408px;
+          font-size: 20px;
+          margin-top: 11px;
+}
+.icon {
+     margin-left: 23px;
+ }
+ .untitle{
+     margin-left: 36px;
+     font-size: 20px;
+     margin-top: 11px;
+ }
