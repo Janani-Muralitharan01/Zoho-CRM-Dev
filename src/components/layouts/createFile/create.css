@@ -2,7 +2,7 @@
      {
           display: flex;
           justify-content: space-between;
-          padding-bottom: 150px;
+          padding-bottom: 80px;
       }
 .preview{
      margin-top: -7px;
@@ -26,7 +26,7 @@
  }
  .card{
           background-color: white;
-    width: 344px;
+    width: 430px;
     height: 23px;
     border-radius: -7px;
     display: inline-table;
@@ -37,6 +37,7 @@
  .boder-Style{
      border: 2px solid darkgrey;
      padding: 18px;
+     /* padding-top: 53px; */
      border-style: dashed;
  }
  .names{
@@ -44,4 +45,8 @@
           display: flex;
           justify-content: start;
       
+ }
+ .informationName{
+     display: flex;
+    margin-left: 13px;
  }

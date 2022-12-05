@@ -10,6 +10,7 @@
 import { TabView, TabPanel } from 'primereact/tabview';
 import './dashboard.css';
 import UntitleImage from '../createFile/create'
+import QuickCreate from '../QuickCreateFile/quickCreate'
 
 const Dashboard = () => {
     return (
@@ -20,7 +21,7 @@ const Dashboard = () => {
         <UntitleImage/>
     </TabPanel>
     <TabPanel header="QUICK CREATE">
-        Quick Create
+        <QuickCreate/>
     </TabPanel>
     <TabPanel header="DETAIL VIEW">
         Detail View

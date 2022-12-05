@@ -16,7 +16,7 @@ function App() {
           <nav><NavBar/></nav>
           <main><Dashboard/></main>
           <div id="sidebar"><SideBar/></div>
-          <footer><Footer/></footer>
+          {/* <footer><Footer/></footer> */}
       </div>
       {/* </DragDropContext> */}
     </div>

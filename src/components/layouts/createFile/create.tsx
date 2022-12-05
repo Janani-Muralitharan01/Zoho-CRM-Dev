@@ -8,9 +8,7 @@ const UntitleImage = () => {
      <div><div className='untitlee'><div className='boder'>
           <span>Untitle image<InputSwitch/><br/>
      <span>
-     <Avatar icon="pi pi-user" size="xlarge" className="p-overlay-badge"
-     
-     style={{ backgroundColor: '#4caf4f', color: '#ffffff' }}/>
+     <Avatar icon="pi pi-user" size="xlarge" className="p-overlay-badge"/>
      </span>
      </span></div>
      <h5 className='preview'>Preview</h5>

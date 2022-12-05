@@ -9,8 +9,9 @@ const NavBar = () => {
       <i className="pi pi-cog mr-2 icon"></i>
       </div>
       
-      <Button label="Cancel" className='btn-C'/>
-      <Button label="Save and Close"/>
+      <button className='buttonStyle'> Cancel </button>
+      <button className='buttonStyle'> Save and Close </button>
+      {/* <Button label="Save and Close"/> */}
       <Button label="Save"/>
       
       </div>

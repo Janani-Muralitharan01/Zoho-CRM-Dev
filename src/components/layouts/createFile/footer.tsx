@@ -2,7 +2,7 @@ import './create.css'
 const Footer = () => {
     
 
-     const buttonNames = [
+     const cards = [
           {
           names : 'Secondary email',
          
@@ -39,7 +39,8 @@ const Footer = () => {
      return (
           
           <div className='boder-Style'>
-               {buttonNames.map(button=>  
+               <h5 className='informationName'>Untitled Information</h5>
+               {cards.map(button=>  
                <div className='card'><span className='names'>{button.names}</span></div>
               )}</div>
      );

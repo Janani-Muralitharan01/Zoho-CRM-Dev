@@ -1,0 +1,33 @@
+.cardQuick {
+     background-color: white;
+     width: 468px;
+     height: 23px;
+     border-radius: -7px;
+     display: inline-table;
+     padding: 11px;
+     border: 2px solid #f6f5f5;
+ }
+ .boder-StyleQuick {
+     border: 2px solid darkgrey;
+     padding: 5px;
+     /* padding-top: 53px; */
+     display: inline-grid;
+     border-style: dashed;
+ }
+ .namesQuick {
+     display: flex;
+     justify-content: space-around;
+ }
+ .subName{
+     
+          margin-right: 180px;
+          /* margin-left: 83px; */
+          color: darkgrey;
+      
+ }
+ .previewQuick {
+     margin-top: -7px;
+     display: flex;
+     color: blue;
+     justify-content: end;
+ }
