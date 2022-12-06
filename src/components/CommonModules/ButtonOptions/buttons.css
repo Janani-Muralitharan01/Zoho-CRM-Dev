@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 0.2fr 1fr;
   width: 140px !important;
-  height: 18px;
+  height: 25px;
   background-color: #ffffff;
   color: black;
   border-color: #3b3f42;

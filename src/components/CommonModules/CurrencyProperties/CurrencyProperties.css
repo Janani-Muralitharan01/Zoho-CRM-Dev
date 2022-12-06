@@ -1,0 +1,16 @@
+.currencyProperties_cancel {
+  display: flex;
+  justify-content: space-between;
+}
+.currencyProperties_cancel > p {
+  color: blue;
+}
+.Currency_Round {
+  display: flex;
+}
+.Currency_Precision {
+  margin-left: 15px;
+}
+.p-button {
+  height: 40px;
+}

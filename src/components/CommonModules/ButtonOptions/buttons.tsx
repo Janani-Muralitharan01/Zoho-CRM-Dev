@@ -23,14 +23,14 @@ interface ButtonOptionsProps {
 // }
 
 const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
-  console.log("Buttonname", name);
-  console.log("Buttonicon", icon);
+  //   console.log("Buttonname", name);
+  //   console.log("Buttonicon", icon);
   const [isDragged, setIsDragged] = useState(false);
 
   const onStart = (event: any, data: any) => {
-    console.log("HELLO");
-    console.log({ event });
-    console.log({ data });
+    // console.log("HELLO");
+    // console.log({ event });
+    // console.log({ data });
     setIsDragged(true);
   };
 
@@ -43,12 +43,15 @@ const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
         </div>
       )}
       <Draggable
-        onStart={(event, data) => onStart(event, data)}
+        onStart={(event, data) => {
+          console.log(event, "onStart", data, "isDragged", isDragged);
+          onStart(event, data);
+        }}
         onDrag={(event, data) => {
-          console.log(data, "123", event);
+          console.log(data, "onDrag", event, "isDragged", isDragged);
         }}
         onStop={(event, data) => {
-          console.log(event, "456", data);
+          console.log(event, "onStop", data, "isDragged", isDragged);
           setIsDragged(true);
         }}
       >

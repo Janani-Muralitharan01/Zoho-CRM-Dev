@@ -16,7 +16,8 @@
   height: 25px;
 }
 .designBoxSub {
-  padding: 4px;
+  padding-left: 4px;
+
   display: flex;
   align-items: center;
   width: 290px;
@@ -24,4 +25,7 @@
 }
 .apple {
   justify-content: center;
+}
+.orange {
+  visibility: hidden;
 }
