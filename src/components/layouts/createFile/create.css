@@ -1,0 +1,52 @@
+.untitlee
+     {
+          display: flex;
+          justify-content: space-between;
+          padding-bottom: 80px;
+      }
+.preview{
+     margin-top: -7px;
+     color: blue;
+}
+.boder{
+     
+          border: 2px solid darkgrey;
+          padding: 10px;
+          border-style: dashed;
+      
+}
+.image{
+     margin-right: 74px;
+}
+.p-avatar.p-avatar-xl {
+     width: 4rem;
+     height: 4rem;
+     font-size: 2rem;
+     margin-left: -73px !important;
+ }
+ .card{
+          background-color: white;
+    width: 430px;
+    height: 23px;
+    border-radius: -7px;
+    display: inline-table;
+    padding: 11px;
+    border: 2px solid #f6f5f5;
+      
+ }
+ .boder-Style{
+     border: 2px solid darkgrey;
+     padding: 18px;
+     /* padding-top: 53px; */
+     border-style: dashed;
+ }
+ .names{
+     
+          display: flex;
+          justify-content: start;
+      
+ }
+ .informationName{
+     display: flex;
+    margin-left: 13px;
+ }

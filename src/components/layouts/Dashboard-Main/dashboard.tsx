@@ -7,13 +7,27 @@
 // import TabContext from '@mui/lab/TabContext';
 // import TabList from '@mui/lab/TabList';
 // import TabPanel from '@mui/lab/TabPanel';
-
+import { TabView, TabPanel } from 'primereact/tabview';
+import './dashboard.css';
+import UntitleImage from '../createFile/create'
+import QuickCreate from '../QuickCreateFile/quickCreate'
 
 const Dashboard = () => {
     return (
     <>
-      <div>
-        <h1>Dashboard</h1>
+      <div >
+      <TabView className='tabview'>
+    <TabPanel header="CREATE">
+        <UntitleImage/>
+    </TabPanel>
+    <TabPanel header="QUICK CREATE">
+        <QuickCreate/>
+    </TabPanel>
+    <TabPanel header="DETAIL VIEW">
+        Detail View
+    </TabPanel>
+</TabView>
+{/* <i className="pi pi-clone mr-2 icon"></i> */}
       </div>
       {/* <Tabs>
         <Tab>title</Tab>
