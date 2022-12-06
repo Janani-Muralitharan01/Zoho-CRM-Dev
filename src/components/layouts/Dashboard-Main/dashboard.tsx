@@ -11,11 +11,15 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import './dashboard.css';
 import UntitleImage from '../createFile/create'
 import QuickCreate from '../QuickCreateFile/quickCreate'
+import DetailView from '../DetailView/detailView'
 
 const Dashboard = () => {
+   
     return (
     <>
-      <div >
+      <div>
+        
+      <i className="pi pi-clone book"></i>
       <TabView className='tabview'>
     <TabPanel header="CREATE">
         <UntitleImage/>
@@ -23,11 +27,11 @@ const Dashboard = () => {
     <TabPanel header="QUICK CREATE">
         <QuickCreate/>
     </TabPanel>
-    <TabPanel header="DETAIL VIEW">
-        Detail View
+    <TabPanel header="DETAIL VIEW" >
+        <DetailView/>
     </TabPanel>
 </TabView>
-{/* <i className="pi pi-clone mr-2 icon"></i> */}
+ 
       </div>
       {/* <Tabs>
         <Tab>title</Tab>
