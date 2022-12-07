@@ -1,4 +1,5 @@
 import "./App.css";
+import "primeicons/primeicons.css";
 import Dashboard from "./components/layouts/Dashboard-Main/dashboard";
 import Footer from "./components/layouts/Footer/footer";
 import NavBar from "./components/layouts/Navbar/navbar";

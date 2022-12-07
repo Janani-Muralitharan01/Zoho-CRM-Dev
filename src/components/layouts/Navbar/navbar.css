@@ -48,8 +48,10 @@
           margin-left: 626px;
           position: relative;
           right: 408px;
-          font-size: 20px;
+          color: black;
+          font-size: 18px;
           margin-top: 11px;
+          font-family: "Times New Roman", Times, serif;
 }
 .icon {
      margin-left: 23px;
@@ -57,5 +59,18 @@
  .untitle{
      margin-left: 36px;
      font-size: 20px;
+     color: black;
      margin-top: 11px;
+     font-family: "Times New Roman", Times, serif;
  }
+.line {
+    position: fixed;
+    top: 26px;
+    /* right: 85px; */
+    left: 38px;
+    color: darkgrey;
+}
+.inputBorder{
+    border: 2px solid white !important;
+    border-bottom-color: rgb(169, 167, 167) !important;
+}

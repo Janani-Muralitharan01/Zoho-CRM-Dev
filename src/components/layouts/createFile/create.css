@@ -35,7 +35,6 @@
 }
 .boder-Style:hover {
   border: 2px solid darkgrey;
-  /* padding: 18px; */
 
   /* padding-top: 53px; */
   border-style: dotted;
@@ -49,7 +48,24 @@
   margin-left: 39px;
 }
 .informationName:hover {
-  /* background: white; */
-  /* width: 156px; */
-  /* padding: 6px; */
+  background: white;
+  width: 156px;
+  padding: 6px;
+}
+.ellips {
+  position: fixed;
+  left: 330px;
+  top: 199px;
+  background: #cfcfcf;
+}
+.dropdownBorderStyle {
+  background: #fffbe8;
+  width: 312px;
+  padding: 15px;
+  border: 1px solid #d9caab;
+  height: 60px;
+  top: 0px;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 1px 1px #d9caab;
+  position: fixed;
 }
