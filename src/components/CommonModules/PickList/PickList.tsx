@@ -80,7 +80,7 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
         <section>
           {arr.map((item, i: any) => {
             return (
-              <section className="multipleSelectDialogOption">
+              <section className="surface-100">
                 <input
                   onChange={handleChange}
                   value={item.value}
@@ -118,9 +118,9 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
             value="Alphabetical order"
             onChange={onValueChange}
           />
-          <label>Alphabetical order{order}</label>
+          <label>Alphabetical order</label>
         </p>
-        <p>
+        <p className=" bg-blue-100 p-2 border-round border-1 border-blue-500">
           {order == "Entered order"
             ? "Values will be sorted alphabetically in respective languages."
             : "The order customized here will be followed in List views, reports and dashboards where sorting is applied for the picklist field."}
