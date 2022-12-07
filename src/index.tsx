@@ -8,7 +8,8 @@ import "./index.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
-//import 'primeflex/primeflex.scss';
+import "primeflex/primeflex.min.css";
+// import 'primeflex/primeflex.scss';
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
