@@ -17,7 +17,6 @@ const MultipleSelectLookUp: React.FC<MultipleSelectLookUpProps> = ({
 
   return (
     <div>
-      MultipleSelectLookUp
       <Dialog
         header="Multi Select Lookup Properties"
         visible={state}

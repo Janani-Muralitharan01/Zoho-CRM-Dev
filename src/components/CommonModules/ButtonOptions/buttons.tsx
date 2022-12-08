@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./buttons.css";
 // import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Draggable from "react-draggable";
 import ReplicateButton from "../ReplicateButton/ReplicateButton";
+import { useSelector, useDispatch } from "react-redux";
 
 interface ButtonOptionsProps {
   name: string;
@@ -10,22 +11,16 @@ interface ButtonOptionsProps {
   id: number;
 }
 
-// const [val,setVal]=useState([]);
-// const handleAdd=()=>{
-//   const abc: any =[...val,[]]
-//   setVal(abc)
-// }
-
-// const handleChange=(onChangeValue: any)=>{
-// const inputdata: any =[...val]
-// inputdata[i]=onChangeValue.target.value;
-// setVal(inputdata)
-// }
-
 const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
   //   console.log("Buttonname", name);
   //   console.log("Buttonicon", icon);
   const [isDragged, setIsDragged] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const count = useSelector((state: any) => state);
+  useEffect(() => {
+    setActiveIndex(count.user.indexValue);
+    console.log("count.user.indexValue", count.user.indexValue);
+  }, [count.user.indexValue]);
 
   const onStart = (event: any, data: any) => {
     // console.log("HELLO");
@@ -37,7 +32,9 @@ const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
   return (
     <div className={isDragged ? "rectangleMainBox" : ""}>
       {isDragged && (
-        <div className="rectanglebox">
+        <div
+          className={activeIndex == 1 ? "rectangleboxQuick" : "rectanglebox"}
+        >
           <img className="imagedesign height" src={icon}></img>
           <div>{name}</div>
         </div>
@@ -58,7 +55,11 @@ const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
         <div>
           {isDragged && <ReplicateButton buttonName={name} icon={icon} />}
           {!isDragged && (
-            <div className="rectanglebox">
+            <div
+              className={
+                activeIndex == 1 ? "rectangleboxQuick" : "rectanglebox"
+              }
+            >
               <img className="imagedesign height" src={icon}></img>
               <div>{name}</div>
             </div>
