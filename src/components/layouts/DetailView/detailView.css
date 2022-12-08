@@ -6,64 +6,76 @@
      display: table;
      padding: 11px;
      border: 2px solid #f6f5f5;
- }
- .TextOne{
-     
-          display: flex;
-          justify-content: start;
- }
- .Texttwo{
-     
+}
+
+.TextOne {
+
+     display: flex;
+     justify-content: start;
+}
+
+.Texttwo {
+
      display: flex;
      justify-content: space-between;
- 
+
 }
- .customize{
-          color: royalblue;
-          margin-left: 225px;
- }
- .customizeStyle{
+
+.customize {
+     color: royalblue;
+     margin-left: 225px;
+}
+
+.customizeStyle {
      color: royalblue;
 }
- .top-margin{    margin-top: 40px;
+
+.top-margin {
+     margin-top: 40px;
 }
-.hoverborder:hover{
-     
-          border: 0.5px solid darkgrey;
-          padding: 9px;
-          box-shadow: 1px 1px ;
-          
-      
+
+.hoverborder:hover {
+
+     border: 0.5px solid darkgrey;
+     padding: 9px;
+     box-shadow: 1px 1px;
+
+
 }
- .supportLine{
-     
-          display: flex;
-          background: #efefef;
-          border: 1px solid transparent;
-          width: 437px;
-          padding: 5px;
-          font-size: 13px;
-      
- }
- .supportCard{
+
+.supportLine {
+
      display: flex;
-    background: white;
-    justify-content: space-around;
-    padding: 8px;
- }
- .namesQuick {
+     background: #efefef;
+     border: 1px solid transparent;
+     width: 437px;
+     padding: 5px;
+     font-size: 13px;
+
+}
+
+.supportCard {
+     display: flex;
+     background: white;
+     justify-content: space-around;
+     padding: 8px;
+}
+
+.namesQuick {
      display: flex;
      justify-content: space-between;
      font-size: 14px;
- }
- .namesDetail {
+}
+
+.namesDetail {
      display: flex;
      justify-content: space-around;
      border-right: 2px solid #f6f5f5;
      padding-right: 78px;
      font-size: 14px;
- }
- .p-inputswitch-slider {
+}
+
+.p-inputswitch-slider {
      position: absolute;
      cursor: pointer;
      top: 6px !important;
@@ -72,4 +84,12 @@
      /* bottom: -23px; */
      border: 1px solid transparent;
      height: 27px !important;
- }
+}
+
+.falseText {
+     display: table-cell;
+     justify-content: flex-start;
+     background:  #efefef;
+     font-size: 14px;
+     padding: 12px;
+}

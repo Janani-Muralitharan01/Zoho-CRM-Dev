@@ -1,38 +1,45 @@
 import "./create.css";
 import Draggable from "react-draggable";
-const Footer = () => {
-  const cards = [
-    // {
-    //   names: "Secondary email",
-    //   subname: " Single Line",
-    //   id: 1,
-    // },
-    // {
-    //   names: "Untitled Name",
-    //   subname: " Single Line",
-    //   id: 2,
-    // },
-    // {
-    //   names: "Untitled Owner",
-    //   subname: " Single Line",
-    //   id: 3,
-    // },
-    // {
-    //   names: "Email Opt Out",
-    //   subname: " Email",
-    //   id: 4,
-    // },
-    // {
-    //   names: "Email",
-    //   subname: " Email",
-    //   id: 5,
-    // },
-    // {
-    //   names: "Created By",
-    //   subname: " Single Line",
-    //   id: 6,
-    // },
-  ];
+import previewTopSideBar from "./previewTopSideBar";
+// interface props{
+//   data:any;
+// }
+
+const Footer = ({ cards }: any) => {
+  // const cards = [
+  //   {
+  //     names: "Secondary email",
+  //     subname: " Single Line",
+
+  //     id: 1,
+  //   },
+  //   {
+  //     names: "Untitled Name",
+  //     subname: " Single Line",
+  //     id: 2,
+  //   },
+  //   {
+  //     names: "Untitled Owner",
+  //     subname: " Single Line",
+  //     id: 3,
+  //   },
+  //   {
+  //     names: "Email Opt Out",
+  //     subname: " Email",
+  //     id: 4,
+  //   },
+  //   {
+  //     names: "Email",
+  //     subname: " Email",
+  //     id: 5,
+  //   },
+  //   {
+  //     names: "Created By",
+  //     subname: " Single Line",
+  //     id: 6,
+  //   },
+
+  // ];
 
   return (
     <div className="boder-Style">
@@ -58,11 +65,21 @@ const Footer = () => {
           console.log(event, "onStop", data, "isDragged");
         }}
       >
-        <div className="card">
+        {/* <div className="card">
           <span className="names">
             Secondary email<span className="grey">Single Line </span>
             <i className="pi pi-ellipsis-v"></i>
           </span>
+        </div> */}
+        <div>
+          {cards.map((button: any) => (
+            <div className="card">
+              <span className="names">
+                {button.names} <span className="grey">{button.subname} </span>
+                <i className="pi pi-ellipsis-v"></i>
+              </span>{" "}
+            </div>
+          ))}
         </div>
       </Draggable>
       <Draggable

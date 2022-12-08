@@ -57,14 +57,14 @@
      margin-left: 23px;
  }
  .untitle{
-     margin-left: 36px;
+     margin-left: 10px;
      font-size: 20px;
      color: black;
      margin-top: 11px;
      font-family: "Times New Roman", Times, serif;
  }
 .line {
-    position: fixed;
+    position: absolute;
     top: 26px;
     /* right: 85px; */
     left: 38px;

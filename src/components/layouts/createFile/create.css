@@ -3,27 +3,33 @@
   justify-content: space-between;
   padding-bottom: 80px;
 }
+
 .preview {
   margin-top: -7px;
   color: blue;
 }
+
 .boder {
   border: 2px solid darkgrey;
   padding: 10px;
   border-style: dotted;
 }
+
 .grey {
   color: darkgrey;
 }
+
 .image {
   margin-right: 74px;
 }
+
 .p-avatar.p-avatar-xl {
   width: 4rem;
   height: 4rem;
   font-size: 2rem;
   margin-left: -73px !important;
 }
+
 .card {
   background-color: white;
   width: 430px;
@@ -33,31 +39,36 @@
   padding: 11px;
   border: 2px solid #f6f5f5;
 }
+
 .boder-Style:hover {
   border: 2px solid darkgrey;
   min-height: 250px;
   /* padding-top: 53px; */
   border-style: dotted;
 }
+
 .names {
   display: flex;
   justify-content: space-between;
 }
+
 .informationName {
   display: flex;
   margin-left: 39px;
 }
+
 .informationName:hover {
   background: white;
   width: 156px;
   padding: 6px;
 }
+
 .ellips {
-  position: fixed;
-  left: 330px;
-  top: 199px;
-  background: #cfcfcf;
+  position: relative;
+  bottom: 59px;
+  right: 36px;
 }
+
 .dropdownBorderStyle {
   background: #fffbe8;
   width: 312px;
@@ -69,7 +80,19 @@
   box-shadow: 0 1px 1px #d9caab;
   position: fixed;
 }
-.createImagePosition {
-  left: 80px !important;
-  top: 10px !important;
+.contactName {
+  background: #f0f1f3;
+  display: flex;
+  /* margin: 6px; */
+  padding: 15px;
+  font-size: 17px;
+  color: #111111;
+  font-weight: bold;
+}
+.contactuntitle {
+  font-size: 18px;
+  display: flex;
+  margin: 20px;
+  color: #111111;
+  font-weight: bold;
 }
