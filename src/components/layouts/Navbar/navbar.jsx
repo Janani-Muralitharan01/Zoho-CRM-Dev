@@ -4,6 +4,7 @@ import './navbar.css'
 import { InputText } from 'primereact/inputtext';
 import { Tooltip } from 'primereact/tooltip';
 import { OverlayPanel } from 'primereact/overlaypanel';
+import Footer from '../Footer/footer'
 const NavBar = () => {
   const op = useRef(null);
   const setting = useRef(null);
@@ -36,11 +37,12 @@ const NavBar = () => {
       {/* settings */}
       <OverlayPanel
       ref={setting}
-      >
+      ><Footer />
      <div>Rename</div><br/>
      <div>Module Permisson</div>
       </OverlayPanel>
       </div>
+      
     );
   }
   
