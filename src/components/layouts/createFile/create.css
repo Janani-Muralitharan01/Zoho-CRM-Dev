@@ -7,6 +7,7 @@
 .preview {
   margin-top: -7px;
   color: blue;
+  cursor: pointer;
 }
 
 .boder {
@@ -57,11 +58,11 @@
   margin-left: 39px;
 }
 
-.informationName:hover {
+/* .informationName:hover {
   background: white;
   width: 156px;
   padding: 6px;
-}
+} */
 
 .ellips {
   position: relative;
@@ -71,11 +72,13 @@
 
 .dropdownBorderStyle {
   background: #fffbe8;
-  width: 312px;
+  width: 328px;
   padding: 15px;
   border: 1px solid #d9caab;
   height: 60px;
   top: 0px;
+  font-size: 13px;
+  color: #7b603d;
   border-radius: 0 0 5px 5px;
   box-shadow: 0 1px 1px #d9caab;
   position: fixed;

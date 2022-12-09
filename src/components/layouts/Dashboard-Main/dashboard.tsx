@@ -29,7 +29,7 @@ const Dashboard = () => {
   return (
     <>
       <div>
-        <i className="pi pi-clone book"></i>
+        <i className="pi pi-clone flex justify-content-end mr-2"></i>
 
         <TabView
           className="tabview"

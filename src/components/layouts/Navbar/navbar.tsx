@@ -12,13 +12,13 @@ const NavBar = () => {
       
     <div className="navbar ">
       <span></span>
-      <div className='untitle'  onClick={(e) => op.current.toggle(e)} >Untitled <br/><span className='line'>________________________</span></div>
-      <div className='standard'>Standard
+      <div className='untitle font-normal'  onClick={(e) => op.current.toggle(e)} >Untitled <br/><span className='line'>________________________</span></div>
+      <div className='standard font-normal'>Standard
       <i className="pi pi-cog mr-2 icon" onClick={(e) => setting.current.toggle(e)}></i>
       </div>
       
-      <button className='buttonStyle'> Cancel </button>
-      <button className='buttonStyle'> Save and Close </button>
+      <button className='buttonStyle font-normal'> Cancel </button>
+      <button className='buttonStyle font-normal'> Save and Close </button>
       {/* <Button label="Save and Close"/> */}
       <Button label="Save"/>
       <OverlayPanel

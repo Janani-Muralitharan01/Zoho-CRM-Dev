@@ -72,14 +72,14 @@ const Footer = ({ cards }: any) => {
           </span>
         </div> */}
         <div>
-          {cards.map((button: any) => (
+          {/* {cards.map((button: any) => (
             <div className="card">
               <span className="names">
                 {button.names} <span className="grey">{button.subname} </span>
                 <i className="pi pi-ellipsis-v"></i>
               </span>{" "}
             </div>
-          ))}
+          ))} */}
         </div>
       </Draggable>
       <Draggable
