@@ -21,7 +21,7 @@ function App() {
         <div id="sidebar">
           <SideBar />
         </div>
-        {/* <footer><Footer/></footer> */}
+        <footer><Footer/></footer>
       </div>
       {/* </DragDropContext> */}
     </div>

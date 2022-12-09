@@ -14,12 +14,14 @@
      color: #080809 !important;
  }
  .p-tabview .p-tabview-panels {
-     background:#f6f5f5 !important;
-     padding: 1.25rem;
-     border: 0 none;
-     color: #495057;
-     border-bottom-right-radius: 6px;
-     border-bottom-left-radius: 6px;
+    background: #f6f5f5 !important;
+    padding: 1.25rem;
+    border: 0 none;
+    color: #495057;
+    overflow: scroll;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    height: 503px;
  }
  .p-tabview .p-tabview-nav .p-tabview-ink-bar {
      z-index: 1;
@@ -35,4 +37,13 @@
      outline-offset: 0;
      box-shadow: inset 0 0 0 0.2rem #f6f5f5 !important;
  }
+ .p-tabview-title {
+    font-size: 14px !important;
+    line-height: 1;
+    white-space: nowrap;
+    /* margin-left: 21px; */
+    color: #666 !important;
+    font-weight: 500 !important;
+}
+
  
