@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { Checkbox } from 'primereact/checkbox';
 import { InputText } from 'primereact/inputtext';
+import { ColorPicker } from 'primereact/colorpicker';
 
 import "./PickList.css";
 
@@ -17,17 +18,20 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
       type: "text",
       id: 1,
       value: "",
+      
     },
   ];
   const [checked, setChecked] = useState(false);
+  const [colorchecked, setcolorchecked] = useState(false);
   const [state, setState] = useState(false);
   const [option, setOption] = useState([]);
   const [order, setOrder] = useState("");
-  const [checkAlpha, setCheckAlpha] = useState("");
+  const [checkAlpha, setCheckAlpha] = useState(false);
   const [checkRequire, setCheckRequire] = useState("");
   const [checkToolTip, setCheckToolTip] = useState("");
   const [arr, setArr] = useState(inputArr);
   const [Multiselect, setMultiselect] = useState<any>([]);
+  const [color2, setColor2] = useState('');
 
   useEffect(() => {
     setState(pickListDialogVisible);
@@ -42,6 +46,11 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   console.log(e,"ee")
   setChecked(!checked)
   }
+  const handlerCheckcolor = (e:any) =>{
+    console.log(e,"ee")
+    setcolorchecked(!colorchecked)
+    }
+  var k = 1;
   const handlerCheckclose = (e:any) =>{
     console.log(e,"closee")
     setState(false)
@@ -59,6 +68,11 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
       ];
     });
   };
+  const deleteinput = (i:any) =>{
+    const deleteVal = [ ...arr]
+        deleteVal.splice(i,1)
+        setArr(deleteVal)
+    }
 
   const onValueChange = (e: any) => {
     console.log("onValueChange", e.target.value);
@@ -164,19 +178,22 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
           <input type="text" />
         </p>
         <h4>Pick List Option</h4>
-        <section>
+        <section className="multipleSelectDialogOption_main">
           {arr.map((item, i: any) => {
             return (
-              <section className="surface-100">
-                <input
-                  onChange={handleChange}
-                  value={item.value}
-                  id={i}
-                  type={item.type}
-                />
-                <i className="pi pi-plus " onClick={addInput}></i>
-                <i className="pi pi-minus"></i>
-              </section>
+              
+              <section className="multipleSelectDialogOption">
+                {colorchecked?<ColorPicker value={color2} onChange={(e:any) => setColor2(e.value)}  ></ColorPicker>:""}
+              <InputText
+                onChange={handleChange}
+                value={item.value}
+                
+                placeholder={' Options' +  " " +k++}
+                type={item.type}
+              />
+              <i className="pi pi-plus " onClick={addInput}></i>
+              <i className="pi pi-minus" onClick= { () => deleteinput(i)}></i>
+            </section>
             );
           })}
         </section>
@@ -218,13 +235,8 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
         </p>
         <section>
           <p>
-            <input
-              type="checkbox"
-              value="alphabetically"
-              name="alphabetically"
-              onChange={(event) => setCheckAlpha(event.target.value)}
-            ></input>
-            Display values alphabetically, instead of in the order entered.
+          <Checkbox inputId="binary" checked={colorchecked} onChange={handlerCheckcolor} />
+           Enable color for picklist options
           </p>
 
           <p>

@@ -45,4 +45,26 @@
  .pt{
      padding-top: 72px;
  }
- 
+ .multipleSelectDialogOption_main {
+    background: #f0f3f5;
+    border: 0;
+    height: 222px;
+    border-radius: 3px;
+    padding: 8px 5px 8px 10px;
+    overflow: scroll;
+  }
+ .multipleSelectDialogOption > input {
+    margin-block: 8px;
+   
+    height: 33px;
+    width: 289px;
+    border: none;
+    /* border-radius: 5px; */
+  
+ }
+.color-picker {
+    position: relative;
+    left: 73px;
+    top: 0px;
+    
+}

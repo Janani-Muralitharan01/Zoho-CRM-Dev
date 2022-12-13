@@ -50,6 +50,15 @@ const UntitleImage = () => {
     },
     
   ];
+
+  const removecards  = (id:number) => {
+    console.log("id",id)
+     const clear = cards.filter((i)=>{
+      return i.id == id
+    }) 
+    
+    
+  }
   // useEffect(()=>{
   //   console.log(preview,"preview")
   // },[])
@@ -135,7 +144,7 @@ const UntitleImage = () => {
         <div>
         {cards.map((button: any)=>  
         
-               <div className='card border-0 mt-3 ml-7'><span className='names' >{button.names}<InputText className='w-8'/> </span> </div>
+               <div className='card border-0 mt-3 ml-7'><span className='names' >{button.names}<InputText className='w-8'/></span> </div>
               )}</div></div>   
         </div>
       </Sidebar>

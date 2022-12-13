@@ -2,6 +2,7 @@ import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useState, useEffect } from "react";
 import "./MultipleSelect.css";
+import { InputTextarea } from 'primereact/inputtextarea';
 import { Checkbox } from "primereact/checkbox";
 import { Dropdown } from "primereact/dropdown";
 
@@ -25,6 +26,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
   const [val, setVal] = useState([]);
   const [option, setOption] = useState([]);
   const [arr, setArr] = useState(inputArr);
+  const [checked, setChecked] = useState(false);
 
   const addInput = () => {
     setArr((s: any) => {
@@ -38,7 +40,16 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
       ];
     });
   };
-
+  var k = 1;
+  const handlerCheck = (e:any) =>{
+    console.log(e,"ee")
+    setChecked(!checked)
+    }
+  const deleteinput = (i:any) =>{
+  const deleteVal = [ ...arr]
+      deleteVal.splice(i,1)
+      setArr(deleteVal)
+  }
   const handleChange = (e: any) => {
     e.preventDefault();
 
@@ -86,10 +97,11 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
                   onChange={handleChange}
                   value={item.value}
                   id={i}
+                  placeholder= {" Options" +""+ k++} 
                   type={item.type}
                 />
-                <i className="pi pi-plus " onClick={addInput}></i>
-                <i className="pi pi-minus"></i>
+                <i className="pi pi-plus "  onMouseEnter={() => "hello"} onClick={addInput}></i>
+                <i className="pi pi-minus" onClick= { () => deleteinput(i)}></i>
               </section>
             );
           })}
@@ -117,14 +129,10 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
 
           <p>
             {" "}
-            <input
-              type="checkbox"
-              value="toolTip"
-              name="toolTip"
-              onChange={(event) => setCheckToolTip(event.target.value)}
-            ></input>
-            Show Tooltip{" "}
+            <Checkbox inputId="binary" checked={checked} onChange={handlerCheck} />
+            <label className="ml-1">Show Tooltip</label>{" "}
           </p>
+          {checked?<div><InputTextarea placeholder="Type tooltip message"/></div>:""}
         </section>
 
         <p>Select default value</p>
