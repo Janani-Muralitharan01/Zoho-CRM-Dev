@@ -2,6 +2,11 @@ import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useState, useEffect } from "react";
 import { Dropdown } from "primereact/dropdown";
+import { Checkbox } from 'primereact/checkbox';
+import { InputText } from 'primereact/inputtext';
+import { ColorPicker } from 'primereact/colorpicker';
+
+import "./PickList.css";
 
 interface PickListProps {
   pickListDialogVisible: boolean;
@@ -13,15 +18,20 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
       type: "text",
       id: 1,
       value: "",
+      
     },
   ];
+  const [checked, setChecked] = useState(false);
+  const [colorchecked, setcolorchecked] = useState(false);
   const [state, setState] = useState(false);
   const [option, setOption] = useState([]);
   const [order, setOrder] = useState("");
-  const [checkAlpha, setCheckAlpha] = useState("");
+  const [checkAlpha, setCheckAlpha] = useState(false);
   const [checkRequire, setCheckRequire] = useState("");
   const [checkToolTip, setCheckToolTip] = useState("");
   const [arr, setArr] = useState(inputArr);
+  const [Multiselect, setMultiselect] = useState<any>([]);
+  const [color2, setColor2] = useState('');
 
   useEffect(() => {
     setState(pickListDialogVisible);
@@ -32,6 +42,19 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
     { name: "Rome", code: "RM" },
     { name: "London", code: "LDN" },
   ];
+  const handlerCheck = (e:any) =>{
+  console.log(e,"ee")
+  setChecked(!checked)
+  }
+  const handlerCheckcolor = (e:any) =>{
+    console.log(e,"ee")
+    setcolorchecked(!colorchecked)
+    }
+  var k = 1;
+  const handlerCheckclose = (e:any) =>{
+    console.log(e,"closee")
+    setState(false)
+    }
 
   const addInput = () => {
     setArr((s: any) => {
@@ -45,11 +68,27 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
       ];
     });
   };
+  const deleteinput = (i:any) =>{
+    const deleteVal = [ ...arr]
+        deleteVal.splice(i,1)
+        setArr(deleteVal)
+    }
 
   const onValueChange = (e: any) => {
     setOrder(e.target.value);
   };
+  
+  const onCityChange = (e:any) => {
+    let selectedCities : any[] = []
+     selectedCities = [...Multiselect];
+    console.log(selectedCities,"selectedCities")
+    if (e.checked)
+        selectedCities.push(e.value);
+    else
+        selectedCities.splice(selectedCities.indexOf(e.value), 1);
 
+    setMultiselect(selectedCities);
+}
   const handleChange = (e: any) => {
     e.preventDefault();
 
@@ -64,7 +103,69 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
 
   return (
     <div className="flex">
-      <Dialog
+      {checked ? <Dialog
+        header="Picklist History Tracking"
+        visible={checked}
+        style={{ width: "45vw" }}
+        position="top"
+        onHide={() => setChecked(!checked)}
+      >
+        <div>
+          <header>
+          <span>Related List Name</span>
+          <InputText type="text" className=" mb-2 w-12 mt-1 border-noround" placeholder="Pick List 1 History" />
+          </header>
+          
+          
+
+          <div className="mt-4">
+            <span className="mt-4">Related List Columns</span>
+            
+            <div className="border-1 border-400 p-3 mt-3">
+              <div className="inline-flex checkboxPosition">
+                <div className="field-checkbox">
+                    <Checkbox inputId="city1" name="city"   value="Pick List 1" onChange={onCityChange} checked={Multiselect.indexOf('Pick List 1') !== -1} />
+                    <label htmlFor="city1">Pick List 1</label>
+                </div>
+                <div className="field-checkbox ml-145 ">
+                    <Checkbox inputId="city2" name="city" value="Modified Time" onChange={onCityChange} checked={Multiselect.indexOf('Modified Time') !== -1} />
+                    <label htmlFor="city2">Modified Time</label>
+                </div></div><br/>
+                <div className="inline-flex checkboxPositionTwo">
+                <div className="field-checkbox">
+                    <Checkbox inputId="city3" name="city" value="Duration" onChange={onCityChange} checked={Multiselect.indexOf('Duration') !== -1} />
+                    <label htmlFor="city3">Duration</label>
+                </div>
+                <div className="field-checkbox ml-145">
+                    <Checkbox inputId="city4" name="city" value="Modified By" onChange={onCityChange} checked={Multiselect.indexOf('Modified By') !== -1} />
+                    <label htmlFor="city4">Modified By</label>
+                </div></div><br/>
+                <div className="inline-flex checkboxPositionThree">
+                <div className="field-checkbox ">
+                    <Checkbox inputId="city3" name="city" value="Email" onChange={onCityChange} checked={Multiselect.indexOf('Email') !== -1} />
+                    <label htmlFor="city3">Email</label>
+                </div>
+                <div className="field-checkbox ml-145">
+                    <Checkbox inputId="city4" name="city" value="Secondary Email" onChange={onCityChange} checked={Multiselect.indexOf('Secondary Email') !== -1} />
+                    <label htmlFor="city4">Secondary email</label>
+                </div></div>
+                <div className="field-checkbox">
+                    <Checkbox inputId="city4" name="city" value="Email Opt Out" onChange={onCityChange} checked={Multiselect.indexOf('Email Opt Out') !== -1} />
+                    <label htmlFor="city4">Email Opt Out</label>
+                </div>
+                <span className="backborder"> <i className="pi pi-info mr-2 mt-1"></i> You cannot select more than 10 new fields</span>
+                </div>
+          </div>
+          <div className="pt">
+          <div className="footerstyle">
+            
+            <span className="p-2 text-primary" onClick={handlerCheckclose}>Don't save this field</span>
+      <button className='buttonStyle ml-8 mt-1' onClick={handlerCheck}> Cancel </button>
+      <Button label="Done"/></div>
+          </div>
+
+        </div>
+      </Dialog> :  <Dialog
         header="Pick List Properties"
         visible={state}
         style={{ width: "50vw" }}
@@ -76,19 +177,22 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
           <input type="text" />
         </p>
         <h4>Pick List Option</h4>
-        <section>
+        <section className="multipleSelectDialogOption_main">
           {arr.map((item, i: any) => {
             return (
-              <section className="surface-100">
-                <input
-                  onChange={handleChange}
-                  value={item.value}
-                  id={i}
-                  type={item.type}
-                />
-                <i className="pi pi-plus " onClick={addInput}></i>
-                <i className="pi pi-minus"></i>
-              </section>
+              
+              <section className="multipleSelectDialogOption">
+                {colorchecked?<ColorPicker value={color2} onChange={(e:any) => setColor2(e.value)}  ></ColorPicker>:""}
+              <InputText
+                onChange={handleChange}
+                value={item.value}
+                
+                placeholder={' Options' +  " " +k++}
+                type={item.type}
+              />
+              <i className="pi pi-plus " onClick={addInput}></i>
+              <i className="pi pi-minus" onClick= { () => deleteinput(i)}></i>
+            </section>
             );
           })}
         </section>
@@ -99,7 +203,11 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
           optionLabel="name"
           placeholder="-None-"
         />
-        <p>Enable history tracking for picklist values.</p>
+        <div className="field-checkbox mt-2">
+                    <Checkbox inputId="binary" checked={checked} onChange={handlerCheck} />
+                    <label htmlFor="binary">Enable history tracking for picklist values.</label>
+                </div>
+        
         <p>Sort order preference</p>
         <p>
           <input
@@ -126,13 +234,8 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
         </p>
         <section>
           <p>
-            <input
-              type="checkbox"
-              value="alphabetically"
-              name="alphabetically"
-              onChange={(event) => setCheckAlpha(event.target.value)}
-            ></input>
-            Display values alphabetically, instead of in the order entered.
+          <Checkbox inputId="binary" checked={colorchecked} onChange={handlerCheckcolor} />
+           Enable color for picklist options
           </p>
 
           <p>
@@ -160,7 +263,10 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
           <p className="">Don't save this field.</p>
           <Button label="Done" onClick={() => setState(!state)} />
         </div>
-      </Dialog>
+      </Dialog>}
+         
+     
+      
     </div>
   );
 };

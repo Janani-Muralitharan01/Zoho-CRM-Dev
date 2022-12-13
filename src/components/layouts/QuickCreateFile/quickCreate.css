@@ -31,5 +31,13 @@
      margin-top: -7px;
      display: flex;
      color: blue;
+     cursor: pointer;
      justify-content: end;
  }
+ .sidebarheader{
+    display: flex;
+    background: #f0f1f3;
+    padding: 15px;
+    color: #111111;
+    /* font-weight: bold; */
+}

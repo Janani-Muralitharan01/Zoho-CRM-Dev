@@ -32,6 +32,8 @@ import user from "../../../assets/user.svg";
 import subform from "../../../assets/subform.svg";
 import url from "../../../assets/url.svg";
 import rect from "../../../assets/rect.svg";
+import { InputText } from "primereact/inputtext";
+import { color } from "@mui/system";
 import {
   DragDropContext,
   Draggable,
@@ -47,6 +49,7 @@ import {
 } from "../../../features/counter/dragAndDrop";
 
 const SideBar = () => {
+  const [search, setsearch] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const count: any = useSelector((state) => state);
@@ -71,6 +74,9 @@ const SideBar = () => {
 
   const addList = (e: any) => {
     setUidv4({ [uuidv4()]: [] });
+  };
+  const handleSearch = (e: any) => {
+    setsearch(!search);
   };
 
   const ITEMS = [
@@ -367,29 +373,47 @@ const SideBar = () => {
           </AccordionItem>
         </Accordion>
       ) : activeIndex === 1 ? (
-        <Accordion>
-          <AccordionItem>
-            <AccordionItemHeading>
-              <AccordionItemButton>Available Fields</AccordionItemButton>
-            </AccordionItemHeading>
-            <p className=" text-white font-light text-base">
-              Untitled Information
-            </p>
-            <AccordionItemPanel>
-              <div>
-                {AvailableButtonNames.map((button) => (
-                  <p className="bg-blue-100">{button.names}</p>
-                ))}
-              </div>
-            </AccordionItemPanel>
-          </AccordionItem>
-        </Accordion>
+        <div>
+          {search ? (
+            <div className="nameOne margin-10 mt-3 justify-content-between flex">
+              Available Fields{" "}
+              <span onClick={handleSearch}>
+                <i className="pi pi-search mr-2"></i>
+              </span>
+            </div>
+          ) : (
+            <div className="justify-content-between flex mt-3">
+              <InputText
+                type="text"
+                className=" mb-2 w-10 "
+                style={{ background: "#3b3f42" }}
+                placeholder="search"
+              />
+              <span onClick={handleSearch}>
+                <i className="pi pi-times mr-2 text-50 mt-2"></i>
+              </span>
+            </div>
+          )}
+
+          <div className="name  margin-10 ">Untitled Information</div>
+          <br />
+
+          <div>
+            {AvailableButtonNames.map((button) => (
+              <ButtonOptions
+                name={button.names}
+                icon={button.icon}
+                id={button.id}
+              />
+            ))}
+          </div>
+        </div>
       ) : (
         <div>
-          <p className=" text-white  font-light text-base ">Related List</p>
-          <p className=" text-white font-light text-sm">
-            All available related lists have been selected.
-          </p>
+          <span className="nameOne margin-10">Related List</span>
+          <span className="detail margin-10">
+            All available related lists have been selected.{" "}
+          </span>
         </div>
       )}
     </div>
