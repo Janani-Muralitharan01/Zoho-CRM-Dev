@@ -47,7 +47,6 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   };
 
   const onValueChange = (e: any) => {
-    console.log("onValueChange", e.target.value);
     setOrder(e.target.value);
   };
 

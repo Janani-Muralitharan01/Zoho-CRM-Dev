@@ -32,139 +32,167 @@ import user from "../../../assets/user.svg";
 import subform from "../../../assets/subform.svg";
 import url from "../../../assets/url.svg";
 import rect from "../../../assets/rect.svg";
-import { DragDropContext } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  DraggableLocation,
+  Droppable,
+} from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import {
+  dragAndDropValue,
+  dragAndDropTotalValue,
+} from "../../../features/counter/dragAndDrop";
 
 const SideBar = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const count = useSelector((state: any) => state);
+
+  const count: any = useSelector((state) => state);
+
+  const [uidv4, setUidv4] = useState<any>();
+
+  const [name, setName] = useState("");
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(dragAndDropValue(uidv4));
+  }, [uidv4]);
 
   useEffect(() => {
     setActiveIndex(count.user.indexValue);
   }, [count.user.indexValue]);
 
-  console.log("123", count);
-  const buttonNames = [
+  useEffect(() => {
+    setUidv4(count.dragAndDrop.initialStateDrag);
+  }, [count.dragAndDrop.initialStateDrag]);
+
+  const addList = (e: any) => {
+    setUidv4({ [uuidv4()]: [] });
+  };
+
+  const ITEMS = [
     {
       names: "Single Line",
       icon: singleline,
-      id: 1,
+      id: uuidv4(),
     },
     {
       names: "Multi-Line",
       icon: multiline,
-      id: 2,
+      id: uuidv4(),
     },
     {
       names: "Email",
       icon: mail,
-      id: 3,
+      id: uuidv4(),
     },
     {
       names: "Phone",
       icon: phone,
-      id: 4,
+      id: uuidv4(),
     },
     {
       names: "Pick List",
       icon: picklist,
-      id: 5,
+      id: uuidv4(),
     },
     {
       names: "Multi-Select",
       icon: multiselect,
-      id: 6,
+      id: uuidv4(),
     },
     {
       names: "Date",
       icon: date,
-      id: 7,
+      id: uuidv4(),
     },
     {
       names: "Date/Time",
       icon: dateandtime,
-      id: 8,
+      id: uuidv4(),
     },
     {
       names: "Number",
       icon: onetwothree,
-      id: 9,
+      id: uuidv4(),
     },
     {
       names: "Auto-Number",
       icon: autonum,
-      id: 10,
+      id: uuidv4(),
     },
     {
       names: "Currency",
       icon: currency,
-      id: 11,
+      id: uuidv4(),
     },
     {
       names: "Decimal",
       icon: decimal,
-      id: 12,
+      id: uuidv4(),
     },
     {
       names: "Percent",
       icon: percent,
-      id: 13,
+      id: uuidv4(),
     },
     {
       names: "Long integer",
       icon: longint,
-      id: 14,
+      id: uuidv4(),
     },
     {
       names: "Checkbox",
       icon: check,
-      id: 15,
+      id: uuidv4(),
     },
     {
       names: "URL",
       icon: url,
-      id: 16,
+      id: uuidv4(),
     },
     {
       names: "Lookup",
       icon: lookup,
-      id: 17,
+      id: uuidv4(),
     },
     {
       names: "Formula",
       icon: fx,
-      id: 18,
+      id: uuidv4(),
     },
     {
       names: "User",
       icon: user,
-      id: 19,
+      id: uuidv4(),
     },
     {
       names: "File Upload",
       icon: fileupload,
-      id: 20,
+      id: uuidv4(),
     },
     {
       names: "Image Upload",
       icon: imageupload,
-      id: 21,
+      id: uuidv4(),
     },
     {
       names: "Multi-Select Lookup",
       icon: multilookup,
-      id: 22,
+      id: uuidv4(),
     },
     {
       names: "Subform",
       icon: subform,
-      id: 23,
+      id: uuidv4(),
     },
     {
       names: "NEW SECTION",
       icon: rect,
-      id: 25,
+      id: uuidv4(),
     },
   ];
 
@@ -186,8 +214,6 @@ const SideBar = () => {
     },
   ];
 
-  const updateMissinButton = () => {};
-
   return (
     <div>
       {activeIndex === 0 ? (
@@ -197,15 +223,134 @@ const SideBar = () => {
               <AccordionItemButton>New Fields</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <div className="alignTwo">
-                {buttonNames.map((button) => (
-                  <ButtonOptions
-                    name={button.names}
-                    icon={button.icon}
-                    id={button.id}
-                  />
-                ))}
-              </div>
+              <Droppable droppableId="ITEMS" isDropDisabled={true}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    className="text-blue-500 alignTwo"
+                  >
+                    {ITEMS.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <>
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                              style={provided.draggableProps.style}
+                              className="rectanglebox white-space-nowrap"
+                            >
+                              <img
+                                className="imagedesign height"
+                                src={item.icon}
+                              ></img>
+                              {item.names}
+                            </div>
+                            {snapshot.isDragging && (
+                              <span className="rectanglebox white-space-nowrap">
+                                <img
+                                  className="imagedesign height"
+                                  src={item.icon}
+                                ></img>
+                                {item.names}
+                              </span>
+                            )}
+                          </>
+                        )}
+                      </Draggable>
+                    ))}
+                  </div>
+                )}
+              </Droppable>
+
+              {/* <section className="text-blue-500 bg-green-300">
+                <div onClick={addList}>
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                      fill="currentColor"
+                      d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                    />
+                  </svg>
+                  <span>Add List</span>
+                </div>
+
+                {Object.keys(uidv4 || {}).map((list: any, i: number) => {
+                  return (
+                    <Droppable key={list} droppableId={list}>
+                      {(provided, snapshot) => (
+                        <div className="App" ref={provided.innerRef}>
+                          {uidv4[list].length
+                            ? uidv4[list].map((item: any, index: number) => (
+                                <Draggable
+                                  key={item.id}
+                                  draggableId={item.id}
+                                  index={index}
+                                >
+                                  {(provided, snapshot) => (
+                                    <div
+                                      className="App"
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      style={provided.draggableProps.style}
+                                    >
+                                      <div className="text-pink-400 flex">
+                                        <section
+                                          className="App"
+                                          {...provided.dragHandleProps}
+                                        >
+                                          <svg
+                                            width="24"
+                                            height="24"
+                                            viewBox="0 0 24 24"
+                                          >
+                                            <path
+                                              fill="currentColor"
+                                              d="M3,15H21V13H3V15M3,19H21V17H3V19M3,11H21V9H3V11M3,5V7H21V5H3Z"
+                                            />
+                                          </svg>
+                                        </section>
+                                        <input
+                                          type={"text"}
+                                          name="name"
+                                          value={name}
+                                          onChange={() => setName(item.content)}
+                                        />
+                                        <p> {item.content}</p>
+                                        <p
+                                          className="delete"
+                                          onClick={(e) => {
+                                            const objWithIdIndex = uidv4[
+                                              list
+                                            ].findIndex(
+                                              (obj: any) => obj.id === item.id
+                                            );
+                                            uidv4[list].splice(
+                                              objWithIdIndex,
+                                              1
+                                            );
+                                          }}
+                                        >
+                                          ...
+                                        </p>
+                                      </div>
+                                    </div>
+                                  )}
+                                </Draggable>
+                              ))
+                            : !provided.placeholder && (
+                                <span className="Appp ">Drop items here</span>
+                              )}
+                          {provided.placeholder}
+                        </div>
+                      )}
+                    </Droppable>
+                  );
+                })}
+              </section> */}
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
@@ -213,7 +358,7 @@ const SideBar = () => {
               <AccordionItemButton>Unused Fields</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <p>
+              <p className="text-gray-50">
                 In ad velit in ex nostrud dolore cupidatat consectetur ea in ut
                 nostrud velit in irure cillum tempor laboris sed adipisicing eu
                 esse duis nulla non.
@@ -233,11 +378,7 @@ const SideBar = () => {
             <AccordionItemPanel>
               <div>
                 {AvailableButtonNames.map((button) => (
-                  <ButtonOptions
-                    name={button.names}
-                    icon={button.icon}
-                    id={button.id}
-                  />
+                  <p className="bg-blue-100">{button.names}</p>
                 ))}
               </div>
             </AccordionItemPanel>

@@ -8,24 +8,18 @@ import { useSelector, useDispatch } from "react-redux";
 interface ButtonOptionsProps {
   name: string;
   icon: string;
-  id: number;
+  id: any;
 }
 
 const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
-  //   console.log("Buttonname", name);
-  //   console.log("Buttonicon", icon);
   const [isDragged, setIsDragged] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const count = useSelector((state: any) => state);
   useEffect(() => {
     setActiveIndex(count.user.indexValue);
-    console.log("count.user.indexValue", count.user.indexValue);
   }, [count.user.indexValue]);
 
   const onStart = (event: any, data: any) => {
-    // console.log("HELLO");
-    // console.log({ event });
-    // console.log({ data });
     setIsDragged(true);
   };
 
@@ -36,19 +30,14 @@ const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
           className={activeIndex == 1 ? "rectangleboxQuick" : "rectanglebox"}
         >
           <img className="imagedesign height" src={icon}></img>
-          <div>{name}</div>
+          <div>1{name}</div>
         </div>
       )}
       <Draggable
         onStart={(event, data) => {
-          console.log(event, "onStart", data, "isDragged", isDragged);
           onStart(event, data);
         }}
-        onDrag={(event, data) => {
-          console.log(data, "onDrag", event, "isDragged", isDragged);
-        }}
         onStop={(event, data) => {
-          console.log(event, "onStop", data, "isDragged", isDragged);
           setIsDragged(true);
         }}
       >
@@ -61,7 +50,7 @@ const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
               }
             >
               <img className="imagedesign height" src={icon}></img>
-              <div>{name}</div>
+              <div>2{name}</div>
             </div>
           )}
         </div>

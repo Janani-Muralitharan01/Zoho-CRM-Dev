@@ -1,184 +1,86 @@
 import "./create.css";
-import Draggable from "react-draggable";
-import previewTopSideBar from "./previewTopSideBar";
-// interface props{
-//   data:any;
-// }
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useSelector, useDispatch } from "react-redux";
 
-const Footer = ({ cards }: any) => {
-  // const cards = [
-  //   {
-  //     names: "Secondary email",
-  //     subname: " Single Line",
+const Footer = ({ cards }: any, items: any) => {
+  const count: any = useSelector((state) => state);
+  const [name, setName] = useState("");
+  const [uidv4, setUidv4] = useState<any>();
 
-  //     id: 1,
-  //   },
-  //   {
-  //     names: "Untitled Name",
-  //     subname: " Single Line",
-  //     id: 2,
-  //   },
-  //   {
-  //     names: "Untitled Owner",
-  //     subname: " Single Line",
-  //     id: 3,
-  //   },
-  //   {
-  //     names: "Email Opt Out",
-  //     subname: " Email",
-  //     id: 4,
-  //   },
-  //   {
-  //     names: "Email",
-  //     subname: " Email",
-  //     id: 5,
-  //   },
-  //   {
-  //     names: "Created By",
-  //     subname: " Single Line",
-  //     id: 6,
-  //   },
-
-  // ];
+  useEffect(() => {
+    setUidv4(count.dragAndDrop.initialStateDrag);
+    console.log("count", count);
+  }, [count.dragAndDrop.initialStateDrag]);
 
   return (
-    <div className="boder-Style">
-      <h5 className="informationName">Untitled Information</h5>
-      {/* {cards.map((button) => (
-        <div className="card">
-          <span className="names">
-            {button.names} <span className="grey">{button.subname} </span>
-            <i className="pi pi-ellipsis-v"></i>
-          </span>{" "}
-        </div>
-      ))} */}
-      <Draggable
-        defaultPosition={{ x: 25, y: 25 }}
-        position={{ x: 25, y: 35 }}
-        onStart={(event, data) => {
-          console.log(event, "onStart", data, "isDragged");
-        }}
-        onDrag={(event, data) => {
-          console.log(data, "onDrag", event, "isDragged");
-        }}
-        onStop={(event, data) => {
-          console.log(event, "onStop", data, "isDragged");
-        }}
-      >
-        {/* <div className="card">
-          <span className="names">
-            Secondary email<span className="grey">Single Line </span>
-            <i className="pi pi-ellipsis-v"></i>
-          </span>
-        </div> */}
-        <div>
-          {cards.map((button: any) => (
-            <div className="card">
-              <span className="names">
-                {button.names} <span className="grey">{button.subname} </span>
-                <i className="pi pi-ellipsis-v"></i>
-              </span>{" "}
-            </div>
-          ))}
-        </div>
-      </Draggable>
-      <Draggable
-        defaultPosition={{ x: 25, y: 25 }}
-        onStart={(event, data) => {
-          console.log(event, "onStart", data, "isDragged");
-        }}
-        onDrag={(event, data) => {
-          console.log(data, "onDrag", event, "isDragged");
-        }}
-        onStop={(event, data) => {
-          console.log(event, "onStop", data, "isDragged");
-        }}
-      >
-        <div className="card">
-          <span className="names">
-            Untitled Owner <span className="grey">Single Line </span>
-            <i className="pi pi-ellipsis-v"></i>
-          </span>
-        </div>
-      </Draggable>
-      <Draggable
-        defaultPosition={{ x: 25, y: 25 }}
-        onStart={(event, data) => {
-          console.log(event, "onStart", data, "isDragged");
-        }}
-        onDrag={(event, data) => {
-          console.log(data, "onDrag", event, "isDragged");
-        }}
-        onStop={(event, data) => {
-          console.log(event, "onStop", data, "isDragged");
-        }}
-      >
-        <div className="card">
-          <span className="names">
-            Untitled Name <span className="grey">Single Line </span>
-            <i className="pi pi-ellipsis-v"></i>
-          </span>
-        </div>
-      </Draggable>
+    <section>
+      <div className="boder-Style">
+        <h5 className="informationName">Untitled Information </h5>
 
-      <Draggable
-        defaultPosition={{ x: 25, y: 25 }}
-        onStart={(event, data) => {
-          console.log(event, "onStart", data, "isDragged");
-        }}
-        onDrag={(event, data) => {
-          console.log(data, "onDrag", event, "isDragged");
-        }}
-        onStop={(event, data) => {
-          console.log(event, "onStop", data, "isDragged");
-        }}
-      >
-        <div className="card">
-          <span className="names">
-            Email Opt Out<span className="grey">Email </span>
-            <i className="pi pi-ellipsis-v"></i>
-          </span>
+        <div className="">
+          {Object.keys(uidv4 || {}).map((list: any, i: number) => {
+            return (
+              <Droppable key={list} droppableId={list}>
+                {(provided, snapshot) => (
+                  <div className="App" ref={provided.innerRef}>
+                    {uidv4[list].length
+                      ? uidv4[list].map((item: any, index: number) => (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                className="card px-2"
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                style={provided.draggableProps.style}
+                              >
+                                <div
+                                  className="names"
+                                  {...provided.dragHandleProps}
+                                >
+                                  <input
+                                    type={"text"}
+                                    name="name"
+                                    value={name}
+                                    onChange={() => setName(item.names)}
+                                    className="h-2rem my-auto"
+                                  />
+                                  <p className="grey">{item.names}</p>
+                                  <p
+                                    className="delete"
+                                    onClick={(e) => {
+                                      const objWithIdIndex = uidv4[
+                                        list
+                                      ].findIndex(
+                                        (obj: any) => obj.id === item.id
+                                      );
+                                      uidv4[list].splice(objWithIdIndex, 1);
+                                    }}
+                                  >
+                                    <i className="pi pi-ellipsis-v"></i>
+                                  </p>
+                                </div>
+                              </div>
+                            )}
+                          </Draggable>
+                        ))
+                      : !provided.placeholder && (
+                          <span className="Appp ">Drop items here</span>
+                        )}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            );
+          })}
         </div>
-      </Draggable>
-      <Draggable
-        defaultPosition={{ x: 25, y: 25 }}
-        onStart={(event, data) => {
-          console.log(event, "onStart", data, "isDragged");
-        }}
-        onDrag={(event, data) => {
-          console.log(data, "onDrag", event, "isDragged");
-        }}
-        onStop={(event, data) => {
-          console.log(event, "onStop", data, "isDragged");
-        }}
-      >
-        <div className="card">
-          <span className="names">
-            Email <span className="grey">Email </span>
-            <i className="pi pi-ellipsis-v"></i>
-          </span>
-        </div>
-      </Draggable>
-      <Draggable
-        defaultPosition={{ x: 25, y: 25 }}
-        onStart={(event, data) => {
-          console.log(event, "onStart", data, "isDragged");
-        }}
-        onDrag={(event, data) => {
-          console.log(data, "onDrag", event, "isDragged");
-        }}
-        onStop={(event, data) => {
-          console.log(event, "onStop", data, "isDragged");
-        }}
-      >
-        <div className="card">
-          <span className="names">
-            Created By<span className="grey">Single Line </span>
-            <i className="pi pi-ellipsis-v"></i>
-          </span>
-        </div>
-      </Draggable>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -14,7 +14,6 @@ const User: React.FC<UserProps> = ({ UserDialogVisible }) => {
   const [checkToolTip, setCheckToolTip] = useState("");
 
   const onValueChange = (e: any) => {
-    console.log("onValueChange", e.target.value);
     setOrder(e.target.value);
   };
 

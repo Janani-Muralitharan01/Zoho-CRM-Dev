@@ -22,7 +22,6 @@ const ReplicateButton: React.FC<ReplicateButtonOptions> = ({
 
   useEffect(() => {
     setButtonsNames(buttonName);
-    console.log(icon, "buttonName", buttonName);
   }, [buttonName]);
 
   return (

@@ -1,13 +1,13 @@
-import { InputSwitch } from 'primereact/inputswitch';
-import { Avatar } from 'primereact/avatar';
-import Footer from './footer';
-import { useState, useRef ,useEffect} from 'react';
-import noImages from '../../../images/noimage.jpg';
-import './create.css';
-import { OverlayPanel } from 'primereact/overlaypanel';
-import { Sidebar } from 'primereact/sidebar';
-import { Dropdown } from 'primereact/dropdown';
-import { InputText } from 'primereact/inputtext';
+import { InputSwitch } from "primereact/inputswitch";
+import { Avatar } from "primereact/avatar";
+import Footer from "./footer";
+import { useState, useRef, useEffect } from "react";
+import noImages from "../../../images/noimage.jpg";
+import "./create.css";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { Sidebar } from "primereact/sidebar";
+import { Dropdown } from "primereact/dropdown";
+import { InputText } from "primereact/inputtext";
 
 const UntitleImage = () => {
   const [preview, setPreview] = useState([]);
@@ -15,7 +15,7 @@ const UntitleImage = () => {
   const [sidebar, setSidebar] = useState(false);
   const [selectedCity1, setSelectedCity1] = useState(null);
   const op: any = useRef(null);
-  console.log("hello",preview);
+
   const cards = [
     {
       names: "Secondary email",
@@ -48,17 +48,12 @@ const UntitleImage = () => {
       subname: " Single Line",
       id: 6,
     },
-    
   ];
-  // useEffect(()=>{
-  //   console.log(preview,"preview")
-  // },[])
-
 
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
   };
-  const cities = [{ name: 'Admistrator', code: 'NY' }];
+  const cities = [{ name: "Admistrator", code: "NY" }];
   function handlerClick() {
     setSidebar(!sidebar);
   }
@@ -70,7 +65,7 @@ const UntitleImage = () => {
       <div className="untitlee">
         <div className="boder">
           <span>
-            Untitle image{' '}
+            Untitle image{" "}
             <InputSwitch checked={checked1} onChange={handletoggle} />
             <br />
             {checked1}
@@ -79,7 +74,7 @@ const UntitleImage = () => {
                 <span className="mr-2">
                   <img
                     src={noImages}
-                    style={{ width: ' 96px', height: '74px' }}
+                    style={{ width: " 96px", height: "74px" }}
                   ></img>
                 </span>
                 <span className="ellips" onClick={(e) => op.current.toggle(e)}>
@@ -87,7 +82,7 @@ const UntitleImage = () => {
                 </span>
               </div>
             ) : (
-              ''
+              ""
             )}
             <div>
               {/* <Avatar icon="pi pi-user mr-3" size="xlarge" className="p-overlay-badge"/> */}
@@ -101,7 +96,7 @@ const UntitleImage = () => {
       <Sidebar
         visible={sidebar}
         position="top"
-        style={{ width: '92vw',height: '50vw' }}
+        style={{ width: "92vw", height: "50vw" }}
         onHide={() => setSidebar(!sidebar)}
       >
         <div>
@@ -121,22 +116,28 @@ const UntitleImage = () => {
               {/* <Footer cards={cards} /> */}
             </div>
           </div>
-          <div className='border-black-alpha-30 border-1 pb-7'>
-        <span className='contactName '>Create Untitled</span>
-        <span className='contactuntitle'>Untitled Image</span>
-        
-        <span className="ml-5">
-                  <img
-                    src={noImages}
-                    style={{ width: ' 56px', height: '50px' }}
-                  ></img>
-                </span>
-                <span className='contactuntitle'>Untitled Information</span>
-        <div>
-        {cards.map((button: any)=>  
-        
-               <div className='card border-0 mt-3 ml-7'><span className='names' >{button.names}<InputText className='w-8'/> </span> </div>
-              )}</div></div>   
+          <div className="border-black-alpha-30 border-1 pb-7">
+            <span className="contactName ">Create Untitled</span>
+            <span className="contactuntitle">Untitled Image</span>
+
+            <span className="ml-5">
+              <img
+                src={noImages}
+                style={{ width: " 56px", height: "50px" }}
+              ></img>
+            </span>
+            <span className="contactuntitle">Untitled Information</span>
+            <div>
+              {cards.map((button: any) => (
+                <div className="card border-0 mt-3 ml-7">
+                  <span className="names">
+                    {button.names}
+                    <InputText className="w-8" />{" "}
+                  </span>{" "}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Sidebar>
       <OverlayPanel ref={op}>
@@ -144,8 +145,9 @@ const UntitleImage = () => {
           Set Permisson <span></span>
         </div>
       </OverlayPanel>
-      <div><Footer cards={cards} /></div>
-      
+      <div>
+        <Footer cards={cards} />
+      </div>
     </div>
   );
 };

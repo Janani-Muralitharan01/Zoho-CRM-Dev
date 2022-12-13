@@ -36,7 +36,7 @@
   height: 23px;
   border-radius: -7px;
   display: inline-table;
-  padding: 11px;
+  /* padding: 11px; */
   border: 2px solid #f6f5f5;
 }
 
