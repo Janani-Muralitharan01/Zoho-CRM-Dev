@@ -99,3 +99,7 @@
   color: #111111;
   font-weight: bold;
 }
+.previewCardAligment{
+  display: flex;
+  flex-wrap: wrap;
+}
