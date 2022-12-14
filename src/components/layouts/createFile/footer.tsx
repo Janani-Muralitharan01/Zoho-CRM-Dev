@@ -8,16 +8,47 @@ const Footer = ({ cards }: any, items: any) => {
   const count: any = useSelector((state) => state);
   const [name, setName] = useState("");
   const [uidv4, setUidv4] = useState<any>();
+  const [listId, setListId] = useState<any>();
 
   useEffect(() => {
     setUidv4(count.dragAndDrop.initialStateDrag);
-    console.log("count", count);
+
+    let index: any;
+    let inputName: any;
+    Object.keys(count.dragAndDrop.initialStateDrag || {}).map((x: any) => {
+      index = x;
+    });
+    if (index != null) {
+      [count.dragAndDrop.initialStateDrag].map((x: any) => {
+        inputName = x[index];
+      });
+    }
   }, [count.dragAndDrop.initialStateDrag]);
+
+  const handleChange = (e: any, i: number) => {
+    let index: any;
+    let inputName: any[] = [];
+    Object.keys(uidv4 || {}).map((x: any) => {
+      index = x;
+    });
+    if (index != null) {
+      [uidv4].map((x: any) => {
+        inputName = x[index];
+      });
+    }
+    inputName = inputName.map((x: any, idx: any) => {
+      if (idx === i) {
+        return { ...x, names: e.target.value };
+      }
+      return x;
+    });
+    setUidv4({ [index]: inputName });
+  };
 
   return (
     <section>
       <div className="boder-Style">
-        <h5 className="informationName">Untitled Information </h5>
+        <h5 className="informationName">Untitled Information</h5>
 
         <div className="">
           {Object.keys(uidv4 || {}).map((list: any, i: number) => {
@@ -44,13 +75,15 @@ const Footer = ({ cards }: any, items: any) => {
                                   {...provided.dragHandleProps}
                                 >
                                   <input
-                                    type={"text"}
-                                    name="name"
-                                    value={name}
-                                    onChange={() => setName(item.names)}
+                                    type="text"
+                                    name="names"
+                                    value={item.names}
+                                    onChange={(e) => {
+                                      handleChange(e, index);
+                                    }}
                                     className="h-2rem my-auto"
                                   />
-                                  <p className="grey">{item.names}</p>
+                                  <p className="grey">{item.subName}</p>
                                   <p
                                     className="delete"
                                     onClick={(e) => {

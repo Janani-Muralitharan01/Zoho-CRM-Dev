@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface userReducerState {
   initialStateDrag: null;
-  initialStateDragAndDrop: null;
+  initialStateQuickDrag: null;
 }
 
 const initialDragAndDrop: userReducerState = {
   initialStateDrag: null,
-  initialStateDragAndDrop: null,
+  initialStateQuickDrag: null,
 };
 
 export const userReducer = createSlice({
@@ -17,10 +17,10 @@ export const userReducer = createSlice({
     dragAndDropValue: (state: any, action) => {
       state.initialStateDrag = action.payload;
     },
-    dragAndDropTotalValue: (state: any, action) => {
-      state.initialStateDragAndDrop = action.payload;
+    quickDragAndDropValue: (state: any, action) => {
+      state.initialStateQuickDrag = action.payload;
     },
   },
 });
-export const { dragAndDropValue, dragAndDropTotalValue } = userReducer.actions;
+export const { dragAndDropValue, quickDragAndDropValue } = userReducer.actions;
 export default userReducer.reducer;

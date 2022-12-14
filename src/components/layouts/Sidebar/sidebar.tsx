@@ -43,10 +43,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import {
-  dragAndDropValue,
-  dragAndDropTotalValue,
-} from "../../../features/counter/dragAndDrop";
+import { dragAndDropValue } from "../../../features/counter/dragAndDrop";
 
 const SideBar = () => {
   const [search, setsearch] = useState(true);
@@ -202,21 +199,21 @@ const SideBar = () => {
     },
   ];
 
-  const AvailableButtonNames = [
+  const QUICKCREATEITEMS = [
     {
       names: "Single Line",
       icon: singleline,
-      id: 1,
+      id: uuidv4(),
     },
     {
       names: "Multi-Line",
       icon: multiline,
-      id: 2,
+      id: uuidv4(),
     },
     {
       names: "Email",
       icon: mail,
-      id: 3,
+      id: uuidv4(),
     },
   ];
 
@@ -229,7 +226,7 @@ const SideBar = () => {
               <AccordionItemButton>New Fields</AccordionItemButton>
             </AccordionItemHeading>
             <AccordionItemPanel>
-              <Droppable droppableId="ITEMS" isDropDisabled={true}>
+              <Droppable droppableId="CHECKITEMS" isDropDisabled={true}>
                 {(provided, snapshot) => (
                   <div
                     ref={provided.innerRef}
@@ -272,91 +269,6 @@ const SideBar = () => {
                   </div>
                 )}
               </Droppable>
-
-              {/* <section className="text-blue-500 bg-green-300">
-                <div onClick={addList}>
-                  <svg width="24" height="24" viewBox="0 0 24 24">
-                    <path
-                      fill="currentColor"
-                      d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                    />
-                  </svg>
-                  <span>Add List</span>
-                </div>
-
-                {Object.keys(uidv4 || {}).map((list: any, i: number) => {
-                  return (
-                    <Droppable key={list} droppableId={list}>
-                      {(provided, snapshot) => (
-                        <div className="App" ref={provided.innerRef}>
-                          {uidv4[list].length
-                            ? uidv4[list].map((item: any, index: number) => (
-                                <Draggable
-                                  key={item.id}
-                                  draggableId={item.id}
-                                  index={index}
-                                >
-                                  {(provided, snapshot) => (
-                                    <div
-                                      className="App"
-                                      ref={provided.innerRef}
-                                      {...provided.draggableProps}
-                                      style={provided.draggableProps.style}
-                                    >
-                                      <div className="text-pink-400 flex">
-                                        <section
-                                          className="App"
-                                          {...provided.dragHandleProps}
-                                        >
-                                          <svg
-                                            width="24"
-                                            height="24"
-                                            viewBox="0 0 24 24"
-                                          >
-                                            <path
-                                              fill="currentColor"
-                                              d="M3,15H21V13H3V15M3,19H21V17H3V19M3,11H21V9H3V11M3,5V7H21V5H3Z"
-                                            />
-                                          </svg>
-                                        </section>
-                                        <input
-                                          type={"text"}
-                                          name="name"
-                                          value={name}
-                                          onChange={() => setName(item.content)}
-                                        />
-                                        <p> {item.content}</p>
-                                        <p
-                                          className="delete"
-                                          onClick={(e) => {
-                                            const objWithIdIndex = uidv4[
-                                              list
-                                            ].findIndex(
-                                              (obj: any) => obj.id === item.id
-                                            );
-                                            uidv4[list].splice(
-                                              objWithIdIndex,
-                                              1
-                                            );
-                                          }}
-                                        >
-                                          ...
-                                        </p>
-                                      </div>
-                                    </div>
-                                  )}
-                                </Draggable>
-                              ))
-                            : !provided.placeholder && (
-                                <span className="Appp ">Drop items here</span>
-                              )}
-                          {provided.placeholder}
-                        </div>
-                      )}
-                    </Droppable>
-                  );
-                })}
-              </section> */}
             </AccordionItemPanel>
           </AccordionItem>
           <AccordionItem>
@@ -376,7 +288,7 @@ const SideBar = () => {
         <div>
           {search ? (
             <div className="nameOne margin-10 mt-3 justify-content-between flex">
-              Available Fields{" "}
+              Available Fields
               <span onClick={handleSearch}>
                 <i className="pi pi-search mr-2"></i>
               </span>
@@ -399,13 +311,46 @@ const SideBar = () => {
           <br />
 
           <div>
-            {AvailableButtonNames.map((button) => (
-              <ButtonOptions
-                name={button.names}
-                icon={button.icon}
-                id={button.id}
-              />
-            ))}
+            <Droppable droppableId="QUICKCREATEITEMS" isDropDisabled={true}>
+              {(provided, snapshot) => (
+                <div ref={provided.innerRef} className="text-blue-500 alignTwo">
+                  {QUICKCREATEITEMS.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <>
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={provided.draggableProps.style}
+                            className="rectanglebox white-space-nowrap"
+                          >
+                            <img
+                              className="imagedesign height"
+                              src={item.icon}
+                            ></img>
+                            {item.names}
+                          </div>
+                          {snapshot.isDragging && (
+                            <span className="rectanglebox white-space-nowrap">
+                              <img
+                                className="imagedesign height"
+                                src={item.icon}
+                              ></img>
+                              {item.names}
+                            </span>
+                          )}
+                        </>
+                      )}
+                    </Draggable>
+                  ))}
+                </div>
+              )}
+            </Droppable>
           </div>
         </div>
       ) : (
