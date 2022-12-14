@@ -8,14 +8,26 @@ import { OverlayPanel } from "primereact/overlaypanel";
 import { Sidebar } from "primereact/sidebar";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
+import { useSelector, useDispatch } from "react-redux";
+import { iteratorSymbol } from "immer/dist/internal";
 
 const UntitleImage = () => {
-  const [preview, setPreview] = useState([]);
+  const count: any = useSelector((state) => state);
+  const [preview, setPreview] = useState();
   const [checked1, setChecked1] = useState(false);
   const [sidebar, setSidebar] = useState(false);
   const [selectedCity1, setSelectedCity1] = useState(null);
   const op: any = useRef(null);
-
+  const [previewData,setPreviewData] = useState<any>()
+  console.log(previewData,"previewData")
+  
+  useEffect(() => {
+    setPreviewData(count.dragAndDrop.initialStateDrag);
+    console.log("count33", count.dragAndDrop.initialStateDrag);
+    // if(uidv4?.names == 'Multi-Select'){
+    //   console.log("hello")
+    // }
+  }, [count.dragAndDrop.initialStateDrag]);
   const cards = [
     {
       names: "Secondary email",
@@ -55,7 +67,23 @@ const UntitleImage = () => {
   };
   const cities = [{ name: "Admistrator", code: "NY" }];
   function handlerClick() {
-    setSidebar(!sidebar);
+    
+    {Object.keys(previewData || []).map((list:any, i:number) =>{
+      previewData[list]?.map((item:any,index:number) =>{
+     console.log(item.names,"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",sidebar)
+
+        if(item.names.includes("Multi-Select")){
+          if(item.names === "Multi-Select"){
+            
+            setSidebar(false);
+            console.log("hello",sidebar)
+          }
+          
+        }
+        
+      })
+    })}
+    setSidebar(true);
   }
   const handletoggle = (e: any) => {
     setChecked1(!checked1);
@@ -128,14 +156,43 @@ const UntitleImage = () => {
             </span>
             <span className="contactuntitle">Untitled Information</span>
             <div>
-              {cards.map((button: any) => (
+              {/* {cards.map((button: any) => (
                 <div className="card border-0 mt-3 ml-7">
                   <span className="names">
                     {button.names}
                     <InputText className="w-8" />{" "}
                   </span>{" "}
                 </div>
-              ))}
+              ))} */}
+              <div >
+      {Object.keys(previewData || []).map((list: any, i: number) => {
+        return (
+          <div key={i} className="previewCardAligment">
+            
+            { previewData[list]?.map((item: any, index: number) => {
+              console.log(item,"item")
+              
+              if(item.names=="Multi-Select"){
+              console.log("jeeyyyy")
+              
+              }
+              return (
+                <div key={index} >
+                  <div className="card border-0 mt-3 ml-7">
+                  <span className="names">
+                    {item.names}
+                    
+                    <InputText className="w-8" />{" "}
+                  </span>{" "}
+                </div>
+                </div>
+              );
+            })}
+
+                     </div>
+        );
+      })}
+    </div>
             </div>
           </div>
         </div>
