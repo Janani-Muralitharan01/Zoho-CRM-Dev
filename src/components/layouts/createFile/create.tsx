@@ -65,15 +65,14 @@ const UntitleImage = () => {
     {
       Object.keys(previewData || []).map((list: any, i: number) => {
         previewData[list]?.map((item: any, index: number) => {
-          if (item.names.includes("Multi-Select")) {
-            if (item.names === "Multi-Select") {
-              setSidebar(false);
-            }
+          {
+            item.names === "Multi-Select"
+              ? setSidebar(false)
+              : setSidebar(true);
           }
         });
       });
     }
-    setSidebar(true);
   }
   const handletoggle = (e: any) => {
     setChecked1(!checked1);
@@ -163,6 +162,7 @@ const UntitleImage = () => {
                           <div key={index}>
                             <div className="card border-0 mt-3 ml-7">
                               <span className="names">
+                                {item.names == ""}
                                 {item.names}
                                 <InputText className="w-8" />{" "}
                               </span>{" "}

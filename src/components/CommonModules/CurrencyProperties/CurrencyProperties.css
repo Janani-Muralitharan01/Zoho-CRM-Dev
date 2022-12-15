@@ -14,3 +14,16 @@
 .p-button {
   height: 40px;
 }
+.p-inputnumber-buttons-stacked .p-inputnumber-button-group {
+  display: flex !important;
+  flex-direction: unset !important;
+}
+.pi {
+  margin-left: 0px !important;
+}
+.pop{
+  width: 35%;
+  position: relative;
+  /* top: -70px; */
+  bottom: 70px;
+}
