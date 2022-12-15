@@ -27,7 +27,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
   const [option, setOption] = useState([]);
   const [arr, setArr] = useState(inputArr);
   const [checked, setChecked] = useState(false);
-
+  console.log(arr,"html")
   const addInput = () => {
     setArr((s: any) => {
       const lastId = s[s.length - 1].id;
