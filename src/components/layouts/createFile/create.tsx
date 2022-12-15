@@ -18,15 +18,10 @@ const UntitleImage = () => {
   const [sidebar, setSidebar] = useState(false);
   const [selectedCity1, setSelectedCity1] = useState(null);
   const op: any = useRef(null);
-  const [previewData,setPreviewData] = useState<any>()
-  console.log(previewData,"previewData")
-  
+  const [previewData, setPreviewData] = useState<any>();
+
   useEffect(() => {
     setPreviewData(count.dragAndDrop.initialStateDrag);
-    console.log("count33", count.dragAndDrop.initialStateDrag);
-    // if(uidv4?.names == 'Multi-Select'){
-    //   console.log("hello")
-    // }
   }, [count.dragAndDrop.initialStateDrag]);
   const cards = [
     {
@@ -67,22 +62,17 @@ const UntitleImage = () => {
   };
   const cities = [{ name: "Admistrator", code: "NY" }];
   function handlerClick() {
-    
-    {Object.keys(previewData || []).map((list:any, i:number) =>{
-      previewData[list]?.map((item:any,index:number) =>{
-     console.log(item.names,"hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",sidebar)
-
-        if(item.names.includes("Multi-Select")){
-          if(item.names === "Multi-Select"){
-            
-            setSidebar(false);
-            console.log("hello",sidebar)
+    {
+      Object.keys(previewData || []).map((list: any, i: number) => {
+        previewData[list]?.map((item: any, index: number) => {
+          if (item.names.includes("Multi-Select")) {
+            if (item.names === "Multi-Select") {
+              setSidebar(false);
+            }
           }
-          
-        }
-        
-      })
-    })}
+        });
+      });
+    }
     setSidebar(true);
   }
   const handletoggle = (e: any) => {
@@ -164,35 +154,26 @@ const UntitleImage = () => {
                   </span>{" "}
                 </div>
               ))} */}
-              <div >
-      {Object.keys(previewData || []).map((list: any, i: number) => {
-        return (
-          <div key={i} className="previewCardAligment">
-            
-            { previewData[list]?.map((item: any, index: number) => {
-              console.log(item,"item")
-              
-              if(item.names=="Multi-Select"){
-              console.log("jeeyyyy")
-              
-              }
-              return (
-                <div key={index} >
-                  <div className="card border-0 mt-3 ml-7">
-                  <span className="names">
-                    {item.names}
-                    
-                    <InputText className="w-8" />{" "}
-                  </span>{" "}
-                </div>
-                </div>
-              );
-            })}
-
-                     </div>
-        );
-      })}
-    </div>
+              <div>
+                {Object.keys(previewData || []).map((list: any, i: number) => {
+                  return (
+                    <div key={i} className="previewCardAligment">
+                      {previewData[list]?.map((item: any, index: number) => {
+                        return (
+                          <div key={index}>
+                            <div className="card border-0 mt-3 ml-7">
+                              <span className="names">
+                                {item.names}
+                                <InputText className="w-8" />{" "}
+                              </span>{" "}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

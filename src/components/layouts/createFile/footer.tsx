@@ -10,8 +10,14 @@ import CurrencyProperties from "../../CommonModules/CurrencyProperties/CurrencyP
 import LookUp from "../../CommonModules/LookUp/LookUp";
 import AutoNumber from "../../CommonModules/AutoNumber/AutoNumber";
 import Formula from "../../CommonModules/Formula/Formula";
+import User from "../../CommonModules/User/User";
+import MultipleSelectLookUp from "../../CommonModules/MultipleSelectLookUp/MultipleSelectLookUp";
+import { ITEMS } from "../../Constant/const";
+import { dragAndDropDialogOpenIndex } from "../../../features/counter/dragAndDrop";
 
 const Footer = ({ cards }: any, items: any) => {
+  const dispatch = useDispatch();
+
   const count: any = useSelector((state) => state);
   const [name, setName] = useState("");
   const [uidv4, setUidv4] = useState<any>();
@@ -52,6 +58,32 @@ const Footer = ({ cards }: any, items: any) => {
     setUidv4({ [index]: inputName });
   };
 
+  const openDialog = () => {
+    let value = ITEMS[count.dragAndDrop.DialogOpenIndex];
+    if (value) {
+      if (value.names === "Currency") {
+        return <CurrencyProperties currencyDialogVisible={true} />;
+      } else if (value.names === "Lookup") {
+        return <LookUp lookUpDialogVisible={true} />;
+      } else if (value.names === "Auto-Number") {
+        return <AutoNumber AutoNumberDialogVisible={true} />;
+      } else if (value.names === "User") {
+        return <User UserDialogVisible={true} />;
+      } else if (value.names === "Multi-Select Lookup") {
+        return (
+          <MultipleSelectLookUp MultipleSelectLookUpDialogVisible={true} />
+        );
+      } else if (value.names === "Pick List") {
+        return <Picklist pickListDialogVisible={true} />;
+      } else if (value.names === "Multi-Select") {
+        return <MultipleSelect dialogVisible={true} />;
+      } else if (value.names === "Formula") {
+        return <Formula FormulaDialogVisible={true} />;
+      }
+    }
+    dispatch(dragAndDropDialogOpenIndex(-1));
+  };
+
   return (
     <div>
       <section>
@@ -84,15 +116,31 @@ const Footer = ({ cards }: any, items: any) => {
                                         className="names"
                                         {...provided.dragHandleProps}
                                       >
-                                        <input
-                                          type="text"
-                                          name="names"
-                                          value={item.names}
-                                          onChange={(e) => {
-                                            handleChange(e, index);
-                                          }}
-                                          className="h-2rem my-auto"
-                                        />
+                                        {item.names === "Untitled Owner" ? (
+                                          <p>{item.subName}</p>
+                                        ) : item.names === "Untitled Name" ? (
+                                          <p>{item.subName}</p>
+                                        ) : item.names === "Created By" ? (
+                                          <p>{item.subName}</p>
+                                        ) : item.names === "Secondary Email" ? (
+                                          <p>{item.subName}</p>
+                                        ) : item.names === "Email" ? (
+                                          <p>{item.subName}</p>
+                                        ) : item.names === "Email Opt Out" ? (
+                                          <p>{item.subName}</p>
+                                        ) : item.names === "Modified By" ? (
+                                          <p>{item.subName}</p>
+                                        ) : (
+                                          <input
+                                            type="text"
+                                            name="names"
+                                            value={item.names}
+                                            onChange={(e) => {
+                                              handleChange(e, index);
+                                            }}
+                                            className="h-2rem my-auto"
+                                          />
+                                        )}
                                         <p className="grey">{item.subName}</p>
                                         <p
                                           className="delete"
@@ -114,23 +162,33 @@ const Footer = ({ cards }: any, items: any) => {
                                     </div>
                                   )}
                                 </Draggable>
-                                {item.names == "Multi-Select" ? (
-                                  <MultipleSelect dialogVisible={true} />
-                                ) : items.names == "Pick List" ? (
-                                  <Picklist pickListDialogVisible={true} />
-                                ) : item.names == "Currency" ? (
-                                  <CurrencyProperties
-                                    currencyDialogVisible={true}
-                                  />
-                                ) : item.names == "Lookup" ? (
-                                  <LookUp lookUpDialogVisible={true} />
-                                ) : item.names == "Auto-Number" ? (
-                                  <AutoNumber AutoNumberDialogVisible={true} />
-                                ) : item.names == "Formula" ? (
-                                  <Formula FormulaDialogVisible={true} />
-                                ) : (
-                                  ""
-                                )}
+
+                                {count.dragAndDrop.DialogOpenIndex === 10 &&
+                                item.names.toString() === "Currency"
+                                  ? openDialog()
+                                  : count.dragAndDrop.DialogOpenIndex === 16 &&
+                                    item.names.toString() === "Lookup"
+                                  ? openDialog()
+                                  : count.dragAndDrop.DialogOpenIndex === 9 &&
+                                    item.names.toString() === "Auto-Number"
+                                  ? openDialog()
+                                  : count.dragAndDrop.DialogOpenIndex === 18 &&
+                                    item.names.toString() === "User"
+                                  ? openDialog()
+                                  : count.dragAndDrop.DialogOpenIndex === 21 &&
+                                    item.names.toString() ===
+                                      "Multi-Select Lookup"
+                                  ? openDialog()
+                                  : item.names == "Pick List" &&
+                                    count.dragAndDrop.DialogOpenIndex == 4
+                                  ? openDialog()
+                                  : item.names == "Multi-Select" &&
+                                    count.dragAndDrop.DialogOpenIndex == 5
+                                  ? openDialog()
+                                  : item.names == "Formula" &&
+                                    count.dragAndDrop.DialogOpenIndex == 17
+                                  ? openDialog()
+                                  : ""}
                               </>
                             );
                           })
