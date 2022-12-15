@@ -30,9 +30,10 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   const [checkRequire, setCheckRequire] = useState("");
   const [checkToolTip, setCheckToolTip] = useState("");
   const [arr, setArr] = useState(inputArr);
+  const [selectedCity1, setSelectedCity1] = useState<any>([{ name: 'Normal', code: 'NY' },]);
   const [Multiselect, setMultiselect] = useState<any>([]);
   const [color2, setColor2] = useState('');
-
+  console.log(arr,"arr")
   useEffect(() => {
     setState(pickListDialogVisible);
   }, [pickListDialogVisible]);
@@ -77,6 +78,10 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   const onValueChange = (e: any) => {
     setOrder(e.target.value);
   };
+
+  const defaultValue = (e: { value: any}) => {
+    setSelectedCity1(e.value);
+}
   
   const onCityChange = (e:any) => {
     let selectedCities : any[] = []
@@ -174,41 +179,44 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
       >
         <p>
           Field Label <br />
-          <input type="text" />
+          <InputText type="text"  className="w-7 mt-1"/>
         </p>
         <h4>Pick List Option</h4>
         <section className="multipleSelectDialogOption_main">
+
           {arr.map((item, i: any) => {
             return (
               
               <section className="multipleSelectDialogOption">
-                {colorchecked?<ColorPicker value={color2} onChange={(e:any) => setColor2(e.value)}  ></ColorPicker>:""}
+               <span>           {colorchecked?<ColorPicker value={color2} onChange={(e:any) => setColor2(e.value)}  ></ColorPicker>:""}</span>
               <InputText
                 onChange={handleChange}
                 value={item.value}
-                
+                id={i}
                 placeholder={' Options' +  " " +k++}
                 type={item.type}
               />
-              <i className="pi pi-plus " onClick={addInput}></i>
-              <i className="pi pi-minus" onClick= { () => deleteinput(i)}></i>
+              <i className="pi pi-plus ml-2 " onClick={addInput}></i>
+              <i className="pi pi-minus ml-2" onClick= { () => deleteinput(i)}></i>
             </section>
             );
           })}
         </section>
-        <p>Select default value </p>
+        <p className="text-sm">Select default value </p>
         <Dropdown
-          value={option}
-          options={cities}
-          optionLabel="name"
+          value={selectedCity1}
+          options={arr}
+          optionLabel="value"
+          onChange={defaultValue}
           placeholder="-None-"
+          className="border-noround w-4"
         />
-        <div className="field-checkbox mt-2">
+        <div className="field-checkbox mt-3">
                     <Checkbox inputId="binary" checked={checked} onChange={handlerCheck} />
-                    <label htmlFor="binary">Enable history tracking for picklist values.</label>
+                    <label htmlFor="binary" className="font-semibold">Enable history tracking for picklist values.</label>
                 </div>
         
-        <p>Sort order preference</p>
+        <p className="font-semibold ml-2">Sort order preference</p>
         <p>
           <input
             type="radio"
