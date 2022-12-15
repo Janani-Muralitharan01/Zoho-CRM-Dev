@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import UntitleImage from "../createFile/create";
 import { useSelector, useDispatch } from "react-redux";
 import MultipleSelect from "../../CommonModules/MultipleSelect/MultipleSelect";
-import Picklist from "../../CommonModules/PickList/PickList";
+import Picklist from "../../CommonModules/PickList/PickList"
 import CurrencyProperties from "../../CommonModules/CurrencyProperties/CurrencyProperties";
 import LookUp from "../../CommonModules/LookUp/LookUp";
 import AutoNumber from "../../CommonModules/AutoNumber/AutoNumber";
@@ -80,10 +80,12 @@ const Footer = ({ cards }: any, items: any) => {
                                       {...provided.draggableProps}
                                       style={provided.draggableProps.style}
                                     >
+                                        
                                       <div
                                         className="names"
                                         {...provided.dragHandleProps}
                                       >
+                                        
                                         <input
                                           type="text"
                                           name="names"
@@ -117,7 +119,7 @@ const Footer = ({ cards }: any, items: any) => {
                                 {item.names == "Multi-Select" ? (
                                   <MultipleSelect dialogVisible={true} />
                                 ) : items.names == "Pick List" ? (
-                                  <Picklist pickListDialogVisible={true} />
+                                  <Picklist pickListDialogVisible ={true} />
                                 ) : item.names == "Currency" ? (
                                   <CurrencyProperties
                                     currencyDialogVisible={true}
