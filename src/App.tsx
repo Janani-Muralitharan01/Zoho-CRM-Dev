@@ -3,7 +3,7 @@ import "primeicons/primeicons.css";
 import Dashboard from "./components/layouts/Dashboard-Main/dashboard";
 import NavBar from "./components/layouts/Navbar/navbar";
 import SideBar from "./components/layouts/Sidebar/sidebar";
-import Login from "./components/CommonModules/LoginPage/Login"
+
 import {
   DragDropContext,
   Draggable,
@@ -175,8 +175,8 @@ function App() {
       >
         <div className="App">
           
-          <Login/>
-          {/* <div className="container">
+         
+          <div className="container">
             <nav>
               <NavBar />
             </nav>
@@ -186,7 +186,7 @@ function App() {
             <div id="sidebar">
               <SideBar />
             </div>
-          </div> */}
+          </div>
         </div>
       </DragDropContext>
     </>
