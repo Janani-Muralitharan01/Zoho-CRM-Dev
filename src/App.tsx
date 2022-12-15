@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import "primeicons/primeicons.css";
 import Dashboard from "./components/layouts/Dashboard-Main/dashboard";
@@ -23,6 +24,8 @@ import {
   COMPLETE,
   QUICKCREATECOMPLETE,
 } from "./components/Constant/const";
+import OrganizationSignup from "../src/components/Authentication/organization-signup";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -92,8 +95,8 @@ function App() {
     dispatch(quickDragAndDropValue(quickCreateComplete));
   }, [quickCreateComplete]);
 
-  return (
-    <>
+  const Dragable = () => {
+    return (
       <DragDropContext
         onDragEnd={(result) => {
           const { source, destination } = result;
@@ -184,7 +187,104 @@ function App() {
           </div>
         </div>
       </DragDropContext>
-    </>
+    );
+  };
+
+  return (
+    <Routes>
+      <Route path="/signIn" element={<OrganizationSignup />} />
+      <Route path="/navbar" element={<Dragable />} />
+      {/* <DragDropContext
+        onDragEnd={(result) => {
+          const { source, destination } = result;
+          if (!destination) {
+            return;
+          }
+
+          switch (source.droppableId) {
+            case destination.droppableId:
+              if (counter == 0) {
+                setCompleted({
+                  [destination.droppableId]: reorder(
+                    complete[source.droppableId],
+                    source.index,
+                    destination.index
+                  ),
+                });
+              } else {
+                setQuickCreateComplete({
+                  [destination.droppableId]: reorder(
+                    quickCreateComplete[source.droppableId],
+                    source.index,
+                    destination.index
+                  ),
+                });
+              }
+
+              break;
+            case "CHECKITEMS":
+              setCompleted({
+                [destination.droppableId]: copy(
+                  ITEMS,
+                  complete[destination.droppableId],
+                  source,
+                  destination
+                ),
+              });
+              let indexOfDragable = result ? result.source.index : "";
+              dispatch(dragAndDropDialogOpenIndex(indexOfDragable));
+
+              break;
+            case "QUICKCREATEITEMS":
+              setQuickCreateComplete({
+                [destination.droppableId]: copy(
+                  QUICKITEMS,
+                  quickCreateComplete[destination.droppableId],
+                  source,
+                  destination
+                ),
+              });
+              break;
+            default:
+              if (counter == 0) {
+                setCompleted(
+                  move(
+                    complete[source.droppableId],
+                    complete[destination.droppableId],
+                    source,
+                    destination
+                  )
+                );
+              } else {
+                setQuickCreateComplete(
+                  move(
+                    quickCreateComplete[source.droppableId],
+                    quickCreateComplete[destination.droppableId],
+                    source,
+                    destination
+                  )
+                );
+              }
+
+              break;
+          }
+        }}
+      >
+        <div className="App">
+          <div className="container">
+            <nav>
+              <NavBar />
+            </nav>
+            <main>
+              <Dashboard />
+            </main>
+            <div id="sidebar">
+              <SideBar />
+            </div>
+          </div>
+        </div>
+      </DragDropContext> */}
+    </Routes>
   );
 }
 
