@@ -81,3 +81,9 @@
 .p-input-icon-left > .p-inputtext {
   padding-left: 35px !important;
 }
+
+.form-error {
+  font-size: 10px;
+  color: red;
+  font-weight: bold;
+}

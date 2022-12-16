@@ -109,7 +109,7 @@ const Login = () => {
             <div
               className="text-center mt-2 pointer"
               style={{ width: "239px" }}
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/")}
             >
               Sign up
             </div>{" "}

@@ -199,7 +199,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/signup" element={<SignUp />} />
+      <Route path="/" element={<SignUp />} />
       {/* <DragDropContext
         onDragEnd={(result) => {
           const { source, destination } = result;
