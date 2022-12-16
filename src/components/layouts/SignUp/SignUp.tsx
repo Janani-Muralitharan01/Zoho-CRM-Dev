@@ -202,6 +202,15 @@ const SignUp = () => {
   const toast = useRef<any>(null);
   const [city, setCity] = useState(null);
 
+  const sucessToast = () => {
+    toast.current.show({
+      severity: "error",
+      summary: "File Size too large",
+      detail: "",
+      life: 1000,
+    });
+  };
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -215,17 +224,13 @@ const SignUp = () => {
 
         try {
           let res = await axios.post("http://localhost:8080/user/signup", val);
-          toast.current.show({
-            severity: "info",
-            summary: "Sticky Message",
-            detail: "Message Content",
-            sticky: false,
-          });
+
+          await sucessToast();
 
           localStorage.setItem("token", res.data.access_token);
           navigate("/dashboard");
         } catch (err) {
-          toast.current.show({
+          await toast.current.show({
             severity: "info",
             summary: "Sticky Message",
             detail: err,
