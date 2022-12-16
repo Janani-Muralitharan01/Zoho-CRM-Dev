@@ -16,7 +16,7 @@ const Selection = () => {
             </main>
             <div id="sidebar">
               <div>
-              <div className="text-50" onClick={() => navigate("/dashboard")}>Form Link</div>
+              <div className="text-50 cursor-pointer" onClick={() => navigate("/dashboard")}>Form Link</div>
               </div>
               
             </div>
