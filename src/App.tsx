@@ -28,6 +28,7 @@ import {
 import OrganizationSignup from "../src/components/Authentication/organization-signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/layouts/LoginPage/Login";
+import Selection from "./components/layouts/SelectionPage/Selection"
 import SignUp from "./components/layouts/SignUp/SignUp";
 
 // const reorder = (
@@ -199,6 +200,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/selection" element={<Selection />} />
       <Route path="/" element={<SignUp />} />
       {/* <DragDropContext
         onDragEnd={(result) => {

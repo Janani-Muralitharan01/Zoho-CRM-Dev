@@ -12,12 +12,13 @@ const Login = () => {
   const [city, setCity] = useState(null);
   const [value3, setValue3] = useState("");
   const [value4, setValue4] = useState("");
+  
   // const [selectedCategory, setSelectedCategory] = useState(categories[1]);
   return (
     <div>
-      <div className="split left">
-        <div className="centered">
-          <div style={{ padding: "100px" }} className="mt-8">
+<div className="containerLogin"> 
+  <div className="lefts">
+  <div style={{ padding: "100px" }} className="mt-8">
             <div className="HeadingStyle">
               Recruiteas
               <br />
@@ -26,7 +27,7 @@ const Login = () => {
               Lorem ipsum is a pseudo-Latin text used in web design
             </span>
 
-            <p className="text-2xl text-50">Who is Using?</p>
+            <p className="text-2xl text-50 flex">Who is Using?</p>
             <div className="flex gap ">
               <div className="field-radiobutton radioButtonorder">
                 <RadioButton
@@ -67,15 +68,12 @@ const Login = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="splittwo right">
-        <div className="centered">
-          <div className="loginRightHeading">
-            <span className="text-2xl font-bold">Hello Again</span>
+    
+  </div>
+  <div className="rights">  <div className="loginRightHeading">
+            <span className="text-2xl font-bold flex">Hello Again</span>
             <br />
-            <span className="flex mt-1">Welcome Back</span>
+            <span className="flex justify-content-start">Welcome Back</span>
             <div className="mt-4">
               <span className="p-input-icon-left">
                 <i className="pi pi-envelope" />
@@ -103,6 +101,7 @@ const Login = () => {
                 aria-label="Submit"
                 style={{ width: "230px" }}
                 className="mt-3 p-button-rounded"
+                onClick={() => navigate("/selection")}
               />
             </span>
             <br />
@@ -117,9 +116,23 @@ const Login = () => {
             <div className="text-center  pointer" style={{ width: "239px" }}>
               Forget Password
             </div>
-          </div>
+          </div></div>
+</div>
+
+
+    {/* <div>
+      <div className="split left">
+        <div className="centered">
+          
         </div>
       </div>
+
+      <div className="splittwo right">
+        <div className="centered">
+         
+        </div>
+      </div>
+    </div> */}
     </div>
   );
 };
