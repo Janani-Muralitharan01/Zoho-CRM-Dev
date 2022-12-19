@@ -28,6 +28,7 @@ import {
 import OrganizationSignup from "../src/components/Authentication/organization-signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/layouts/LoginPage/Login";
+import Selection from "./components/layouts/SelectionPage/Selection";
 import SignUp from "./components/layouts/SignUp/SignUp";
 import { AuthRoute } from "../src/components/AuthRoute/AuthRoute";
 
@@ -37,6 +38,7 @@ function App() {
       {/* <Route path="/" element={<Layout />}> */}
       <Route element={<AuthRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/selection" element={<Selection />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<SignUp />} />

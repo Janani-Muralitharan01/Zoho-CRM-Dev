@@ -192,10 +192,12 @@ const Login = () => {
     });
 
   return (
-    <div>
+<div>
+<div>
       <Toast ref={toast} position="top-center" />
-      <div className="split left">
-        <div className="centered">
+<div className="containerLogin">
+  <div className="lefts">
+  <div className="centered">
           <div style={{ padding: "100px" }} className="mt-8">
             <div className="HeadingStyle">
               Recruiteas
@@ -205,7 +207,7 @@ const Login = () => {
               Lorem ipsum is a pseudo-Latin text used in web design
             </span>
 
-            <p className="text-2xl text-50">Who is Using?</p>
+            <p className="text-2xl text-50 flex">Who is Using?</p>
             <div className="flex gap ">
               <div className="field-radiobutton radioButtonorder">
                 <RadioButton
@@ -246,13 +248,12 @@ const Login = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <div className="splittwo right">
-        <div className="centered">
-          <div className="loginRightHeading">
-            <span className="text-2xl font-bold">Hello Again</span>
+    
+  </div>
+  </div>
+  <div className="rights">
+  <div className="loginRightHeading">
+            <span className="text-2xl font-bold flex">Hello Again</span>
             <br />
             <span className="flex mt-1">Welcome Back</span>
             <form onSubmit={handleSubmit} className="p-fluid">
@@ -299,6 +300,7 @@ const Login = () => {
                   label="login"
                   aria-label="Submit"
                   style={{ width: "230px" }}
+                  onClick={() => navigate("/selection")}
                   className="mt-3 p-button-rounded"
                 />
               </span>
@@ -316,8 +318,27 @@ const Login = () => {
               Forget Password
             </div>
           </div>
+  </div>
+</div>
+
+    
+     
+</div>
+
+    {/* <div>
+      <div className="split left">
+        <div className="centered">
+          
         </div>
       </div>
+
+      <div className="splittwo right">
+        <div className="centered">
+         
+        </div>
+      </div>
+    </div> */}
+    
     </div>
   );
 };
