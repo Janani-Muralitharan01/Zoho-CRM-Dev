@@ -29,13 +29,18 @@ import OrganizationSignup from "../src/components/Authentication/organization-si
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/layouts/LoginPage/Login";
 import SignUp from "./components/layouts/SignUp/SignUp";
+import { AuthRoute } from "../src/components/AuthRoute/AuthRoute";
 
 function App() {
   return (
     <Routes>
-      <Route path="/dashboard" element={<Dashboard />} />
+      {/* <Route path="/" element={<Layout />}> */}
+      <Route element={<AuthRoute />}>
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<SignUp />} />
+
       {/* <DragDropContext
         onDragEnd={(result) => {
           const { source, destination } = result;
