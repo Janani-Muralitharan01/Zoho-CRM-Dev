@@ -228,7 +228,7 @@ const SignUp = () => {
           await sucessToast();
 
           localStorage.setItem("token", res.data.access_token);
-          navigate("/dashboard");
+          navigate("/selection");
         } catch (err) {
           await toast.current.show({
             severity: "info",
