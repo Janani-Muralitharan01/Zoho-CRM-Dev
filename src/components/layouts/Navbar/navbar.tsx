@@ -6,8 +6,9 @@ import { InputText } from "primereact/inputtext";
 import { MultiSelect } from "primereact/multiselect";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useNavigate } from "react-router-dom";
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
-import { Toast } from 'primereact/toast';
+import Cookies from "js-cookie";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
 
 const NavBar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -15,8 +16,8 @@ const NavBar = () => {
   const [sidebarModule, setSidebarModule] = useState(false);
   const op: any = useRef(null);
   const setting: any = useRef(null);
-  const toast:any = useRef(null);
-  console.log(toast,"toast")
+  const toast: any = useRef(null);
+  console.log(toast, "toast");
   const navigate = useNavigate();
   function handlerSiebarOptionOne() {
     setSidebar(!sidebar);
@@ -24,16 +25,25 @@ const NavBar = () => {
   function handlerSiebarOptionTwo() {
     setSidebarModule(!sidebarModule);
   }
- 
+
   const accept = () => {
-   
-    toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
-    
+    toast.current.show({
+      severity: "info",
+      summary: "Confirmed",
+      detail: "You have accepted",
+      life: 3000,
+    });
+
     navigate("/selection");
-}
-const reject = () => {
-    toast.current.show({ severity: 'warn', summary: 'Rejected', detail: 'You have rejected', life: 3000 });
-}
+  };
+  const reject = () => {
+    toast.current.show({
+      severity: "warn",
+      summary: "Rejected",
+      detail: "You have rejected",
+      life: 3000,
+    });
+  };
   const Options = [
     { name: "Standard", code: "NY" },
     { name: "Administrator", code: "RM" },
@@ -42,18 +52,26 @@ const reject = () => {
   return (
     <div className="navbar ">
       <Toast ref={toast} />
-      <span className="mt-3 cursor-pointer"><i className="pi pi-arrow-left" onClick={(e: any) => {
+      <span className="mt-3 cursor-pointer">
+        <i
+          className="pi pi-arrow-left"
+          onClick={(e: any) => {
             confirmDialog({
-              message: 'Do you want Save Change?',
-              header: 'Confirmation',
-              icon: 'pi pi-info-circle',
-              
-              accept
-              ,reject
-             
-          });
-            
-          }} ></i></span>
+              message: "Do you want Save Change?",
+              header: "Confirmation",
+              icon: "pi pi-info-circle",
+
+              accept: () => {
+                Cookies.remove("token");
+                Cookies.remove("access_token");
+                // localStorage.clear();
+                navigate("/selection");
+              },
+              reject,
+            });
+          }}
+        ></i>
+      </span>
       <div
         className="untitle font-normal ml-3"
         onClick={(e) => op.current.toggle(e)}
@@ -69,22 +87,28 @@ const reject = () => {
         ></i>
       </div>
       <span className="buttonGap">
-      <ConfirmDialog />
+        <ConfirmDialog />
         <button
           className="buttonStyle font-normal"
           onClick={(e: any) => {
             confirmDialog({
-              message: 'Do you want to Log Out?',
-              header: 'Log Out Confirmation',
-              icon: 'pi pi-info-circle',
-              
-              accept : () =>{
-                toast.current.show({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted', life: 3000 });
+              message: "Do you want to Log Out?",
+              header: "Log Out Confirmation",
+              icon: "pi pi-info-circle",
+
+              accept: () => {
+                // localStorage.clear();
+                Cookies.remove("token");
+                Cookies.remove("access_token");
+                toast.current.show({
+                  severity: "info",
+                  summary: "Confirmed",
+                  detail: "You have accepted",
+                  life: 3000,
+                });
                 navigate("/");
-              },reject
-             
-          });
-            
+              },
+            });
           }}
         >
           {" "}

@@ -11,16 +11,16 @@ const initialSignUpPage: userReducerState = {
 
 export const signUp = createAsyncThunk(
   "auth/signUp",
-  async (name, thunkAPI) => {
+  async (name: any, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://localhost:80/user/signup",
+        "http://localhost:8085/api/auth/register",
         name
       );
-      // return response.data;
-    } catch (error) {
-      // return thunkAPI.rejectWithValue(error.response.data.message);
-      console.log("error", error);
+
+      return response.data;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
