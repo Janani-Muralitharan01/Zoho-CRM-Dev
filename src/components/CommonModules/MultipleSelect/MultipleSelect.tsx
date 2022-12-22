@@ -27,17 +27,172 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
   const [checkToolTip, setCheckToolTip] = useState('');
   const [val, setVal] = useState([]);
   const [OptionOne, setOptionOne] = useState(false);
+  const [OptionTwo, setOptionTwo] = useState(false);
   const [OptionThree, setOptionThree] = useState(false);
   const [option, setOption] = useState([]);
+  const [picklist, setpicklist] = useState<any>();
   const [arr, setArr] = useState(inputArr);
   const [checked, setChecked] = useState(false);
   const op: any = useRef(null);
+  const Days = [
+    {
+      names: 'Monday',
 
+      id: 1,
+    },
+    {
+      names: 'Tuesday',
+      
+      id: 2,
+    },
+    {
+      names: 'Wednesday',
+      
+      id: 3,
+    },
+    {
+      names: 'Thursday',
+      
+      id: 4,
+    },
+    {
+      names: 'Friday',
+      
+      id: 5,
+    },
+    {
+      names: 'Friday',
+      
+      id: 6,
+    },
+    {
+      names: 'Saturday',
+      
+      id: 7,
+    },
+  ];
+  const Month = [
+    {
+      names: 'january',
+
+      id: 1,
+    },
+    {
+      names: 'feburary',
+      
+      id: 2,
+    },
+    {
+      names: 'March',
+      
+      id: 3,
+    },
+    {
+      names: 'April',
+      
+      id: 4,
+    },
+    {
+      names: 'May',
+      
+      id: 5,
+    },
+    {
+      names: 'June',
+      
+      id: 6,
+    },
+    {
+      names: 'July',
+      
+      id: 7,
+    },
+    {
+      names: 'Augest',
+      
+      id: 8,
+    },
+    {
+      names: 'September',
+      
+      id: 9,
+    },
+    {
+      names: 'October',
+      
+      id: 10,
+    },
+    {
+      names: 'November',
+      
+      id: 11,
+    },
+    {
+      names: 'December',
+      
+      id: 12,
+    },
+  ];
+  const Continent = [
+    {
+      names: 'Asia ',
+
+      id: 1,
+    },
+    {
+      names: 'North America',
+      
+      id: 2,
+    },
+    {
+      names: 'South America',
+      
+      id: 3,
+    },
+    {
+      names: 'Africa',
+      
+      id: 4,
+    },
+    {
+      names: 'Antartica',
+      
+      id: 5,
+    },
+    {
+      names: 'Australia',
+      
+      id: 6,
+    },
+    {
+      names: 'Eroup',
+      
+      id: 7,
+    },
+  ];
   function handlerSiebarOptionOne() {
     setOptionOne(!OptionOne);
   }
+  function handlerSiebarOptionTwo() {
+    setOptionTwo(!OptionTwo);
+  }
   function handlerSiebarOptionThree() {
     setOptionThree(!OptionThree);
+  }
+  function ClickPickList (name:any){
+    if(name == 'days'){
+      console.log("Days",Days)
+    setpicklist(Days)
+    console.log(picklist,"picklistpicklist")
+      
+    }
+    else if(name == 'month'){
+      console.log("fiseleee")
+      setpicklist(Month)
+    }
+    else if(name == 'Continents'){
+      setpicklist(Continent)
+    }
   }
   const addInput = () => {
     setArr((s: any) => {
@@ -111,7 +266,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
               View/add unused values
             </span>
             <hr />
-            <span className=" options">Add prefined choices</span>
+            <span className=" options" onClick={handlerSiebarOptionTwo}>Add prefined choices</span>
             <br />
             <br />
             <span className="  options " onClick={handlerSiebarOptionThree}>
@@ -129,6 +284,44 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
         >
           <div className="allOptionUse">All options are in use.</div>
         </Dialog>
+        <Dialog
+        header="Pick List Properties"
+        visible={OptionTwo}
+        style={{ width: "46.2%" }}
+        position="top"
+        onHide={() => setOptionTwo(!OptionTwo)}
+      >
+        <div >
+          <span>Import Predefined Choices</span>
+
+          <div className="containerPicklist">
+            <div className="leftside">
+              <span className="p-1 ml-3 flex options"  onClick={() => ClickPickList('days')}>Days of the week</span><hr/>
+              <span className="p-1 ml-3 flex options" onClick={() => ClickPickList('month')}>Month of the year</span><hr/>
+              <span className="p-1 ml-3 flex options">Time Zones</span><hr/>
+              <span className="p-1 ml-3 flex options">US State</span><hr/>
+              <span className="p-1 ml-3 flex options" onClick={() => ClickPickList('Continents')}>Continents</span><hr/>
+              <span className="p-1 ml-3 flex options">Countries / Regions</span><hr/>
+            </div>
+            <div className="rightside">
+              
+              {picklist?.map((list:any)=>{
+                return(
+                  <div>
+                  <div className="ml-4 mt-3"> {list.names}</div></div>
+                )
+                
+              })}
+              {/* {picklist} */}
+            </div>
+          </div>
+          <div className="footerstyle">
+            
+            <span className="p-2 text-primary">Don't save this field</span>
+      <button className='buttonStyle ml-8 mt-1' onClick={handlerCheck}> Cancel </button>
+      <Button label="Done"/></div>
+          </div>
+      </Dialog>
         <Dialog
           header="Bulk Choice"
           visible={OptionThree}
@@ -159,7 +352,7 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
             </div>
           </div>
         </Dialog>
-        <section className="multipleSelectDialogOption_main">
+        <section className="multipleSelectDialogOption_main mt-2">
           {arr.map((item, i: any) => {
             return (
               <section className="multipleSelectDialogOption">
@@ -171,11 +364,11 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
                   type={item.type}
                 />
                 <i
-                  className="pi pi-plus "
+                  className="pi pi-plus ml-2 "
                   onMouseEnter={() => 'hello'}
                   onClick={addInput}
                 ></i>
-                <i className="pi pi-minus" onClick={() => deleteinput(i)}></i>
+                <i className="pi pi-minus ml-2" onClick={() => deleteinput(i)}></i>
               </section>
             );
           })}

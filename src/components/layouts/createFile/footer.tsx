@@ -143,7 +143,7 @@ const Footer = ({ cards }: any, items: any) => {
                                             onChange={(e) => {
                                               handleChange(e, index);
                                             }}
-                                            className="h-2rem my-auto border-yellow-50 text-yellow-800"
+                                            className="h-2rem my-auto border-none text-yellow-800"
                                           />
                                         )}
                                         <p className="grey">{item.subName}</p>
