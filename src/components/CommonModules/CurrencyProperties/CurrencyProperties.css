@@ -17,6 +17,7 @@
 .p-inputnumber-buttons-stacked .p-inputnumber-button-group {
   display: flex !important;
   flex-direction: unset !important;
+  column-gap: 5px;
 }
 .pi {
   margin-left: 0px !important;

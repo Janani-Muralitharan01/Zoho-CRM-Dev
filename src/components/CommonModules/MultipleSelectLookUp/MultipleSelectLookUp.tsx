@@ -1,7 +1,7 @@
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { useState, useEffect } from "react";
-
+import { InputText } from 'primereact/inputtext';
 interface MultipleSelectLookUpProps {
   MultipleSelectLookUpDialogVisible: boolean;
 }
@@ -24,18 +24,18 @@ const MultipleSelectLookUp: React.FC<MultipleSelectLookUpProps> = ({
         position="top"
         onHide={() => setState(false)}
       >
-        <p className="bg-pink-50 border-round">
+        <p className="bg-pink-50 border-round p-2">
           Create relationship between B and C modules such that module B can
           have many records in module C and vice versa.
         </p>
         <p>
           Field Label <br />
-          <input type="text" />
+          <InputText type="text" />
         </p>
         <p>
           Select Related Module
           <br />
-          <input type="number" placeholder="Select Module" />
+          <InputText type="number" placeholder="Select Module" />
         </p>
         <div className="currencyProperties_cancel">
           <p className="">Don't save this field.</p>

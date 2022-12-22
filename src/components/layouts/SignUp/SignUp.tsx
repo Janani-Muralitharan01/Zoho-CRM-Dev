@@ -223,13 +223,15 @@ const SignUp = () => {
         };
 
         try {
+          navigate("/dashboard");
           let res = await axios.post("http://localhost:8080/user/signup", val);
 
           await sucessToast();
 
           localStorage.setItem("token", res.data.access_token);
-          navigate("/dashboard");
+          
         } catch (err) {
+          console.log("err",err)
           await toast.current.show({
             severity: "info",
             summary: "Sticky Message",

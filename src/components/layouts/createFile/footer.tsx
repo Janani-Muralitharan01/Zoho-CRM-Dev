@@ -14,6 +14,7 @@ import User from "../../CommonModules/User/User";
 import MultipleSelectLookUp from "../../CommonModules/MultipleSelectLookUp/MultipleSelectLookUp";
 import { ITEMS } from "../../Constant/const";
 import { dragAndDropDialogOpenIndex } from "../../../features/counter/dragAndDrop";
+import FileUploadDemo from "../../CommonModules/FileUpload/FileUpload"
 
 const Footer = ({ cards }: any, items: any) => {
   const dispatch = useDispatch();
@@ -77,8 +78,12 @@ const Footer = ({ cards }: any, items: any) => {
         return <Picklist pickListDialogVisible={true} />;
       } else if (value.names === "Multi-Select") {
         return <MultipleSelect dialogVisible={true} />;
-      } else if (value.names === "Formula") {
+      } 
+      else if (value.names === "Formula") {
         return <Formula FormulaDialogVisible={true} />;
+      }
+      else if (value.names === "File Upload") {
+        return <FileUploadDemo FileUploadVisible={true} />;
       }
     }
     dispatch(dragAndDropDialogOpenIndex(-1));
@@ -138,7 +143,7 @@ const Footer = ({ cards }: any, items: any) => {
                                             onChange={(e) => {
                                               handleChange(e, index);
                                             }}
-                                            className="h-2rem my-auto"
+                                            className="h-2rem my-auto border-yellow-50 text-yellow-800"
                                           />
                                         )}
                                         <p className="grey">{item.subName}</p>
@@ -187,6 +192,9 @@ const Footer = ({ cards }: any, items: any) => {
                                   ? openDialog()
                                   : item.names == "Formula" &&
                                     count.dragAndDrop.DialogOpenIndex == 17
+                                  ? openDialog()
+                                  : item.names == "File Upload" &&
+                                  count.dragAndDrop.DialogOpenIndex == 19
                                   ? openDialog()
                                   : ""}
                               </>

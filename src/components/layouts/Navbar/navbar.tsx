@@ -55,7 +55,7 @@ const reject = () => {
             
           }} ></i></span>
       <div
-        className="untitle font-normal ml-2"
+        className="untitle font-normal ml-3"
         onClick={(e) => op.current.toggle(e)}
       >
         Untitled <br />
