@@ -1,10 +1,12 @@
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useRef } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { Checkbox } from 'primereact/checkbox';
 import { InputText } from 'primereact/inputtext';
+import { OverlayPanel } from "primereact/overlaypanel";
 import { ColorPicker } from 'primereact/colorpicker';
+import { InputTextarea } from 'primereact/inputtextarea';
 
 import "./PickList.css";
 
@@ -24,7 +26,11 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   const [checked, setChecked] = useState(false);
   const [colorchecked, setcolorchecked] = useState(false);
   const [state, setState] = useState(false);
-  const [option, setOption] = useState([]);
+  const [OptionOne, setOptionOne] = useState(false);
+  const [OptionTwo, setOptionTwo] = useState(false);
+  const [OptionThree, setOptionThree] = useState(false);
+  const [Days, setDays] = useState(false);
+  const [Months, setMonths] = useState(false);
   const [order, setOrder] = useState("");
   const [checkAlpha, setCheckAlpha] = useState(false);
   const [checkRequire, setCheckRequire] = useState("");
@@ -33,7 +39,8 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   const [selectedCity1, setSelectedCity1] = useState<any>([{ name: 'Normal', code: 'NY' },]);
   const [Multiselect, setMultiselect] = useState<any>([]);
   const [color2, setColor2] = useState('');
-  console.log(arr,"arr")
+  const op: any = useRef(null);
+ 
   useEffect(() => {
     setState(pickListDialogVisible);
   }, [pickListDialogVisible]);
@@ -43,17 +50,35 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
     { name: "Rome", code: "RM" },
     { name: "London", code: "LDN" },
   ];
+  function ClickDays (_name:any){
+    setMonths(false)
+    setDays(!Days)
+  }
+  function ClickMonths (){
+    setDays(false)
+    setMonths(!Months)
+  }
+  function handlerSiebarOptionOne() {
+    setDays(false)
+    setOptionOne(!OptionOne);
+  }
+  function handlerSiebarOptionTwo() {
+    setOptionTwo(!OptionTwo);
+  }
+  function handlerSiebarOptionThree() {
+    setOptionThree(!OptionThree);
+  }
   const handlerCheck = (e:any) =>{
-  console.log(e,"ee")
+  
   setChecked(!checked)
   }
   const handlerCheckcolor = (e:any) =>{
-    console.log(e,"ee")
+
     setcolorchecked(!colorchecked)
     }
   var k = 1;
   const handlerCheckclose = (e:any) =>{
-    console.log(e,"closee")
+ 
     setState(false)
     }
 
@@ -86,7 +111,7 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   const onCityChange = (e:any) => {
     let selectedCities : any[] = []
      selectedCities = [...Multiselect];
-    console.log(selectedCities,"selectedCities")
+ 
     if (e.checked)
         selectedCities.push(e.value);
     else
@@ -181,7 +206,72 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
           Field Label <br />
           <InputText type="text"  className="w-7 mt-1"/>
         </p>
-        <h4>Pick List Option</h4>
+        <div className="flex justify-content-between "><span>Pick List Option</span>  <span  onClick={(e) => op.current.toggle(e)}><i className="pi pi-cog cursor-pointer"></i></span></div>
+        <OverlayPanel
+        ref={op}
+        style={{ width: "255px" }}
+        className="overlaypanel-demo"
+      ><div>
+        <span className=" options" onClick={handlerSiebarOptionOne}>View/add unused values</span><hr/>
+        <span className=" options" onClick={handlerSiebarOptionTwo}>Add prefined choices</span><br/><br/>
+        <span className="  options " onClick={handlerSiebarOptionThree}>Add Bulk choices</span><br/>
+        </div></OverlayPanel>
+        <Dialog
+        header="Unused Values"
+        visible={OptionOne}
+        style={{ width: "50vw" }}
+        position="top"
+        onHide={() => setOptionOne(!OptionOne)}
+      >
+        <div className="allOptionUse">All options are in use.</div>
+      </Dialog>
+      <Dialog
+        header="Pick List Properties"
+        visible={OptionTwo}
+        style={{ width: "50vw" }}
+        position="top"
+        onHide={() => setOptionTwo(!OptionTwo)}
+      >
+        <div >
+          <span>Import Predefined Choices</span>
+
+          <div className="containerPicklist">
+            <div className="leftside">
+              <span className="p-1 ml-3 flex options"  onClick={ClickDays}>Days of the week</span><hr/>
+              <span className="p-1 ml-3 flex options" onClick={ClickMonths}>Month of the year</span><hr/>
+              <span className="p-1 ml-3 flex options">Time Zones</span><hr/>
+              <span className="p-1 ml-3 flex options">US State</span><hr/>
+              <span className="p-1 ml-3 flex options">Continents</span><hr/>
+              <span className="p-1 ml-3 flex options">Countries / Regions</span><hr/>
+            </div>
+            <div className="rightside">
+              
+            </div>
+          </div>
+          </div>
+      </Dialog>
+      <Dialog
+        header="Bulk Choice"
+        visible={OptionThree}
+        style={{ width: "45vw" }}
+        position="top"
+        onHide={() => setOptionThree(!OptionThree)}
+      >
+        <div > <div className="field col-12 md:col-4">
+                        <span className="p-float-label">
+                            <InputTextarea id="textarea"   rows={15} cols={65} autoResize />
+                            <label htmlFor="textarea">Textarea</label>
+                        </span>
+                    </div>
+                    <div className="pt">
+          <div className="footerstyle">
+            
+            <span className="p-2 text-primary" onClick={handlerCheckclose}>Don't save this field</span>
+      <button className='buttonStyle ml-8 mt-1' onClick={handlerCheck}> Cancel </button>
+      <Button label="Done"/></div>
+          </div>
+                    </div>
+      </Dialog>
         <section className="multipleSelectDialogOption_main">
 
           {arr.map((item, i: any) => {

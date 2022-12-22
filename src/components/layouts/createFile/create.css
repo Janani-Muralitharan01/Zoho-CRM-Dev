@@ -103,3 +103,10 @@
   display: flex;
   flex-wrap: wrap;
 }
+.setpermissionRadio{
+  display: flex;
+  justify-content: space-around;
+  column-gap: 67px;
+  margin-right: 42px;
+
+}

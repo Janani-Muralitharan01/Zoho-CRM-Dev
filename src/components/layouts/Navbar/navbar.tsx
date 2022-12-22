@@ -8,6 +8,7 @@ import { OverlayPanel } from "primereact/overlaypanel";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
 
 const NavBar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -15,6 +16,8 @@ const NavBar = () => {
   const [sidebarModule, setSidebarModule] = useState(false);
   const op: any = useRef(null);
   const setting: any = useRef(null);
+  const toast: any = useRef(null);
+  console.log(toast, "toast");
   const navigate = useNavigate();
   function handlerSiebarOptionOne() {
     setSidebar(!sidebar);
@@ -22,6 +25,25 @@ const NavBar = () => {
   function handlerSiebarOptionTwo() {
     setSidebarModule(!sidebarModule);
   }
+
+  const accept = () => {
+    toast.current.show({
+      severity: "info",
+      summary: "Confirmed",
+      detail: "You have accepted",
+      life: 3000,
+    });
+
+    navigate("/selection");
+  };
+  const reject = () => {
+    toast.current.show({
+      severity: "warn",
+      summary: "Rejected",
+      detail: "You have rejected",
+      life: 3000,
+    });
+  };
   const Options = [
     { name: "Standard", code: "NY" },
     { name: "Administrator", code: "RM" },
@@ -29,6 +51,7 @@ const NavBar = () => {
   ];
   return (
     <div className="navbar ">
+      <Toast ref={toast} />
       <span className="mt-3 cursor-pointer">
         <i
           className="pi pi-arrow-left"
@@ -44,12 +67,13 @@ const NavBar = () => {
                 // localStorage.clear();
                 navigate("/selection");
               },
+              reject,
             });
           }}
         ></i>
       </span>
       <div
-        className="untitle font-normal ml-2"
+        className="untitle font-normal ml-3"
         onClick={(e) => op.current.toggle(e)}
       >
         Untitled <br />
@@ -76,6 +100,12 @@ const NavBar = () => {
                 // localStorage.clear();
                 Cookies.remove("token");
                 Cookies.remove("access_token");
+                toast.current.show({
+                  severity: "info",
+                  summary: "Confirmed",
+                  detail: "You have accepted",
+                  life: 3000,
+                });
                 navigate("/");
               },
             });

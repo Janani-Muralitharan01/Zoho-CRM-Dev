@@ -68,3 +68,37 @@
     top: 0px;
     
 }
+.allOptionUse {
+    border: 1px solid #9d8b8b;
+    background: lightgrey;
+    display: flex;
+    padding: 203px;
+    padding-top: 63%;
+    /* overflow: scroll; */
+}
+.containerPicklist{
+    min-height: 65vh;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    column-gap: 30px;
+  }
+  .leftside{
+    border: 1px solid #766060b8;
+    width: 25vw;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      360deg,
+      rgb(146, 140, 140) 0%,
+      rgb(192, 192, 192) 0%,
+      rgb(165, 165, 167) 8%,
+      rgb(213, 217, 225) 86%
+    );
+  }
+  .rightside{
+    width: 50vw;
+    background-color: rgb(253, 253, 253);
+    border: 1px solid;
+  }
