@@ -2,43 +2,21 @@ import React from "react";
 import "./App.css";
 import "primeicons/primeicons.css";
 import Dashboard from "./components/layouts/Dashboard-Main/dashboard";
-import NavBar from "./components/layouts/Navbar/navbar";
-import SideBar from "./components/layouts/Sidebar/sidebar";
-
-import {
-  DragDropContext,
-  Draggable,
-  DraggableLocation,
-  Droppable,
-} from "react-beautiful-dnd";
-import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
-import {
-  dragAndDropValue,
-  quickDragAndDropValue,
-  dragAndDropDialogOpenIndex,
-} from "./features/counter/dragAndDrop";
-import {
-  ITEMS,
-  QUICKITEMS,
-  COMPLETE,
-  QUICKCREATECOMPLETE,
-} from "./components/Constant/const";
-import OrganizationSignup from "../src/components/Authentication/organization-signup";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/layouts/LoginPage/Login";
 import Selection from "./components/layouts/SelectionPage/Selection";
 import SignUp from "./components/layouts/SignUp/SignUp";
 import { AuthRoute } from "../src/components/AuthRoute/AuthRoute";
+import SuperAdmin from "./components/SuperAdmin";
 
 function App() {
   return (
     <Routes>
-      {/* <Route path="/" element={<Layout />}> */}
+      {/* <Route path="/" element={<AuthRoute />}> */}
       <Route element={<AuthRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/selection" element={<Selection />} />
+        <Route path="/super-admin" element={<SuperAdmin />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<SignUp />} />
