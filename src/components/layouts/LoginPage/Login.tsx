@@ -1,10 +1,8 @@
 import "./Login.css";
 import { RadioButton } from "primereact/radiobutton";
 import { useState, useEffect } from "react";
-// import LoginRight from "./LoginRight";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
-import { Password } from "primereact/password";
 import { useNavigate } from "react-router-dom";
 import { Toast } from "primereact/toast";
 import { useFormik } from "formik";
@@ -12,6 +10,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import React, { useRef } from "react";
 import Cookies from "js-cookie";
+import { logInVerification } from "../../../features/Auth/logIn";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 const signUpSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email"),
@@ -27,6 +27,8 @@ const Login = () => {
   const navigate = useNavigate();
   const toast = useRef<any>(null);
   const [city, setCity] = useState(null);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.logIn);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -37,33 +39,36 @@ const Login = () => {
           email: values.email,
           password: values.password,
         };
-        try {
-          let res = await axios.post(
-            "http://localhost:8085/api/auth/login",
-            val
-          );
 
-          Cookies.set("access_token", res.data.access_token, {
-            expires: 1 / 24,
-          });
-          let Ans: any = true;
-          Cookies.set("logged_in", Ans, {
-            expires: 1 / 24,
-          });
-          Cookies.set("refresh_token", res.data.access_token, {
-            expires: 1 / 24,
-          });
+        let res = await dispatch(logInVerification(val));
+        Cookies.set("access_token", res.payload.access_token, {
+          expires: 1 / 24,
+        });
+        let Ans: any = true;
+        Cookies.set("logged_in", Ans, {
+          expires: 1 / 24,
+        });
+        Cookies.set("refresh_token", res.payload.access_token, {
+          expires: 1 / 24,
+        });
 
-          // if (res.status == 200) {
-          //   let val2 = await axios.get(`http://localhost:8085/api/users/me`);
-          // }
+        // if (res.status == 200) {
+        //   let val2 = await axios.get(`http://localhost:8085/api/users/me`);
+        // }
 
+        if (res.payload.access_token) {
           navigate("/selection");
-        } catch (err) {
-          navigate("/login");
+        }
+        if (!res.payload.access_token) {
+          await toast.current.show({
+            severity: "error",
+            summary: res.payload.message,
+            detail: "",
+            life: 3000,
+          });
         }
 
-        action.resetForm();
+        // action.resetForm();
       },
     });
 

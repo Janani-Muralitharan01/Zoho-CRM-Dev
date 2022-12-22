@@ -4,16 +4,14 @@ import { InputText } from "primereact/inputtext";
 import { useState, useEffect } from "react";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import axios from "axios";
 import React, { useRef } from "react";
 import { Toast } from "primereact/toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Input } from "@mui/material";
 import Cookies from "js-cookie";
 import { useAppDispatch } from "../../../app/hooks";
 import { signUp } from "../../../features/Auth/signIn";
+import { mailVerification } from "../../../features/Auth/mailVerify";
 
 const signUpSchema = Yup.object({
   name: Yup.string().min(2).max(25).required("Please enter your name"),
@@ -51,28 +49,19 @@ const SignUp = () => {
           passwordConfirm: values.confirmPassword,
         };
 
-        try {
-          let res = await axios.post(
-            "http://localhost:8085/api/auth/register",
-            val
-          );
+        let res = await dispatch(signUp(val));
 
-          // dispatch(signUp(val));
-
-          if (res.data.token) {
-            Cookies.set("token", res.data.token);
-            await axios.get(
-              `http://localhost:8085/api/auth/verifyemail/${res.data.token}`
-            );
-            Cookies.remove("token");
-          }
-          navigate("/login");
-        } catch (err) {
-          navigate("/");
+        if (res.payload.token) {
+          Cookies.set("token", res.payload.token);
+          await dispatch(mailVerification(res.payload.token));
+          Cookies.remove("token");
+        }
+        navigate("/login");
+        if (!res.payload.token) {
           await toast.current.show({
             severity: "info",
             summary: "Sticky Message",
-            detail: err,
+            detail: "err",
             sticky: false,
           });
         }

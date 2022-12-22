@@ -17,11 +17,10 @@ export const signUp = createAsyncThunk(
         "http://localhost:8085/api/auth/register",
         name
       );
-      console.log("store", response);
+
       return response.data;
-    } catch (error) {
-      // return thunkAPI.rejectWithValue(error.response.data.message);
-      console.log("error store", error);
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
