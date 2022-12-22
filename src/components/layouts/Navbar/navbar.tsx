@@ -6,7 +6,8 @@ import { InputText } from "primereact/inputtext";
 import { MultiSelect } from "primereact/multiselect";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useNavigate } from "react-router-dom";
-import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import Cookies from "js-cookie";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 
 const NavBar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -28,20 +29,25 @@ const NavBar = () => {
   ];
   return (
     <div className="navbar ">
-      <span className="mt-3 cursor-pointer"><i className="pi pi-arrow-left" onClick={(e: any) => {
+      <span className="mt-3 cursor-pointer">
+        <i
+          className="pi pi-arrow-left"
+          onClick={(e: any) => {
             confirmDialog({
-              message: 'Do you want Save Change?',
-              header: 'Confirmation',
-              icon: 'pi pi-info-circle',
-              
-              accept : () =>{
-                localStorage.clear();
+              message: "Do you want Save Change?",
+              header: "Confirmation",
+              icon: "pi pi-info-circle",
+
+              accept: () => {
+                Cookies.remove("token");
+                Cookies.remove("access_token");
+                // localStorage.clear();
                 navigate("/selection");
-              }
-             
-          });
-            
-          }} ></i></span>
+              },
+            });
+          }}
+        ></i>
+      </span>
       <div
         className="untitle font-normal ml-2"
         onClick={(e) => op.current.toggle(e)}
@@ -57,22 +63,22 @@ const NavBar = () => {
         ></i>
       </div>
       <span className="buttonGap">
-      <ConfirmDialog />
+        <ConfirmDialog />
         <button
           className="buttonStyle font-normal"
           onClick={(e: any) => {
             confirmDialog({
-              message: 'Do you want to Log Out?',
-              header: 'Log Out Confirmation',
-              icon: 'pi pi-info-circle',
-              
-              accept : () =>{
-                localStorage.clear();
+              message: "Do you want to Log Out?",
+              header: "Log Out Confirmation",
+              icon: "pi pi-info-circle",
+
+              accept: () => {
+                // localStorage.clear();
+                Cookies.remove("token");
+                Cookies.remove("access_token");
                 navigate("/");
-              }
-             
-          });
-            
+              },
+            });
           }}
         >
           {" "}
