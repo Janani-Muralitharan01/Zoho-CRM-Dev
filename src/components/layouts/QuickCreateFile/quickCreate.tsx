@@ -94,7 +94,7 @@ const QuickCreate = () => {
                                     onChange={(e) => {
                                       handleChange(e, index);
                                     }}
-                                    className="h-2rem my-auto"
+                                    className="h-2rem my-auto border-none text-yellow-800"
                                   />
                                   <p className="grey">{item.subName}</p>
                                   <p

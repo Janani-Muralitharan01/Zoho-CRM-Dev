@@ -79,15 +79,17 @@
 .containerPicklist{
     min-height: 65vh;
     display: flex;
-    margin: 0;
-    padding: 0;
+    margin: 0px;
+    padding: 17px;
     border: 0;
     box-sizing: border-box;
     column-gap: 30px;
   }
   .leftside{
     border: 1px solid #766060b8;
-    width: 25vw;
+    width: 44vw;
+    height: 373px;
+    
     background: rgb(0, 0, 0);
     background: linear-gradient(
       360deg,
@@ -99,6 +101,21 @@
   }
   .rightside{
     width: 50vw;
+    height: 373px;
+    overflow: scroll;
     background-color: rgb(253, 253, 253);
     border: 1px solid;
   }
+  .footerStylePick {
+    z-index: 10;
+    padding: 2px;
+    display: flex;
+    justify-content: space-evenly;
+    top: 10px;
+    right: 22px;
+    width: 44.7vw;
+    padding-top: 24px;
+    position: relative;
+    box-shadow: 0 0 4px 0 rgb(0 0 0 / 30%);
+    height: 76px;
+}

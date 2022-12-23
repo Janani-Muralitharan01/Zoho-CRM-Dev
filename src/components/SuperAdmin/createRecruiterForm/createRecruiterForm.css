@@ -1,0 +1,27 @@
+.UploadButton 
+     {
+          display: flex;
+          margin-left: 226px;
+          margin-top: -94px;
+          padding: 9px;
+          color: darkslategrey;
+          border: 2px solid lightgrey;
+          cursor: pointer;
+      }
+      .cardRequirters {
+          background-color: white;
+          width: 465px;
+          height: 80px;
+          border-radius: -7px;
+          display: inline-table;
+          /* padding: 11px; */
+          /* box-shadow: 2px 2px 2px 2px; */
+          border: 2px solid #0c0b0b05;
+          border-width: 3px;
+      }
+      .ButtonsEnd{
+          display: flex;
+          justify-content: end;
+          margin-right: 33px;
+          column-gap: 50px;
+      }

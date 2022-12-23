@@ -29,7 +29,7 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   const [OptionOne, setOptionOne] = useState(false);
   const [OptionTwo, setOptionTwo] = useState(false);
   const [OptionThree, setOptionThree] = useState(false);
-  const [Days, setDays] = useState(false);
+  const [picklist, setpicklist] = useState<any>();
   const [Months, setMonths] = useState(false);
   const [order, setOrder] = useState("");
   const [checkAlpha, setCheckAlpha] = useState(false);
@@ -40,7 +40,142 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   const [Multiselect, setMultiselect] = useState<any>([]);
   const [color2, setColor2] = useState('');
   const op: any = useRef(null);
- 
+  const Days = [
+    {
+      names: 'Monday',
+
+      id: 1,
+    },
+    {
+      names: 'Tuesday',
+      
+      id: 2,
+    },
+    {
+      names: 'Wednesday',
+      
+      id: 3,
+    },
+    {
+      names: 'Thursday',
+      
+      id: 4,
+    },
+    {
+      names: 'Friday',
+      
+      id: 5,
+    },
+    {
+      names: 'Friday',
+      
+      id: 6,
+    },
+    {
+      names: 'Saturday',
+      
+      id: 7,
+    },
+  ];
+  const Month = [
+    {
+      names: 'january',
+
+      id: 1,
+    },
+    {
+      names: 'feburary',
+      
+      id: 2,
+    },
+    {
+      names: 'March',
+      
+      id: 3,
+    },
+    {
+      names: 'April',
+      
+      id: 4,
+    },
+    {
+      names: 'May',
+      
+      id: 5,
+    },
+    {
+      names: 'June',
+      
+      id: 6,
+    },
+    {
+      names: 'July',
+      
+      id: 7,
+    },
+    {
+      names: 'Augest',
+      
+      id: 8,
+    },
+    {
+      names: 'September',
+      
+      id: 9,
+    },
+    {
+      names: 'October',
+      
+      id: 10,
+    },
+    {
+      names: 'November',
+      
+      id: 11,
+    },
+    {
+      names: 'December',
+      
+      id: 12,
+    },
+  ];
+  const Continent = [
+    {
+      names: 'Asia ',
+
+      id: 1,
+    },
+    {
+      names: 'North America',
+      
+      id: 2,
+    },
+    {
+      names: 'South America',
+      
+      id: 3,
+    },
+    {
+      names: 'Africa',
+      
+      id: 4,
+    },
+    {
+      names: 'Antartica',
+      
+      id: 5,
+    },
+    {
+      names: 'Australia',
+      
+      id: 6,
+    },
+    {
+      names: 'Eroup',
+      
+      id: 7,
+    },
+  ];
   useEffect(() => {
     setState(pickListDialogVisible);
   }, [pickListDialogVisible]);
@@ -50,16 +185,28 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
     { name: "Rome", code: "RM" },
     { name: "London", code: "LDN" },
   ];
-  function ClickDays (_name:any){
-    setMonths(false)
-    setDays(!Days)
+  function ClickPickList (name:any){
+    if(name == 'days'){
+      console.log("Days",Days)
+    setpicklist(Days)
+    console.log(picklist,"picklistpicklist")
+      
+    }
+    else if(name == 'month'){
+      console.log("fiseleee")
+      setpicklist(Month)
+    }
+    else if(name == 'Continents'){
+      setpicklist(Continent)
+    }
   }
-  function ClickMonths (){
-    setDays(false)
-    setMonths(!Months)
-  }
+  
+  // function ClickMonths (){
+  //   setDays(false)
+  //   setMonths(!Months)
+  // }
   function handlerSiebarOptionOne() {
-    setDays(false)
+    
     setOptionOne(!OptionOne);
   }
   function handlerSiebarOptionTwo() {
@@ -228,7 +375,7 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
       <Dialog
         header="Pick List Properties"
         visible={OptionTwo}
-        style={{ width: "50vw" }}
+        style={{ width: "46.2%" }}
         position="top"
         onHide={() => setOptionTwo(!OptionTwo)}
       >
@@ -237,17 +384,30 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
 
           <div className="containerPicklist">
             <div className="leftside">
-              <span className="p-1 ml-3 flex options"  onClick={ClickDays}>Days of the week</span><hr/>
-              <span className="p-1 ml-3 flex options" onClick={ClickMonths}>Month of the year</span><hr/>
+              <span className="p-1 ml-3 flex options"  onClick={() => ClickPickList('days')}>Days of the week</span><hr/>
+              <span className="p-1 ml-3 flex options" onClick={() => ClickPickList('month')}>Month of the year</span><hr/>
               <span className="p-1 ml-3 flex options">Time Zones</span><hr/>
               <span className="p-1 ml-3 flex options">US State</span><hr/>
-              <span className="p-1 ml-3 flex options">Continents</span><hr/>
+              <span className="p-1 ml-3 flex options" onClick={() => ClickPickList('Continents')}>Continents</span><hr/>
               <span className="p-1 ml-3 flex options">Countries / Regions</span><hr/>
             </div>
             <div className="rightside">
               
+              {picklist?.map((list:any)=>{
+                return(
+                  <div>
+                  <div className="ml-4 mt-3"> {list.names}</div></div>
+                )
+                
+              })}
+              {/* {picklist} */}
             </div>
           </div>
+          <div className="footerstyle">
+            
+            <span className="p-2 text-primary" onClick={handlerCheckclose}>Don't save this field</span>
+      <button className='buttonStyle ml-8 mt-1' onClick={handlerCheck}> Cancel </button>
+      <Button label="Done"/></div>
           </div>
       </Dialog>
       <Dialog
@@ -272,7 +432,7 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
           </div>
                     </div>
       </Dialog>
-        <section className="multipleSelectDialogOption_main">
+        <section className="multipleSelectDialogOption_main mt-2">
 
           {arr.map((item, i: any) => {
             return (

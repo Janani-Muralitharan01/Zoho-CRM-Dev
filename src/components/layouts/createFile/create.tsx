@@ -148,6 +148,9 @@ const UntitleImage = () => {
 <span className='mr-7'><RadioButton inputId="Read Only  All" name="city" value="Read Only  All" onChange={(e) => setCity(e.value)} checked={city === 'Read Only  All'} /></span>
 <span><RadioButton inputId="Do not Show  All" name="city" value="Do not Show  All" onChange={(e) => setCity(e.value)} checked={city === 'Do not Show  All'} /></span>
           </div>
+          <div className='flex justify-content-end mt-4 gap mr-4'>
+          <button className='buttonStyle ml-8 mt-1' > Cancel </button>
+      <Button label="Save"/></div>
         </div>
       </Sidebar>
       <Sidebar
