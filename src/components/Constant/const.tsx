@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
+export const BASEURL = "http://localhost:8085/";
+
 export const ITEMS = [
   {
     names: "Single Line",
