@@ -1,0 +1,11 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-areas: "sb1 m";
+}
+.mainContent {
+  grid-area: m;
+}
+.sideContent {
+  grid-area: sb1;
+}

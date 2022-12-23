@@ -6,14 +6,13 @@ import CreateRecrutierTable from "./createRecruiterTable";
 const SuperAdmin = () => {
   return (
     <div>
-      <h1>SuperAdmin</h1>
-
-      <div>
-        <SuperAdminSideBar />
-        <section>
-          <CreateRecruiterForm />
+      <div className="layout h-full">
+        <div className="sideContent">
+          <SuperAdminSideBar />
+        </div>
+        <div className="mainContent">
           <CreateRecrutierTable />
-        </section>
+        </div>
       </div>
     </div>
   );
