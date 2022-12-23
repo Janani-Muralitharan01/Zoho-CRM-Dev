@@ -7,11 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { Toast } from "primereact/toast";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import React, { useRef } from "react";
 import Cookies from "js-cookie";
 import { logInVerification } from "../../../features/Auth/logIn";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { LoginUserDetails } from "../../../features/Auth/userDetails";
 
 const signUpSchema = Yup.object({
   email: Yup.string().email().required("Please enter your email"),
@@ -43,18 +43,24 @@ const Login = () => {
         let res = await dispatch(logInVerification(val));
         Cookies.set("access_token", res.payload.access_token, {
           expires: 1 / 24,
+          // path: "/",
+          // httpOnly: true,
         });
         let Ans: any = true;
         Cookies.set("logged_in", Ans, {
-          expires: 1 / 24,
+          // path: "/",
+          // expires: 1 / 24,
         });
         Cookies.set("refresh_token", res.payload.access_token, {
           expires: 1 / 24,
+          // path: "/",
+          // httpOnly: true,
         });
 
-        // if (res.status == 200) {
-        //   let val2 = await axios.get(`http://localhost:8085/api/users/me`);
-        // }
+        if (res.payload.access_token) {
+          let app = res.payload.access_token;
+          await dispatch(LoginUserDetails(app));
+        }
 
         if (res.payload.access_token) {
           navigate("/selection");
