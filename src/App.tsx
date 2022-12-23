@@ -14,7 +14,7 @@ function App() {
   return (
     <Routes>
       {/* <Route path="/" element={<AuthRoute />}> */}
-      <Route element={<AuthRoute />}>
+      <Route >
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/selection" element={<Selection />} />
         <Route path="/super-admin" element={<SuperAdmin />} />

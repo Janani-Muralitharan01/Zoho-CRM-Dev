@@ -25,7 +25,7 @@ const CreateRecruiterForm = () => {
       id: 4,
     },
     {
-      names: 'phone number',
+      names: 'Phone number',
       subname: ' 987654321',
       id: 5,
     },
@@ -43,16 +43,16 @@ const CreateRecruiterForm = () => {
         </span>
         <button className="UploadButton">Upload Image</button>
       </div>
-      <div className="p-8">
+      <div className="p-8 RequirtersGrid">
       {cards.map((list:any)=>{
         return(
-          <div className="cardRequirters px-2  "> <span className="mt-2">{list.names}</span><br/>
-          <span className="mt-3 flex text-600">{list.subname}</span></div>
+          <div className=" px-2 backgroundStyle p-2 "> <span className="mt-2">{list.names}</span><br/>
+          <span className="mt-3  text-600">{list.subname}</span></div>
         )
       })}
           </div>
           <div className="ButtonsEnd mt-6">
-          <button className='buttonStyle ml-8 mt-1' style={{    height: '37px'}} > Cancel </button>
+          <button className='buttonStyle ml-8 mt-1' style={{    height: '39px'}} > Cancel </button>
       <Button label="Save"/></div>
           </div>
   );

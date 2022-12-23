@@ -8,20 +8,23 @@
           border: 2px solid lightgrey;
           cursor: pointer;
       }
-      .cardRequirters {
-          background-color: white;
-          width: 465px;
-          height: 80px;
-          border-radius: -7px;
-          display: inline-table;
-          /* padding: 11px; */
-          /* box-shadow: 2px 2px 2px 2px; */
-          border: 2px solid #0c0b0b05;
-          border-width: 3px;
+      .RequirtersGrid
+          {
+               display: grid;
+               grid-template-columns: 1fr 1fr;
+               gap: 20px;
+               /* box-shadow: 1px 1px 1px 1px; */
+           
       }
       .ButtonsEnd{
           display: flex;
           justify-content: end;
           margin-right: 33px;
           column-gap: 50px;
+      }
+      .backgroundStyle{
+          border: 1px solid;
+          padding: 10px;
+          box-shadow: 1px 2px 5px #888888;
+          /* box-shadow: 1px 1px 1px 1px grey; */
       }

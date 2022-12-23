@@ -95,12 +95,12 @@ const Footer = ({ cards }: any, items: any) => {
         <div className="boder-Style">
           <h5 className="informationName">Untitled Information</h5>
 
-          <div className="">
+          <div className="dragCard">
             {Object.keys(uidv4 || []).map((list: any, i: number) => {
               return (
                 <Droppable key={list} droppableId={list}>
                   {(provided, snapshot) => (
-                    <div className="App" ref={provided.innerRef}>
+                    <div className="dragCard" ref={provided.innerRef}>
                       {uidv4[list].length
                         ? uidv4[list].map((item: any, index: number) => {
                             return (

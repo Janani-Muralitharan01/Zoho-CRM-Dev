@@ -33,14 +33,18 @@
 
 .card {
   background-color: white;
-  width: 430px;
-  height: 23px;
-  border-radius: -7px;
-  display: inline-table;
+  width: 436px;
+  /* height: 23px; */
   /* padding: 11px; */
   border: 2px solid #f6f5f5;
 }
 
+.dragCard{
+  
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-left: 12px;
+}
 .boder-Style:hover {
   border: 2px solid darkgrey;
   min-height: 250px;

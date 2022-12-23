@@ -131,6 +131,7 @@ const NavBar = () => {
           />
           <br />
           <span className="text-400">Plural form of module name</span>
+          <br/>
           <InputText
             type="text"
             className=" mb-2 w-12 inputBorder"
