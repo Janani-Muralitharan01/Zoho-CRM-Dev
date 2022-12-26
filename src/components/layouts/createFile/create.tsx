@@ -1,21 +1,21 @@
-import { InputSwitch } from 'primereact/inputswitch';
-import { Avatar } from 'primereact/avatar';
-import Footer from './footer';
-import { useState, useRef, useEffect } from 'react';
-import noImages from '../../../images/noimage.jpg';
-import './create.css';
-import { RadioButton } from 'primereact/radiobutton';
-import { Checkbox } from 'primereact/checkbox';
-import { OverlayPanel } from 'primereact/overlaypanel';
-import { Sidebar } from 'primereact/sidebar';
-import { Dropdown } from 'primereact/dropdown';
-import { InputText } from 'primereact/inputtext';
-import { useSelector, useDispatch } from 'react-redux';
-import { iteratorSymbol } from 'immer/dist/internal';
-import { Calendar } from 'primereact/calendar';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { InputMask } from 'primereact/inputmask';
-import { Button } from 'primereact/button';
+import { InputSwitch } from "primereact/inputswitch";
+import { Avatar } from "primereact/avatar";
+import Footer from "./footer";
+import { useState, useRef, useEffect } from "react";
+import noImages from "../../../images/noimage.jpg";
+import "./create.css";
+import { RadioButton } from "primereact/radiobutton";
+import { Checkbox } from "primereact/checkbox";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { Sidebar } from "primereact/sidebar";
+import { Dropdown } from "primereact/dropdown";
+import { InputText } from "primereact/inputtext";
+import { useSelector, useDispatch } from "react-redux";
+import { iteratorSymbol } from "immer/dist/internal";
+import { Calendar } from "primereact/calendar";
+import { InputTextarea } from "primereact/inputtextarea";
+import { InputMask } from "primereact/inputmask";
+import { Button } from "primereact/button";
 
 const UntitleImage = () => {
   const count: any = useSelector((state) => state);
@@ -26,40 +26,40 @@ const UntitleImage = () => {
   const [selectedCity1, setSelectedCity1] = useState(null);
   const op: any = useRef(null);
   const [previewData, setPreviewData] = useState<any>();
- 
+
   useEffect(() => {
     setPreviewData(count.dragAndDrop.initialStateDrag);
   }, [count.dragAndDrop.initialStateDrag]);
   const cards = [
     {
-      names: 'Secondary email',
-      subname: ' Single Line',
+      names: "Secondary email",
+      subname: " Single Line",
 
       id: 1,
     },
     {
-      names: 'Untitled Name',
-      subname: ' Single Line',
+      names: "Untitled Name",
+      subname: " Single Line",
       id: 2,
     },
     {
-      names: 'Untitled Owner',
-      subname: ' Single Line',
+      names: "Untitled Owner",
+      subname: " Single Line",
       id: 3,
     },
     {
-      names: 'Email Opt Out',
-      subname: ' Email',
+      names: "Email Opt Out",
+      subname: " Email",
       id: 4,
     },
     {
-      names: 'Email',
-      subname: ' Email',
+      names: "Email",
+      subname: " Email",
       id: 5,
     },
     {
-      names: 'Created By',
-      subname: ' Single Line',
+      names: "Created By",
+      subname: " Single Line",
       id: 6,
     },
   ];
@@ -67,10 +67,10 @@ const UntitleImage = () => {
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
   };
-  const cities = [{ name: 'Admistrator', code: 'NY' }];
+  const cities = [{ name: "Admistrator", code: "NY" }];
   const fileUpload = [
-    { name: 'Upload File', code: 'NY' },
-    { name: 'document', code: 'NY' },
+    { name: "Upload File", code: "NY" },
+    { name: "document", code: "NY" },
   ];
   function handlerSiebarimage() {
     setsidebarimage(!sidebarimage);
@@ -80,7 +80,7 @@ const UntitleImage = () => {
       Object.keys(previewData || []).map((list: any, i: number) => {
         previewData[list]?.map((item: any, index: number) => {
           {
-            item.names === 'Multi-Select'
+            item.names === "Multi-Select"
               ? setSidebar(false)
               : setSidebar(true);
           }
@@ -96,7 +96,7 @@ const UntitleImage = () => {
       <div className="untitlee">
         <div className="boder">
           <span>
-            Untitle image{' '}
+            Untitle image{" "}
             <InputSwitch checked={checked1} onChange={handletoggle} />
             <br />
             {checked1}
@@ -105,7 +105,7 @@ const UntitleImage = () => {
                 <span className="mr-2 mt-2">
                   <img
                     src={noImages}
-                    style={{ width: ' 96px', height: '74px' }}
+                    style={{ width: " 96px", height: "74px" }}
                     className="mt-2"
                   ></img>
                 </span>
@@ -116,7 +116,7 @@ const UntitleImage = () => {
                 </span>
               </div>
             ) : (
-              ''
+              ""
             )}
             <div>
               {/* <Avatar icon="pi pi-user mr-3" size="xlarge" className="p-overlay-badge"/> */}
@@ -130,33 +130,60 @@ const UntitleImage = () => {
       <Sidebar
         visible={sidebarimage}
         position="top"
-        style={{ width: '55vw', height: '20vw' }}
+        style={{ width: "55vw", height: "20vw" }}
         onHide={() => setsidebarimage(!sidebarimage)}
       >
-        <div className='mt-6'>
-          <span className='text-2xl font-bold fixed top-0 mt-3'>Set Permission</span>
-          <div className='flex justify-content-around'>
+        <div className="mt-6">
+          <span className="text-2xl font-bold fixed top-0 mt-3">
+            Set Permission
+          </span>
+          <div className="flex justify-content-around">
             <label>Profiles</label>
-            <label htmlFor="Read and Write  All">Read and Write  All</label>
-            <label htmlFor="Read Only  All">Read Only  All</label>
-            <label htmlFor="Do not Show  All" >Do not Show  All</label>
+            <label htmlFor="Read and Write  All">Read and Write All</label>
+            <label htmlFor="Read Only  All">Read Only All</label>
+            <label htmlFor="Do not Show  All">Do not Show All</label>
           </div>
-          <hr/>
-          <div className='setpermissionRadio'>
-<span>Administrator</span>
-<span className='mr-6'><RadioButton inputId="Read and Write  All" name="city" value="Read and Write  All" onChange={(e) => setCity(e.value)} checked={city === 'Read and Write  All'} /></span>
-<span className='mr-7'><RadioButton inputId="Read Only  All" name="city" value="Read Only  All" onChange={(e) => setCity(e.value)} checked={city === 'Read Only  All'} /></span>
-<span><RadioButton inputId="Do not Show  All" name="city" value="Do not Show  All" onChange={(e) => setCity(e.value)} checked={city === 'Do not Show  All'} /></span>
+          <hr />
+          <div className="setpermissionRadio">
+            <span>Administrator</span>
+            <span className="mr-6">
+              <RadioButton
+                inputId="Read and Write  All"
+                name="city"
+                value="Read and Write  All"
+                onChange={(e) => setCity(e.value)}
+                checked={city === "Read and Write  All"}
+              />
+            </span>
+            <span className="mr-7">
+              <RadioButton
+                inputId="Read Only  All"
+                name="city"
+                value="Read Only  All"
+                onChange={(e) => setCity(e.value)}
+                checked={city === "Read Only  All"}
+              />
+            </span>
+            <span>
+              <RadioButton
+                inputId="Do not Show  All"
+                name="city"
+                value="Do not Show  All"
+                onChange={(e) => setCity(e.value)}
+                checked={city === "Do not Show  All"}
+              />
+            </span>
           </div>
-          <div className='flex justify-content-end mt-4 gap mr-4'>
-          <button className='buttonStyle ml-8 mt-1' > Cancel </button>
-      <Button label="Save"/></div>
+          <div className="flex justify-content-end mt-4 gap mr-4">
+            <button className="buttonStyle ml-8 mt-1"> Cancel </button>
+            <Button label="Save" />
+          </div>
         </div>
       </Sidebar>
       <Sidebar
         visible={sidebar}
         position="top"
-        style={{ width: '92vw', height: '50vw' }}
+        style={{ width: "92vw", height: "50vw" }}
         onHide={() => setSidebar(!sidebar)}
       >
         <div>
@@ -183,19 +210,11 @@ const UntitleImage = () => {
             <span className="ml-5">
               <img
                 src={noImages}
-                style={{ width: ' 56px', height: '50px' }}
+                style={{ width: " 56px", height: "50px" }}
               ></img>
             </span>
             <span className="contactuntitle">Untitled Information</span>
             <div>
-              {/* {cards.map((button: any) => (
-                <div className="card border-0 mt-3 ml-7">
-                  <span className="names">
-                    {button.names}
-                    <InputText className="w-8" />{" "}
-                  </span>{" "}
-                </div>
-              ))} */}
               <div>
                 {Object.keys(previewData || []).map((list: any, i: number) => {
                   return (
@@ -206,53 +225,53 @@ const UntitleImage = () => {
                             <div className="card border-0 mt-3 ml-7">
                               <div className="names">
                                 <p className="grey">{item.subName}</p>
-                                {item.names === 'Untitled Owner' ? (
+                                {item.names === "Untitled Owner" ? (
                                   <span className="p-input-icon-right ">
                                     <i className="pi pi-lock mt-0" />
                                     <InputText
                                       className="mt-3"
-                                      value={'john'}
+                                      value={"john"}
                                       disabled
                                     />
                                   </span>
-                                ) : item.names === 'Lookup' ? (
+                                ) : item.names === "Lookup" ? (
                                   <span className="p-input-icon-right ">
                                     <i className="pi pi-euro mt-0" />
                                     <InputText className="mt-3" disabled />
                                   </span>
-                                ) : item.names === 'Currency' ? (
+                                ) : item.names === "Currency" ? (
                                   <span className="p-input-icon-left">
                                     <i className="pi pi-dollar mt-0" />
                                     <InputText className="mt-3 " />
                                   </span>
-                                ) : item.names === 'Percent' ? (
+                                ) : item.names === "Percent" ? (
                                   <p>
                                     <InputText />
                                   </p>
-                                ) : item.names === 'Untitled Name' ? (
+                                ) : item.names === "Untitled Name" ? (
                                   <p>
                                     <InputText />
                                   </p>
-                                ) : item.names === 'Created By' ? (
+                                ) : item.names === "Created By" ? (
                                   <p>
                                     <InputText />
                                   </p>
-                                ) : item.names === 'Secondary Email' ? (
+                                ) : item.names === "Secondary Email" ? (
                                   <p>
                                     <InputText disabled />
                                   </p>
-                                ) : item.names === 'Image Upload' ? (
+                                ) : item.names === "Image Upload" ? (
                                   <p>
                                     <Button
                                       label="+ New Image"
                                       className="bg-blue-100 text-primary"
                                     />
                                   </p>
-                                ) : item.names === 'Email' ? (
+                                ) : item.names === "Email" ? (
                                   <p>
                                     <InputText placeholder="Enter your email" />
                                   </p>
-                                ) : item.names === 'File Upload' ? (
+                                ) : item.names === "File Upload" ? (
                                   <p>
                                     <Dropdown
                                       className="mr-6"
@@ -260,19 +279,19 @@ const UntitleImage = () => {
                                       options={fileUpload}
                                       onChange={onCityChange}
                                       optionLabel="name"
-                                      style={{ width: '99%' }}
+                                      style={{ width: "99%" }}
                                       placeholder="Select a file"
                                     />
                                   </p>
-                                ) : item.names === 'Email Opt Out' ? (
+                                ) : item.names === "Email Opt Out" ? (
                                   <p>
                                     <Checkbox />
                                   </p>
-                                ) : item.names === 'Modified By' ? (
+                                ) : item.names === "Modified By" ? (
                                   <p>
                                     <InputText disabled />
                                   </p>
-                                ) : item.names === 'Date/Time' ? (
+                                ) : item.names === "Date/Time" ? (
                                   <p>
                                     <Calendar
                                       showTime
@@ -280,51 +299,51 @@ const UntitleImage = () => {
                                       placeholder="Enter the date"
                                     />
                                   </p>
-                                ) : item.names === 'Decimal' ? (
+                                ) : item.names === "Decimal" ? (
                                   <p>
                                     <InputText />
                                   </p>
-                                ) : item.names === 'URL' ? (
+                                ) : item.names === "URL" ? (
                                   <p>
                                     <InputText />
                                   </p>
-                                ) : item.names === 'Multi-Line' ? (
+                                ) : item.names === "Multi-Line" ? (
                                   <p>
                                     <InputTextarea />
                                   </p>
-                                ) : item.names === 'Date' ? (
+                                ) : item.names === "Date" ? (
                                   <p>
                                     <Calendar placeholder="DD/MM/YY   " />
                                   </p>
-                                ) : item.names === 'Checkbox' ? (
+                                ) : item.names === "Checkbox" ? (
                                   <span className="p-input-icon-right ">
                                     <Checkbox
                                       style={{
-                                        position: 'relative',
-                                        left: '30px',
-                                        bottom: '4px',
+                                        position: "relative",
+                                        left: "30px",
+                                        bottom: "4px",
                                       }}
                                     />
                                     <InputText className="mt-3" />
                                   </span>
-                                ) : item.names === 'Phone' ? (
+                                ) : item.names === "Phone" ? (
                                   <p>
-                                    {' '}
+                                    {" "}
                                     <InputMask
                                       id="phone"
                                       mask="99-99-99-99-99"
                                       placeholder="(999) 999-9999"
                                     ></InputMask>
                                   </p>
-                                ) : item.names === 'Long integer' ? (
+                                ) : item.names === "Long integer" ? (
                                   <p>
                                     <InputText />
                                   </p>
-                                ) : item.names === 'Number' ? (
+                                ) : item.names === "Number" ? (
                                   <p>
                                     <InputText />
                                   </p>
-                                ) : item.names === 'User' ? (
+                                ) : item.names === "User" ? (
                                   <span className="p-input-icon-right ">
                                     <Dropdown
                                       className="mr-6"
@@ -332,7 +351,7 @@ const UntitleImage = () => {
                                       options={cities}
                                       onChange={onCityChange}
                                       optionLabel="name"
-                                      style={{ width: '99%' }}
+                                      style={{ width: "99%" }}
                                       placeholder="Select a City"
                                     />
                                   </span>
@@ -345,24 +364,7 @@ const UntitleImage = () => {
                                     className="h-2rem my-auto"
                                   />
                                 )}
-
-                                {/* <p
-                                          className="delete"
-                                          onClick={(e) => {
-                                            const objWithIdIndex = uidv4[
-                                              list
-                                            ].findIndex(
-                                              (obj: any) => obj.id === item.id
-                                            );
-                                            uidv4[list].splice(
-                                              objWithIdIndex,
-                                              1
-                                            );
-                                          }}
-                                        >
-                                          <i className="pi pi-ellipsis-v"></i>
-                                        </p> */}
-                              </div>{' '}
+                              </div>
                             </div>
                           </div>
                         );

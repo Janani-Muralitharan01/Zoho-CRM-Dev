@@ -17,7 +17,7 @@ const NavBar = () => {
   const op: any = useRef(null);
   const setting: any = useRef(null);
   const toast: any = useRef(null);
-  console.log(toast, "toast");
+
   const navigate = useNavigate();
   function handlerSiebarOptionOne() {
     setSidebar(!sidebar);
@@ -131,7 +131,7 @@ const NavBar = () => {
           />
           <br />
           <span className="text-400">Plural form of module name</span>
-          <br/>
+          <br />
           <InputText
             type="text"
             className=" mb-2 w-12 inputBorder"

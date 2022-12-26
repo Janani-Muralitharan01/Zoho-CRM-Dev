@@ -1,12 +1,12 @@
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
-import { useState, useEffect, useRef } from 'react';
-import './MultipleSelect.css';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Checkbox } from 'primereact/checkbox';
-import { Dropdown } from 'primereact/dropdown';
-import { OverlayPanel } from 'primereact/overlaypanel';
+import { Dialog } from "primereact/dialog";
+import { Button } from "primereact/button";
+import { useState, useEffect, useRef } from "react";
+import "./MultipleSelect.css";
+import { InputText } from "primereact/inputtext";
+import { InputTextarea } from "primereact/inputtextarea";
+import { Checkbox } from "primereact/checkbox";
+import { Dropdown } from "primereact/dropdown";
+import { OverlayPanel } from "primereact/overlaypanel";
 
 interface MultipleSelectProps {
   dialogVisible: boolean;
@@ -15,16 +15,16 @@ interface MultipleSelectProps {
 const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
   const inputArr = [
     {
-      type: 'text',
+      type: "text",
       id: 1,
-      value: '',
+      value: "",
     },
   ];
 
   const [state, setState] = useState(false);
-  const [checkAlpha, setCheckAlpha] = useState('');
-  const [checkRequire, setCheckRequire] = useState('');
-  const [checkToolTip, setCheckToolTip] = useState('');
+  const [checkAlpha, setCheckAlpha] = useState("");
+  const [checkRequire, setCheckRequire] = useState("");
+  const [checkToolTip, setCheckToolTip] = useState("");
   const [val, setVal] = useState([]);
   const [OptionOne, setOptionOne] = useState(false);
   const [OptionTwo, setOptionTwo] = useState(false);
@@ -36,137 +36,137 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
   const op: any = useRef(null);
   const Days = [
     {
-      names: 'Monday',
+      names: "Monday",
 
       id: 1,
     },
     {
-      names: 'Tuesday',
-      
+      names: "Tuesday",
+
       id: 2,
     },
     {
-      names: 'Wednesday',
-      
+      names: "Wednesday",
+
       id: 3,
     },
     {
-      names: 'Thursday',
-      
+      names: "Thursday",
+
       id: 4,
     },
     {
-      names: 'Friday',
-      
+      names: "Friday",
+
       id: 5,
     },
     {
-      names: 'Friday',
-      
+      names: "Friday",
+
       id: 6,
     },
     {
-      names: 'Saturday',
-      
+      names: "Saturday",
+
       id: 7,
     },
   ];
   const Month = [
     {
-      names: 'january',
+      names: "january",
 
       id: 1,
     },
     {
-      names: 'feburary',
-      
+      names: "feburary",
+
       id: 2,
     },
     {
-      names: 'March',
-      
+      names: "March",
+
       id: 3,
     },
     {
-      names: 'April',
-      
+      names: "April",
+
       id: 4,
     },
     {
-      names: 'May',
-      
+      names: "May",
+
       id: 5,
     },
     {
-      names: 'June',
-      
+      names: "June",
+
       id: 6,
     },
     {
-      names: 'July',
-      
+      names: "July",
+
       id: 7,
     },
     {
-      names: 'Augest',
-      
+      names: "Augest",
+
       id: 8,
     },
     {
-      names: 'September',
-      
+      names: "September",
+
       id: 9,
     },
     {
-      names: 'October',
-      
+      names: "October",
+
       id: 10,
     },
     {
-      names: 'November',
-      
+      names: "November",
+
       id: 11,
     },
     {
-      names: 'December',
-      
+      names: "December",
+
       id: 12,
     },
   ];
   const Continent = [
     {
-      names: 'Asia ',
+      names: "Asia ",
 
       id: 1,
     },
     {
-      names: 'North America',
-      
+      names: "North America",
+
       id: 2,
     },
     {
-      names: 'South America',
-      
+      names: "South America",
+
       id: 3,
     },
     {
-      names: 'Africa',
-      
+      names: "Africa",
+
       id: 4,
     },
     {
-      names: 'Antartica',
-      
+      names: "Antartica",
+
       id: 5,
     },
     {
-      names: 'Australia',
-      
+      names: "Australia",
+
       id: 6,
     },
     {
-      names: 'Eroup',
-      
+      names: "Eroup",
+
       id: 7,
     },
   ];
@@ -179,19 +179,13 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
   function handlerSiebarOptionThree() {
     setOptionThree(!OptionThree);
   }
-  function ClickPickList (name:any){
-    if(name == 'days'){
-      console.log("Days",Days)
-    setpicklist(Days)
-    console.log(picklist,"picklistpicklist")
-      
-    }
-    else if(name == 'month'){
-      console.log("fiseleee")
-      setpicklist(Month)
-    }
-    else if(name == 'Continents'){
-      setpicklist(Continent)
+  function ClickPickList(name: any) {
+    if (name == "days") {
+      setpicklist(Days);
+    } else if (name == "month") {
+      setpicklist(Month);
+    } else if (name == "Continents") {
+      setpicklist(Continent);
     }
   }
   const addInput = () => {
@@ -200,8 +194,8 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
       return [
         ...s,
         {
-          type: 'text',
-          value: '',
+          type: "text",
+          value: "",
         },
       ];
     });
@@ -232,9 +226,9 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
   }, [dialogVisible]);
 
   const cities = [
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
+    { name: "New York", code: "NY" },
+    { name: "Rome", code: "RM" },
+    { name: "London", code: "LDN" },
   ];
 
   return (
@@ -251,14 +245,14 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
         </p>
 
         <div className="flex justify-content-between ">
-          <span>Multi Pick List Option</span>{' '}
+          <span>Multi Pick List Option</span>{" "}
           <span onClick={(e) => op.current.toggle(e)}>
             <i className="pi pi-cog cursor-pointer"></i>
           </span>
         </div>
         <OverlayPanel
           ref={op}
-          style={{ width: '255px' }}
+          style={{ width: "255px" }}
           className="overlaypanel-demo"
         >
           <div>
@@ -266,7 +260,9 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
               View/add unused values
             </span>
             <hr />
-            <span className=" options" onClick={handlerSiebarOptionTwo}>Add prefined choices</span>
+            <span className=" options" onClick={handlerSiebarOptionTwo}>
+              Add prefined choices
+            </span>
             <br />
             <br />
             <span className="  options " onClick={handlerSiebarOptionThree}>
@@ -278,59 +274,84 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
         <Dialog
           header="Unused Values"
           visible={OptionOne}
-          style={{ width: '50vw' }}
+          style={{ width: "50vw" }}
           position="top"
           onHide={() => setOptionOne(!OptionOne)}
         >
           <div className="allOptionUse">All options are in use.</div>
         </Dialog>
         <Dialog
-        header="Pick List Properties"
-        visible={OptionTwo}
-        style={{ width: "46.2%" }}
-        position="top"
-        onHide={() => setOptionTwo(!OptionTwo)}
-      >
-        <div >
-          <span>Import Predefined Choices</span>
+          header="Pick List Properties"
+          visible={OptionTwo}
+          style={{ width: "46.2%" }}
+          position="top"
+          onHide={() => setOptionTwo(!OptionTwo)}
+        >
+          <div>
+            <span>Import Predefined Choices</span>
 
-          <div className="containerPicklist">
-            <div className="leftside">
-              <span className="p-1 ml-3 flex options"  onClick={() => ClickPickList('days')}>Days of the week</span><hr/>
-              <span className="p-1 ml-3 flex options" onClick={() => ClickPickList('month')}>Month of the year</span><hr/>
-              <span className="p-1 ml-3 flex options">Time Zones</span><hr/>
-              <span className="p-1 ml-3 flex options">US State</span><hr/>
-              <span className="p-1 ml-3 flex options" onClick={() => ClickPickList('Continents')}>Continents</span><hr/>
-              <span className="p-1 ml-3 flex options">Countries / Regions</span><hr/>
+            <div className="containerPicklist">
+              <div className="leftside">
+                <span
+                  className="p-1 ml-3 flex options"
+                  onClick={() => ClickPickList("days")}
+                >
+                  Days of the week
+                </span>
+                <hr />
+                <span
+                  className="p-1 ml-3 flex options"
+                  onClick={() => ClickPickList("month")}
+                >
+                  Month of the year
+                </span>
+                <hr />
+                <span className="p-1 ml-3 flex options">Time Zones</span>
+                <hr />
+                <span className="p-1 ml-3 flex options">US State</span>
+                <hr />
+                <span
+                  className="p-1 ml-3 flex options"
+                  onClick={() => ClickPickList("Continents")}
+                >
+                  Continents
+                </span>
+                <hr />
+                <span className="p-1 ml-3 flex options">
+                  Countries / Regions
+                </span>
+                <hr />
+              </div>
+              <div className="rightside">
+                {picklist?.map((list: any) => {
+                  return (
+                    <div>
+                      <div className="ml-4 mt-3"> {list.names}</div>
+                    </div>
+                  );
+                })}
+                {/* {picklist} */}
+              </div>
             </div>
-            <div className="rightside">
-              
-              {picklist?.map((list:any)=>{
-                return(
-                  <div>
-                  <div className="ml-4 mt-3"> {list.names}</div></div>
-                )
-                
-              })}
-              {/* {picklist} */}
+            <div className="footerstyle">
+              <span className="p-2 text-primary">Don't save this field</span>
+              <button className="buttonStyle ml-8 mt-1" onClick={handlerCheck}>
+                {" "}
+                Cancel{" "}
+              </button>
+              <Button label="Done" />
             </div>
           </div>
-          <div className="footerstyle">
-            
-            <span className="p-2 text-primary">Don't save this field</span>
-      <button className='buttonStyle ml-8 mt-1' onClick={handlerCheck}> Cancel </button>
-      <Button label="Done"/></div>
-          </div>
-      </Dialog>
+        </Dialog>
         <Dialog
           header="Bulk Choice"
           visible={OptionThree}
-          style={{ width: '45vw' }}
+          style={{ width: "45vw" }}
           position="top"
           onHide={() => setOptionThree(!OptionThree)}
         >
           <div>
-            {' '}
+            {" "}
             <div className="field col-12 md:col-4">
               <span className="p-float-label">
                 <InputTextarea id="textarea" rows={15} cols={65} autoResize />
@@ -344,8 +365,8 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
                   className="buttonStyle ml-8 mt-1"
                   onClick={handlerCheck}
                 >
-                  {' '}
-                  Cancel{' '}
+                  {" "}
+                  Cancel{" "}
                 </button>
                 <Button label="Done" />
               </div>
@@ -360,15 +381,18 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
                   onChange={handleChange}
                   value={item.value}
                   id={i}
-                  placeholder={' Options' + '' + k++}
+                  placeholder={" Options" + "" + k++}
                   type={item.type}
                 />
                 <i
                   className="pi pi-plus ml-2 "
-                  onMouseEnter={() => 'hello'}
+                  onMouseEnter={() => "hello"}
                   onClick={addInput}
                 ></i>
-                <i className="pi pi-minus ml-2" onClick={() => deleteinput(i)}></i>
+                <i
+                  className="pi pi-minus ml-2"
+                  onClick={() => deleteinput(i)}
+                ></i>
               </section>
             );
           })}
@@ -395,20 +419,20 @@ const MultipleSelect: React.FC<MultipleSelectProps> = ({ dialogVisible }) => {
           </p>
 
           <p>
-            {' '}
+            {" "}
             <Checkbox
               inputId="binary"
               checked={checked}
               onChange={handlerCheck}
             />
-            <label className="ml-1">Show Tooltip</label>{' '}
+            <label className="ml-1">Show Tooltip</label>{" "}
           </p>
           {checked ? (
             <div>
               <InputTextarea placeholder="Type tooltip message" />
             </div>
           ) : (
-            ''
+            ""
           )}
         </section>
 

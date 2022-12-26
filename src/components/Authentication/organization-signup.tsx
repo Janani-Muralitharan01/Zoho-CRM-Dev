@@ -22,11 +22,6 @@ export default function OrganizationSignup() {
     setValue(e.target.value);
   };
 
-  useEffect(() => {
-    console.log("signUpPage", signUpPage);
-    // dispatch(signUp(signUpPage: any));
-  }, [signUpPage]);
-
   const handleSubmit = async (e: any) => {
     let value = {
       fullname: fullName,
@@ -34,14 +29,13 @@ export default function OrganizationSignup() {
       password: password,
     };
     e.preventDefault();
-    console.log("eeeeeeee", e);
+
     setPayload(value);
-    // console.log("payload", payload);
+
     let res = axios.post("http://localhost:800/user/signup", payload);
     // navigate("/navbar");
-    console.log("res", res);
+
     dispatch(signUpPageValue(value));
-    console.log("signUpPage", await signUpPage);
 
     // dispatch(signUp(payload));
   };

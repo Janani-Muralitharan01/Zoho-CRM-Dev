@@ -1,62 +1,60 @@
-import { InputSwitch } from 'primereact/inputswitch';
-import './detailView.css';
+import { InputSwitch } from "primereact/inputswitch";
+import "./detailView.css";
 import { Button } from "primereact/button";
-import { Checkbox } from 'primereact/checkbox';
-import { OverlayPanel } from 'primereact/overlaypanel';
-import { useState, useEffect,useRef } from 'react';
-import { InputText } from 'primereact/inputtext';
+import { Checkbox } from "primereact/checkbox";
+import { OverlayPanel } from "primereact/overlaypanel";
+import { useState, useEffect, useRef } from "react";
+import { InputText } from "primereact/inputtext";
 const DetailView = () => {
   const op: any = useRef(null);
   const [checked1, setChecked1] = useState(true);
   const [Multiselect, setMultiselect] = useState<any>([]);
-  const onCityChange = (e:any) => {
-    let selectedCities : any[] = []
-     selectedCities = [...Multiselect];
-    console.log(selectedCities,"selectedCities")
-    if (e.checked)
-        selectedCities.push(e.value);
-    else
-        selectedCities.splice(selectedCities.indexOf(e.value), 1);
+  const onCityChange = (e: any) => {
+    let selectedCities: any[] = [];
+    selectedCities = [...Multiselect];
+
+    if (e.checked) selectedCities.push(e.value);
+    else selectedCities.splice(selectedCities.indexOf(e.value), 1);
 
     setMultiselect(selectedCities);
-}
+  };
   const cards = [
     {
-      names: 'Untitled Owner',
-      subName: 'Look Up',
+      names: "Untitled Owner",
+      subName: "Look Up",
 
       id: 1,
     },
     {
-      names: 'Modified By',
-      subName: 'Single line',
+      names: "Modified By",
+      subName: "Single line",
       id: 2,
     },
     {
-      names: 'Email',
-      subName: 'Email',
+      names: "Email",
+      subName: "Email",
       id: 2,
     },
   ];
 
   const Attachments = [
     {
-      names: 'File Name',
+      names: "File Name",
 
       id: 1,
     },
     {
-      names: 'Attached By',
+      names: "Attached By",
 
       id: 2,
     },
     {
-      names: 'Date Added',
+      names: "Date Added",
 
       id: 2,
     },
     {
-      names: 'Size',
+      names: "Size",
 
       id: 2,
     },
@@ -64,50 +62,50 @@ const DetailView = () => {
 
   const checklist = [
     {
-      names: 'Checklist details',
+      names: "Checklist details",
 
       id: 1,
     },
     {
-      names: 'Completed by',
+      names: "Completed by",
 
       id: 2,
     },
   ];
   const Emails = [
     {
-      names: 'Received By',
+      names: "Received By",
 
       id: 1,
     },
     {
-      names: 'Subject',
+      names: "Subject",
 
       id: 2,
     },
     {
-      names: 'Owned By',
+      names: "Owned By",
 
       id: 3,
     },
     {
-      names: 'Date',
+      names: "Date",
 
       id: 4,
     },
     {
-      names: 'Sent By',
+      names: "Sent By",
 
       id: 5,
     },
     {
-      names: 'Source',
+      names: "Source",
 
       id: 6,
     },
 
     {
-      names: 'Status',
+      names: "Status",
 
       id: 8,
     },
@@ -116,13 +114,22 @@ const DetailView = () => {
     <div>
       <div className="TextOne">
         <span>
-          BUSINESS CARD{' '}
+          BUSINESS CARD{" "}
           <InputSwitch
             checked={checked1}
             onChange={(e) => setChecked1(e.value)}
           />
         </span>
-        {checked1?<span className="customize cursor-pointer" onClick={(e) => op.current.toggle(e)}>Customize</span>:""}
+        {checked1 ? (
+          <span
+            className="customize cursor-pointer"
+            onClick={(e) => op.current.toggle(e)}
+          >
+            Customize
+          </span>
+        ) : (
+          ""
+        )}
       </div>
       {checked1 ? (
         <div>
@@ -148,7 +155,7 @@ const DetailView = () => {
       )}
       <br />
       <div>
-        {' '}
+        {" "}
         <span className="TextOne">DETAILS</span>
         <br />
         <span className="supportLine">
@@ -198,7 +205,12 @@ const DetailView = () => {
       <div className="hoverborder top-margin">
         <span className="Texttwo ">
           <b>Open Activities</b>
-          <span className="customizeStyle" onClick={(e) => op.current.toggle(e)}>customise</span>
+          <span
+            className="customizeStyle"
+            onClick={(e) => op.current.toggle(e)}
+          >
+            customise
+          </span>
         </span>
         <br />
         <span className="TextOne">This List preview cannot be shown</span>
@@ -207,7 +219,12 @@ const DetailView = () => {
       <div className="hoverborder top-margin">
         <span className="Texttwo">
           <b>Closed Activitie</b>
-          <span className="customizeStyle" onClick={(e) => op.current.toggle(e)}>customise</span>
+          <span
+            className="customizeStyle"
+            onClick={(e) => op.current.toggle(e)}
+          >
+            customise
+          </span>
         </span>
         <br />
         <span className="TextOne">This List preview cannot be shown</span>
@@ -228,46 +245,76 @@ const DetailView = () => {
       </div>
       <OverlayPanel
         ref={op}
-        style={{ width: '240px' }}
+        style={{ width: "240px" }}
         className="overlaypanel-demo"
-      ><div>
-        <span className="p-input-icon-left">
-        {/* <i className="pi pi-search" /> */}
-                    <InputText  placeholder='Search'/>
-                   
-                </span><br/>
-        <div className="field-checkbox mt-5">
-                    <Checkbox  value="Email" onChange={onCityChange} checked={Multiselect.indexOf('Email') !== -1} />
-                    <label>Email</label>
-                </div>
-                <div className="field-checkbox">
-                    <Checkbox  name="Created By" value="Created By" onChange={onCityChange} checked={Multiselect.indexOf('Created By') !== -1} />
-                    <label >Created By</label>
-                </div>
-                <div className="field-checkbox">
-                    <Checkbox  name="city" value="Secondary Email" onChange={onCityChange} checked={Multiselect.indexOf('Secondary Email') !== -1} />
-                    <label >Secondary Email</label>
-                </div>
-                <div className="field-checkbox">
-                    <Checkbox  value="Untitled Owner" onChange={onCityChange} checked={Multiselect.indexOf('Untitled Owner') !== -1} />
-                    <label >Untitled Owner</label>
-                </div>
-                <div className="field-checkbox">
-                    <Checkbox  value="Modified By" onChange={onCityChange} checked={Multiselect.indexOf('Modified By') !== -1} />
-                    <label >Modified By</label>
-                </div>
-                <div className="field-checkbox">
-                    <Checkbox  value="Email Opt Out" onChange={onCityChange} checked={Multiselect.indexOf('Email Opt Out') !== -1} />
-                    <label >Email Opt Out</label>
-                </div><br/>
-               
-          <div className='flex justify-content-center borderCard'>
-            
-          <Button label="Done" style={{height: '38px'}}/>
-      <button className='buttonStyle 'style={{height: '38px'}} > Cancel </button>
-      </div>
-          
-        </div></OverlayPanel>
+      >
+        <div>
+          <span className="p-input-icon-left">
+            {/* <i className="pi pi-search" /> */}
+            <InputText placeholder="Search" />
+          </span>
+          <br />
+          <div className="field-checkbox mt-5">
+            <Checkbox
+              value="Email"
+              onChange={onCityChange}
+              checked={Multiselect.indexOf("Email") !== -1}
+            />
+            <label>Email</label>
+          </div>
+          <div className="field-checkbox">
+            <Checkbox
+              name="Created By"
+              value="Created By"
+              onChange={onCityChange}
+              checked={Multiselect.indexOf("Created By") !== -1}
+            />
+            <label>Created By</label>
+          </div>
+          <div className="field-checkbox">
+            <Checkbox
+              name="city"
+              value="Secondary Email"
+              onChange={onCityChange}
+              checked={Multiselect.indexOf("Secondary Email") !== -1}
+            />
+            <label>Secondary Email</label>
+          </div>
+          <div className="field-checkbox">
+            <Checkbox
+              value="Untitled Owner"
+              onChange={onCityChange}
+              checked={Multiselect.indexOf("Untitled Owner") !== -1}
+            />
+            <label>Untitled Owner</label>
+          </div>
+          <div className="field-checkbox">
+            <Checkbox
+              value="Modified By"
+              onChange={onCityChange}
+              checked={Multiselect.indexOf("Modified By") !== -1}
+            />
+            <label>Modified By</label>
+          </div>
+          <div className="field-checkbox">
+            <Checkbox
+              value="Email Opt Out"
+              onChange={onCityChange}
+              checked={Multiselect.indexOf("Email Opt Out") !== -1}
+            />
+            <label>Email Opt Out</label>
+          </div>
+          <br />
+
+          <div className="flex justify-content-center borderCard">
+            <Button label="Done" style={{ height: "38px" }} />
+            <button className="buttonStyle " style={{ height: "38px" }}>
+              {" "}
+              Cancel{" "}
+            </button>
+          </div>
+        </div>
+      </OverlayPanel>
     </div>
   );
 };

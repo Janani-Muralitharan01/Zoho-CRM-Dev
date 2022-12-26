@@ -74,7 +74,7 @@ const move = (
   return result;
 };
 
-const Dashboard = () => {
+const Dashboard = (props: any) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const dispatch = useDispatch();
   const [complete, setCompleted] = useState<any>({
@@ -186,30 +186,38 @@ const Dashboard = () => {
       >
         <div className="App">
           <div className="container">
-            <nav>
-              <NavBar />
-            </nav>
-            <main>
-              <div>
-                <i className="pi pi-clone flex justify-content-end mr-2"></i>
+            {props.idValue !== 4 ? (
+              <nav>
+                <NavBar />
+              </nav>
+            ) : (
+              ""
+            )}
+            {props.idValue !== 4 ? (
+              <main>
+                <div>
+                  <i className="pi pi-clone flex justify-content-end mr-2"></i>
 
-                <TabView
-                  className="tabview"
-                  activeIndex={activeIndex}
-                  onTabChange={(e) => indexValue(e)}
-                >
-                  <TabPanel header="CREATE">
-                    <UntitleImage />
-                  </TabPanel>
-                  <TabPanel header="QUICK CREATE">
-                    <QuickCreate />
-                  </TabPanel>
-                  <TabPanel header="DETAIL VIEW">
-                    <DetailView />
-                  </TabPanel>
-                </TabView>
-              </div>
-            </main>
+                  <TabView
+                    className="tabview"
+                    activeIndex={activeIndex}
+                    onTabChange={(e) => indexValue(e)}
+                  >
+                    <TabPanel header="CREATE">
+                      <UntitleImage />
+                    </TabPanel>
+                    <TabPanel header="QUICK CREATE">
+                      <QuickCreate />
+                    </TabPanel>
+                    <TabPanel header="DETAIL VIEW">
+                      <DetailView />
+                    </TabPanel>
+                  </TabView>
+                </div>
+              </main>
+            ) : (
+              ""
+            )}
             {/* <Tabs>
         <Tab>title</Tab>
         <Tab>tl 2</Tab>

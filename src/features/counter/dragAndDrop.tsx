@@ -4,12 +4,14 @@ interface userReducerState {
   initialStateDrag: null;
   initialStateQuickDrag: null;
   DialogOpenIndex: null;
+  initialStartDragSuperAdmin: null;
 }
 
 const initialDragAndDrop: userReducerState = {
   initialStateDrag: null,
   initialStateQuickDrag: null,
   DialogOpenIndex: null,
+  initialStartDragSuperAdmin: null,
 };
 
 export const userReducer = createSlice({
@@ -25,11 +27,15 @@ export const userReducer = createSlice({
     dragAndDropDialogOpenIndex: (state: any, action) => {
       state.DialogOpenIndex = action.payload;
     },
+    dragAndDropValueSuperAdmin: (state: any, action) => {
+      state.initialStartDragSuperAdmin = action.payload;
+    },
   },
 });
 export const {
   dragAndDropValue,
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
+  dragAndDropValueSuperAdmin,
 } = userReducer.actions;
 export default userReducer.reducer;

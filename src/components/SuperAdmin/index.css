@@ -8,4 +8,6 @@
 }
 .sideContent {
   grid-area: sb1;
+  background-color: gainsboro;
+  min-height: 100vh;
 }

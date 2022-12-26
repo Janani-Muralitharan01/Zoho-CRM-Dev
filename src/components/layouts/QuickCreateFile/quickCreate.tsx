@@ -151,25 +151,25 @@ const QuickCreate = () => {
           <div className="border-black-alpha-30 border-1 pb-7">
             <span className="sidebarheader font-medium">Quick Create</span>
             <div>
-            {Object.keys(uidv4 || []).map((list: any, i: number) => {
-                  return (
-                    <div key={i} className="previewCardAligment">
-                      {uidv4[list]?.map((item: any, index: number) => {
-                        return (
-                          <div key={index}>
-                            <div className="card border-0 mt-3 ml-7">
-                              <span className="names">
-                                {item.names == ""}
-                                {item.names}
-                                <InputText className="w-8" />{" "}
-                              </span>{" "}
-                            </div>
+              {Object.keys(uidv4 || []).map((list: any, i: number) => {
+                return (
+                  <div key={i} className="previewCardAligment">
+                    {uidv4[list]?.map((item: any, index: number) => {
+                      return (
+                        <div key={index}>
+                          <div className="card border-0 mt-3 ml-7">
+                            <span className="names">
+                              {item.names == ""}
+                              {item.names}
+                              <InputText className="w-8" />{" "}
+                            </span>{" "}
                           </div>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

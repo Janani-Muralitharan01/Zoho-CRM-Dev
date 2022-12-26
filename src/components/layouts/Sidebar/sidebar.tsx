@@ -33,7 +33,6 @@ import subform from "../../../assets/subform.svg";
 import url from "../../../assets/url.svg";
 import rect from "../../../assets/rect.svg";
 import { InputText } from "primereact/inputtext";
-import { color } from "@mui/system";
 import {
   DragDropContext,
   Draggable,
@@ -44,6 +43,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { dragAndDropValue } from "../../../features/counter/dragAndDrop";
+import { SIDEBARITEMS } from "../../Constant/const";
 
 const SideBar = () => {
   const [search, setsearch] = useState(true);
@@ -75,129 +75,6 @@ const SideBar = () => {
   const handleSearch = (e: any) => {
     setsearch(!search);
   };
-
-  const ITEMS = [
-    {
-      names: "Single Line",
-      icon: singleline,
-      id: uuidv4(),
-    },
-    {
-      names: "Multi-Line",
-      icon: multiline,
-      id: uuidv4(),
-    },
-    {
-      names: "Email",
-      icon: mail,
-      id: uuidv4(),
-    },
-    {
-      names: "Phone",
-      icon: phone,
-      id: uuidv4(),
-    },
-    {
-      names: "Pick List",
-      icon: picklist,
-      id: uuidv4(),
-    },
-    {
-      names: "Multi-Select",
-      icon: multiselect,
-      id: uuidv4(),
-    },
-    {
-      names: "Date",
-      icon: date,
-      id: uuidv4(),
-    },
-    {
-      names: "Date/Time",
-      icon: dateandtime,
-      id: uuidv4(),
-    },
-    {
-      names: "Number",
-      icon: onetwothree,
-      id: uuidv4(),
-    },
-    {
-      names: "Auto-Number",
-      icon: autonum,
-      id: uuidv4(),
-    },
-    {
-      names: "Currency",
-      icon: currency,
-      id: uuidv4(),
-    },
-    {
-      names: "Decimal",
-      icon: decimal,
-      id: uuidv4(),
-    },
-    {
-      names: "Percent",
-      icon: percent,
-      id: uuidv4(),
-    },
-    {
-      names: "Long integer",
-      icon: longint,
-      id: uuidv4(),
-    },
-    {
-      names: "Checkbox",
-      icon: check,
-      id: uuidv4(),
-    },
-    {
-      names: "URL",
-      icon: url,
-      id: uuidv4(),
-    },
-    {
-      names: "Lookup",
-      icon: lookup,
-      id: uuidv4(),
-    },
-    {
-      names: "Formula",
-      icon: fx,
-      id: uuidv4(),
-    },
-    {
-      names: "User",
-      icon: user,
-      id: uuidv4(),
-    },
-    {
-      names: "File Upload",
-      icon: fileupload,
-      id: uuidv4(),
-    },
-    {
-      names: "Image Upload",
-      icon: imageupload,
-      id: uuidv4(),
-    },
-    {
-      names: "Multi-Select Lookup",
-      icon: multilookup,
-      id: uuidv4(),
-    },
-    {
-      names: "Subform",
-      icon: subform,
-      id: uuidv4(),
-    },
-    {
-      names: "NEW SECTION",
-      icon: rect,
-      id: uuidv4(),
-    },
-  ];
 
   const QUICKCREATEITEMS = [
     {
@@ -232,7 +109,7 @@ const SideBar = () => {
                     ref={provided.innerRef}
                     className="text-blue-500 alignTwo"
                   >
-                    {ITEMS.map((item, index) => (
+                    {SIDEBARITEMS.map((item, index) => (
                       <Draggable
                         key={item.id}
                         draggableId={item.id}
