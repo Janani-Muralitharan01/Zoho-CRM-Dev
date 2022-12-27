@@ -14,7 +14,7 @@ export const signUp = createAsyncThunk(
   async (name: any, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://localhost:8085/api/auth/register",
+        "http://54.152.227.71/api/auth/register",
         name
       );
 

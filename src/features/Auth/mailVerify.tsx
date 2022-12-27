@@ -14,7 +14,7 @@ export const mailVerification = createAsyncThunk(
   async (name: any, thunkAPI) => {
     try {
       const response = await axios.get(
-        `http://localhost:8085/api/auth/verifyemail/${name}`
+        `http://54.152.227.71/api/auth/verifyemail/${name}`
       );
 
       return response.data;
