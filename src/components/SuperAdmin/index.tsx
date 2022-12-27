@@ -28,6 +28,7 @@ import {
 } from "../../features/counter/dragAndDrop";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../layouts/Navbar/navbar";
+import FormSubmission from "./formSubmission";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -150,6 +151,8 @@ const SuperAdmin = () => {
               <CreateRecruiterForm />
             ) : id === 4 ? (
               <FormCreation idValue={id} />
+            ) : id === 5 ? (
+              <FormSubmission />
             ) : (
               // <Dashboard idValue={id} />
               // <FormCreation />

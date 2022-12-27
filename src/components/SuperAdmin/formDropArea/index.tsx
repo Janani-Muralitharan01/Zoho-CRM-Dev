@@ -1,13 +1,6 @@
 import { dragAndDropValueSuperAdmin } from "../../../features/counter/dragAndDrop";
-
-import { InputText } from "primereact/inputtext";
 import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Checkbox } from "primereact/checkbox";
-import { Dropdown } from "primereact/dropdown";
-import { Calendar } from "primereact/calendar";
-import { InputTextarea } from "primereact/inputtextarea";
-import { InputMask } from "primereact/inputmask";
 import { Button } from "primereact/button";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import "./FormDropArea.css";
