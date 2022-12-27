@@ -10,6 +10,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { InputMask } from "primereact/inputmask";
 import { Button } from "primereact/button";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import "./FormDropArea.css";
 
 const FormDropArea = (props: any) => {
   const [uidv4, setuidv4] = useState<any>();
@@ -41,14 +42,20 @@ const FormDropArea = (props: any) => {
   };
 
   return (
-    <div>
-      <h1>Form Creation</h1>
+    <div className="mx-auto">
+      <div className="flex justify-content-between ">
+        <h3>Form Creation</h3>
+        <div className="flex align-items-center">
+          <i className="pi pi-pencil" style={{ fontSize: "1em" }}></i>
+          <p className="ml-1">Edit</p>
+        </div>
+      </div>
       <div>
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
             <Droppable key={list} droppableId={list}>
               {(provided, snapshot) => (
-                <div className="App" ref={provided.innerRef}>
+                <div className="FormDropArea" ref={provided.innerRef}>
                   {uidv4[list].length
                     ? uidv4[list].map((item: any, index: number) => (
                         <Draggable
@@ -58,13 +65,13 @@ const FormDropArea = (props: any) => {
                         >
                           {(provided, snapshot) => (
                             <div
-                              className="cardQuickPreview px-2"
+                              className="FormDropAreaMain px-2"
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               style={provided.draggableProps.style}
                             >
                               <div
-                                className="names"
+                                className="FormDropAreaCard"
                                 {...provided.dragHandleProps}
                               >
                                 <input
@@ -76,20 +83,9 @@ const FormDropArea = (props: any) => {
                                   }}
                                   className="h-2rem my-auto border-none text-yellow-800"
                                 />
-                                <p className="grey">{item.subName}</p>
-                                <p
-                                  className="delete"
-                                  onClick={(e) => {
-                                    const objWithIdIndex = uidv4[
-                                      list
-                                    ].findIndex(
-                                      (obj: any) => obj.id === item.id
-                                    );
-                                    uidv4[list].splice(objWithIdIndex, 1);
-                                  }}
-                                >
-                                  <i className="pi pi-ellipsis-v"></i>
-                                </p>
+                                <section className="grey py-2">
+                                  {item.subName}
+                                </section>
                               </div>
                             </div>
                           )}
@@ -104,6 +100,12 @@ const FormDropArea = (props: any) => {
             </Droppable>
           );
         })}
+      </div>
+
+      <div className="mt-7 flex text-left justify-content-end">
+        <Button label="Cancel" className="p-button-secondary" />
+        <Button label="Save" className="p-button-secondary ml-2" />
+        <Button label="Preview" className="p-button-secondary ml-2" />
       </div>
     </div>
   );

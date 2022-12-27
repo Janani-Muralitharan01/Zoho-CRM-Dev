@@ -14,7 +14,7 @@ const FormSideBar = (props: any) => {
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
-            className="text-blue-500 alignTwo gap-2 mx-1"
+            className="text-blue-500 alignTwo gap-1 m-1"
           >
             {SIDEBARITEMS.map((item, index) => (
               <Draggable key={item.id} draggableId={item.id} index={index}>
@@ -27,19 +27,11 @@ const FormSideBar = (props: any) => {
                       style={provided.draggableProps.style}
                       className="rectanglebox1 white-space-nowrap"
                     >
-                      <img
-                        className="imagedesign1 height1"
-                        src={item.icon}
-                      ></img>
-                      {item.names}
+                      <p className="m-auto">{item.names}</p>
                     </div>
                     {snapshot.isDragging && (
                       <span className="rectanglebox1 white-space-nowrap">
-                        <img
-                          className="imagedesign1 height1"
-                          src={item.icon}
-                        ></img>
-                        {item.names}
+                        <p className="m-auto">{item.names}</p>
                       </span>
                     )}
                   </>

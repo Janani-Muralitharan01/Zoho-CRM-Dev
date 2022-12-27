@@ -7,7 +7,7 @@ const SuperAdminSideBar = (props: any) => {
       <div>
         {SUPERADMINSIDEBAR.map((x: any) => (
           <span
-            className="grid justify-content-center align-items-center p-2 text-xl surface-500 m-2 sideBarOnClick"
+            className="grid justify-content-center align-items-center p-2 text-xl surface-500 m-2 sideBarOnClick white-space-nowrap"
             onClick={(e: any) => props.handleClick(x.id)}
           >
             {x.names}
