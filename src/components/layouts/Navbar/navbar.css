@@ -3,25 +3,8 @@
   justify-content: space-between;
   padding: 4px;
 }
-/* .p-button {
-    display: inline-flex;
-    cursor: pointer;
-    -webkit-user-select: none;
-    user-select: none;
-    align-items: center;
-    vertical-align: bottom;
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-    height: 35px;
-    background-color:#0279ff !important;
-    border-radius: 6px !important;
-    border: 1px solid #d0d4df !important;
-    padding: 6px 20px 7px !important;
-    color: rgb(247, 247, 247) !important;
-} */
+
 .buttonStyle {
-  /* margin-top: 22px; */
 
   display: inline-flex;
   cursor: pointer;
@@ -34,7 +17,6 @@
   position: relative;
   height: 35px;
 
-  /* background-color:#fcfff8 !important; */
   border-radius: 6px !important;
   border: 1px solid #d0d4df !important;
   padding: 6px 20px 7px !important;
@@ -45,14 +27,17 @@
   box-shadow: 0 -1px 0 0 #d0d4df inset;
   background: linear-gradient(#fcfdff 0, #eaeef5 100%) no-repeat padding-box;
 }
+
 .left-25 {
   position: relative;
   right: -30px !important;
 }
+
 .buttonGap {
   display: flex;
   column-gap: 29px;
 }
+
 .standard {
   margin-left: 626px;
   position: relative;
@@ -61,15 +46,18 @@
   font-size: 18px;
   margin-top: 11px;
 }
+
 .icon {
   margin-left: 23px;
 }
+
 .untitle {
   font-size: 20px;
   color: black;
   margin-top: 11px;
   font-family: "Times New Roman", Times, serif;
 }
+
 .line {
   position: absolute;
   top: 26px;
@@ -77,10 +65,12 @@
   left: 38px;
   color: darkgrey;
 }
+
 .inputBorder {
   border: 2px solid white !important;
   border-bottom-color: rgb(169, 167, 167) !important;
 }
+
 .options:hover {
   font-size: 18px;
   color: #0279ff;
@@ -88,6 +78,7 @@
     width: 110%; */
   cursor: pointer;
 }
+
 .optionSideBarHeader {
   font-size: 20px;
   color: #111111;
@@ -96,6 +87,7 @@
   top: 22px;
   margin-left: 8px;
 }
+
 .btnEndStyle {
   margin-top: 39px;
   column-gap: 19px;

@@ -34,21 +34,19 @@
 .card {
   background-color: white;
   width: 436px;
-  /* height: 23px; */
-  /* padding: 11px; */
   border: 2px solid #f6f5f5;
 }
 
-.dragCard{
-  
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-left: 12px;
+.dragCard {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-left: 12px;
 }
+
 .boder-Style:hover {
   border: 2px solid darkgrey;
   min-height: 250px;
-  /* padding-top: 53px; */
   border-style: dotted;
 }
 
@@ -61,12 +59,6 @@
   display: flex;
   margin-left: 39px;
 }
-
-/* .informationName:hover {
-  background: white;
-  width: 156px;
-  padding: 6px;
-} */
 
 .ellips {
   position: relative;
@@ -87,15 +79,16 @@
   box-shadow: 0 1px 1px #d9caab;
   position: fixed;
 }
+
 .contactName {
   background: #f0f1f3;
   display: flex;
-  /* margin: 6px; */
   padding: 15px;
   font-size: 17px;
   color: #111111;
   font-weight: bold;
 }
+
 .contactuntitle {
   font-size: 18px;
   display: flex;
@@ -103,11 +96,13 @@
   color: #111111;
   font-weight: bold;
 }
-.previewCardAligment{
+
+.previewCardAligment {
   display: flex;
   flex-wrap: wrap;
 }
-.setpermissionRadio{
+
+.setpermissionRadio {
   display: flex;
   justify-content: space-around;
   column-gap: 67px;

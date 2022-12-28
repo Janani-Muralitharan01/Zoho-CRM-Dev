@@ -1,6 +1,6 @@
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { useState, useEffect } from "react";
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { useState, useEffect } from 'react';
 
 interface UserProps {
   UserDialogVisible: boolean;
@@ -8,10 +8,10 @@ interface UserProps {
 
 const User: React.FC<UserProps> = ({ UserDialogVisible }) => {
   const [state, setState] = useState(false);
-  const [order, setOrder] = useState("");
-  const [checkAlpha, setCheckAlpha] = useState("");
-  const [checkRequire, setCheckRequire] = useState("");
-  const [checkToolTip, setCheckToolTip] = useState("");
+  const [order, setOrder] = useState('');
+  const [checkAlpha, setCheckAlpha] = useState('');
+  const [checkRequire, setCheckRequire] = useState('');
+  const [checkToolTip, setCheckToolTip] = useState('');
 
   const onValueChange = (e: any) => {
     setOrder(e.target.value);
@@ -26,7 +26,7 @@ const User: React.FC<UserProps> = ({ UserDialogVisible }) => {
       <Dialog
         header="User Field Properties"
         visible={state}
-        style={{ width: "40vw" }}
+        style={{ width: '40vw' }}
         position="top"
         onHide={() => setState(false)}
       >
@@ -76,14 +76,14 @@ const User: React.FC<UserProps> = ({ UserDialogVisible }) => {
           </p>
 
           <p>
-            {" "}
+            {' '}
             <input
               type="checkbox"
               value="toolTip"
               name="toolTip"
               onChange={(event) => setCheckToolTip(event.target.value)}
             ></input>
-            Show Tooltip{" "}
+            Show Tooltip{' '}
           </p>
         </section>
         <div className="currencyProperties_cancel">

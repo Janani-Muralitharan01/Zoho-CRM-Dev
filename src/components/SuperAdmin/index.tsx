@@ -157,8 +157,6 @@ const SuperAdmin = () => {
             ) : id === 7 ? (
               <CandidateList />
             ) : (
-              // <Dashboard idValue={id} />
-              // <FormCreation />
               <CreateRecrutierTable />
             )}
           </div>

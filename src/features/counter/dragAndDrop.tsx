@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 interface userReducerState {
   initialStateDrag: null;
@@ -15,7 +15,7 @@ const initialDragAndDrop: userReducerState = {
 };
 
 export const userReducer = createSlice({
-  name: "userData",
+  name: 'userData',
   initialState: initialDragAndDrop,
   reducers: {
     dragAndDropValue: (state: any, action) => {

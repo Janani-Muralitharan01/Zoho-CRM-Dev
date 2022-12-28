@@ -7,6 +7,7 @@
   overflow-x: hidden;
   padding-top: 20px;
 }
+
 .splittwo {
   height: 100%;
   width: 43%;
@@ -20,41 +21,46 @@
 .left {
   left: 0;
   background: rgb(0, 0, 0);
-  background: linear-gradient(
-    360deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(9, 13, 121, 1) 0%,
-    rgba(9, 16, 126, 1) 8%,
-    rgba(0, 91, 255, 1) 86%
-  );
+  background: linear-gradient(360deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(9, 13, 121, 1) 0%,
+      rgba(9, 16, 126, 1) 8%,
+      rgba(0, 91, 255, 1) 86%);
 }
 
 .right {
   right: 0;
   background-color: #ffffff;
 }
+
 .HeadingStyle {
   display: flex;
   font-size: 43px;
-  /* padding: 110px; */
   color: white;
 }
+
 .radioButtonorder {
   border: 2px solid #ffffffb0;
   border-radius: 28px;
   padding: 14px;
   width: 200px;
 }
+
 .radioButtonorder:hover {
   border: 2px solid rgb(1, 1, 81);
 }
+
 .radioButtonorder:active {
   border: 2px solid rgb(226, 226, 231);
 }
+
 .gap {
   column-gap: 18px;
 }
-.containerLogin{
+.flexD{
+  display: flex;
+}
+.containerLogin {
   min-height: 100vh;
   display: flex;
   margin: 0;
@@ -62,35 +68,35 @@
   border: 0;
   box-sizing: border-box;
 }
-.lefts{
+
+.lefts {
   width: 57vw;
   background: rgb(0, 0, 0);
-  background: linear-gradient(
-    360deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(9, 13, 121, 1) 0%,
-    rgba(9, 16, 126, 1) 8%,
-    rgba(0, 91, 255, 1) 86%
-  );
+  background: linear-gradient(360deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(9, 13, 121, 1) 0%,
+      rgba(9, 16, 126, 1) 8%,
+      rgba(0, 91, 255, 1) 86%);
 }
-.rights{
+
+.rights {
+  display: flex;
   width: 43vw;
-  background-color:rgb(253, 253, 253) ;
+  background-color: rgb(253, 253, 253);
+  justify-content: center;
+  align-items: center;
 }
-/* .p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
-  width: 12px;
-  height: 12px;
-  transition-duration: 0.2s;
-  background-color: #15ff00 !important;
-} */
-.loginRightHeading {
+
+/* .loginRightHeading {
   padding: 134px;
   margin-top: 54px;
-}
+} */
+
 .borderRadius {
   border-radius: 16px !important;
   height: 38px !important;
 }
+
 .signUp {
   display: flex;
   justify-content: center;
@@ -100,7 +106,7 @@
   cursor: pointer;
 }
 
-.p-input-icon-left > .p-inputtext {
+.p-input-icon-left>.p-inputtext {
   padding-left: 35px !important;
 }
 
@@ -108,4 +114,9 @@
   font-size: 10px;
   color: red;
   font-weight: bold;
+}
+@media only screen and (max-width: 1000px){
+  .flexD{
+    display: contents;
+  }
 }

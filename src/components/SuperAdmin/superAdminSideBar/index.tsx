@@ -1,5 +1,5 @@
-import "./superAdminSideBar.css";
-import { SUPERADMINSIDEBAR } from "../../Constant/const";
+import './superAdminSideBar.css';
+import { SUPERADMINSIDEBAR } from '../../Constant/const';
 
 const SuperAdminSideBar = (props: any) => {
   return (

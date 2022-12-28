@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import "./buttons.css";
+import { useState, useEffect } from 'react';
+import './buttons.css';
 // import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import Draggable from "react-draggable";
-import ReplicateButton from "../ReplicateButton/ReplicateButton";
-import { useSelector, useDispatch } from "react-redux";
+import Draggable from 'react-draggable';
+import ReplicateButton from '../ReplicateButton/ReplicateButton';
+import { useSelector, useDispatch } from 'react-redux';
 
 interface ButtonOptionsProps {
   name: string;
@@ -24,10 +24,10 @@ const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
   };
 
   return (
-    <div className={isDragged ? "rectangleMainBox" : ""}>
+    <div className={isDragged ? 'rectangleMainBox' : ''}>
       {isDragged && (
         <div
-          className={activeIndex == 1 ? "rectangleboxQuick" : "rectanglebox"}
+          className={activeIndex == 1 ? 'rectangleboxQuick' : 'rectanglebox'}
         >
           <img className="imagedesign height" src={icon}></img>
           <div>1{name}</div>
@@ -46,7 +46,7 @@ const ButtonOptions: React.FC<ButtonOptionsProps> = ({ name, icon }) => {
           {!isDragged && (
             <div
               className={
-                activeIndex == 1 ? "rectangleboxQuick" : "rectanglebox"
+                activeIndex == 1 ? 'rectangleboxQuick' : 'rectanglebox'
               }
             >
               <img className="imagedesign height" src={icon}></img>

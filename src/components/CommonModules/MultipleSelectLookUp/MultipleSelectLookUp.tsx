@@ -1,6 +1,6 @@
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { useState, useEffect } from "react";
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { useState, useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 interface MultipleSelectLookUpProps {
   MultipleSelectLookUpDialogVisible: boolean;
@@ -20,7 +20,7 @@ const MultipleSelectLookUp: React.FC<MultipleSelectLookUpProps> = ({
       <Dialog
         header="Multi Select Lookup Properties"
         visible={state}
-        style={{ width: "40vw" }}
+        style={{ width: '40vw' }}
         position="top"
         onHide={() => setState(false)}
       >

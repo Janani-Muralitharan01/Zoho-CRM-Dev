@@ -1,35 +1,35 @@
-import "./createRecruiterTable.css";
-import React, { useState, useEffect } from "react";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
+import './createRecruiterTable.css';
+import React, { useState, useEffect } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
 
 const CreateRecrutierTable = () => {
   const [selectedCity1, setSelectedCity1] = useState(null);
   const [products, setProducts] = useState([
     {
       code: 1,
-      name: "Recruiters",
+      name: 'Recruiters',
     },
     {
       code: 2,
-      name: "Recruiters list",
+      name: 'Recruiters list',
     },
     {
       code: 3,
-      name: "Recruiters Top",
+      name: 'Recruiters Top',
     },
   ]);
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
   };
   const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' },
   ];
 
   return (
@@ -49,7 +49,7 @@ const CreateRecrutierTable = () => {
           />
         </div>
       </div>
-      <div className=" ">
+      <div className=" w-11">
         <DataTable value={products} responsiveLayout="scroll">
           <Column field="code" header="Sno"></Column>
           <Column field="name" header="Name"></Column>

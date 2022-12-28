@@ -110,7 +110,8 @@ const NavBar = () => {
             });
           }}
         >
-          LogOut
+          {" "}
+          LogOut{" "}
         </button>
         <button className="buttonStyle font-normal"> Cancel </button>
         <button className="buttonStyle font-normal"> Save and Close </button>

@@ -1,7 +1,7 @@
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { useState, useEffect } from "react";
-import { Dropdown } from "primereact/dropdown";
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { useState, useEffect } from 'react';
+import { Dropdown } from 'primereact/dropdown';
 
 interface PickListProps {
   lookUpDialogVisible: boolean;
@@ -9,8 +9,8 @@ interface PickListProps {
 
 const LookUp: React.FC<PickListProps> = ({ lookUpDialogVisible }) => {
   const [state, setState] = useState(false);
-  const [checkRequire, setCheckRequire] = useState("");
-  const [checkToolTip, setCheckToolTip] = useState("");
+  const [checkRequire, setCheckRequire] = useState('');
+  const [checkToolTip, setCheckToolTip] = useState('');
 
   useEffect(() => {
     setState(lookUpDialogVisible);
@@ -21,7 +21,7 @@ const LookUp: React.FC<PickListProps> = ({ lookUpDialogVisible }) => {
       <Dialog
         header="Lookup Properties"
         visible={state}
-        style={{ width: "35vw" }}
+        style={{ width: '35vw' }}
         position="top"
         onHide={() => setState(false)}
       >
@@ -52,14 +52,14 @@ const LookUp: React.FC<PickListProps> = ({ lookUpDialogVisible }) => {
           </p>
 
           <p>
-            {" "}
+            {' '}
             <input
               type="checkbox"
               value="toolTip"
               name="toolTip"
               onChange={(event) => setCheckToolTip(event.target.value)}
             ></input>
-            Show Tooltip{" "}
+            Show Tooltip{' '}
           </p>
         </section>
         <div className="currencyProperties_cancel">

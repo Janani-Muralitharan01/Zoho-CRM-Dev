@@ -1,12 +1,12 @@
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { useState, useEffect } from "react";
-import { InputText } from "primereact/inputtext";
-import { Dropdown } from "primereact/dropdown";
-import { InputNumber } from "primereact/inputnumber";
-import "./CurrencyProperties.css";
-import { Checkbox } from "primereact/checkbox";
-import { InputTextarea } from "primereact/inputtextarea";
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { useState, useEffect } from 'react';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { InputNumber } from 'primereact/inputnumber';
+import './CurrencyProperties.css';
+import { Checkbox } from 'primereact/checkbox';
+import { InputTextarea } from 'primereact/inputtextarea';
 
 interface CurrencyPropertiesProps {
   currencyDialogVisible: boolean;
@@ -15,13 +15,13 @@ interface CurrencyPropertiesProps {
 const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
   currencyDialogVisible,
 }) => {
-  const [value1, setValue1] = useState("");
+  const [value1, setValue1] = useState('');
   const [Number1, setNumber1] = useState(0);
   const [Number2, setNumber2] = useState(0);
   const [Number3, setNumber3] = useState(0);
   const [state, setState] = useState(false);
   const [selectedCity1, setSelectedCity1] = useState<any>([
-    { name: "Normal", code: "NY" },
+    { name: 'Normal', code: 'NY' },
   ]);
   const [checked, setChecked] = useState<boolean>(false);
   const [checked1, setChecked1] = useState<boolean>(false);
@@ -46,10 +46,10 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
     setSelectedCity1(e.value);
   };
   const cities = [
-    { name: "Normal", code: "NY" },
-    { name: "Roundoff", code: "RM" },
-    { name: "RoundDown", code: "LDN" },
-    { name: "RoundUp", code: "IST" },
+    { name: 'Normal', code: 'NY' },
+    { name: 'Roundoff', code: 'RM' },
+    { name: 'RoundDown', code: 'LDN' },
+    { name: 'RoundUp', code: 'IST' },
     // { name: 'Paris', code: 'PRS' }
   ];
 
@@ -62,7 +62,7 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
       <Dialog
         header="Currency Properties"
         visible={state}
-        style={{ width: "50vw" }}
+        style={{ width: '50vw' }}
         position="top"
         onHide={() => setState(false)}
       >
@@ -74,7 +74,7 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
           />
         </div>
 
-        <div className="field col-12 md:col-3" style={{ width: "35%" }}>
+        <div className="field col-12 md:col-3" style={{ width: '35%' }}>
           <label htmlFor="Maximum digits allowed">Maximum digits allowed</label>
           <InputNumber
             inputId="Maximum digits allowed"
@@ -87,7 +87,7 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
           />
         </div>
 
-        <div className="field col-12 md:col-3" style={{ width: "35%" }}>
+        <div className="field col-12 md:col-3" style={{ width: '35%' }}>
           <label htmlFor="Number of decimal places">
             Number of decimal places
           </label>
@@ -113,7 +113,7 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
               placeholder="Select a City"
             />
           </span>
-          {selectedCity1.name != "Normal" ? (
+          {selectedCity1.name != 'Normal' ? (
             <div className="field col-12 md:col-3 pop">
               <h5>Precision</h5>
               <InputNumber
@@ -127,7 +127,7 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
               />
             </div>
           ) : (
-            ""
+            ''
           )}
         </div>
         {/* <p className="Currency_Precision">
@@ -150,7 +150,7 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
               access to this module.
             </p>
           ) : (
-            ""
+            ''
           )}
 
           <div className="field-checkbox">
@@ -170,7 +170,7 @@ const CurrencyProperties: React.FC<CurrencyPropertiesProps> = ({
             />
             <label htmlFor="binary">Show Tooltip</label>
           </div>
-          {checked ? <InputTextarea placeholder="Type tooltip" /> : ""}
+          {checked ? <InputTextarea placeholder="Type tooltip" /> : ''}
         </section>
 
         <div className="currencyProperties_cancel">

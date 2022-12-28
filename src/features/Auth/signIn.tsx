@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface userReducerState {
   signUpPage: null;
@@ -10,11 +10,11 @@ const initialSignUpPage: userReducerState = {
 };
 
 export const signUp = createAsyncThunk(
-  "auth/signUp",
+  'auth/signUp',
   async (name: any, thunkAPI) => {
     try {
       const response = await axios.post(
-        "http://54.152.227.71/api/auth/register",
+        'http://54.152.227.71/api/auth/register',
         name
       );
 
@@ -26,7 +26,7 @@ export const signUp = createAsyncThunk(
 );
 
 export const userReducer = createSlice({
-  name: "signUp",
+  name: 'signUp',
   initialState: initialSignUpPage,
   reducers: {
     signUpPageValue: (state: any, action) => {

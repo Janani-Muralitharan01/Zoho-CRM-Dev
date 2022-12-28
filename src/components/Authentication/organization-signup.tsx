@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-import { Password } from "primereact/password";
-import { signUp } from "../../features/Auth/signIn";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { signUpPageValue } from "../../features/Auth/signIn";
+import React, { useState, useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { Password } from 'primereact/password';
+import { signUp } from '../../features/Auth/signIn';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { signUpPageValue } from '../../features/Auth/signIn';
 
 export default function OrganizationSignup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [payload, setPayload] = useState<any>();
 
   const { signUpPage } = useSelector((store: any) => store.signIn);
@@ -32,7 +32,7 @@ export default function OrganizationSignup() {
 
     setPayload(value);
 
-    let res = axios.post("http://localhost:800/user/signup", payload);
+    let res = axios.post('http://localhost:800/user/signup', payload);
     // navigate("/navbar");
 
     dispatch(signUpPageValue(value));

@@ -1,10 +1,10 @@
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 axios.interceptors.request.use(
   async (config) => {
     const configuration = config;
-    const token = Cookies.get("access_token");
+    const token = Cookies.get('access_token');
     if (token) {
       configuration.headers = {
         Authorization: `Bearer ${token}`,
@@ -16,6 +16,7 @@ axios.interceptors.request.use(
     Promise.reject(error);
   }
 );
+//needed
 // axios.interceptors.response.use(
 //   (response) => response,
 //   (error) => {
