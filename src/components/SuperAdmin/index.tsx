@@ -1,33 +1,33 @@
-import "./index.css";
-import React, { useState, useEffect } from "react";
-import SuperAdminSideBar from "./superAdminSideBar";
-import CreateRecruiterForm from "./createRecruiterForm";
-import CreateRecrutierTable from "./createRecruiterTable";
-import Dashboard from "../layouts/Dashboard-Main/dashboard";
-import FormCreation from "./formCreation";
-import SideBar from "../layouts/Sidebar/sidebar";
+import './index.css';
+import React, { useState, useEffect } from 'react';
+import SuperAdminSideBar from './superAdminSideBar';
+import CreateRecruiterForm from './createRecruiterForm';
+import CreateRecrutierTable from './createRecruiterTable';
+import Dashboard from '../layouts/Dashboard-Main/dashboard';
+import FormCreation from './formCreation';
+import SideBar from '../layouts/Sidebar/sidebar';
 import {
   DragDropContext,
   Draggable,
   DraggableLocation,
   Droppable,
-} from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
+} from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 import {
   ITEMS,
   QUICKITEMS,
   COMPLETE,
   QUICKCREATECOMPLETE,
-} from "../Constant/const";
+} from '../Constant/const';
 
 import {
   dragAndDropValue,
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
   dragAndDropValueSuperAdmin,
-} from "../../features/counter/dragAndDrop";
-import { useSelector, useDispatch } from "react-redux";
-import NavBar from "../layouts/Navbar/navbar";
+} from '../../features/counter/dragAndDrop';
+import { useSelector, useDispatch } from 'react-redux';
+import NavBar from '../layouts/Navbar/navbar';
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -112,7 +112,7 @@ const SuperAdmin = () => {
               });
 
               break;
-            case "CHECKSUPERDRAGITEMS":
+            case 'CHECKSUPERDRAGITEMS':
               setCompleted({
                 [destination.droppableId]: copy(
                   ITEMS,
@@ -151,8 +151,6 @@ const SuperAdmin = () => {
             ) : id === 4 ? (
               <FormCreation idValue={id} />
             ) : (
-              // <Dashboard idValue={id} />
-              // <FormCreation />
               <CreateRecrutierTable />
             )}
           </div>

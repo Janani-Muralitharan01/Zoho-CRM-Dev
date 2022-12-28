@@ -1,7 +1,7 @@
-import { Dialog } from "primereact/dialog";
-import { Button } from "primereact/button";
-import { useState, useEffect } from "react";
-import "./AutoNumber.css";
+import { Dialog } from 'primereact/dialog';
+import { Button } from 'primereact/button';
+import { useState, useEffect } from 'react';
+import './AutoNumber.css';
 
 interface AutoNumberProps {
   AutoNumberDialogVisible: boolean;
@@ -9,7 +9,7 @@ interface AutoNumberProps {
 
 const AutoNumber: React.FC<AutoNumberProps> = ({ AutoNumberDialogVisible }) => {
   const [state, setState] = useState(false);
-  const [checkToolTip, setCheckToolTip] = useState("");
+  const [checkToolTip, setCheckToolTip] = useState('');
 
   useEffect(() => {
     setState(AutoNumberDialogVisible);
@@ -20,7 +20,7 @@ const AutoNumber: React.FC<AutoNumberProps> = ({ AutoNumberDialogVisible }) => {
       <Dialog
         header="Pick List Properties"
         visible={state}
-        style={{ width: "50vw" }}
+        style={{ width: '50vw' }}
         position="top"
         onHide={() => setState(false)}
       >
@@ -52,13 +52,13 @@ const AutoNumber: React.FC<AutoNumberProps> = ({ AutoNumberDialogVisible }) => {
           ></input>
           Show Tooltip
         </p>
-        {checkToolTip === "toolTip" ? (
+        {checkToolTip === 'toolTip' ? (
           <textarea id="w3review" rows={4} cols={70}>
             At w3schools.com you will learn how to make a website. They offer
             free tutorials in all web development technologies.
           </textarea>
         ) : (
-          ""
+          ''
         )}
         <div className="currencyProperties_cancel">
           <p className="">Don't save this field.</p>

@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface userReducerState {
   mailVerificationPage: null;
@@ -10,7 +10,7 @@ const initialMailVerificationPage: userReducerState = {
 };
 
 export const mailVerification = createAsyncThunk(
-  "auth/mailVerify",
+  'auth/mailVerify',
   async (name: any, thunkAPI) => {
     try {
       const response = await axios.get(
@@ -25,7 +25,7 @@ export const mailVerification = createAsyncThunk(
 );
 
 export const userReducer = createSlice({
-  name: "mailVerification",
+  name: 'mailVerification',
   initialState: initialMailVerificationPage,
   reducers: {
     mailVerificationValue: (state: any, action) => {

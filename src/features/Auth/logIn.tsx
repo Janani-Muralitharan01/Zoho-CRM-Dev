@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 interface userReducerState {
   logInVerificationPage: null;
@@ -9,12 +9,12 @@ interface userReducerState {
 
 const initiallogInVerificationPage: userReducerState = {
   logInVerificationPage: null,
-  status: "",
-  error: "",
+  status: '',
+  error: '',
 };
 
 export const logInVerification = createAsyncThunk(
-  "auth/logInVerification",
+  'auth/logInVerification',
   async (name: any, thunkAPI) => {
     try {
       const response = await axios.post(
@@ -30,15 +30,15 @@ export const logInVerification = createAsyncThunk(
 );
 
 export const userReducer = createSlice({
-  name: "logInVerification",
+  name: 'logInVerification',
   initialState: initiallogInVerificationPage,
   reducers: {
     logInVerificationValue: (state: any, action) => {
       state.logInVerificationPage = action.payload;
     },
     resetStatus: (state, action) => {
-      state.error = "";
-      state.status = "";
+      state.error = '';
+      state.status = '';
     },
   },
 });

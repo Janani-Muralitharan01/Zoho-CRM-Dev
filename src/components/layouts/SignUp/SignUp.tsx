@@ -1,33 +1,33 @@
-import "./SignUp.css";
-import { RadioButton } from "primereact/radiobutton";
-import { InputText } from "primereact/inputtext";
-import { useState, useEffect } from "react";
-import { Button } from "primereact/button";
-import { useNavigate } from "react-router-dom";
-import React, { useRef } from "react";
-import { Toast } from "primereact/toast";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import Cookies from "js-cookie";
-import { useAppDispatch } from "../../../app/hooks";
-import { signUp } from "../../../features/Auth/signIn";
-import { mailVerification } from "../../../features/Auth/mailVerify";
+import './SignUp.css';
+import { RadioButton } from 'primereact/radiobutton';
+import { InputText } from 'primereact/inputtext';
+import { useState, useEffect } from 'react';
+import { Button } from 'primereact/button';
+import { useNavigate } from 'react-router-dom';
+import React, { useRef } from 'react';
+import { Toast } from 'primereact/toast';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import Cookies from 'js-cookie';
+import { useAppDispatch } from '../../../app/hooks';
+import { signUp } from '../../../features/Auth/signIn';
+import { mailVerification } from '../../../features/Auth/mailVerify';
 
 const signUpSchema = Yup.object({
-  name: Yup.string().min(2).max(25).required("Please enter your name"),
-  email: Yup.string().email().required("Please enter your email"),
-  password: Yup.string().min(4).required("Please enter your password"),
+  name: Yup.string().min(2).max(25).required('Please enter your name'),
+  email: Yup.string().email().required('Please enter your email'),
+  password: Yup.string().min(4).required('Please enter your password'),
   confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
+    [Yup.ref('password'), null],
+    'Passwords must match'
   ),
 });
 
 const initialValues = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
 
 const SignUp = () => {
@@ -45,23 +45,23 @@ const SignUp = () => {
           name: values.name,
           email: values.email,
           password: values.password,
-          photo: "",
+          photo: '',
           passwordConfirm: values.confirmPassword,
         };
 
         let res = await dispatch(signUp(val));
 
         if (res.payload.token) {
-          Cookies.set("token", res.payload.token);
+          Cookies.set('token', res.payload.token);
           await dispatch(mailVerification(res.payload.token));
-          Cookies.remove("token");
+          Cookies.remove('token');
         }
-        navigate("/login");
+        navigate('/login');
         if (!res.payload.token) {
           await toast.current.show({
-            severity: "info",
-            summary: "Sticky Message",
-            detail: "err",
+            severity: 'info',
+            summary: 'Sticky Message',
+            detail: 'err',
             sticky: false,
           });
         }
@@ -73,7 +73,7 @@ const SignUp = () => {
       <Toast ref={toast} position="top-center" />
       <div className="split left">
         <div className="centered">
-          <div style={{ padding: "100px" }} className="mt-8">
+          <div style={{ padding: '100px' }} className="mt-8">
             <div className="HeadingStyle">
               Recruiteas
               <br />
@@ -90,7 +90,7 @@ const SignUp = () => {
                   name="city"
                   value="Human Resources"
                   onChange={(e) => setCity(e.value)}
-                  checked={city === "Human Resources"}
+                  checked={city === 'Human Resources'}
                 />
                 <label htmlFor="Human Resources" className="text-50">
                   Human Resources
@@ -102,7 +102,7 @@ const SignUp = () => {
                   name="city"
                   value="Assistance"
                   onChange={(e) => setCity(e.value)}
-                  checked={city === "Assistance"}
+                  checked={city === 'Assistance'}
                 />
                 <label htmlFor="Assistance" className="text-50">
                   Assistance
@@ -115,7 +115,7 @@ const SignUp = () => {
                   name="city"
                   value="Management"
                   onChange={(e) => setCity(e.value)}
-                  checked={city === "Management"}
+                  checked={city === 'Management'}
                 />
                 <label htmlFor="Management" className="text-50">
                   Management
@@ -143,7 +143,7 @@ const SignUp = () => {
                   <InputText
                     placeholder="Full Name "
                     className="borderRadius"
-                    style={{ width: "200px" }}
+                    style={{ width: '200px' }}
                     type="name"
                     autoComplete="off"
                     name="name"
@@ -161,7 +161,7 @@ const SignUp = () => {
                   <InputText
                     placeholder="Email Address"
                     className="borderRadius"
-                    style={{ width: "200px" }}
+                    style={{ width: '200px' }}
                     type="email"
                     autoComplete="off"
                     name="email"
@@ -179,7 +179,7 @@ const SignUp = () => {
                   <InputText
                     type="password"
                     placeholder="Password"
-                    style={{ width: "200px" }}
+                    style={{ width: '200px' }}
                     className="borderRadius "
                     autoComplete="off"
                     name="password"
@@ -198,7 +198,7 @@ const SignUp = () => {
                   <InputText
                     type="password"
                     placeholder="Confirm Password"
-                    style={{ width: "200px" }}
+                    style={{ width: '200px' }}
                     className="borderRadius "
                     autoComplete="off"
                     name="confirmPassword"
@@ -216,15 +216,15 @@ const SignUp = () => {
                 <Button
                   label="Register"
                   aria-label="Submit"
-                  style={{ width: "200px" }}
+                  style={{ width: '200px' }}
                   className="mt-3 p-button-rounded"
                 />
               </span>
             </form>
             <div
               className="text-center mt-2"
-              style={{ width: "200px" }}
-              onClick={() => navigate("/login")}
+              style={{ width: '200px' }}
+              onClick={() => navigate('/login')}
             >
               LOG IN
             </div>

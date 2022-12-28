@@ -1,26 +1,26 @@
-import "./create.css";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
-import UntitleImage from "../createFile/create";
-import { useSelector, useDispatch } from "react-redux";
-import MultipleSelect from "../../CommonModules/MultipleSelect/MultipleSelect";
-import Picklist from "../../CommonModules/PickList/PickList";
-import CurrencyProperties from "../../CommonModules/CurrencyProperties/CurrencyProperties";
-import LookUp from "../../CommonModules/LookUp/LookUp";
-import AutoNumber from "../../CommonModules/AutoNumber/AutoNumber";
-import Formula from "../../CommonModules/Formula/Formula";
-import User from "../../CommonModules/User/User";
-import MultipleSelectLookUp from "../../CommonModules/MultipleSelectLookUp/MultipleSelectLookUp";
-import { ITEMS } from "../../Constant/const";
-import { dragAndDropDialogOpenIndex } from "../../../features/counter/dragAndDrop";
-import FileUploadDemo from "../../CommonModules/FileUpload/FileUpload"
+import './create.css';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import UntitleImage from '../createFile/create';
+import { useSelector, useDispatch } from 'react-redux';
+import MultipleSelect from '../../CommonModules/MultipleSelect/MultipleSelect';
+import Picklist from '../../CommonModules/PickList/PickList';
+import CurrencyProperties from '../../CommonModules/CurrencyProperties/CurrencyProperties';
+import LookUp from '../../CommonModules/LookUp/LookUp';
+import AutoNumber from '../../CommonModules/AutoNumber/AutoNumber';
+import Formula from '../../CommonModules/Formula/Formula';
+import User from '../../CommonModules/User/User';
+import MultipleSelectLookUp from '../../CommonModules/MultipleSelectLookUp/MultipleSelectLookUp';
+import { ITEMS } from '../../Constant/const';
+import { dragAndDropDialogOpenIndex } from '../../../features/counter/dragAndDrop';
+import FileUploadDemo from '../../CommonModules/FileUpload/FileUpload';
 
 const Footer = ({ cards }: any, items: any) => {
   const dispatch = useDispatch();
 
   const count: any = useSelector((state) => state);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [uidv4, setUidv4] = useState<any>();
   const [listId, setListId] = useState<any>();
 
@@ -62,27 +62,25 @@ const Footer = ({ cards }: any, items: any) => {
   const openDialog = () => {
     let value = ITEMS[count.dragAndDrop.DialogOpenIndex];
     if (value) {
-      if (value.names === "Currency") {
+      if (value.names === 'Currency') {
         return <CurrencyProperties currencyDialogVisible={true} />;
-      } else if (value.names === "Lookup") {
+      } else if (value.names === 'Lookup') {
         return <LookUp lookUpDialogVisible={true} />;
-      } else if (value.names === "Auto-Number") {
+      } else if (value.names === 'Auto-Number') {
         return <AutoNumber AutoNumberDialogVisible={true} />;
-      } else if (value.names === "User") {
+      } else if (value.names === 'User') {
         return <User UserDialogVisible={true} />;
-      } else if (value.names === "Multi-Select Lookup") {
+      } else if (value.names === 'Multi-Select Lookup') {
         return (
           <MultipleSelectLookUp MultipleSelectLookUpDialogVisible={true} />
         );
-      } else if (value.names === "Pick List") {
+      } else if (value.names === 'Pick List') {
         return <Picklist pickListDialogVisible={true} />;
-      } else if (value.names === "Multi-Select") {
+      } else if (value.names === 'Multi-Select') {
         return <MultipleSelect dialogVisible={true} />;
-      } 
-      else if (value.names === "Formula") {
+      } else if (value.names === 'Formula') {
         return <Formula FormulaDialogVisible={true} />;
-      }
-      else if (value.names === "File Upload") {
+      } else if (value.names === 'File Upload') {
         return <FileUploadDemo FileUploadVisible={true} />;
       }
     }
@@ -121,19 +119,19 @@ const Footer = ({ cards }: any, items: any) => {
                                         className="names"
                                         {...provided.dragHandleProps}
                                       >
-                                        {item.names === "Untitled Owner" ? (
+                                        {item.names === 'Untitled Owner' ? (
                                           <p>{item.subName}</p>
-                                        ) : item.names === "Untitled Name" ? (
+                                        ) : item.names === 'Untitled Name' ? (
                                           <p>{item.subName}</p>
-                                        ) : item.names === "Created By" ? (
+                                        ) : item.names === 'Created By' ? (
                                           <p>{item.subName}</p>
-                                        ) : item.names === "Secondary Email" ? (
+                                        ) : item.names === 'Secondary Email' ? (
                                           <p>{item.subName}</p>
-                                        ) : item.names === "Email" ? (
+                                        ) : item.names === 'Email' ? (
                                           <p>{item.subName}</p>
-                                        ) : item.names === "Email Opt Out" ? (
+                                        ) : item.names === 'Email Opt Out' ? (
                                           <p>{item.subName}</p>
-                                        ) : item.names === "Modified By" ? (
+                                        ) : item.names === 'Modified By' ? (
                                           <p>{item.subName}</p>
                                         ) : (
                                           <input
@@ -169,34 +167,34 @@ const Footer = ({ cards }: any, items: any) => {
                                 </Draggable>
 
                                 {count.dragAndDrop.DialogOpenIndex === 10 &&
-                                item.names.toString() === "Currency"
+                                item.names.toString() === 'Currency'
                                   ? openDialog()
                                   : count.dragAndDrop.DialogOpenIndex === 16 &&
-                                    item.names.toString() === "Lookup"
+                                    item.names.toString() === 'Lookup'
                                   ? openDialog()
                                   : count.dragAndDrop.DialogOpenIndex === 9 &&
-                                    item.names.toString() === "Auto-Number"
+                                    item.names.toString() === 'Auto-Number'
                                   ? openDialog()
                                   : count.dragAndDrop.DialogOpenIndex === 18 &&
-                                    item.names.toString() === "User"
+                                    item.names.toString() === 'User'
                                   ? openDialog()
                                   : count.dragAndDrop.DialogOpenIndex === 21 &&
                                     item.names.toString() ===
-                                      "Multi-Select Lookup"
+                                      'Multi-Select Lookup'
                                   ? openDialog()
-                                  : item.names == "Pick List" &&
+                                  : item.names == 'Pick List' &&
                                     count.dragAndDrop.DialogOpenIndex == 4
                                   ? openDialog()
-                                  : item.names == "Multi-Select" &&
+                                  : item.names == 'Multi-Select' &&
                                     count.dragAndDrop.DialogOpenIndex == 5
                                   ? openDialog()
-                                  : item.names == "Formula" &&
+                                  : item.names == 'Formula' &&
                                     count.dragAndDrop.DialogOpenIndex == 17
                                   ? openDialog()
-                                  : item.names == "File Upload" &&
-                                  count.dragAndDrop.DialogOpenIndex == 19
+                                  : item.names == 'File Upload' &&
+                                    count.dragAndDrop.DialogOpenIndex == 19
                                   ? openDialog()
-                                  : ""}
+                                  : ''}
                               </>
                             );
                           })

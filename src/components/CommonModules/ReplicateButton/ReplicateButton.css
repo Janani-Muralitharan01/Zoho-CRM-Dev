@@ -8,13 +8,16 @@
   border-radius: 3px;
   display: flex;
 }
+
 .ReplicateLable {
   white-space: nowrap;
 }
+
 .ReplicateInputBox {
   width: 150px;
   height: 25px;
 }
+
 .designBoxSub {
   padding-left: 4px;
 
@@ -23,9 +26,11 @@
   width: 290px;
   justify-content: space-between;
 }
+
 .apple {
   justify-content: center;
 }
+
 .orange {
   visibility: hidden;
 }

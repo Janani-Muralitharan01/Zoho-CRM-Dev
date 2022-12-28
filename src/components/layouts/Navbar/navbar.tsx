@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Button } from "primereact/button";
-import "./navbar.css";
-import { Sidebar } from "primereact/sidebar";
-import { InputText } from "primereact/inputtext";
-import { MultiSelect } from "primereact/multiselect";
-import { OverlayPanel } from "primereact/overlaypanel";
-import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
-import { Toast } from "primereact/toast";
+import React, { useState, useEffect, useRef } from 'react';
+import { Button } from 'primereact/button';
+import './navbar.css';
+import { Sidebar } from 'primereact/sidebar';
+import { InputText } from 'primereact/inputtext';
+import { MultiSelect } from 'primereact/multiselect';
+import { OverlayPanel } from 'primereact/overlaypanel';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { ConfirmDialog, confirmDialog } from 'primereact/confirmdialog';
+import { Toast } from 'primereact/toast';
 
 const NavBar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -28,26 +28,26 @@ const NavBar = () => {
 
   const accept = () => {
     toast.current.show({
-      severity: "info",
-      summary: "Confirmed",
-      detail: "You have accepted",
+      severity: 'info',
+      summary: 'Confirmed',
+      detail: 'You have accepted',
       life: 3000,
     });
 
-    navigate("/selection");
+    navigate('/selection');
   };
   const reject = () => {
     toast.current.show({
-      severity: "warn",
-      summary: "Rejected",
-      detail: "You have rejected",
+      severity: 'warn',
+      summary: 'Rejected',
+      detail: 'You have rejected',
       life: 3000,
     });
   };
   const Options = [
-    { name: "Standard", code: "NY" },
-    { name: "Administrator", code: "RM" },
-    { name: "Squash", code: "LDN" },
+    { name: 'Standard', code: 'NY' },
+    { name: 'Administrator', code: 'RM' },
+    { name: 'Squash', code: 'LDN' },
   ];
   return (
     <div className="navbar ">
@@ -57,15 +57,15 @@ const NavBar = () => {
           className="pi pi-arrow-left"
           onClick={(e: any) => {
             confirmDialog({
-              message: "Do you want Save Change?",
-              header: "Confirmation",
-              icon: "pi pi-info-circle",
+              message: 'Do you want Save Change?',
+              header: 'Confirmation',
+              icon: 'pi pi-info-circle',
 
               accept: () => {
-                Cookies.remove("token");
-                Cookies.remove("access_token");
+                Cookies.remove('token');
+                Cookies.remove('access_token');
                 // localStorage.clear();
-                navigate("/selection");
+                navigate('/selection');
               },
               reject,
             });
@@ -92,35 +92,35 @@ const NavBar = () => {
           className="buttonStyle font-normal"
           onClick={(e: any) => {
             confirmDialog({
-              message: "Do you want to Log Out?",
-              header: "Log Out Confirmation",
-              icon: "pi pi-info-circle",
+              message: 'Do you want to Log Out?',
+              header: 'Log Out Confirmation',
+              icon: 'pi pi-info-circle',
 
               accept: () => {
                 // localStorage.clear();
-                Cookies.remove("token");
-                Cookies.remove("access_token");
+                Cookies.remove('token');
+                Cookies.remove('access_token');
                 toast.current.show({
-                  severity: "info",
-                  summary: "Confirmed",
-                  detail: "You have accepted",
+                  severity: 'info',
+                  summary: 'Confirmed',
+                  detail: 'You have accepted',
                   life: 3000,
                 });
-                navigate("/");
+                navigate('/');
               },
             });
           }}
         >
-          {" "}
-          LogOut{" "}
+          {' '}
+          LogOut{' '}
         </button>
         <button className="buttonStyle font-normal"> Cancel </button>
         <button className="buttonStyle font-normal"> Save and Close </button>
-        <Button label="Save" style={{ height: "36px" }} />
+        <Button label="Save" style={{ height: '36px' }} />
       </span>
       <OverlayPanel
         ref={op}
-        style={{ width: "450px" }}
+        style={{ width: '450px' }}
         className="overlaypanel-demo"
       >
         <div>
@@ -159,7 +159,7 @@ const NavBar = () => {
         visible={sidebar}
         position="top"
         className="border-round-lg"
-        style={{ width: "45vw", height: "18vw" }}
+        style={{ width: '45vw', height: '18vw' }}
         onHide={() => setSidebar(!sidebar)}
       >
         <div>
@@ -170,7 +170,7 @@ const NavBar = () => {
               type="text"
               className="border-noround ml-2 w-6"
               placeholder="Standard"
-            />{" "}
+            />{' '}
             <i className="pi pi-clone ml-2 mt-2"></i>
           </span>
           <span className="flex justify-content-end btnEndStyle">
@@ -178,10 +178,10 @@ const NavBar = () => {
               className="buttonStyle font-normal"
               onClick={() => setSidebar(!sidebar)}
             >
-              {" "}
-              Cancel{" "}
+              {' '}
+              Cancel{' '}
             </button>
-            <Button label="Save" style={{ height: "36px" }} />
+            <Button label="Save" style={{ height: '36px' }} />
           </span>
         </div>
       </Sidebar>
@@ -189,7 +189,7 @@ const NavBar = () => {
         visible={sidebarModule}
         position="top"
         className="border-round-lg"
-        style={{ width: "45vw", height: "21vw" }}
+        style={{ width: '45vw', height: '21vw' }}
         onHide={() => setSidebarModule(!sidebarModule)}
       >
         <div>
@@ -208,10 +208,10 @@ const NavBar = () => {
               className="buttonStyle font-normal"
               onClick={() => setSidebarModule(!sidebarModule)}
             >
-              {" "}
-              Cancel{" "}
+              {' '}
+              Cancel{' '}
             </button>
-            <Button label="Save" style={{ height: "36px" }} />
+            <Button label="Save" style={{ height: '36px' }} />
           </span>
         </div>
       </Sidebar>

@@ -1,11 +1,11 @@
-import "./quickCreate.css";
-import { useState, useRef, useEffect } from "react";
-import { Sidebar } from "primereact/sidebar";
-import { Dropdown } from "primereact/dropdown";
-import { InputText } from "primereact/inputtext";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
-import { useSelector, useDispatch } from "react-redux";
+import './quickCreate.css';
+import { useState, useRef, useEffect } from 'react';
+import { Sidebar } from 'primereact/sidebar';
+import { Dropdown } from 'primereact/dropdown';
+import { InputText } from 'primereact/inputtext';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
+import { useSelector, useDispatch } from 'react-redux';
 const QuickCreate = () => {
   const [sidebar, setSidebar] = useState(false);
   const [selectedCity1, setSelectedCity1] = useState(null);
@@ -14,16 +14,16 @@ const QuickCreate = () => {
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
   };
-  const cities = [{ name: "Admistrator", code: "NY" }];
+  const cities = [{ name: 'Admistrator', code: 'NY' }];
   const cards = [
     {
-      names: "Untitled Name",
-      subName: "single Line",
+      names: 'Untitled Name',
+      subName: 'single Line',
       id: 1,
     },
     {
-      names: "Email",
-      subName: "Email",
+      names: 'Email',
+      subName: 'Email',
       id: 2,
     },
   ];
@@ -129,7 +129,7 @@ const QuickCreate = () => {
       <Sidebar
         visible={sidebar}
         position="top"
-        style={{ width: "45vw", height: "27vw" }}
+        style={{ width: '45vw', height: '27vw' }}
         onHide={() => setSidebar(!sidebar)}
       >
         <div>
@@ -159,10 +159,10 @@ const QuickCreate = () => {
                         <div key={index}>
                           <div className="card border-0 mt-3 ml-7">
                             <span className="names">
-                              {item.names == ""}
+                              {item.names == ''}
                               {item.names}
-                              <InputText className="w-8" />{" "}
-                            </span>{" "}
+                              <InputText className="w-8" />{' '}
+                            </span>{' '}
                           </div>
                         </div>
                       );

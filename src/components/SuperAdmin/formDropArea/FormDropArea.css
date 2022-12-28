@@ -11,3 +11,7 @@
 .FormDropAreaCard {
   width: 300px;
 }
+.FormDiv {
+  height: 500px;
+  overflow: scroll;
+}

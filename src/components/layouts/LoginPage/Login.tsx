@@ -1,26 +1,26 @@
-import "./Login.css";
-import { RadioButton } from "primereact/radiobutton";
-import { useState, useEffect } from "react";
-import { InputText } from "primereact/inputtext";
-import { Button } from "primereact/button";
-import { useNavigate } from "react-router-dom";
-import { Toast } from "primereact/toast";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import React, { useRef } from "react";
-import Cookies from "js-cookie";
-import { logInVerification } from "../../../features/Auth/logIn";
-import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { LoginUserDetails } from "../../../features/Auth/userDetails";
+import './Login.css';
+import { RadioButton } from 'primereact/radiobutton';
+import { useState, useEffect } from 'react';
+import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
+import { useNavigate } from 'react-router-dom';
+import { Toast } from 'primereact/toast';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import React, { useRef } from 'react';
+import Cookies from 'js-cookie';
+import { logInVerification } from '../../../features/Auth/logIn';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { LoginUserDetails } from '../../../features/Auth/userDetails';
 
 const signUpSchema = Yup.object({
-  email: Yup.string().email().required("Please enter your email"),
-  password: Yup.string().min(8).required("Please enter your password"),
+  email: Yup.string().email().required('Please enter your email'),
+  password: Yup.string().min(8).required('Please enter your password'),
 });
 
 const initialValues = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 const Login = () => {
@@ -41,17 +41,17 @@ const Login = () => {
         };
 
         let res = await dispatch(logInVerification(val));
-        Cookies.set("access_token", res.payload.access_token, {
+        Cookies.set('access_token', res.payload.access_token, {
           expires: 1 / 24,
           // path: "/",
           // httpOnly: true,
         });
         let Ans: any = true;
-        Cookies.set("logged_in", Ans, {
+        Cookies.set('logged_in', Ans, {
           // path: "/",
           // expires: 1 / 24,
         });
-        Cookies.set("refresh_token", res.payload.access_token, {
+        Cookies.set('refresh_token', res.payload.access_token, {
           expires: 1 / 24,
           // path: "/",
           // httpOnly: true,
@@ -63,13 +63,13 @@ const Login = () => {
         }
 
         if (res.payload.access_token) {
-          navigate("/selection");
+          navigate('/selection');
         }
         if (!res.payload.access_token) {
           await toast.current.show({
-            severity: "error",
+            severity: 'error',
             summary: res.payload.message,
-            detail: "",
+            detail: '',
             life: 3000,
           });
         }
@@ -85,7 +85,7 @@ const Login = () => {
         <div className="containerLogin">
           <div className="lefts">
             <div className="centered">
-              <div style={{ padding: "100px" }} className="mt-8">
+              <div style={{ padding: '100px' }} className="mt-8">
                 <div className="HeadingStyle">
                   Recruiteas
                   <br />
@@ -102,7 +102,7 @@ const Login = () => {
                       name="city"
                       value="Human Resources"
                       onChange={(e) => setCity(e.value)}
-                      checked={city === "Human Resources"}
+                      checked={city === 'Human Resources'}
                     />
                     <label htmlFor="Human Resources" className="text-50">
                       Human Resources
@@ -114,7 +114,7 @@ const Login = () => {
                       name="city"
                       value="Assistance"
                       onChange={(e) => setCity(e.value)}
-                      checked={city === "Assistance"}
+                      checked={city === 'Assistance'}
                     />
                     <label htmlFor="Assistance" className="text-50">
                       Assistance
@@ -127,7 +127,7 @@ const Login = () => {
                       name="city"
                       value="Management"
                       onChange={(e) => setCity(e.value)}
-                      checked={city === "Management"}
+                      checked={city === 'Management'}
                     />
                     <label htmlFor="Management" className="text-50">
                       Management
@@ -156,7 +156,7 @@ const Login = () => {
                       value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      style={{ width: "230px" }}
+                      style={{ width: '230px' }}
                     />
                   </span>
                   {errors.email && touched.email ? (
@@ -174,7 +174,7 @@ const Login = () => {
                       value={values.password}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      style={{ width: "230px" }}
+                      style={{ width: '230px' }}
                     />
                   </span>
                   {errors.password && touched.password ? (
@@ -185,7 +185,7 @@ const Login = () => {
                   <Button
                     label="login"
                     aria-label="Submit"
-                    style={{ width: "230px" }}
+                    style={{ width: '230px' }}
                     className="mt-3 p-button-rounded"
                   />
                 </span>
@@ -193,13 +193,13 @@ const Login = () => {
               <br />
               <div
                 className="text-center mt-2 pointer"
-                style={{ width: "239px" }}
-                onClick={() => navigate("/")}
+                style={{ width: '239px' }}
+                onClick={() => navigate('/')}
               >
                 Sign up
-              </div>{" "}
+              </div>{' '}
               <br />
-              <div className="text-center  pointer" style={{ width: "239px" }}>
+              <div className="text-center  pointer" style={{ width: '239px' }}>
                 Forget Password
               </div>
             </div>

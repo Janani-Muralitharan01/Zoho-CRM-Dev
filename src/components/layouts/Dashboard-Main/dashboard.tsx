@@ -1,33 +1,33 @@
-import { TabView, TabPanel } from "primereact/tabview";
-import "./dashboard.css";
-import UntitleImage from "../createFile/create";
-import QuickCreate from "../QuickCreateFile/quickCreate";
-import DetailView from "../DetailView/detailView";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { dashboardIndexValue } from "../../../../src/features/counter/counterSlice";
-import NavBar from "../Navbar/navbar";
-import SideBar from "../Sidebar/sidebar";
+import { TabView, TabPanel } from 'primereact/tabview';
+import './dashboard.css';
+import UntitleImage from '../createFile/create';
+import QuickCreate from '../QuickCreateFile/quickCreate';
+import DetailView from '../DetailView/detailView';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { dashboardIndexValue } from '../../../../src/features/counter/counterSlice';
+import NavBar from '../Navbar/navbar';
+import SideBar from '../Sidebar/sidebar';
 // import "../../../../src/App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
   DragDropContext,
   Draggable,
   DraggableLocation,
   Droppable,
-} from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
+} from 'react-beautiful-dnd';
+import { v4 as uuidv4 } from 'uuid';
 import {
   ITEMS,
   QUICKITEMS,
   COMPLETE,
   QUICKCREATECOMPLETE,
-} from "../../Constant/const";
+} from '../../Constant/const';
 import {
   dragAndDropValue,
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
-} from "../../../features/counter/dragAndDrop";
+} from '../../../features/counter/dragAndDrop';
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -136,7 +136,7 @@ const Dashboard = (props: any) => {
               }
 
               break;
-            case "CHECKITEMS":
+            case 'CHECKITEMS':
               setCompleted({
                 [destination.droppableId]: copy(
                   ITEMS,
@@ -145,11 +145,11 @@ const Dashboard = (props: any) => {
                   destination
                 ),
               });
-              let indexOfDragable = result ? result.source.index : "";
+              let indexOfDragable = result ? result.source.index : '';
               dispatch(dragAndDropDialogOpenIndex(indexOfDragable));
 
               break;
-            case "QUICKCREATEITEMS":
+            case 'QUICKCREATEITEMS':
               setQuickCreateComplete({
                 [destination.droppableId]: copy(
                   QUICKITEMS,
@@ -191,7 +191,7 @@ const Dashboard = (props: any) => {
                 <NavBar />
               </nav>
             ) : (
-              ""
+              ''
             )}
             {props.idValue !== 4 ? (
               <main>
@@ -216,12 +216,9 @@ const Dashboard = (props: any) => {
                 </div>
               </main>
             ) : (
-              ""
+              ''
             )}
-            {/* <Tabs>
-        <Tab>title</Tab>
-        <Tab>tl 2</Tab>
-      </Tabs> */}
+
             <div id="sidebar">
               <SideBar />
             </div>

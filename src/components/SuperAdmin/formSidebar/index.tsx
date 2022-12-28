@@ -1,11 +1,11 @@
-import { SIDEBARITEMS } from "../../Constant/const";
+import { SIDEBARITEMS } from '../../Constant/const';
 import {
   DragDropContext,
   Draggable,
   DraggableLocation,
   Droppable,
-} from "react-beautiful-dnd";
-import "./FormSideBar.css";
+} from 'react-beautiful-dnd';
+import './FormSideBar.css';
 
 const FormSideBar = (props: any) => {
   return (

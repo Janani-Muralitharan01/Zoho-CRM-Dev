@@ -6,11 +6,13 @@
   padding: 8px 5px 8px 10px;
   overflow: scroll;
 }
-.multipleSelectDialogOption > input {
+
+.multipleSelectDialogOption>input {
   margin-block: 8px;
   margin-left: 4px;
   border-radius: 5px;
 }
+
 .pi {
   margin-left: 10px !important;
 }
@@ -23,31 +25,37 @@
   display: flex;
   justify-content: space-between;
 }
-.multiSelect_feild_lable > label {
+
+.multiSelect_feild_lable>label {
   width: 25%;
 }
-.multiSelect_feild_lable > input {
+
+.multiSelect_feild_lable>input {
   width: 75%;
 }
+
 .multiSelect_cancel {
   display: flex;
   justify-content: space-between;
 }
-.multiSelect_cancel > p {
+
+.multiSelect_cancel>p {
   color: blue;
 }
+
 .p-inputtext {
   padding: 4px !important;
 }
+
 .multiSelect_option {
   display: flex;
   justify-content: space-between;
 }
-.multipleSelectDialogOption > input {
+
+.multipleSelectDialogOption>input {
   margin-block: 8px;
   margin-left: 35px;
   height: 33px;
   width: 289px;
   border: none;
-  /* border-radius: 5px; */
 }

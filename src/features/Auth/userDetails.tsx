@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../components/Constant/Api";
-import { BASEURL } from "../../components/Constant/const";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from '../../components/Constant/Api';
+import { BASEURL } from '../../components/Constant/const';
 
 interface userReducerState {
   logInVerificationPage: null;
@@ -10,12 +10,12 @@ interface userReducerState {
 
 const initiallogInVerificationPage: userReducerState = {
   logInVerificationPage: null,
-  status: "",
-  error: "",
+  status: '',
+  error: '',
 };
 
 export const LoginUserDetails = createAsyncThunk(
-  "auth/logInVerification",
+  'auth/logInVerification',
   async (name: any, thunkAPI) => {
     try {
       const response = await axios.get(`${BASEURL}api/users/me`);
@@ -27,15 +27,15 @@ export const LoginUserDetails = createAsyncThunk(
 );
 
 export const userReducer = createSlice({
-  name: "logInVerification",
+  name: 'logInVerification',
   initialState: initiallogInVerificationPage,
   reducers: {
     logInVerificationValue: (state: any, action) => {
       state.logInVerificationPage = action.payload;
     },
     resetStatus: (state, action) => {
-      state.error = "";
-      state.status = "";
+      state.error = '';
+      state.status = '';
     },
   },
 });

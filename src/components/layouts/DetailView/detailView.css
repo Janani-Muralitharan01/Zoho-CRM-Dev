@@ -39,7 +39,7 @@
 .hoverborder:hover {
 
      border: 0.5px solid darkgrey;
-     
+
      box-shadow: 1px 1px;
 
 
@@ -86,19 +86,22 @@
      /* bottom: -23px; */
      border: 1px solid transparent;
      height: 23px !important;
- }
- .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+}
+
+.p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
      background: #37d93c !important;
-    
- }
+
+}
+
 .falseText {
      display: table-cell;
      justify-content: flex-start;
-     background:  #efefef;
+     background: #efefef;
      font-size: 14px;
      padding: 12px;
 }
-.borderCard{
+
+.borderCard {
      column-gap: 30px;
      border: 1px;
      border-style: groove;
@@ -109,9 +112,8 @@
      border-bottom: none;
      border-top: outset;
      padding: 5px;
-     /* border-top: 1px solid var(--br_ddd); */
      box-shadow: 2px;
      box-shadow: 2px px 2px -3px;
      padding: 10px 0;
      text-align: center;
- }
+}
