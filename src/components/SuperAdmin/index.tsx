@@ -29,6 +29,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "../layouts/Navbar/navbar";
 import FormSubmission from "./formSubmission";
+import CandidateList from "./candidateList";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -153,6 +154,8 @@ const SuperAdmin = () => {
               <FormCreation idValue={id} />
             ) : id === 5 ? (
               <FormSubmission />
+            ) : id === 7 ? (
+              <CandidateList />
             ) : (
               // <Dashboard idValue={id} />
               // <FormCreation />
