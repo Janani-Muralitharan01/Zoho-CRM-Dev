@@ -83,7 +83,7 @@ const SignUp = () => {
             </span>
 
             <p className="text-2xl text-50">Who is Using?</p>
-            <div className="flex gap ">
+            <div className="flexD gap ">
               <div className="field-radiobutton radioButtonorder">
                 <RadioButton
                   inputId="Human Resources"

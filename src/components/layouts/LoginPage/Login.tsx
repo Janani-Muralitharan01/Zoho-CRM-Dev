@@ -94,8 +94,8 @@ const Login = () => {
                   Lorem ipsum is a pseudo-Latin text used in web design
                 </span>
 
-                <p className="text-2xl text-50 flex">Who is Using?</p>
-                <div className="flex gap ">
+                <p className="text-2xl text-50 flexD">Who is Using?</p>
+                <div className="flexD gap ">
                   <div className="field-radiobutton radioButtonorder">
                     <RadioButton
                       inputId="Human Resources"

@@ -16,6 +16,9 @@ const FormCreation = (props: any) => {
       <FormSideBar />
       <FormDropArea />
     </div>
+
+
+
   );
 };
 export default FormCreation;

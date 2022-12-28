@@ -49,7 +49,7 @@ const CreateRecrutierTable = () => {
           />
         </div>
       </div>
-      <div className=" ">
+      <div className=" w-11">
         <DataTable value={products} responsiveLayout="scroll">
           <Column field="code" header="Sno"></Column>
           <Column field="name" header="Name"></Column>
