@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
+import { logOut } from "../../../features/Auth/logOut";
+import { useAppDispatch } from "../../../app/hooks";
 
 const NavBar = () => {
   const [sidebar, setSidebar] = useState(false);
@@ -19,6 +21,7 @@ const NavBar = () => {
   const toast: any = useRef(null);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   function handlerSiebarOptionOne() {
     setSidebar(!sidebar);
   }
@@ -96,23 +99,18 @@ const NavBar = () => {
               header: "Log Out Confirmation",
               icon: "pi pi-info-circle",
 
-              accept: () => {
-                // localStorage.clear();
-                Cookies.remove("token");
-                Cookies.remove("access_token");
-                toast.current.show({
-                  severity: "info",
-                  summary: "Confirmed",
-                  detail: "You have accepted",
-                  life: 3000,
-                });
-                navigate("/");
+              accept: async () => {
+                let res: any = await dispatch(logOut());
+                if (res.payload.status === "success") {
+                  Cookies.remove("token");
+                  Cookies.remove("access_token");
+                  navigate("/");
+                }
               },
             });
           }}
         >
-          {" "}
-          LogOut{" "}
+          LogOut
         </button>
         <button className="buttonStyle font-normal"> Cancel </button>
         <button className="buttonStyle font-normal"> Save and Close </button>
