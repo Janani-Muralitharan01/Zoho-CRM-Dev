@@ -1,11 +1,7 @@
 .p-component {
   white-space: nowrap;
 }
-.p-paginator .p-dropdown {
-  /* margin-left: 0.5rem; */
-  height: 2rem !important; 
-  
-}
+
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
   background: #163fc3 !important;
   border-color: #000000 !important;
@@ -21,11 +17,16 @@
   transition: box-shadow 0.2s;
   border-radius: 11% !important;
 }
-@media only screen and (min-width: 1200px) {
-  .p-paginator .p-dropdown {
-    /* margin-left: 0.5rem; */
-    height: 2rem !important; 
-    margin-left: 457px !important;
-  }
-
+.p-paginator {
+  display: flex !important;
+  justify-content: start !important;
+  position: relative;
+}
+.p-paginator .p-dropdown {
+  position: absolute;
+  right: 0;
+}
+.p-dropdown-label {
+  display: flex !important;
+  align-items: center !important;
 }

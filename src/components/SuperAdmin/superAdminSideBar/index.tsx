@@ -108,7 +108,7 @@ const SuperAdminSideBar = (props: any) => {
             <div>Status</div>
           </section>
         </div>
-        <div>
+        <div className="mt-6">
           <section
             className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
             onClick={(e: any) => props.handleClick(2)}
