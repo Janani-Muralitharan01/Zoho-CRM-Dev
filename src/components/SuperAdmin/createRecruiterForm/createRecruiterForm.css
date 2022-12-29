@@ -1,7 +1,6 @@
 .UploadButton {
     display: flex;
-    margin-left: 226px;
-    margin-top: -94px;
+   height: 38px;;
     padding: 9px;
     color: darkslategrey;
     border: 2px solid lightgrey;
@@ -10,7 +9,7 @@
 
 .RequirtersGrid {
     display: grid;
-    grid-template-columns: auto auto;
+    /* grid-template-columns: auto auto; */
     gap: 20px;
 }
 
@@ -22,10 +21,20 @@
 }
 
 .backgroundStyle {
-    border: 1px solid;
+    border: 1px solid #CCCCCC;
+    width: 72%;
     padding: 10px;
-    box-shadow: 1px 2px 5px #888888;
+    /* box-shadow: 1px 2px 5px #888888; */
+    height: 106%;
+    border-radius: 10px;
 
+}
+.buttonbg{
+
+padding: 10px 24px;
+gap: 10px;
+color: black;
+border-radius: 10px;
 }
 @media only screen and (max-width: 750px){
     .RequirtersGrid {
