@@ -27,9 +27,10 @@ import {
   dragAndDropValueSuperAdmin,
 } from "../../features/counter/dragAndDrop";
 import { useSelector, useDispatch } from "react-redux";
-import NavBar from "../layouts/Navbar/navbar";
+// import NavBar from "../layouts/Navbar/navbar";
 import FormSubmission from "./formSubmission";
 import CandidateList from "./candidateList";
+import NavBar from "./navBar";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -141,6 +142,7 @@ const SuperAdmin = () => {
           }
         }}
       >
+        <NavBar />
         <div className="layout h-full">
           <div className="sideContent">
             <SuperAdminSideBar handleClick={handleClick} />
