@@ -4,6 +4,7 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
+import Profile from "../../../assets/profile.png";
 
 const CreateRecrutierTable = () => {
   const [selectedCity1, setSelectedCity1] = useState(null);
@@ -28,6 +29,356 @@ const CreateRecrutierTable = () => {
       phone: "99999999",
       actions: "...",
     },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 2,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
+    {
+      sno: 1,
+      name: "Recruiters",
+      designation: "developer",
+      gender: "male",
+      dob: "23.4.9999",
+      email: "test@gmail.com",
+      phone: "99999999",
+      actions: "...",
+    },
   ]);
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
@@ -39,6 +390,15 @@ const CreateRecrutierTable = () => {
     { name: "Istanbul", code: "IST" },
     { name: "Paris", code: "PRS" },
   ];
+  const countryBodyTemplate = (rowData: any) => {
+    console.log(rowData, "rowData");
+    return (
+      <React.Fragment>
+        <img alt="flag" src={Profile} width={30} />
+        <span className="image-text mb-2 flex">{rowData.name}</span>
+      </React.Fragment>
+    );
+  };
 
   return (
     <div className="mx-5 my-3">
@@ -46,9 +406,17 @@ const CreateRecrutierTable = () => {
         <h2 className=" "> Recrutier</h2>
         <Button label="Add New Recruiter" />
       </div>
-      <DataTable value={products} responsiveLayout="scroll">
+      {/* <div className="card"> */}
+      <DataTable
+        value={products}
+        paginator
+        responsiveLayout="scroll"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+        rows={10}
+        rowsPerPageOptions={[10, 20, 50]}
+      >
         <Column field="sno" header="S.No"></Column>
-        <Column field="name" header="Name"></Column>
+        <Column field="name" body={countryBodyTemplate} header="Name"></Column>
         <Column field="designation" header="Designation"></Column>
         <Column field="gender" header="Gender"></Column>
         <Column field="dob" header="Date of Birth"></Column>
