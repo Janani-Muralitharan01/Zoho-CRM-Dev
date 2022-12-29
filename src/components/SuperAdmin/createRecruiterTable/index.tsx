@@ -41,12 +41,11 @@ const CreateRecrutierTable = () => {
   ];
 
   return (
-    <div className="m-3">
+    <div className="mx-5 my-3">
       <div className="flex justify-content-between align-items-center">
         <h2 className=" "> Recrutier</h2>
         <Button label="Add New Recruiter" />
       </div>
-      {/* <div className="card"> */}
       <DataTable value={products} responsiveLayout="scroll">
         <Column field="sno" header="S.No"></Column>
         <Column field="name" header="Name"></Column>
@@ -57,7 +56,6 @@ const CreateRecrutierTable = () => {
         <Column field="phone" header="Phone Number"></Column>
         <Column field="actions" header="Actions"></Column>
       </DataTable>
-      {/* </div> */}
     </div>
   );
 };
