@@ -10,6 +10,7 @@ import { AuthRoute } from "../src/components/AuthRoute/AuthRoute";
 import SuperAdmin from "./components/SuperAdmin";
 import CreateRecruiterForm from "./components/SuperAdmin/createRecruiterForm/index";
 
+
 function App() {
   return (
     <Routes>
@@ -21,6 +22,7 @@ function App() {
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<SignUp />} />
+      <Route path="/CreateRecruiterForm" element={<CreateRecruiterForm/>}/>
 
       {/* <DragDropContext
         onDragEnd={(result) => {
