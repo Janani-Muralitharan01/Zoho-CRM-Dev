@@ -56,7 +56,7 @@ const SuperAdminSideBar = (props: any) => {
             <img src={Recruiter} width={16} height={16} className="mr-2 ml-4" />
             <div>Recruiters</div>
           </section>
-          <section className="ml-4 mt-5 super_Admin_Sidebar_Recruiter">
+          <section className="ml-4 mt-3 super_Admin_Sidebar_Recruiter">
             Candidate
           </section>
           <section
@@ -73,7 +73,7 @@ const SuperAdminSideBar = (props: any) => {
             <img src={Contact} width={16} height={16} className="mr-2 ml-4" />
             <div>Candidate</div>
           </section>
-          <section className="ml-4 mt-5 super_Admin_Sidebar_Recruiter">
+          <section className="ml-4 mt-3 super_Admin_Sidebar_Recruiter">
             Form
           </section>
           <section
@@ -90,7 +90,7 @@ const SuperAdminSideBar = (props: any) => {
             <img src={Contact} width={16} height={16} className="mr-2 ml-4" />
             <div>Form Submission</div>
           </section>
-          <section className="ml-4 mt-5 super_Admin_Sidebar_Recruiter">
+          <section className="ml-4 mt-3 super_Admin_Sidebar_Recruiter">
             Schedules
           </section>
           <section
