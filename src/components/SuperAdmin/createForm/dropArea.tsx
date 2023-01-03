@@ -55,6 +55,7 @@ const DropArea = () => {
     { name: "document", code: "NY" },
   ];
   const cities = [{ name: "Admistrator", code: "NY" }];
+  
   return (
     <div className="">
       <div className="FormDiv1">
@@ -72,24 +73,25 @@ const DropArea = () => {
                         >
                           {(provided, snapshot) => (
                             <div
-                              className=" px-2 mt-3"
+                              className=" px-2 mt-3 ml-8 mr-8"
                               ref={provided.innerRef}
                               {...provided.draggableProps}
                               style={provided.draggableProps.style}
                               {...provided.dragHandleProps}
                             >
-                              <section className="grey py-2">
+                              <section className="grey py-2 font-semibold" style={{color: '#333333'}}>
                                 {item.subName}
                               </section>
                               <div className=" py-1">
                                 <input
                                   type="text"
                                   name="names"
+                                  style={{    height: '44px' ,border: '1px solid lightgrey',color: '#8083A3'}}
                                   value={item.names}
                                   onChange={(e) => {
                                     handleChange(e, index);
                                   }}
-                                  className="h-2rem w-30rem my-auto border-none text-yellow-800 p-3"
+                                  className=" w-30rem my-auto border-round-md  p-3"
                                 />
                                 {/* <section className="grey py-2">
                                   {item.subName}
@@ -120,9 +122,9 @@ const DropArea = () => {
         ></Button>
       </div> */}
 
-      <div className="flex  justify-content-end">
-        <Button label="Cancel" className="p-button-secondary mr-4" />
-        <Button label="Save" />
+      <div className="flex  justify-content-end mt-4 mb-3 mr-5">
+        <Button label="Cancel" className="surface-300 border-300 text-color mr-5"  />
+        <Button label="Save" className="bg-primary" />
       </div>
     </div>
   );

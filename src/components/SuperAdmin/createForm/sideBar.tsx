@@ -8,8 +8,9 @@ import {
 import "./CreateForm.css";
 
 const SideBar = () => {
+  
   return (
-    <div className="surface-500 overflow-y-auto  mt-2 border-round-3xl sideBar_main">
+    <div className="surface-500 overflow-y-auto  mt-2 border-round-xl  border-round-right-lg sideBar_main">
       <Droppable droppableId="CHECKSUPERDRAGITEMS" isDropDisabled={true}>
         {(provided, snapshot) => (
           <div ref={provided.innerRef} className="text-blue-500 ">
@@ -25,7 +26,7 @@ const SideBar = () => {
                       className="rectanglebox2 "
                     >
                       <img src={item.icon} width={20} height={20} />
-                      <div className="ml-2">{item.names}</div>
+                      <div className="ml-3">{item.names}</div>
                     </div>
                     <div className="sideBar_bottom_line"></div>
 

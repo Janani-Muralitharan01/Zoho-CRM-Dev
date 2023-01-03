@@ -14,6 +14,10 @@ const TopBars = () => {
         <img src={Edit} width={14} height={14} />
         <p className="ml-1">Edit</p>
       </div>
+      <div className="flex align-items-center mx-5">
+        <img src={Actions} width={14} height={14} />
+        <p className="ml-1">Create</p>
+      </div>
 
       <div className="flex align-items-center mr-5">
         <img src={Actions} width={14} height={14} />

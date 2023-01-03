@@ -8,8 +8,8 @@ const CreateForm = () => {
   return (
     <div className="mx-3">
       <div className="flex align-items-center justify-content-start">
-        <img src={Arrow} width={15} height={15} />
-        <p className="create_form_main_head ml-2">Create Form</p>
+        
+        <h2 className="create_form_main_head ml-2">Create Form</h2>
       </div>
       <TopBars />
       <div className="flex mt-3 create_form_main">
