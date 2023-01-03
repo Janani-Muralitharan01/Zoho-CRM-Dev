@@ -183,26 +183,26 @@ export const COMPLETE = [
     subName: "Created By",
     id: uuidv4(),
   },
-  {
-    names: "Secondary Email",
-    subName: "Secondary Email",
-    id: uuidv4(),
-  },
-  {
-    names: "Email Opt Out",
-    subName: "Email Opt Out",
-    id: uuidv4(),
-  },
-  {
-    names: "Email",
-    subName: "Email",
-    id: uuidv4(),
-  },
-  {
-    names: "Modified By",
-    subName: "Modified By",
-    id: uuidv4(),
-  },
+  // {
+  //   names: "Secondary Email",
+  //   subName: "Secondary Email",
+  //   id: uuidv4(),
+  // },
+  // {
+  //   names: "Email Opt Out",
+  //   subName: "Email Opt Out",
+  //   id: uuidv4(),
+  // },
+  // {
+  //   names: "Email",
+  //   subName: "Email",
+  //   id: uuidv4(),
+  // },
+  // {
+  //   names: "Modified By",
+  //   subName: "Modified By",
+  //   id: uuidv4(),
+  // },
 ];
 
 export const QUICKCREATECOMPLETE = [

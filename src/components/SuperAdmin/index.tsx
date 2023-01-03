@@ -31,6 +31,7 @@ import { useSelector, useDispatch } from "react-redux";
 import FormSubmission from "./formSubmission";
 import CandidateList from "./candidateList";
 import NavBar from "./navBar";
+import CreateForm from "./createForm";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -149,17 +150,18 @@ const SuperAdmin = () => {
           </div>
           <div className="mainContent">
             {id === 1 ? (
-              <CreateRecrutierTable />
-            ) : id === 2 ? (
               <CreateRecruiterForm />
+            ) : id === 2 ? (
+              <CreateRecrutierTable />
             ) : id === 4 ? (
               <FormCreation idValue={id} />
             ) : id === 5 ? (
-              <FormSubmission />
-            ) : id === 7 ? (
+              <CreateForm />
+            ) : // <FormCreation />
+            id === 7 ? (
               <CandidateList />
             ) : (
-              <CreateRecrutierTable />
+              <CreateRecruiterForm />
             )}
           </div>
         </div>

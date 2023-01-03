@@ -1,0 +1,56 @@
+.rectanglebox2 {
+  display: flex !important;
+  /* width: 135px !important; */
+  /* height: 8px; */
+  background-color: #f2f2f2;
+  color: #333333;
+  justify-content: start;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 400;
+  font-weight: normal;
+  padding-inline: 30px;
+  padding-block: 8px;
+}
+.FormDropAreaMain1 {
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.FormDropAreaCard1 {
+  width: 300px;
+}
+.FormDiv1 {
+  height: 450px;
+  overflow: auto;
+}
+
+.topBanners_main {
+  background-color: #ffffff;
+  box-shadow: 0px 1px 0px rgba(18, 32, 59, 0.09);
+  height: 60px;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 18px;
+  font-size: normal;
+  color: #8083a3;
+  border-radius: 5px;
+}
+
+.create_form_main {
+  background-color: #ffffff;
+}
+.create_form_main_head {
+  font-size: 16px;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sideBar_main {
+  height: 500px;
+  width: 250px;
+}
+
+.sideBar_bottom_line {
+  border: 1px solid #ffffff;
+}
