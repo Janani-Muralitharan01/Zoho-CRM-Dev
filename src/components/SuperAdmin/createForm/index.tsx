@@ -22,7 +22,10 @@ const CreateForm = () => {
       </div>
       <div className="flex mt-3 create_form_main">
         <SideBar />
-        {show == "addinputs" ? <AddInputs /> : <DropArea />}
+        <div className="create_form_main_division">
+          {" "}
+          {show == "addinputs" ? <AddInputs /> : <DropArea />}
+        </div>
       </div>
     </div>
   );

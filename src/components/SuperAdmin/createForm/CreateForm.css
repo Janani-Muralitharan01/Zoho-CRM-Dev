@@ -51,16 +51,20 @@
 
 .sideBar_main {
   height: 445px;
-    width: 327px;
-    margin-left: 13px;
+  width: 30%;
+  margin-left: 13px;
 }
 
 .sideBar_bottom_line {
   border: 1px solid #ffffff;
 }
-.Add_input_page{
+.Add_input_page {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.create_form_main_division {
+  width: 70% !important;
 }
