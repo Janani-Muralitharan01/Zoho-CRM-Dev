@@ -41,6 +41,7 @@ const SignUp = () => {
       initialValues,
       validationSchema: signUpSchema,
       onSubmit: async (values, action) => {
+        console.log("hrrrrrr")
         let val: object = {
           name: values.name,
           email: values.email,
