@@ -57,6 +57,7 @@ const DropArea = () => {
   const cities = [{ name: "Admistrator", code: "NY" }];
   
   return (
+    
     <div className="">
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
