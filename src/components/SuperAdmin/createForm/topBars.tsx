@@ -3,14 +3,14 @@ import Edit from "../../../assets/edit.png";
 import Add from "../../../assets/add.png";
 import Actions from "../../../assets/actions.png";
 
-const TopBars = () => {
+const TopBars = ( props:any) => {
   return (
     <div className="topBanners_main flex">
-      <div className="flex align-items-center">
+      <div className="flex align-items-center" >
         <img src={Add} width={14} height={14} />
-        <p className="ml-1"> Add Inputs</p>
+        <p className="ml-1" onClick={props.onclick("addinputs")}> Add Inputs</p>
       </div>
-      <div className="flex align-items-center mx-5">
+      <div className="flex align-items-center mx-5" >
         <img src={Edit} width={14} height={14} />
         <p className="ml-1">Edit</p>
       </div>

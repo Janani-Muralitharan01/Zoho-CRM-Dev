@@ -58,3 +58,9 @@
 .sideBar_bottom_line {
   border: 1px solid #ffffff;
 }
+.Add_input_page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
