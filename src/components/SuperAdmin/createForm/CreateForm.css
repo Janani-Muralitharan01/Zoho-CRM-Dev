@@ -58,13 +58,13 @@
 .sideBar_bottom_line {
   border: 1px solid #ffffff;
 }
-.Add_input_page {
+/* .Add_input_page {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 100%;
-}
+} */
 
 .create_form_main_division {
   width: 70% !important;
