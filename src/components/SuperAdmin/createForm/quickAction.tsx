@@ -1,17 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
-import { Calendar } from "primereact/calendar";
+import { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { Calendar } from 'primereact/calendar';
 
-const DropArea = () => {
+const QuickAction = () => {
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
   const [sidebar, setSidebar] = useState(false);
-  const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
-  const [selectedCity1, setSelectedCity1] = useState(null);
-
+//   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
+//   const [selectedCity1, setSelectedCity1] = useState(null);
+ console.log(count,"count")
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
@@ -19,6 +19,7 @@ const DropArea = () => {
   const handleChange = (e: any, i: number) => {
     let index: any;
     let inputName: any[] = [];
+    // eslint-disable-next-line array-callback-return
     Object.keys(uidv4 || {}).map((x: any) => {
       index = x;
     });
@@ -50,61 +51,11 @@ const DropArea = () => {
     // }
     setSidebar(!sidebar);
   }
-  const onCityChange = (e: any) => {
-    setSelectedCity1(e.value);
-  };
-  const fileUpload = [
-    { name: "Upload File", code: "NY" },
-    { name: "document", code: "NY" },
-  ];
-  const cities = [{ name: "Admistrator", code: "NY" }];
-  // const onCityChange = (e: any) => {
-  //   setSelectedCity1(e.value);
-  // };
-  // const fileUpload = [
-  //   { name: 'Upload File', code: 'NY' },
-  //   { name: 'document', code: 'NY' },
-  // ];
-  // const cities = [{ name: 'Admistrator', code: 'NY' }];
+
 
   return (
     <div className="">
-      <div className="ml-8 pl-2">
-        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
-          Form Name
-        </div>
-        <input
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm"
-          p-3
-          style={{
-            height: "52px",
-            border: "1px solid lightgrey",
-            color: "#333333",
-            background: "#CCCCCC",
-          }}
-        />
-      </div>
-      <div className="ml-8 pl-2">
-        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
-          Submit Form Date
-        </div>
-        <Calendar
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm"
-          value={date}
-          onChange={(e) => setDate(e.value)}
-          dateFormat="dd-mm-yy"
-          p-3
-          disabled
-          style={{
-            height: "52px",
-            border: "1px solid lightgrey",
-            color: "#333333",
-            background: "#CCCCCC",
-          }}
-        />
-      </div>
+     
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
@@ -127,17 +78,20 @@ const DropArea = () => {
                                 style={provided.draggableProps.style}
                                 {...provided.dragHandleProps}
                               >
-                                {/* <section className="grey py-2 font-semibold" style={{color: '#333333'}}>
-                                {item.subName}
-                              </section> */}
+                                <section
+                                  className="grey py-2 font-semibold"
+                                  style={{ color: '#333333' }}
+                                >
+                                  {item.subName}
+                                </section>
                                 <div className=" py-1">
                                   <input
                                     type="text"
                                     name="names"
                                     style={{
-                                      height: "44px",
-                                      border: "1px solid lightgrey",
-                                      color: "#8083A3",
+                                      height: '44px',
+                                      border: '1px solid lightgrey',
+                                      color: '#8083A3',
                                     }}
                                     value={item.names}
                                     onChange={(e) => {
@@ -145,12 +99,9 @@ const DropArea = () => {
                                     }}
                                     className=" w-30rem my-auto border-round-md  p-3"
                                   />
-                                  <section
-                                    className="grey py-2 font-semibold"
-                                    style={{ color: "#333333" }}
-                                  >
-                                    {item.subName}
-                                  </section>
+                                  {/* <section className="grey py-2">
+                                  {item.subName}
+                                </section> */}
                                 </div>
                               </div>
                             )}
@@ -167,17 +118,6 @@ const DropArea = () => {
           );
         })}
       </div>
-
-      {/* <div className="mt-7 flex text-left justify-content-end">
-        <Button label="Cancel" className="p-button-secondary" />
-        <Button label="Save" className="p-button-secondary ml-2" />
-        <Button
-          label="Preview"
-          className="p-button-secondary ml-2"
-          onClick={handlerClick}
-        ></Button>
-      </div> */}
-
       <div className="flex  justify-content-end mt-2 mb-3 mr-5">
         <Button
           label="Cancel"
@@ -189,4 +129,4 @@ const DropArea = () => {
   );
 };
 
-export default React.memo(DropArea);
+export default QuickAction;
