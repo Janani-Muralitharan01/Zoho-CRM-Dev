@@ -96,36 +96,37 @@ const TopBars = (props: any) => {
                                   <span className="p-input-icon-right ">
                                     <i className="pi pi-lock mt-0" />
                                     <InputText
+                                    value={item.names}
                                       className="mt-3"
-                                      value={"john"}
+                                      
                                       disabled
                                     />
                                   </span>
                                 ) : item.names === "Lookup" ? (
                                   <span className="p-input-icon-right ">
                                     <i className="pi pi-euro mt-0" />
-                                    <InputText className="mt-3" disabled />
+                                    <InputText className="mt-3" disabled value={item.names}/>
                                   </span>
                                 ) : item.names === "Currency" ? (
                                   <span className="p-input-icon-left">
                                     <i className="pi pi-dollar mt-0" />
-                                    <InputText className="mt-3 " />
+                                    <InputText className="mt-3 " disabled value={item.names}/>
                                   </span>
                                 ) : item.names === "Percent" ? (
                                   <p>
-                                    <InputText />
+                                    <InputText value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "Untitled Name" ? (
                                   <p>
-                                    <InputText />
+                                    <InputText value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "Created By" ? (
                                   <p>
-                                    <InputText />
+                                    <InputText value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "Secondary Email" ? (
                                   <p>
-                                    <InputText disabled />
+                                    <InputText disabled value={item.names} />
                                   </p>
                                 ) : item.names === "Image Upload" ? (
                                   <p>
@@ -136,7 +137,7 @@ const TopBars = (props: any) => {
                                   </p>
                                 ) : item.names === "Email" ? (
                                   <p>
-                                    <InputText placeholder="Enter your email" />
+                                    <InputText placeholder="Enter your email" value={item.names}/>
                                   </p>
                                 ) : item.names === "File Upload" ? (
                                   <p>
@@ -152,46 +153,49 @@ const TopBars = (props: any) => {
                                   </p>
                                 ) : item.names === "Email Opt Out" ? (
                                   <p>
-                                    <Checkbox />
+                                    <Checkbox value={item.names} />
                                   </p>
                                 ) : item.names === "Modified By" ? (
                                   <p>
-                                    <InputText disabled />
+                                    <InputText disabled value={item.names} />
                                   </p>
                                 ) : item.names === "Date/Time" ? (
                                   <p>
                                     <Calendar
+                                    value={item.names}
                                       showTime
+                                      disabled
                                       showSeconds
                                       placeholder="Enter the date"
                                     />
                                   </p>
                                 ) : item.names === "Decimal" ? (
                                   <p>
-                                    <InputText />
+                                    <InputText value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "URL" ? (
                                   <p>
-                                    <InputText />
+                                    <InputText  value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "Multi-Line" ? (
                                   <p>
-                                    <InputTextarea />
+                                    <InputTextarea  value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "Date" ? (
                                   <p>
-                                    <Calendar placeholder="DD/MM/YY   " />
+                                    <Calendar value={item.names} placeholder="DD/MM/YY   " />
                                   </p>
                                 ) : item.names === "Checkbox" ? (
                                   <span className="p-input-icon-right ">
                                     <Checkbox
+                                    value={item.names}
                                       style={{
                                         position: "relative",
                                         left: "30px",
                                         bottom: "4px",
                                       }}
                                     />
-                                    <InputText className="mt-3" />
+                                    <InputText value={item.names} className="mt-3" disabled/>
                                   </span>
                                 ) : item.names === "Phone" ? (
                                   <p>
@@ -199,16 +203,17 @@ const TopBars = (props: any) => {
                                     <InputMask
                                       id="phone"
                                       mask="99-99-99-99-99"
+                                      disabled
                                       placeholder="(999) 999-9999"
-                                    ></InputMask>
+                                    ></InputMask  >
                                   </p>
                                 ) : item.names === "Long integer" ? (
                                   <p>
-                                    <InputText />
+                                    <InputText  value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "Number" ? (
                                   <p>
-                                    <InputText />
+                                    <InputText  value={item.names} disabled/>
                                   </p>
                                 ) : item.names === "User" ? (
                                   <span className="p-input-icon-right ">
@@ -223,11 +228,12 @@ const TopBars = (props: any) => {
                                     /> */}
                                   </span>
                                 ) : (
-                                  <input
+                                  <InputText
                                     type="text"
                                     name="names"
                                     value={item.names}
                                     onChange={(e) => {}}
+                                    disabled
                                     className="h-2rem my-auto"
                                   />
                                 )}

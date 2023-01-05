@@ -2,7 +2,7 @@ import SideBar from "./sideBar";
 import DropArea from "./dropArea";
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
-import QuickAction from "./quickAction"
+import QuickAction from "./quickAction";
 import Arrow from "../../../assets/arrow.png";
 
 import "./CreateForm.css";

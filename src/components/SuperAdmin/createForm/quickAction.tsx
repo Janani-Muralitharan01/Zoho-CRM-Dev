@@ -51,51 +51,11 @@ const QuickAction = () => {
     // }
     setSidebar(!sidebar);
   }
-  // const onCityChange = (e: any) => {
-  //   setSelectedCity1(e.value);
-  // };
-  // const fileUpload = [
-  //   { name: 'Upload File', code: 'NY' },
-  //   { name: 'document', code: 'NY' },
-  // ];
-  // const cities = [{ name: 'Admistrator', code: 'NY' }];
+
 
   return (
     <div className="">
-      {/* <div className="ml-8 pl-2">
-        <div className="grey py-2 font-semibold" style={{ color: '#333333' }}>
-          Form Name
-        </div>
-        <input
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm"
-          p-3
-          style={{
-            height: '52px',
-            border: '1px solid lightgrey',
-            color: '#333333',
-            background: '#CCCCCC',
-          }}
-        />
-      </div> */}
-      {/* <div className="ml-8 pl-2">
-        <div className="grey py-2 font-semibold" style={{ color: '#333333' }}>
-          Submit Name
-        </div>
-        <Calendar
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm"
-          value={date} onChange={(e) => setDate(e.value)} dateFormat="dd-mm-yy"
-          p-3
-          disabled
-          style={{
-            height: '52px',
-            border: '1px solid lightgrey',
-            color: '#333333',
-            background: '#CCCCCC',
-          }}
-        />
-      </div> */}
+     
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
@@ -158,17 +118,6 @@ const QuickAction = () => {
           );
         })}
       </div>
-
-      {/* <div className="mt-7 flex text-left justify-content-end">
-        <Button label="Cancel" className="p-button-secondary" />
-        <Button label="Save" className="p-button-secondary ml-2" />
-        <Button
-          label="Preview"
-          className="p-button-secondary ml-2"
-          onClick={handlerClick}
-        ></Button>
-      </div> */}
-
       <div className="flex  justify-content-end mt-2 mb-3 mr-5">
         <Button
           label="Cancel"

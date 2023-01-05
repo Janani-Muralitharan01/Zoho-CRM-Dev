@@ -79,7 +79,7 @@ const DropArea = () => {
       </div>
       <div className="ml-8 pl-2">
         <div className="grey py-2 font-semibold" style={{ color: '#333333' }}>
-          Submit Name
+          Submit Form Date
         </div>
         <Calendar
           placeholder="Untiled form"
