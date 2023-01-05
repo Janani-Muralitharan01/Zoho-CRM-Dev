@@ -2,15 +2,15 @@ import SideBar from "./sideBar";
 import DropArea from "./dropArea";
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
+import QuickAction from "./quickAction"
 import Arrow from "../../../assets/arrow.png";
 
 import "./CreateForm.css";
 import { useState } from "react";
 
 const CreateForm = () => {
-  const [show, setshow] = useState("");
-  const [active, setActive] = useState(false);
-  const [activeEdit, setactiveEdit] = useState(false);
+  
+ 
   const [page, setpage] = useState(<DropArea />);
   const items:any = [
     {label: 'Back', icon: 'pi pi-fw pi-arrow-circle-left'},
@@ -34,6 +34,11 @@ const CreateForm = () => {
             get = <AddInputs />
         
         }
+        else if(e.index == 4){
+          
+          get = <QuickAction/>
+      
+      }
         else{
         get = <DropArea />
         }

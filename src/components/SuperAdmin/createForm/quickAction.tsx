@@ -5,13 +5,13 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Calendar } from 'primereact/calendar';
 
-const DropArea = () => {
+const QuickAction = () => {
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
   const [sidebar, setSidebar] = useState(false);
-  const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
-  const [selectedCity1, setSelectedCity1] = useState(null);
-
+//   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
+//   const [selectedCity1, setSelectedCity1] = useState(null);
+ console.log(count,"count")
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
@@ -19,6 +19,7 @@ const DropArea = () => {
   const handleChange = (e: any, i: number) => {
     let index: any;
     let inputName: any[] = [];
+    // eslint-disable-next-line array-callback-return
     Object.keys(uidv4 || {}).map((x: any) => {
       index = x;
     });
@@ -61,7 +62,7 @@ const DropArea = () => {
 
   return (
     <div className="">
-      <div className="ml-8 pl-2">
+      {/* <div className="ml-8 pl-2">
         <div className="grey py-2 font-semibold" style={{ color: '#333333' }}>
           Form Name
         </div>
@@ -76,8 +77,8 @@ const DropArea = () => {
             background: '#CCCCCC',
           }}
         />
-      </div>
-      <div className="ml-8 pl-2">
+      </div> */}
+      {/* <div className="ml-8 pl-2">
         <div className="grey py-2 font-semibold" style={{ color: '#333333' }}>
           Submit Name
         </div>
@@ -94,7 +95,7 @@ const DropArea = () => {
             background: '#CCCCCC',
           }}
         />
-      </div>
+      </div> */}
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
@@ -179,4 +180,4 @@ const DropArea = () => {
   );
 };
 
-export default DropArea;
+export default QuickAction;
