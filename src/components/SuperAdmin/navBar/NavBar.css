@@ -1,7 +1,7 @@
 .NavBar_Main {
-  height: 60px;
+  height: 10vh;
   width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0;
   background-color: #ffffff;
   z-index: 1001;

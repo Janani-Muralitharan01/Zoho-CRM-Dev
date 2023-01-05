@@ -3,32 +3,65 @@ import DropArea from "./dropArea";
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
 import Arrow from "../../../assets/arrow.png";
+
 import "./CreateForm.css";
 import { useState } from "react";
 
 const CreateForm = () => {
   const [show, setshow] = useState("");
+  const [active, setActive] = useState(false);
+  const [activeEdit, setactiveEdit] = useState(false);
+  const [page, setpage] = useState(<DropArea />);
+  const items:any = [
+    {label: 'Back', icon: 'pi pi-fw pi-arrow-circle-left'},
+    {label: 'Add Inputs', icon: 'pi pi-fw pi-plus'},
+    {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
+    {label: 'Create', icon: 'pi pi-fw pi-cog'},
+    {label: 'Quick Actions', icon: 'pi pi-fw pi-cog'},
+    {label: 'Preview', icon: 'pi pi-fw pi-cog'}
+];
 
-  const Atclick = (data: any) => {
-    setshow(data);
-  };
+  const pageClick = (e:any) =>{
+     let get:any;
+      if(e.index == 0){
+       
+          get = <DropArea />
+        
+        
+        }
+        else if(e.index == 1){
+          
+            get = <AddInputs />
+        
+        }
+        else{
+        get = <DropArea />
+        }
+        setpage(get)
+
+    //  })
+     
+     
+    
+  }
   return (
     <div className="mx-3">
       <div className="flex align-items-center justify-content-start">
         <h2 className="create_form_main_head ml-2">Create Form</h2>
       </div>
       <div>
-        <TopBars onclick={Atclick} />
+        <TopBars items={items} pageClick={pageClick}/>
       </div>
       <div className="flex mt-3 create_form_main">
         <SideBar />
         <div className="create_form_main_division">
           {" "}
-          {show == "addinputs" ? <AddInputs /> : <DropArea />}
+          {page}
         </div>
       </div>
     </div>
   );
-};
+  }
+
 
 export default CreateForm;

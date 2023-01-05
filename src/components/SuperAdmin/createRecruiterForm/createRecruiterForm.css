@@ -71,6 +71,28 @@ border-radius: 10px;
     color: #8083A3 !important;
     padding: 0.75rem 1.25rem;
 }
+.p-calendar .p-inputtext {
+    flex: 1 1 auto;
+    width: 1%;
+    border-top-style: none !important;
+    border-left-style: none !important;
+    border-right: none !important;
+    background: #FAFAFB;
+}
+.p-calendar .p-inputtext:hover {
+   
+    background: #FAFAFB !important;
+}
+.p-inputtext:enabled:hover {
+    border-color: #121213 !important;
+}
+.p-inputtext:enabled:focus {
+    outline: 0 none;
+    background: #FAFAFB !important;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0.2rem #c7d2fe;
+    /* border-color: #6366F1; */
+}
 
 @media only screen and (max-width: 750px){
     .RequirtersGrid {

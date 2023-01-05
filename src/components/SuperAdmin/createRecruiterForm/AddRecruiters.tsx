@@ -2,11 +2,12 @@ import './createRecruiterForm.css';
 import { useState, useEffect,useRef } from 'react';
 import noavathar from '../../../images/Group.png';
 import { Button } from 'primereact/button';
-
+import Moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
 const AddRecruiters = (props: any) => {
+  const formatDate = (data:any) => Moment(data).format('DD-MM-YYYY')
      const navigate = useNavigate();
      console.log("dd",props)
      var Username =props.Username
@@ -32,7 +33,7 @@ const AddRecruiters = (props: any) => {
         },
         {
           names: 'Date of Birth',
-          subname: Birth,
+          subname: formatDate(Birth),
           id: 3,
         },
         {

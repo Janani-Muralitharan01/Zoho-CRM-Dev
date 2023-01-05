@@ -7,6 +7,8 @@ import { InputText } from 'primereact/inputtext';
 import { useState, useEffect,useRef } from 'react';
 import AddRecruiters from './AddRecruiters'
 import { useFormik } from 'formik';
+import { InputMask } from 'primereact/inputmask';
+
 import * as Yup from 'yup';
 import { Calendar } from 'primereact/calendar';
 const signUpSchema = Yup.object({
@@ -19,16 +21,16 @@ const signUpSchema = Yup.object({
   ),
 });
 const validate = (values: { Username: string | any[]; Designation: string | any[]; email: string; Gender: string | any[];
-  Birth: string | any[];Phone: string | any[]; }) => {
+  Birth: string | any[] | null | Date | Date[] | undefined;Phone: Number | any[]; }) => {
   const errors:any = {};
   if (!values.Username) {
-    errors.Username = 'Please enter Username';
+    errors.Username = 'Please enter your username';
   } else if (values.Username.length > 15) {
     errors.Username = 'Must be 15 characters or less';
   }
 
   if (!values.Designation) {
-    errors.Designation = 'Please enter Designation';
+    errors.Designation = 'Please enter your Designation';
   } else if (values.Designation.length > 20) {
     errors.Designation = 'Must be 20 characters or less';
   }
@@ -45,15 +47,17 @@ const validate = (values: { Username: string | any[]; Designation: string | any[
     errors.Gender = 'Must be 20 characters or less';
   }
   if (!values.Birth) {
-    errors.Birth = 'please enter your Date Of Birth';
-  } else if (values.Birth.length > 20) {
-    errors.Birth = 'Must be 20 characters or less';
+    errors.Birth = 'please enter your D.O.B';
   }
+  //  else if (values.Birth.length > 20) {
+  //   errors.Birth = 'Must be 20 characters or less';
+  // }
   if (!values.Phone) {
     errors.Phone = 'Phone number is Required';
-  } else if (values.Phone.length > 20) {
-    errors.Phone = 'Must be 20 characters or less';
-  }
+  } 
+  // else if (values.Phone.length > 20) {
+  //   errors.Phone = 'Must be 20 characters or less';
+  // }
 
   return errors;
 };
@@ -64,9 +68,10 @@ const CreateRecruiterForm = () => {
   const [Username, setUsername] = useState('');
   const [Designation, setDesignation] = useState('');
   const [Gender, setGender] = useState('');
-  const [Birth, setBirth] = useState('');
+  const [Birth, setBirth] = useState<Date | Date[] | undefined>(undefined);
   const [Email, setEmail] = useState('');
-  const [Phone, setPhone] = useState(''); 
+  const [Phone, setPhone] = useState(0); 
+  
   
   const formik = useFormik({
     initialValues: {
@@ -138,7 +143,7 @@ const CreateRecruiterForm = () => {
          onChange={formik.handleChange}
          value={formik.values.Username}/>
  <label htmlFor="in" className='mr-3'>UserName</label>
- {formik.errors.Username ? <div className='text-red-600'>{formik.errors.Username}</div> : null}
+ {formik.errors.Username ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Username}</div> : null}
 </span>
 <span className="p-float-label">
  <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Designation"
@@ -146,7 +151,7 @@ const CreateRecruiterForm = () => {
          onChange={formik.handleChange}
          value={formik.values.Designation}/>
  <label htmlFor="in">Designation</label>
- {formik.errors.Designation ? <div className='text-red-600'>{formik.errors.Designation}</div> : null}
+ {formik.errors.Designation ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Designation}</div> : null}
 </span>
 <span className="p-float-label">
  <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Gender"
@@ -154,34 +159,41 @@ const CreateRecruiterForm = () => {
          onChange={formik.handleChange}
          value={formik.values.Gender}/>
  <label htmlFor="in">Gender</label>
- {formik.errors.Gender ? <div className='text-red-600'>{formik.errors.Gender}</div> : null}
+ {formik.errors.Gender ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Gender}</div> : null}
 </span>
 <span className="p-float-label">
- <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Birth"
-         type="text"
+ <Calendar id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Birth"
+         
          onChange={formik.handleChange}
-         value={formik.values.Birth}/>
+         value={formik.values.Birth} 
+         placeholder=" "/>
  <label htmlFor="in">Date of Birth</label>
- {formik.errors.Birth ? <div className='text-red-600'>{formik.errors.Birth}</div> : null}
+ {formik.errors.Birth ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Birth}</div> : null}
 </span>
+ {/* <div className="field col-12 md:col-4">
+                        <span className="p-float-label">
+                            <Calendar id="calendar"  name="Birth" value={formik.values.Birth} onChange={formik.handleChange} />
+                            <label htmlFor="calendar">Calendar</label>
+                        </span>
+                    </div> */}
 <span className="p-float-label">
  <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="email"
          type="email"
          onChange={formik.handleChange}
          value={formik.values.email}/>
  <label htmlFor="in">Email Address</label>
- {formik.errors.email ? <div className='text-red-600'>{formik.errors.email}</div> : null}
+ {formik.errors.email ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.email}</div> : null}
 </span>
 <span className="p-float-label">
- <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Phone"
-         type="text"
+ <InputMask  mask="99-99-99-99-99" id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Phone"
+         placeholder="99-99-99-99-99"
          onChange={formik.handleChange}
          value={formik.values.Phone}/>
  <label htmlFor="in">Phone Number</label>
- {formik.errors.Phone ? <div className='text-red-600'>{formik.errors.Phone}</div> : null}
+ {formik.errors.Phone ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Phone}</div> : null}
 </span>
    </div>  </div>
-    <div className="ButtonsEnd mt-5">
+    <div className="ButtonsEnd mt-3">
      <button className="buttonStyle ml-8 " style={{ height: '41px' }}>
        {' '}
        Cancel{' '}

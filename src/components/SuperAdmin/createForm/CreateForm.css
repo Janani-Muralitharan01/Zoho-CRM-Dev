@@ -48,7 +48,28 @@
   font-weight: 700;
   font-style: normal;
 }
-
+.p-tabmenu-nav {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: space-evenly !important;
+  list-style-type: none;
+  flex-wrap: nowrap;
+}
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link:not(.p-disabled):focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 0.2rem #fdfeff !important;
+}
+/* input[type="date" i] {
+  align-items: center;
+  background-color: #333333 !important;
+  display: inline-flex;
+  font-family: monospace;
+  padding-inline-start: 1px;
+  cursor: default;
+  overflow: hidden;
+} */
 .sideBar_main {
   height: 445px;
   width: 30%;
