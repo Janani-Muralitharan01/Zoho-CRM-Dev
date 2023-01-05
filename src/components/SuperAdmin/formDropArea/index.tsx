@@ -12,6 +12,7 @@ import { Dropdown } from "primereact/dropdown";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Calendar } from "primereact/calendar";
 import { InputMask } from "primereact/inputmask";
+import React from "react";
 
 const FormDropArea = (props: any) => {
   const [uidv4, setuidv4] = useState<any>();
@@ -336,4 +337,4 @@ const FormDropArea = (props: any) => {
   );
 };
 
-export default FormDropArea;
+export default React.memo(FormDropArea);

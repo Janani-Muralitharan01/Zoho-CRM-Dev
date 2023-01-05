@@ -1,5 +1,5 @@
 import "./createRecruiterForm.css";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import noavathar from "../../../images/Group.png";
 import { Button } from "primereact/button";
 import Moment from "moment";
@@ -122,4 +122,4 @@ const AddRecruiters = (props: any) => {
   );
 };
 
-export default AddRecruiters;
+export default React.memo(AddRecruiters);

@@ -79,4 +79,4 @@ const CandidateList = () => {
     </div>
   );
 };
-export default CandidateList;
+export default React.memo(CandidateList);

@@ -1,11 +1,12 @@
-import { SIDEBARITEMS } from '../../Constant/const';
+import { SIDEBARITEMS } from "../../Constant/const";
 import {
   DragDropContext,
   Draggable,
   DraggableLocation,
   Droppable,
-} from 'react-beautiful-dnd';
-import './FormSideBar.css';
+} from "react-beautiful-dnd";
+import "./FormSideBar.css";
+import React from "react";
 
 const FormSideBar = (props: any) => {
   return (
@@ -44,4 +45,4 @@ const FormSideBar = (props: any) => {
     </div>
   );
 };
-export default FormSideBar;
+export default React.memo(FormSideBar);

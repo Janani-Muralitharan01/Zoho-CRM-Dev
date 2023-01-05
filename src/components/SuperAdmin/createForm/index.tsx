@@ -3,9 +3,8 @@ import DropArea from "./dropArea";
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
 import Arrow from "../../../assets/arrow.png";
-
 import "./CreateForm.css";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const CreateForm = () => {
   const [show, setshow] = useState("");
@@ -50,4 +49,4 @@ const CreateForm = () => {
   );
 };
 
-export default CreateForm;
+export default React.memo(CreateForm);

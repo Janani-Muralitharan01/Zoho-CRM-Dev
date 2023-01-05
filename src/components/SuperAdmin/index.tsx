@@ -148,26 +148,27 @@ const SuperAdmin = () => {
           <div className="sideContent">
             <SuperAdminSideBar handleClick={handleClick} />
           </div>
-          <div style={{background: '#FAFAFB',height: '100vh'}}>
-          <div className="mainContent">
-            {id === 1 ? (
-              <CreateRecruiterForm />
-            ) : id === 2 ? (
-              <CreateRecrutierTable />
-            ) : id === 4 ? (
-              <FormCreation idValue={id} />
-            ) : id === 5 ? (
-              <CreateForm />
-            ) : // <FormCreation />
-            id === 7 ? (
-              <CandidateList />
-            ) : (
-              <CreateRecruiterForm />
-            )}
-          </div></div>
+          <div style={{ background: "#FAFAFB", height: "100vh" }}>
+            <div className="mainContent">
+              {id === 1 ? (
+                <CreateRecruiterForm />
+              ) : id === 2 ? (
+                <CreateRecrutierTable />
+              ) : id === 4 ? (
+                <FormCreation idValue={id} />
+              ) : id === 5 ? (
+                <CreateForm />
+              ) : // <FormCreation />
+              id === 7 ? (
+                <CandidateList />
+              ) : (
+                <CreateRecruiterForm />
+              )}
+            </div>
+          </div>
         </div>
       </DragDropContext>
     </div>
   );
 };
-export default SuperAdmin;
+export default React.memo(SuperAdmin);

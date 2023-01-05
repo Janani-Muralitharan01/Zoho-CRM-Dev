@@ -4,6 +4,7 @@ import Bell from "../../../assets/Bell.svg";
 import Email from "../../../assets/email.png";
 import Profile from "../../../assets/profile.png";
 import "./NavBar.css";
+import React from "react";
 
 const NavBar = () => {
   return (
@@ -35,4 +36,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default React.memo(NavBar);

@@ -1,3 +1,4 @@
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { COMPLETE } from "../../Constant/const";
 import { useState, useRef, useEffect } from "react";
@@ -38,4 +39,4 @@ const FormSubmission = () => {
   );
 };
 
-export default FormSubmission;
+export default React.memo(FormSubmission);

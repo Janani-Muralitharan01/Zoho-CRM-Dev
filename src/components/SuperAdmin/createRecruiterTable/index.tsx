@@ -56,4 +56,4 @@ const CreateRecrutierTable = () => {
     </div>
   );
 };
-export default CreateRecrutierTable;
+export default React.memo(CreateRecrutierTable);

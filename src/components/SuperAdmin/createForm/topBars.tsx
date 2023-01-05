@@ -3,7 +3,7 @@ import Edit from "../../../assets/edit.png";
 import Add from "../../../assets/add.png";
 import Actions from "../../../assets/actions.png";
 import { Sidebar } from "primereact/sidebar";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
@@ -248,4 +248,4 @@ const TopBars = (props: any) => {
   );
 };
 
-export default TopBars;
+export default React.memo(TopBars);

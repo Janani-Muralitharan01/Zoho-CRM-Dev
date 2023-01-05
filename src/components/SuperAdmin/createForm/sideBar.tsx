@@ -6,9 +6,9 @@ import {
   Droppable,
 } from "react-beautiful-dnd";
 import "./CreateForm.css";
+import React from "react";
 
 const SideBar = () => {
-  
   return (
     <div className="surface-500 overflow-y-auto  mt-2 border-round-xl  border-round-right-lg sideBar_main">
       <Droppable droppableId="CHECKSUPERDRAGITEMS" isDropDisabled={true}>
@@ -47,4 +47,4 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+export default React.memo(SideBar);
