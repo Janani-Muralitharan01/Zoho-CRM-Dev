@@ -13,6 +13,7 @@ import { Button } from "primereact/button";
 import { Checkbox } from "primereact/checkbox";
 import noImages from "../../../images//noimage.jpg";
 import { useSelector, useDispatch } from "react-redux";
+import { TabMenu } from "primereact/tabmenu";
 
 const TopBars = (props: any) => {
   const count: any = useSelector((state) => state);
@@ -29,47 +30,24 @@ const TopBars = (props: any) => {
     setPreviewData(count.dragAndDrop.initialStartDragSuperAdmin);
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
+  // const TopBars = (props: any) => {
+  const [activeIndex, setActiveIndex] = useState(6);
+  const status = (e: any) => {
+    setActiveIndex(e.index);
+    props.pageClick(e);
+    if (e.index === 5) {
+      setPreview(true);
+    }
+  };
+
   return (
-    <>
-      <div className="topBanners_main flex">
-        <div className="flex align-items-center">
-          <img src={Add} width={14} height={14} />
-          <p className="ml-1" onClick={() => props.onclick("addinputs")}>
-            {" "}
-            Add Inputs
-          </p>
-        </div>
-        <div
-          className="flex align-items-center mx-5"
-          onClick={() => props.onclick("edit")}
-        >
-          <img src={Edit} width={14} height={14} />
-          <p className="ml-1">Edit</p>
-        </div>
-        <div
-          className="flex align-items-center mx-5"
-          onClick={() => props.onclick("create")}
-        >
-          <img src={Actions} width={14} height={14} />
-          <p className="ml-1">Create</p>
-        </div>
+    <div>
+      <TabMenu
+        model={props.items}
+        activeIndex={activeIndex}
+        onTabChange={status}
+      />
 
-        <div
-          className="flex align-items-center mr-5"
-          onClick={() => props.onclick("auickActions")}
-        >
-          <img src={Actions} width={14} height={14} />
-          <p className="ml-1">Quick Actions</p>
-        </div>
-
-        <div
-          className="flex align-items-center"
-          onClick={() => setPreview(true)}
-        >
-          <img src={Actions} width={14} height={14} />
-          <p className="ml-1">Preview</p>
-        </div>
-      </div>
       <Sidebar
         visible={preview}
         position="top"
@@ -266,7 +244,7 @@ const TopBars = (props: any) => {
           </div>
         </div>
       </Sidebar>
-    </>
+    </div>
   );
 };
 

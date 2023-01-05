@@ -17,9 +17,9 @@ const SuperAdminSideBar = (props: any) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   return (
-    <div className="">
+    <div className="mr-5">
       <div className="mx-auto mt-3 flex justify-content-center">
-        <Button label=" + Connect New Account" className="p-button-warning" />
+        <Button  icon="pi pi-plus" label="  Connect New Account" className="p-button-warning text-xs " />
       </div>
       {/* <div>
         {SUPERADMINSIDEBAR.map((x: any, i: any) => (

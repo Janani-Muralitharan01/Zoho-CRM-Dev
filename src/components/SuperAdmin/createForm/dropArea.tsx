@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
 
 const DropArea = () => {
   const [uidv4, setuidv4] = useState<any>();
@@ -59,9 +60,14 @@ const DropArea = () => {
   return (
     
     <div className="">
+      <div className="ml-8 pl-2">
+      <div className="grey py-2 font-semibold" style={{color: '#333333'}}>Form Name</div>
+      <input placeholder="Untiled form" className=" w-30rem my-auto border-round-md text-sm"  p-3 style={{    height: '52px' ,border: '1px solid lightgrey',color: '#333333',background:'#CCCCCC'}}/></div>
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
+            <div>
+               
             <Droppable key={list} droppableId={list}>
               {(provided, snapshot) => (
                 <div className="" ref={provided.innerRef}>
@@ -80,6 +86,7 @@ const DropArea = () => {
                               style={provided.draggableProps.style}
                               {...provided.dragHandleProps}
                             >
+                             
                               <section className="grey py-2 font-semibold" style={{color: '#333333'}}>
                                 {item.subName}
                               </section>
@@ -109,6 +116,7 @@ const DropArea = () => {
                 </div>
               )}
             </Droppable>
+            </div>
           );
         })}
       </div>
@@ -123,7 +131,7 @@ const DropArea = () => {
         ></Button>
       </div> */}
 
-      <div className="flex  justify-content-end mt-4 mb-3 mr-5">
+      <div className="flex  justify-content-end mt-2 mb-3 mr-5">
         <Button label="Cancel" className="surface-300 border-300 text-color mr-5"  />
         <Button label="Save" className="bg-primary" />
       </div>

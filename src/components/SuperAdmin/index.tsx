@@ -148,6 +148,7 @@ const SuperAdmin = () => {
           <div className="sideContent">
             <SuperAdminSideBar handleClick={handleClick} />
           </div>
+          <div style={{background: '#FAFAFB',height: '100vh'}}>
           <div className="mainContent">
             {id === 1 ? (
               <CreateRecruiterForm />
@@ -163,7 +164,7 @@ const SuperAdmin = () => {
             ) : (
               <CreateRecruiterForm />
             )}
-          </div>
+          </div></div>
         </div>
       </DragDropContext>
     </div>
