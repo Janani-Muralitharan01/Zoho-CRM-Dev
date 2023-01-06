@@ -1,11 +1,11 @@
-import "./createRecruiterTable.css";
-import React, { useState, useEffect } from "react";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
-import { Button } from "primereact/button";
-import { Dropdown } from "primereact/dropdown";
-import Profile from "../../../assets/profile.png";
-import { CREATERECRUITERTABLE } from "../../Constant/const";
+import './createRecruiterTable.css';
+import React, { useState, useEffect } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import { Dropdown } from 'primereact/dropdown';
+import Profile from '../../../assets/profile.png';
+import { CREATERECRUITERTABLE } from '../../Constant/const';
 
 const CreateRecrutierTable = () => {
   const [selectedCity1, setSelectedCity1] = useState(null);
@@ -14,11 +14,11 @@ const CreateRecrutierTable = () => {
     setSelectedCity1(e.value);
   };
   const cities = [
-    { name: "New York", code: "NY" },
-    { name: "Rome", code: "RM" },
-    { name: "London", code: "LDN" },
-    { name: "Istanbul", code: "IST" },
-    { name: "Paris", code: "PRS" },
+    { name: 'New York', code: 'NY' },
+    { name: 'Rome', code: 'RM' },
+    { name: 'London', code: 'LDN' },
+    { name: 'Istanbul', code: 'IST' },
+    { name: 'Paris', code: 'PRS' },
   ];
   const countryBodyTemplate = (rowData: any) => {
     return (

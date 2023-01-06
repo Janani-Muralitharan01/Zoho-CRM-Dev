@@ -4,8 +4,8 @@ import { Button } from 'primereact/button';
 import { FileUpload } from 'primereact/fileupload';
 import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
-import { useState, useEffect,useRef } from 'react';
-import AddRecruiters from './AddRecruiters'
+import { useState, useEffect, useRef } from 'react';
+import AddRecruiters from './AddRecruiters';
 import { useFormik } from 'formik';
 import { InputMask } from 'primereact/inputmask';
 
@@ -20,9 +20,15 @@ const signUpSchema = Yup.object({
     'Passwords must match'
   ),
 });
-const validate = (values: { Username: string | any[]; Designation: string | any[]; email: string; Gender: string | any[];
-  Birth: string | any[] | null | Date | Date[] | undefined;Phone: Number | any[]; }) => {
-  const errors:any = {};
+const validate = (values: {
+  Username: string | any[];
+  Designation: string | any[];
+  email: string;
+  Gender: string | any[];
+  Birth: string | any[] | null | Date | Date[] | undefined;
+  Phone: Number | any[];
+}) => {
+  const errors: any = {};
   if (!values.Username) {
     errors.Username = 'Please enter your username';
   } else if (values.Username.length > 15) {
@@ -54,7 +60,7 @@ const validate = (values: { Username: string | any[]; Designation: string | any[
   // }
   if (!values.Phone) {
     errors.Phone = 'Phone number is Required';
-  } 
+  }
   // else if (values.Phone.length > 20) {
   //   errors.Phone = 'Must be 20 characters or less';
   // }
@@ -63,148 +69,218 @@ const validate = (values: { Username: string | any[]; Designation: string | any[
 };
 
 const CreateRecruiterForm = () => {
-  const[nextPage,setNaxtPage] = useState(false);
-  
+  const [nextPage, setNaxtPage] = useState(false);
+
   const [Username, setUsername] = useState('');
   const [Designation, setDesignation] = useState('');
   const [Gender, setGender] = useState('');
   const [Birth, setBirth] = useState<Date | Date[] | undefined>(undefined);
   const [Email, setEmail] = useState('');
-  const [Phone, setPhone] = useState(0); 
-  
-  
+  const [Phone, setPhone] = useState(0);
+
   const formik = useFormik({
     initialValues: {
       Username: Username,
-      Designation:Designation,
+      Designation: Designation,
       email: Email,
-      Gender:Gender,
-      Birth:Birth,
-      Phone:Phone
+      Gender: Gender,
+      Birth: Birth,
+      Phone: Phone,
     },
     validate,
-    onSubmit: values =>  {
-      setNaxtPage(!nextPage)
-      setsubmitData( values);
+    onSubmit: (values) => {
+      setNaxtPage(!nextPage);
+      setsubmitData(values);
       // alert(JSON.stringify(values, null, 2));
     },
   });
   const submitDatass = {
     Username: Username,
-    Designation:Designation,
-    Gender:Gender,
-    Birth:Birth,
-    Email:Email,
-    Phone:Phone
+    Designation: Designation,
+    Gender: Gender,
+    Birth: Birth,
+    Email: Email,
+    Phone: Phone,
   };
   const [submitData, setsubmitData] = useState<any>();
-  const nextPagehandler = async () =>{
-    
-    setNaxtPage(!nextPage)
-    
+  const nextPagehandler = async () => {
+    setNaxtPage(!nextPage);
+
     setsubmitData(await submitDatass);
-    console.log(submitData,"submitData")
-  }
-  const toast:any = useRef(null);
-     const onBasicUpload = () => {
-      toast.current.show({severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode'});
-      }
+  };
+  const toast: any = useRef(null);
+  const onBasicUpload = () => {
+    toast.current.show({
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Basic Mode',
+    });
+  };
   return (
     <div>
-    {nextPage?<AddRecruiters handleClick={nextPagehandler} Username={submitData.Username} Designation={submitData.Designation}
-      Gender={submitData.Gender} Birth={submitData.Birth} Email={submitData.email} Phone={submitData.Phone}/>:
-   <div>
-   <Toast ref={toast}></Toast>
-   <span className="flex m-2 ml-2">
-     <span className="text-xl ml-2">Add Recruiters</span>{' '}
-     {/*  */}
-   </span>
-   <div >
-   <div className='flex align-items-center ml-8'>
-     <span className="ml-5 mt-3">
-       {' '}
-       <img src={noavathar} style={{ width: '110px' }}></img>
-     </span>
-     <span className='ml-3 mt-4'>
-     <FileUpload mode="basic" name="demo[]" url="https://primefaces.org/primereact/showcase/upload.php" accept="image/*" maxFileSize={1000000} 
-      onUpload={onBasicUpload} chooseLabel="Upload"/>
-     </span>
-     
-   </div>
-   
-   
-   </div>
-   <form onSubmit={formik.handleSubmit}>
-   <div className='ml-8 mt-3'>
-    <div className=" RequirtersGrid ml-5">
-    <span className="p-float-label">
- <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4"  name="Username"
-         type="text"
-         onChange={formik.handleChange}
-         value={formik.values.Username}/>
- <label htmlFor="in" className='mr-3'>UserName</label>
- {formik.errors.Username ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Username}</div> : null}
-</span>
-<span className="p-float-label">
- <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Designation"
-         type="text"
-         onChange={formik.handleChange}
-         value={formik.values.Designation}/>
- <label htmlFor="in">Designation</label>
- {formik.errors.Designation ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Designation}</div> : null}
-</span>
-<span className="p-float-label">
- <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Gender"
-         type="text"
-         onChange={formik.handleChange}
-         value={formik.values.Gender}/>
- <label htmlFor="in">Gender</label>
- {formik.errors.Gender ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Gender}</div> : null}
-</span>
-<span className="p-float-label">
- <Calendar id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Birth"
-         
-         onChange={formik.handleChange}
-         value={formik.values.Birth} 
-         placeholder=" "/>
- <label htmlFor="in">Date of Birth</label>
- {formik.errors.Birth ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Birth}</div> : null}
-</span>
- {/* <div className="field col-12 md:col-4">
+      {nextPage ? (
+        <AddRecruiters
+          handleClick={nextPagehandler}
+          Username={submitData.Username}
+          Designation={submitData.Designation}
+          Gender={submitData.Gender}
+          Birth={submitData.Birth}
+          Email={submitData.email}
+          Phone={submitData.Phone}
+        />
+      ) : (
+        <div>
+          <Toast ref={toast}></Toast>
+          <span className="flex m-2 ml-2">
+            <span className="text-xl ml-2">Add Recruiters</span> {/*  */}
+          </span>
+          <div>
+            <div className="flex align-items-center ml-8">
+              <span className="ml-5 mt-3">
+                {' '}
+                <img src={noavathar} style={{ width: '110px' }}></img>
+              </span>
+              <span className="ml-3 mt-4">
+                <FileUpload
+                  mode="basic"
+                  name="demo[]"
+                  url="https://primefaces.org/primereact/showcase/upload.php"
+                  accept="image/*"
+                  maxFileSize={1000000}
+                  onUpload={onBasicUpload}
+                  chooseLabel="Upload"
+                />
+              </span>
+            </div>
+          </div>
+          <form onSubmit={formik.handleSubmit}>
+            <div className="ml-8 mt-3">
+              <div className=" RequirtersGrid ml-5">
+                <span className="p-float-label">
+                  <InputText
+                    id="in"
+                    style={{ width: '74%' }}
+                    className="recrirtersForm mt-4"
+                    name="Username"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.Username}
+                  />
+                  <label htmlFor="in" className="mr-3">
+                    UserName
+                  </label>
+                  {formik.errors.Username ? (
+                    <div className="text-red-600 text-sm  font-semibold">
+                      {formik.errors.Username}
+                    </div>
+                  ) : null}
+                </span>
+                <span className="p-float-label">
+                  <InputText
+                    id="in"
+                    style={{ width: '74%' }}
+                    className="recrirtersForm mt-4"
+                    name="Designation"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.Designation}
+                  />
+                  <label htmlFor="in">Designation</label>
+                  {formik.errors.Designation ? (
+                    <div className="text-red-600 text-sm  font-semibold">
+                      {formik.errors.Designation}
+                    </div>
+                  ) : null}
+                </span>
+                <span className="p-float-label">
+                  <InputText
+                    id="in"
+                    style={{ width: '74%' }}
+                    className="recrirtersForm mt-4"
+                    name="Gender"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.Gender}
+                  />
+                  <label htmlFor="in">Gender</label>
+                  {formik.errors.Gender ? (
+                    <div className="text-red-600 text-sm  font-semibold">
+                      {formik.errors.Gender}
+                    </div>
+                  ) : null}
+                </span>
+                <span className="p-float-label">
+                  <Calendar
+                    id="in"
+                    style={{ width: '74%' }}
+                    className="recrirtersForm mt-4"
+                    name="Birth"
+                    touchUI
+                    onChange={formik.handleChange}
+                    value={formik.values.Birth}
+                    placeholder=" "
+                  />
+                  <label htmlFor="in">Date of Birth</label>
+                  {formik.errors.Birth ? (
+                    <div className="text-red-600 text-sm  font-semibold">
+                      {formik.errors.Birth}
+                    </div>
+                  ) : null}
+                </span>
+                {/* <div className="field col-12 md:col-4">
                         <span className="p-float-label">
                             <Calendar id="calendar"  name="Birth" value={formik.values.Birth} onChange={formik.handleChange} />
                             <label htmlFor="calendar">Calendar</label>
                         </span>
                     </div> */}
-<span className="p-float-label">
- <InputText id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="email"
-         type="email"
-         onChange={formik.handleChange}
-         value={formik.values.email}/>
- <label htmlFor="in">Email Address</label>
- {formik.errors.email ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.email}</div> : null}
-</span>
-<span className="p-float-label">
- <InputMask  mask="99-99-99-99-99" id="in"  style={{width: '74%'}} className="recrirtersForm mt-4" name="Phone"
-         placeholder="99-99-99-99-99"
-         onChange={formik.handleChange}
-         value={formik.values.Phone}/>
- <label htmlFor="in">Phone Number</label>
- {formik.errors.Phone ? <div className='text-red-600 text-sm  font-semibold'>{formik.errors.Phone}</div> : null}
-</span>
-   </div>  </div>
-    <div className="ButtonsEnd mt-3">
-     <button className="buttonStyle ml-8 " style={{ height: '41px' }}>
-       {' '}
-       Cancel{' '}
-     </button>
-     
-     <Button label="Save" 
-     type="submit"
-     />
-   </div> </form>
- </div>}
-    
+                <span className="p-float-label">
+                  <InputText
+                    id="in"
+                    style={{ width: '74%' }}
+                    className="recrirtersForm mt-4"
+                    name="email"
+                    type="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email}
+                  />
+                  <label htmlFor="in">Email Address</label>
+                  {formik.errors.email ? (
+                    <div className="text-red-600 text-sm  font-semibold">
+                      {formik.errors.email}
+                    </div>
+                  ) : null}
+                </span>
+                <span className="p-float-label">
+                  <InputMask
+                    mask="99-99-99-99-99"
+                    id="in"
+                    style={{ width: '74%' }}
+                    className="recrirtersForm mt-4"
+                    name="Phone"
+                    placeholder="99-99-99-99-99"
+                    onChange={formik.handleChange}
+                    value={formik.values.Phone}
+                  />
+                  <label htmlFor="in">Phone Number</label>
+                  {formik.errors.Phone ? (
+                    <div className="text-red-600 text-sm  font-semibold">
+                      {formik.errors.Phone}
+                    </div>
+                  ) : null}
+                </span>
+              </div>{' '}
+            </div>
+            <div className="ButtonsEnd mt-3">
+              <button className="buttonStyle ml-8 " style={{ height: '41px' }}>
+                {' '}
+                Cancel{' '}
+              </button>
+
+              <Button label="Save" type="submit" />
+            </div>{' '}
+          </form>
+        </div>
+      )}
     </div>
   );
 };

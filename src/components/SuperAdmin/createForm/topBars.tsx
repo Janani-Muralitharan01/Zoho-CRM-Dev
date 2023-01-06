@@ -20,6 +20,7 @@ const TopBars = (props: any) => {
   const [selectedCity1, setSelectedCity1] = useState(null);
   const [preview, setPreview] = useState(false);
   const [previewData, setPreviewData] = useState<any>();
+  const [checked1, setChecked1] = useState(false);
 
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
@@ -186,17 +187,15 @@ const TopBars = (props: any) => {
                                     <Calendar value={item.names} placeholder="DD/MM/YY   " />
                                   </p>
                                 ) : item.names === "Checkbox" ? (
-                                  <span className="p-input-icon-right ">
-                                    <Checkbox
-                                    value={item.names}
-                                      style={{
-                                        position: "relative",
-                                        left: "30px",
-                                        bottom: "4px",
-                                      }}
-                                    />
-                                    <InputText value={item.names} className="mt-3" disabled/>
-                                  </span>
+                                  <div className="grid p-fluid">
+                    <div className="col-12">
+                        <div className="p-inputgroup">
+                            <span className="p-inputgroup-addon">
+                                <Checkbox checked={checked1} onChange={(e) => setChecked1(!checked1)} />
+                            </span>
+                            <InputText placeholder="Username"/>
+                        </div>
+                    </div></div>
                                 ) : item.names === "Phone" ? (
                                   <p>
                                     {" "}
