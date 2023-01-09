@@ -30,3 +30,15 @@
   display: flex !important;
   align-items: center !important;
 }
+
+.p-speeddial {
+  position: inherit !important;
+}
+.p-speeddial-button.p-button.p-button-icon-only {
+  width: 2rem !important;
+  height: 2rem !important;
+}
+.p-speeddial-direction-right {
+  align-items: center !important;
+  height: 10px !important;
+}

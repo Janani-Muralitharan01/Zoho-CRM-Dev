@@ -8,21 +8,17 @@ import Profile from "../../../assets/profile.png";
 import { CREATERECRUITERTABLE } from "../../Constant/const";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { RecruitersGetValue } from "../../../features/Recruiter/recruiter";
+import { SpeedDial } from "primereact/speeddial";
 
 const CreateRecrutierTable = () => {
   const [selectedCity1, setSelectedCity1] = useState(null);
   const [products, setProducts] = useState();
-
   const dispatch = useAppDispatch();
   const user: any = useAppSelector((state: any) => state);
 
   useLayoutEffect(() => {
     dispatch(RecruitersGetValue());
   }, []);
-
-  // useEffect(() => {
-  //   dispatch(RecruitersGetValue());
-  // }, []);
 
   useEffect(() => {
     if (user.Recruiter.roles != null) {
@@ -40,11 +36,29 @@ const CreateRecrutierTable = () => {
     { name: "Istanbul", code: "IST" },
     { name: "Paris", code: "PRS" },
   ];
+  const items = [
+    {
+      label: "Update",
+      icon: "pi pi-pencil",
+    },
+    {
+      label: "Delete",
+      icon: "pi pi-trash",
+    },
+  ];
   const countryBodyTemplate = (rowData: any) => {
     return (
       <div className="flex align-items-center">
         <img alt="flag" src={Profile} width={30} height={30} />
         <span className="ml-1">{rowData.name}</span>
+      </div>
+    );
+  };
+
+  const editPolicy = (data: any) => {
+    return (
+      <div className="speeddial-linear-demo ">
+        <SpeedDial model={items} direction="right" />
       </div>
     );
   };
@@ -71,7 +85,7 @@ const CreateRecrutierTable = () => {
         <Column field="DateofBirth" header="Date of Birth"></Column>
         <Column field="email" header="Email Address"></Column>
         <Column field="PhoneNumber" header="Phone Number"></Column>
-        <Column field="actions" header="Actions"></Column>
+        <Column body={editPolicy} header="Actions"></Column>
       </DataTable>
     </div>
   );
