@@ -4,6 +4,9 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
+import { dragAndDropDialogIndexSuperAdmin } from "../../../features/counter/dragAndDrop";
+import { ITEMS } from "../../Constant/const";
+import Picklist from "../../CommonModules/PickList/PickList";
 
 const DropArea = () => {
   const [uidv4, setuidv4] = useState<any>();
@@ -11,9 +14,23 @@ const DropArea = () => {
   const [sidebar, setSidebar] = useState(false);
   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
   const [selectedCity1, setSelectedCity1] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
+
+    let index: any;
+    let inputName: any;
+    Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
+      (x: any) => {
+        index = x;
+      }
+    );
+    if (index != null) {
+      [count.dragAndDrop.initialStartDragSuperAdmin].map((x: any) => {
+        inputName = x[index];
+      });
+    }
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
   const handleChange = (e: any, i: number) => {
@@ -36,36 +53,20 @@ const DropArea = () => {
 
     setuidv4({ [index]: inputName });
   };
-  function handlerClick() {
-    // {
-    //   Object.keys(previewData || []).map((list: any, i: number) => {
-    //     previewData[list]?.map((item: any, index: number) => {
-    //       {
-    //         item.names === "Multi-Select"
-    //           ? setSidebar(false)
-    //           : setSidebar(true);
-    //       }
-    //     });
-    //   });
-    // }
-    setSidebar(!sidebar);
-  }
+
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
   };
-  const fileUpload = [
-    { name: "Upload File", code: "NY" },
-    { name: "document", code: "NY" },
-  ];
-  const cities = [{ name: "Admistrator", code: "NY" }];
-  // const onCityChange = (e: any) => {
-  //   setSelectedCity1(e.value);
-  // };
-  // const fileUpload = [
-  //   { name: 'Upload File', code: 'NY' },
-  //   { name: 'document', code: 'NY' },
-  // ];
-  // const cities = [{ name: 'Admistrator', code: 'NY' }];
+
+  const openDialog = () => {
+    let value = ITEMS[count.dragAndDrop.DialogIndex];
+
+    if (value) {
+      if (value.names === "Pick List") {
+        return <Picklist pickListDialogVisible={true} />;
+      }
+    }
+  };
 
   return (
     <div className="">
@@ -114,47 +115,51 @@ const DropArea = () => {
                   <div className="" ref={provided.innerRef}>
                     {uidv4[list].length
                       ? uidv4[list].map((item: any, index: number) => (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div
-                                className=" px-2 mt-3 ml-8 mr-8"
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                style={provided.draggableProps.style}
-                                {...provided.dragHandleProps}
-                              >
-                                {/* <section className="grey py-2 font-semibold" style={{color: '#333333'}}>
-                                {item.subName}
-                              </section> */}
-                                <div className=" py-1">
-                                  <input
-                                    type="text"
-                                    name="names"
-                                    style={{
-                                      height: "44px",
-                                      border: "1px solid lightgrey",
-                                      color: "#8083A3",
-                                    }}
-                                    value={item.names}
-                                    onChange={(e) => {
-                                      handleChange(e, index);
-                                    }}
-                                    className=" w-30rem my-auto border-round-md  p-3"
-                                  />
-                                  <section
-                                    className="grey py-2 font-semibold"
-                                    style={{ color: "#333333" }}
-                                  >
-                                    {item.subName}
-                                  </section>
+                          <>
+                            <Draggable
+                              key={item.id}
+                              draggableId={item.id}
+                              index={index}
+                            >
+                              {(provided, snapshot) => (
+                                <div
+                                  className=" px-2 mt-3 ml-8 mr-8"
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  style={provided.draggableProps.style}
+                                  {...provided.dragHandleProps}
+                                >
+                                  <div className=" py-1">
+                                    <input
+                                      type="text"
+                                      name="names"
+                                      style={{
+                                        height: "44px",
+                                        border: "1px solid lightgrey",
+                                        color: "#8083A3",
+                                      }}
+                                      value={item.names}
+                                      onChange={(e) => {
+                                        handleChange(e, index);
+                                      }}
+                                      className=" w-30rem my-auto border-round-md  p-3"
+                                    />
+                                    <section
+                                      className="grey py-2 font-semibold"
+                                      style={{ color: "#333333" }}
+                                    >
+                                      {item.subName}
+                                    </section>
+                                  </div>
                                 </div>
-                              </div>
-                            )}
-                          </Draggable>
+                              )}
+                            </Draggable>
+
+                            {count.dragAndDrop.DialogIndex == 4 &&
+                            item.names == "Pick List"
+                              ? openDialog()
+                              : ""}
+                          </>
                         ))
                       : !provided.placeholder && (
                           <span className="Appp">Drop items here</span>
@@ -167,16 +172,6 @@ const DropArea = () => {
           );
         })}
       </div>
-
-      {/* <div className="mt-7 flex text-left justify-content-end">
-        <Button label="Cancel" className="p-button-secondary" />
-        <Button label="Save" className="p-button-secondary ml-2" />
-        <Button
-          label="Preview"
-          className="p-button-secondary ml-2"
-          onClick={handlerClick}
-        ></Button>
-      </div> */}
 
       <div className="flex  justify-content-end mt-2 mb-3 mr-5">
         <Button

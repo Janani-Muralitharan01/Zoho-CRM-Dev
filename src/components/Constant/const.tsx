@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
 
-
 import singleline from "../../assets/singleline.svg";
 import onetwothree from "../../assets/123.svg";
 import autonum from "../../assets/autonum.svg";
@@ -281,11 +280,11 @@ export const SIDEBARITEMS = [
     icon: picklist,
     id: uuidv4(),
   },
-  {
-    names: "Multi-Select",
-    icon: multiselect,
-    id: uuidv4(),
-  },
+  // {
+  //   names: "Multi-Select",
+  //   icon: multiselect,
+  //   id: uuidv4(),
+  // },
   {
     names: "Date",
     icon: date,
@@ -301,11 +300,11 @@ export const SIDEBARITEMS = [
     icon: onetwothree,
     id: uuidv4(),
   },
-  {
-    names: "Auto-Number",
-    icon: autonum,
-    id: uuidv4(),
-  },
+  // {
+  //   names: "Auto-Number",
+  //   icon: autonum,
+  //   id: uuidv4(),
+  // },
   {
     names: "Currency",
     icon: currency,
@@ -336,21 +335,21 @@ export const SIDEBARITEMS = [
     icon: url,
     id: uuidv4(),
   },
-  {
-    names: "Lookup",
-    icon: lookup,
-    id: uuidv4(),
-  },
-  {
-    names: "Formula",
-    icon: fx,
-    id: uuidv4(),
-  },
-  {
-    names: "User",
-    icon: user,
-    id: uuidv4(),
-  },
+  // {
+  //   names: "Lookup",
+  //   icon: lookup,
+  //   id: uuidv4(),
+  // },
+  // {
+  //   names: "Formula",
+  //   icon: fx,
+  //   id: uuidv4(),
+  // },
+  // {
+  //   names: "User",
+  //   icon: user,
+  //   id: uuidv4(),
+  // },
   {
     names: "File Upload",
     icon: fileupload,
@@ -361,21 +360,21 @@ export const SIDEBARITEMS = [
     icon: imageupload,
     id: uuidv4(),
   },
-  {
-    names: "Multi-Select Lookup",
-    icon: multilookup,
-    id: uuidv4(),
-  },
-  {
-    names: "Subform",
-    icon: subform,
-    id: uuidv4(),
-  },
-  {
-    names: "NEW SECTION",
-    icon: rect,
-    id: uuidv4(),
-  },
+  // {
+  //   names: "Multi-Select Lookup",
+  //   icon: multilookup,
+  //   id: uuidv4(),
+  // },
+  // {
+  //   names: "Subform",
+  //   icon: subform,
+  //   id: uuidv4(),
+  // },
+  // {
+  //   names: "NEW SECTION",
+  //   icon: rect,
+  //   id: uuidv4(),
+  // },
 ];
 export const CANDIDATETABLE = [
   {
@@ -386,7 +385,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Selected",
+    status: "Selected",
     actions: "...",
   },
   {
@@ -397,7 +396,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Progress",
+    status: "Progress",
     actions: "...",
   },
   {
@@ -408,7 +407,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Notselected",
+    status: "Notselected",
     actions: "...",
   },
   {
@@ -419,7 +418,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Selected",
+    status: "Selected",
     actions: "...",
   },
   {
@@ -430,7 +429,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"OnHoldProgress",
+    status: "OnHoldProgress",
     actions: "...",
   },
   {
@@ -441,7 +440,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"OnHoldProgress",
+    status: "OnHoldProgress",
     actions: "...",
   },
   {
@@ -452,7 +451,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Notselected",
+    status: "Notselected",
     actions: "...",
   },
   {
@@ -463,7 +462,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Selected",
+    status: "Selected",
     actions: "...",
   },
   {
@@ -474,7 +473,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"OnHoldProgress",
+    status: "OnHoldProgress",
     actions: "...",
   },
   {
@@ -485,7 +484,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Notselected",
+    status: "Notselected",
     actions: "...",
   },
   {
@@ -496,7 +495,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Progress",
+    status: "Progress",
     actions: "...",
   },
   {
@@ -507,7 +506,7 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"Selected",
+    status: "Selected",
     actions: "...",
   },
   {
@@ -518,10 +517,9 @@ export const CANDIDATETABLE = [
     dob: "23.4.9999",
     email: "test@gmail.com",
     phone: "99999999",
-    status:"OnHoldProgress",
+    status: "OnHoldProgress",
     actions: "...",
   },
- 
 ];
 
 export const CREATERECRUITERTABLE = [

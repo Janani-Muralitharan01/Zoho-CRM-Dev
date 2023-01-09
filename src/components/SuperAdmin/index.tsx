@@ -1,39 +1,40 @@
-import './index.css';
-import React, { useState, useEffect } from 'react';
-import SuperAdminSideBar from './superAdminSideBar';
-import CreateRecruiterForm from './createRecruiterForm';
-import CreateRecrutierTable from './createRecruiterTable';
-import CandidateTable from './CandidateTable';
-import StatusTable from './StatusTable';
-import Dashboard from '../layouts/Dashboard-Main/dashboard';
-import FormCreation from './formCreation';
-import SideBar from '../layouts/Sidebar/sidebar';
+import "./index.css";
+import React, { useState, useEffect } from "react";
+import SuperAdminSideBar from "./superAdminSideBar";
+import CreateRecruiterForm from "./createRecruiterForm";
+import CreateRecrutierTable from "./createRecruiterTable";
+import CandidateTable from "./CandidateTable";
+import StatusTable from "./StatusTable";
+import Dashboard from "../layouts/Dashboard-Main/dashboard";
+import FormCreation from "./formCreation";
+import SideBar from "../layouts/Sidebar/sidebar";
 import {
   DragDropContext,
   Draggable,
   DraggableLocation,
   Droppable,
-} from 'react-beautiful-dnd';
-import { v4 as uuidv4 } from 'uuid';
+} from "react-beautiful-dnd";
+import { v4 as uuidv4 } from "uuid";
 import {
   ITEMS,
   QUICKITEMS,
   COMPLETE,
   QUICKCREATECOMPLETE,
-} from '../Constant/const';
+} from "../Constant/const";
 
 import {
   dragAndDropValue,
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
   dragAndDropValueSuperAdmin,
-} from '../../features/counter/dragAndDrop';
-import { useSelector, useDispatch } from 'react-redux';
+  dragAndDropDialogIndexSuperAdmin,
+} from "../../features/counter/dragAndDrop";
+import { useSelector, useDispatch } from "react-redux";
 // import NavBar from "../layouts/Navbar/navbar";
-import FormSubmission from './formSubmission';
-import CandidateList from './candidateList';
-import NavBar from './navBar';
-import CreateForm from './createForm';
+import FormSubmission from "./formSubmission";
+import CandidateList from "./candidateList";
+import NavBar from "./navBar";
+import CreateForm from "./createForm";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -118,7 +119,7 @@ const SuperAdmin = () => {
               });
 
               break;
-            case 'CHECKSUPERDRAGITEMS':
+            case "CHECKSUPERDRAGITEMS":
               setCompleted({
                 [destination.droppableId]: copy(
                   ITEMS,
@@ -127,6 +128,9 @@ const SuperAdmin = () => {
                   destination
                 ),
               });
+
+              let indexOfDragable = result ? result.source.index : "";
+              dispatch(dragAndDropDialogIndexSuperAdmin(indexOfDragable));
 
               break;
 
@@ -150,7 +154,7 @@ const SuperAdmin = () => {
           <div className="sideContent">
             <SuperAdminSideBar handleClick={handleClick} />
           </div>
-          <div style={{ background: '#FAFAFB', height: '100vh' }}>
+          <div style={{ background: "#FAFAFB", height: "100vh" }}>
             <div className="mainContent">
               {id === 1 ? (
                 <CreateRecruiterForm />

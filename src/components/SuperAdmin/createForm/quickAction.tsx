@@ -1,17 +1,17 @@
-import { useState, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { Calendar } from 'primereact/calendar';
+import { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Button } from "primereact/button";
+import { InputText } from "primereact/inputtext";
+import { Calendar } from "primereact/calendar";
 
 const QuickAction = () => {
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
   const [sidebar, setSidebar] = useState(false);
-//   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
-//   const [selectedCity1, setSelectedCity1] = useState(null);
- console.log(count,"count")
+  //   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
+  //   const [selectedCity1, setSelectedCity1] = useState(null);
+
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
@@ -52,10 +52,8 @@ const QuickAction = () => {
     setSidebar(!sidebar);
   }
 
-
   return (
     <div className="">
-     
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
@@ -80,7 +78,7 @@ const QuickAction = () => {
                               >
                                 <section
                                   className="grey py-2 font-semibold"
-                                  style={{ color: '#333333' }}
+                                  style={{ color: "#333333" }}
                                 >
                                   {item.subName}
                                 </section>
@@ -89,9 +87,9 @@ const QuickAction = () => {
                                     type="text"
                                     name="names"
                                     style={{
-                                      height: '44px',
-                                      border: '1px solid lightgrey',
-                                      color: '#8083A3',
+                                      height: "44px",
+                                      border: "1px solid lightgrey",
+                                      color: "#8083A3",
                                     }}
                                     value={item.names}
                                     onChange={(e) => {

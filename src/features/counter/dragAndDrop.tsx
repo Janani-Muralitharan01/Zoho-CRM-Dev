@@ -1,10 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 interface userReducerState {
   initialStateDrag: null;
   initialStateQuickDrag: null;
   DialogOpenIndex: null;
   initialStartDragSuperAdmin: null;
+  DialogIndex: null;
 }
 
 const initialDragAndDrop: userReducerState = {
@@ -12,10 +13,11 @@ const initialDragAndDrop: userReducerState = {
   initialStateQuickDrag: null,
   DialogOpenIndex: null,
   initialStartDragSuperAdmin: null,
+  DialogIndex: null,
 };
 
 export const userReducer = createSlice({
-  name: 'userData',
+  name: "userData",
   initialState: initialDragAndDrop,
   reducers: {
     dragAndDropValue: (state: any, action) => {
@@ -30,6 +32,9 @@ export const userReducer = createSlice({
     dragAndDropValueSuperAdmin: (state: any, action) => {
       state.initialStartDragSuperAdmin = action.payload;
     },
+    dragAndDropDialogIndexSuperAdmin: (state: any, action) => {
+      state.DialogIndex = action.payload;
+    },
   },
 });
 export const {
@@ -37,5 +42,6 @@ export const {
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
   dragAndDropValueSuperAdmin,
+  dragAndDropDialogIndexSuperAdmin,
 } = userReducer.actions;
 export default userReducer.reducer;
