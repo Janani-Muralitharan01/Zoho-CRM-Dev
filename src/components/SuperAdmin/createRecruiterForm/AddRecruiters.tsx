@@ -1,13 +1,13 @@
-import "./createRecruiterForm.css";
-import React, { useState, useEffect, useRef } from "react";
-import noavathar from "../../../images/Group.png";
-import { Button } from "primereact/button";
-import Moment from "moment";
-import { useNavigate } from "react-router-dom";
-import { FileUpload } from "primereact/fileupload";
-import { Toast } from "primereact/toast";
+import './createRecruiterForm.css';
+import React, { useState, useEffect, useRef } from 'react';
+import noavathar from '../../../images/Group.png';
+import { Button } from 'primereact/button';
+import Moment from 'moment';
+import { useNavigate } from 'react-router-dom';
+import { FileUpload } from 'primereact/fileupload';
+import { Toast } from 'primereact/toast';
 const AddRecruiters = (props: any) => {
-  const formatDate = (data: any) => Moment(data).format("DD-MM-YYYY");
+  const formatDate = (data: any) => Moment(data).format('DD-MM-YYYY');
   const navigate = useNavigate();
 
   var Username = props.Username;
@@ -19,39 +19,39 @@ const AddRecruiters = (props: any) => {
   const toast: any = useRef(null);
   const onBasicUpload = () => {
     toast.current.show({
-      severity: "info",
-      summary: "Success",
-      detail: "File Uploaded with Auto Mode",
+      severity: 'info',
+      summary: 'Success',
+      detail: 'File Uploaded with Auto Mode',
     });
   };
   const cards = [
     {
-      names: "Full Name",
+      names: 'Full Name',
       subname: Username,
       id: 1,
     },
     {
-      names: "Designation",
+      names: 'Designation',
       subname: Designation,
       id: 2,
     },
     {
-      names: "Date of Birth",
+      names: 'Date of Birth',
       subname: formatDate(Birth),
       id: 3,
     },
     {
-      names: "Gender",
+      names: 'Gender',
       subname: Gender,
       id: 4,
     },
     {
-      names: "Phone number",
+      names: 'Phone number',
       subname: Phone,
       id: 5,
     },
     {
-      names: "Email Address",
+      names: 'Email Address',
       subname: email,
       id: 6,
     },
@@ -61,11 +61,11 @@ const AddRecruiters = (props: any) => {
     <div>
       <Toast ref={toast}></Toast>
       <span className="flex justify-content-between p-2">
-        <span className="text-xl ml-3">Add Recruiters</span>{" "}
+        <span className="text-xl ml-3">Add Recruiters</span>{' '}
         <span className="mr-2">
           <Button
             label="Exit"
-            style={{ background: "#3E7EFF" }}
+            style={{ background: '#3E7EFF' }}
             onClick={(e: any) => props.handleClick()}
           />
         </span>
@@ -73,8 +73,8 @@ const AddRecruiters = (props: any) => {
       <div>
         <div className="flex align-items-center ml-7">
           <span className="ml-4 ">
-            {" "}
-            <img src={noavathar} style={{ width: "110px" }}></img>
+            {' '}
+            <img src={noavathar} style={{ width: '110px' }}></img>
           </span>
           <span className="ml-3 mt-1">
             <FileUpload
@@ -94,13 +94,13 @@ const AddRecruiters = (props: any) => {
           {cards.map((list: any) => {
             return (
               <div className=" px-2 backgroundStyle p-2 ">
-                {" "}
+                {' '}
                 <div className="ml-3">
-                  <span className="mt-2 " style={{ color: "#8083A3" }}>
+                  <span className="mt-2 " style={{ color: '#8083A3' }}>
                     {list.names}
                   </span>
                   <br />
-                  <span className=" flex text-800" style={{ color: "#171721" }}>
+                  <span className=" flex text-800" style={{ color: '#171721' }}>
                     {list.subname}
                   </span>
                 </div>
@@ -111,9 +111,9 @@ const AddRecruiters = (props: any) => {
         </div>
       </div>
       <div className="ButtonsEnd mb-2">
-        <button className="buttonStyle ml-8 " style={{ height: "41px" }}>
-          {" "}
-          Cancel{" "}
+        <button className="buttonStyle ml-8 " style={{ height: '41px' }}>
+          {' '}
+          Cancel{' '}
         </button>
 
         <Button label="Save" />

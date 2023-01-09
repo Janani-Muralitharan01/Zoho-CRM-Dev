@@ -75,7 +75,7 @@ const DropArea = () => {
         </div>
         <input
           placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm"
+          className=" w-30rem my-auto border-round-md text-sm uppercase text-900"
           p-3
           style={{
             height: "52px",
