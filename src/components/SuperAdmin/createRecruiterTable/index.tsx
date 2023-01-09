@@ -1,15 +1,35 @@
 import "./createRecruiterTable.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import Profile from "../../../assets/profile.png";
 import { CREATERECRUITERTABLE } from "../../Constant/const";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { RecruitersGetValue } from "../../../features/Recruiter/recruiter";
 
 const CreateRecrutierTable = () => {
   const [selectedCity1, setSelectedCity1] = useState(null);
-  const [products, setProducts] = useState(CREATERECRUITERTABLE);
+  const [products, setProducts] = useState();
+
+  const dispatch = useAppDispatch();
+  const user: any = useAppSelector((state: any) => state);
+
+  useLayoutEffect(() => {
+    dispatch(RecruitersGetValue());
+  }, []);
+
+  // useEffect(() => {
+  //   dispatch(RecruitersGetValue());
+  // }, []);
+
+  useEffect(() => {
+    if (user.Recruiter.roles != null) {
+      setProducts(user.Recruiter.roles);
+    }
+  }, [user.Recruiter.roles]);
+
   const onCityChange = (e: any) => {
     setSelectedCity1(e.value);
   };
@@ -46,11 +66,11 @@ const CreateRecrutierTable = () => {
       >
         <Column field="sno" header="S.No"></Column>
         <Column field="name" body={countryBodyTemplate} header="Name"></Column>
-        <Column field="designation" header="Designation"></Column>
-        <Column field="gender" header="Gender"></Column>
-        <Column field="dob" header="Date of Birth"></Column>
+        <Column field="Designation" header="Designation"></Column>
+        <Column field="Gender" header="Gender"></Column>
+        <Column field="DateofBirth" header="Date of Birth"></Column>
         <Column field="email" header="Email Address"></Column>
-        <Column field="phone" header="Phone Number"></Column>
+        <Column field="PhoneNumber" header="Phone Number"></Column>
         <Column field="actions" header="Actions"></Column>
       </DataTable>
     </div>

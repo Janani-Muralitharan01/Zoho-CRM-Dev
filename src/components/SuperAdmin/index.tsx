@@ -158,8 +158,7 @@ const SuperAdmin = () => {
                 <FormCreation idValue={id} />
               ) : id === 5 ? (
                 <CreateForm />
-              ) : // <FormCreation />
-              id === 7 ? (
+              ) : id === 7 ? (
                 <CandidateList />
               ) : (
                 <CreateRecruiterForm />

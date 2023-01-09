@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "primeicons/primeicons.css";
 import Dashboard from "./components/layouts/Dashboard-Main/dashboard";
@@ -9,112 +9,68 @@ import SignUp from "./components/layouts/SignUp/SignUp";
 import { AuthRoute } from "../src/components/AuthRoute/AuthRoute";
 import SuperAdmin from "./components/SuperAdmin";
 import CreateRecruiterForm from "./components/SuperAdmin/createRecruiterForm/index";
-
+// import axios from "./components/Constant/Api";
+import axios from "axios";
+import { ProgressSpinner } from "primereact/progressspinner";
 
 function App() {
+  const [show, setShow] = useState(false);
+  const [count, setCount] = useState(true);
+
+  useEffect(() => {
+    axios.interceptors.request.use(
+      (config) => {
+        setShow(true);
+        return config;
+      },
+      function (error) {
+        setShow(false);
+        return Promise.reject(error);
+      }
+    );
+    axios.interceptors.response.use(
+      function (response) {
+        setShow(false);
+        return response;
+      },
+      function (error) {
+        setShow(false);
+        return Promise.reject(error);
+      }
+    );
+  }, []);
+
   return (
-    <Routes>
-      {/* <Route path="/" element={<AuthRoute />}> */}
-      <Route element={<AuthRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/selection" element={<Selection />} />
-        <Route path="/super-admin" element={<SuperAdmin />} />
-      </Route>
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<SignUp />} />
-      <Route path="/CreateRecruiterForm" element={<CreateRecruiterForm/>}/>
-
-      {/* <DragDropContext
-        onDragEnd={(result) => {
-          const { source, destination } = result;
-          if (!destination) {
-            return;
-          }
-
-          switch (source.droppableId) {
-            case destination.droppableId:
-              if (counter == 0) {
-                setCompleted({
-                  [destination.droppableId]: reorder(
-                    complete[source.droppableId],
-                    source.index,
-                    destination.index
-                  ),
-                });
-              } else {
-                setQuickCreateComplete({
-                  [destination.droppableId]: reorder(
-                    quickCreateComplete[source.droppableId],
-                    source.index,
-                    destination.index
-                  ),
-                });
-              }
-
-              break;
-            case "CHECKITEMS":
-              setCompleted({
-                [destination.droppableId]: copy(
-                  ITEMS,
-                  complete[destination.droppableId],
-                  source,
-                  destination
-                ),
-              });
-              let indexOfDragable = result ? result.source.index : "";
-              dispatch(dragAndDropDialogOpenIndex(indexOfDragable));
-
-              break;
-            case "QUICKCREATEITEMS":
-              setQuickCreateComplete({
-                [destination.droppableId]: copy(
-                  QUICKITEMS,
-                  quickCreateComplete[destination.droppableId],
-                  source,
-                  destination
-                ),
-              });
-              break;
-            default:
-              if (counter == 0) {
-                setCompleted(
-                  move(
-                    complete[source.droppableId],
-                    complete[destination.droppableId],
-                    source,
-                    destination
-                  )
-                );
-              } else {
-                setQuickCreateComplete(
-                  move(
-                    quickCreateComplete[source.droppableId],
-                    quickCreateComplete[destination.droppableId],
-                    source,
-                    destination
-                  )
-                );
-              }
-
-              break;
-          }
-        }}
-      >
-        <div className="App">
-          <div className="container">
-            <nav>
-              <NavBar />
-            </nav>
-            <main>
-              <Dashboard />
-            </main>
-            <div id="sidebar">
-              <SideBar />
-            </div>
+    <>
+      {count ? (
+        <>
+          <div className={"loaderTrue " + (show ? "flex" : "hidden")}>
+            <ProgressSpinner
+              style={{ width: "50px", height: "50px" }}
+              strokeWidth="8"
+              className=""
+            />
           </div>
-        </div>
-      </DragDropContext> */}
-    </Routes>
+          <section className={"" + (show ? "hidden" : "block")}>
+            <Routes>
+              <Route element={<AuthRoute />}>
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/selection" element={<Selection />} />
+                <Route path="/super-admin" element={<SuperAdmin />} />
+              </Route>
+              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<SignUp />} />
+              <Route
+                path="/CreateRecruiterForm"
+                element={<CreateRecruiterForm />}
+              />
+            </Routes>
+          </section>
+        </>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 
