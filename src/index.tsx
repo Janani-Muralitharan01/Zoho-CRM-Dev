@@ -5,6 +5,7 @@ import { store } from "./app/store";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+
 // import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 // import "primereact/resources/primereact.min.css"; //core css
 // import "primeicons/primeicons.css";
@@ -14,15 +15,13 @@ import "primereact/resources/themes/lara-light-indigo/theme.css"; //theme
 import "primereact/resources/primereact.min.css"; //core css
 import "primeicons/primeicons.css";
 import { BrowserRouter } from "react-router-dom";
-import { Button } from "primereact/button";
-
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter >
       <App />
     </BrowserRouter>
   </Provider>
