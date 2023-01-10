@@ -35,11 +35,13 @@ const NavBar = (props: any) => {
         <p className="font-bold text-2xl line-height-1 white-space-nowrap ml-1">
           Req-Portal
         </p>
+
         <section className="flex">
           <div className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick">
             <img src={Dashboard} width={16} height={16} className="mr-2 ml-4" />
             <p>Dashboard</p>
           </div>
+
           <div
             className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
             onClick={(e: any) => props.handleClick(1)}
@@ -68,6 +70,7 @@ const NavBar = (props: any) => {
             <img src={Contact} width={16} height={16} className="mr-2 ml-4" />
             <div>Candidate</div>
           </div>
+
           <div
             className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
             onClick={(e: any) => props.handleClick(5)}
@@ -98,12 +101,14 @@ const NavBar = (props: any) => {
           </div>
         </section>
       </section>
+
       <section className="">
         <i
           className="pi pi-cog ml-3 mr-2 pog"
           onClick={(e: any) => props.handleClick(9)}
         ></i>
         <img src={Bell} width={26} height={26} alt="Bell" />
+
         {/* <img src={Email} width={26} height={26} alt="Email" className="ml-4" /> */}
         <img
           src={Profile}

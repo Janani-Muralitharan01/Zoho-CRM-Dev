@@ -18,13 +18,13 @@ const SuperAdminSideBar = (props: any) => {
   const navigate = useNavigate();
   return (
     <div className="">
-      <div className="mx-auto mt-3 flex justify-content-center">
+      {/* <div className="mx-auto mt-3 flex justify-content-center">
         <Button
           icon="pi pi-plus"
           label="  Connect New Account"
           className="p-button-warning text-xs "
         />
-      </div>
+      </div> */}
       {/* <div>
         {SUPERADMINSIDEBAR.map((x: any, i: any) => (
           <span
@@ -36,7 +36,7 @@ const SuperAdminSideBar = (props: any) => {
           </span>
         ))}
       </div> */}
-
+{/* 
       <section>
         <div className="block justify-content-between align-items-center ">
           <section className="flex  super_Admin_Sidebar_Dashboard">
@@ -135,7 +135,7 @@ const SuperAdminSideBar = (props: any) => {
             <div>Logout</div>
           </section>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

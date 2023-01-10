@@ -1,4 +1,5 @@
 import SideBar from "./sideBar";
+import FormSideBar from "../formSidebar/index"
 import DropArea from "./dropArea";
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
@@ -7,11 +8,15 @@ import Arrow from "../../../assets/arrow.png";
 import "./CreateForm.css";
 import React, { useState } from "react";
 
+interface itemProps {
+  label: string;
+  icon: string;
+}
+
 const CreateForm = () => {
-  
- 
+
   const [page, setpage] = useState(<DropArea />);
-  const items: any = [
+  const items: itemProps[] = [
     { label: "Back", icon: "pi pi-fw pi-arrow-circle-left" },
     { label: "Add Inputs", icon: "pi pi-fw pi-plus" },
     { label: "Edit", icon: "pi pi-fw pi-pencil" },
@@ -22,18 +27,19 @@ const CreateForm = () => {
 
   const pageClick = (e:any) =>{
      let get:any;
-      if(e.index == 0){
+    
+      if(e.index === 0){
        
-          get = <DropArea />
+          get =  <DropArea />
         
         
         }
-        else if(e.index == 1){
+        else if(e.index === 1){
           
             get = <AddInputs />
         
         }
-        else if(e.index == 4){
+        else if(e.index === 4){
           
           get = <QuickAction/>
       

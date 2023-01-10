@@ -10,6 +10,7 @@ import Picklist from "../../CommonModules/PickList/PickList";
 import { NewModuleCreation } from "../../../features/Modules/module";
 import { object } from "yup";
 import { useAppDispatch } from "../../../app/hooks";
+import SingleLine from "../Dialogs/singleLine";
 
 const DropArea = () => {
   const [uidv4, setuidv4] = useState<any>();
@@ -24,7 +25,7 @@ const DropArea = () => {
 
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
-
+    console.log("count", count);
     let index: any;
     let inputName: any;
     Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
@@ -74,6 +75,9 @@ const DropArea = () => {
     if (value) {
       if (value.names === "Pick List") {
         return <Picklist pickListDialogVisible={true} />;
+      } else if (value.names === "Single Line") {
+        console.log("fff");
+        return <SingleLine SingleLineDialogVisible={true} />;
       }
     }
   };
@@ -232,6 +236,8 @@ const DropArea = () => {
 
                             {count.dragAndDrop.DialogIndex == 4 &&
                             item.names == "Pick List"
+                              ? openDialog()
+                              : item.names == "Single Line"
                               ? openDialog()
                               : ""}
                           </>

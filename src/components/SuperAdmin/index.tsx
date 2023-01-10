@@ -8,6 +8,7 @@ import StatusTable from "./StatusTable";
 import Dashboard from "../layouts/Dashboard-Main/dashboard";
 import FormCreation from "./formCreation";
 import SideBar from "../layouts/Sidebar/sidebar";
+import SettingsModules from "../SuperAdmin/Modules/index";
 import {
   DragDropContext,
   Draggable,
@@ -35,6 +36,8 @@ import FormSubmission from "./formSubmission";
 import CandidateList from "./candidateList";
 import NavBar from "./navBar";
 import CreateForm from "./createForm";
+import Settings from "./Settings/index";
+import ModuleScreen from "./Modules/modules";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -93,6 +96,7 @@ const SuperAdmin = () => {
   }, [complete]);
 
   const handleClick = (e: any) => {
+    console.log("main, , ", e);
     setId(e);
   };
 
@@ -149,11 +153,12 @@ const SuperAdmin = () => {
           }
         }}
       >
-        <NavBar />
+        <NavBar handleClick={handleClick} />
+        {/* <SettingsModules handleClick={handleClick} someProps="hssjs" /> */}
         <div className="layout h-full">
-          {/* <div className="sideContent">
-            <SuperAdminSideBar handleClick={handleClick} />
-          </div> */}
+          <div className="sideContent">
+            {/* <SuperAdminSideBar handleClick={handleClick} /> */}
+          </div>
           <div style={{ background: "#FAFAFB", height: "100vh" }}>
             <div className="mainContent">
               {id === 1 ? (
@@ -168,8 +173,14 @@ const SuperAdmin = () => {
                 <CandidateList />
               ) : id === 8 ? (
                 <StatusTable />
+              ) : id === 9 ? (
+                <Settings />
+              ) : id === 10 ? (
+                <SettingsModules handleClick={handleClick} />
+              ) : id === 11 ? (
+                <ModuleScreen />
               ) : (
-                <CreateRecruiterForm />
+                ""
               )}
             </div>
           </div>
