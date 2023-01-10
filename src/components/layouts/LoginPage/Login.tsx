@@ -60,6 +60,7 @@ const Login = () => {
         if (res.payload.access_token) {
           let app = res.payload.access_token;
           await dispatch(LoginUserDetails(app));
+          console.log("user", user);
         }
 
         if (res.payload.access_token) {

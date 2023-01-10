@@ -151,9 +151,9 @@ const SuperAdmin = () => {
       >
         <NavBar />
         <div className="layout h-full">
-          <div className="sideContent">
+          {/* <div className="sideContent">
             <SuperAdminSideBar handleClick={handleClick} />
-          </div>
+          </div> */}
           <div style={{ background: "#FAFAFB", height: "100vh" }}>
             <div className="mainContent">
               {id === 1 ? (

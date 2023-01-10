@@ -7,14 +7,20 @@ import { Calendar } from "primereact/calendar";
 import { dragAndDropDialogIndexSuperAdmin } from "../../../features/counter/dragAndDrop";
 import { ITEMS } from "../../Constant/const";
 import Picklist from "../../CommonModules/PickList/PickList";
+import { NewModuleCreation } from "../../../features/Modules/module";
+import { object } from "yup";
+import { useAppDispatch } from "../../../app/hooks";
 
 const DropArea = () => {
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
+  const [formName, setFormName] = useState<any>();
+  const [moduleName, setModuleName] = useState<any>();
+  const [array, setArray] = useState<any>([]);
   const [sidebar, setSidebar] = useState(false);
   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
   const [selectedCity1, setSelectedCity1] = useState(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
@@ -31,6 +37,10 @@ const DropArea = () => {
         inputName = x[index];
       });
     }
+    console.log(
+      "count.dragAndDrop.initialStartDragSuperAdmin",
+      count.dragAndDrop.initialStartDragSuperAdmin
+    );
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
   const handleChange = (e: any, i: number) => {
@@ -68,9 +78,72 @@ const DropArea = () => {
     }
   };
 
+  const Extract = () => {
+    {
+      Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
+        (list: any, i: number) => {
+          count.dragAndDrop.initialStartDragSuperAdmin[list].map(
+            (i: any, index: any) => {
+              array.push({
+                [i.name]: {
+                  type: i.name,
+                  fieldname: i.name,
+                  defaultvalue: i.name,
+                },
+              });
+            }
+          );
+        }
+      );
+    }
+  };
+
+  const saveForm = () => {
+    let val: any = {};
+
+    Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
+      (list: any, i: number) => {
+        count.dragAndDrop.initialStartDragSuperAdmin[list].map(
+          (i: any, index: any) => {
+            val[i.names] = {
+              type: i.names,
+              fieldname: i.names,
+              defaultvalue: i.names,
+            };
+          }
+        );
+      }
+    );
+    let payload: object = {
+      modulename: moduleName,
+      recuriter: "63bcea642d87e52932899f8a",
+      moduleelements: {
+        [formName]: val,
+      },
+    };
+    console.log("count", count);
+    dispatch(NewModuleCreation(payload));
+  };
+
   return (
     <div className="">
       <div className="ml-8 pl-2">
+        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
+          Module Name
+        </div>
+        <input
+          placeholder="Untiled form"
+          className=" w-30rem my-auto border-round-md text-sm uppercase text-900"
+          p-3
+          style={{
+            height: "52px",
+            border: "1px solid lightgrey",
+            color: "#333333",
+            background: "#CCCCCC",
+          }}
+          value={moduleName}
+          onChange={(e) => setModuleName(e.target.value)}
+        />
         <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
           Form Name
         </div>
@@ -84,6 +157,8 @@ const DropArea = () => {
             color: "#333333",
             background: "#CCCCCC",
           }}
+          value={formName}
+          onChange={(e) => setFormName(e.target.value)}
         />
       </div>
       <div className="ml-8 pl-2">
@@ -178,7 +253,13 @@ const DropArea = () => {
           label="Cancel"
           className="surface-300 border-300 text-color mr-5"
         />
-        <Button label="Save" className="bg-primary" />
+        <Button
+          label="Save"
+          className="bg-primary"
+          onClick={() => {
+            saveForm();
+          }}
+        />
       </div>
     </div>
   );

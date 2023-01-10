@@ -1,6 +1,6 @@
 .NavBar_Main {
   height: 10vh;
-  width: 100%;
+  width: 98%;
   position: sticky;
   top: 0;
   background-color: #ffffff;
@@ -11,4 +11,9 @@
 }
 .NavBar_Search {
   width: 60%;
+}
+.pog {
+  font-size: 25px !important;
+  color: gray !important;
+  cursor: pointer;
 }
