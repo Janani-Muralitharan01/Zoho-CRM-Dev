@@ -9,14 +9,16 @@ import SignUp from "./components/layouts/SignUp/SignUp";
 import { AuthRoute } from "../src/components/AuthRoute/AuthRoute";
 import SuperAdmin from "./components/SuperAdmin";
 import CreateRecruiterForm from "./components/SuperAdmin/createRecruiterForm/index";
-import Settings from "./components/SuperAdmin/Settings/index"
+import Settings from "./components/SuperAdmin/Settings/index";
 import SettingsModules from "./components/SuperAdmin/Modules/index";
 import CreateForm from "./components/SuperAdmin/createForm/index";
-import NavigateFile from "./components/SuperAdmin/createForm/navigateFile"
+import NavigateFile from "./components/SuperAdmin/createForm/navigateFile";
 
 // import axios from "./components/Constant/Api";
 import axios from "axios";
 import { ProgressSpinner } from "primereact/progressspinner";
+import NavBar from "./components/SuperAdmin/navBar";
+import createForm from "./components/SuperAdmin/createForm/index";
 
 function App() {
   const [show, setShow] = useState(false);
@@ -57,25 +59,28 @@ function App() {
             />
           </div>
           <section className={"" + (show ? "hidden" : "block")}>
-          {/* <BrowserRouter> */}
             <Routes>
               <Route element={<AuthRoute />}>
+                {/* <NavBar /> */}
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/selection" element={<Selection />} />
-                <Route path="/super-admin" element={<SuperAdmin />} />
+                <Route path="/super-admin">
+                  <Route index={true} element={<SuperAdmin />} />
+                  <Route index={false} path="Settings" element={<Settings />} />
+                  <Route
+                    path="Settings/Modules"
+                    element={<SettingsModules />}
+                  />
+                  <Route path="create-form" element={<SuperAdmin />} />
+                </Route>
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<SignUp />} />
-              <Route path="/Settings" element={<Settings />} />
-              <Route path="/Settings/Modules" element={<SettingsModules  />} />
-             
-              {/* <Route path="/apple" element={<CreateForm />} /> */}
               <Route
                 path="/CreateRecruiterForm"
                 element={<CreateRecruiterForm />}
               />
             </Routes>
-            {/* </BrowserRouter> */}
           </section>
         </>
       ) : (

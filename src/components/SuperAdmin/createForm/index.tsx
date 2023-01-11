@@ -1,12 +1,13 @@
 import SideBar from "./sideBar";
-import FormSideBar from "../formSidebar/index"
+import FormSideBar from "../formSidebar/index";
 import DropArea from "./dropArea";
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
 import QuickAction from "./quickAction";
 import Arrow from "../../../assets/arrow.png";
 import "./CreateForm.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 
 interface itemProps {
   label: string;
@@ -14,8 +15,9 @@ interface itemProps {
 }
 
 const CreateForm = () => {
-
   const [page, setpage] = useState(<DropArea />);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.logIn);
   const items: itemProps[] = [
     { label: "Back", icon: "pi pi-fw pi-arrow-circle-left" },
     { label: "Add Inputs", icon: "pi pi-fw pi-plus" },
@@ -25,32 +27,21 @@ const CreateForm = () => {
     { label: "Preview", icon: "pi pi-fw pi-cog" },
   ];
 
-  const pageClick = (e:any) =>{
-     let get:any;
-    
-      if(e.index === 0){
-       
-          get =  <DropArea />
-        
-        
-        }
-        else if(e.index === 1){
-          
-            get = <AddInputs />
-        
-        }
-        else if(e.index === 4){
-          
-          get = <QuickAction/>
-      
-      }
-        else{
-        get = <DropArea />
-        }
-        setpage(get)
+  const pageClick = (e: any) => {
+    let get: any;
 
-    //  })
+    if (e.index === 0) {
+      get = <DropArea />;
+    } else if (e.index === 1) {
+      get = <AddInputs />;
+    } else if (e.index === 4) {
+      get = <QuickAction />;
+    } else {
+      get = <DropArea />;
+    }
+    setpage(get);
   };
+
   return (
     <div className="mx-3">
       <div className="flex align-items-center justify-content-start">

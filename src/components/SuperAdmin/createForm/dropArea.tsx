@@ -7,19 +7,32 @@ import { Calendar } from "primereact/calendar";
 import { dragAndDropDialogIndexSuperAdmin } from "../../../features/counter/dragAndDrop";
 import { ITEMS } from "../../Constant/const";
 import Picklist from "../../CommonModules/PickList/PickList";
-import SingleLine from "../Dialogs/singleLine"
+import { NewModuleCreation } from "../../../features/Modules/module";
+import { object } from "yup";
+import { useAppDispatch } from "../../../app/hooks";
+import SingleLine from "../Dialogs/singleLine";
+import { Toast } from "primereact/toast";
+import { useNavigate } from "react-router";
+import { LoginUserDetails } from "../../../features/Auth/userDetails";
 
 const DropArea = () => {
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
+  const [formName, setFormName] = useState<any>();
+  const [moduleName, setModuleName] = useState<any>();
+  const [array, setArray] = useState<any>([]);
   const [sidebar, setSidebar] = useState(false);
   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
   const [selectedCity1, setSelectedCity1] = useState(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const toast: any = useRef(null);
+  const navigate = useNavigate();
+
+  console.log(count?.userValue?.roles?.id, "count33333333", typeof count);
 
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
-console.log("count",count)
+
     let index: any;
     let inputName: any;
     Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
@@ -32,7 +45,19 @@ console.log("count",count)
         inputName = x[index];
       });
     }
+    console.log(
+      "count.dragAndDrop.initialStartDragSuperAdmin",
+      count.dragAndDrop.initialStartDragSuperAdmin
+    );
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
+
+  useEffect(() => {
+    GetModuleName();
+  }, []);
+
+  const GetModuleName = async () => {
+    let res = await dispatch(LoginUserDetails());
+  };
 
   const handleChange = (e: any, i: number) => {
     let index: any;
@@ -65,17 +90,84 @@ console.log("count",count)
     if (value) {
       if (value.names === "Pick List") {
         return <Picklist pickListDialogVisible={true} />;
+      } else if (value.names === "Single Line") {
+        console.log("fff");
+        return <SingleLine SingleLineDialogVisible={true} />;
       }
-      else if (value.names === "Single Line"){
-        console.log("fff")
-        return <SingleLine SingleLineDialogVisible={true}/>
+    }
+  };
+
+  const Extract = () => {
+    {
+      Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
+        (list: any, i: number) => {
+          count.dragAndDrop.initialStartDragSuperAdmin[list].map(
+            (i: any, index: any) => {
+              array.push({
+                [i.name]: {
+                  type: i.name,
+                  fieldname: i.name,
+                  defaultvalue: i.name,
+                },
+              });
+            }
+          );
+        }
+      );
+    }
+  };
+
+  const saveForm = async () => {
+    let val: any = {};
+
+    Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
+      (list: any, i: number) => {
+        count.dragAndDrop.initialStartDragSuperAdmin[list].map(
+          (i: any, index: any) => {
+            val[i.names] = {
+              type: i.names,
+              fieldname: i.names,
+              defaultvalue: i.names,
+            };
+          }
+        );
       }
+    );
+    let payload: object = {
+      modulename: moduleName,
+      recuriter: count?.userValue?.roles?.id,
+      moduleelements: {
+        [formName]: val,
+      },
+    };
+    console.log("count", count);
+    let res = await dispatch(NewModuleCreation(payload));
+    console.log("saveeeeeee", res);
+    if (res.payload.status == 200) {
+      navigate("/super-admin");
     }
   };
 
   return (
     <div className="">
+      <Toast ref={toast} />
       <div className="ml-8 pl-2">
+        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
+          Module Name
+        </div>
+        <input
+          placeholder="Untiled form"
+          className=" w-30rem my-auto border-round-md text-sm uppercase text-900"
+          p-3
+          style={{
+            height: "52px",
+            border: "1px solid lightgrey",
+            color: "#333333",
+            background: "#CCCCCC",
+          }}
+          value={moduleName}
+          onChange={(e) => setModuleName(e.target.value)}
+        />
         <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
           Form Name
         </div>
@@ -89,6 +181,8 @@ console.log("count",count)
             color: "#333333",
             background: "#CCCCCC",
           }}
+          value={formName}
+          onChange={(e) => setFormName(e.target.value)}
         />
       </div>
       <div className="ml-8 pl-2">
@@ -163,7 +257,9 @@ console.log("count",count)
                             {count.dragAndDrop.DialogIndex == 4 &&
                             item.names == "Pick List"
                               ? openDialog()
-                              : item.names == "Single Line"?openDialog():""}
+                              : item.names == "Single Line"
+                              ? openDialog()
+                              : ""}
                           </>
                         ))
                       : !provided.placeholder && (
@@ -183,7 +279,13 @@ console.log("count",count)
           label="Cancel"
           className="surface-300 border-300 text-color mr-5"
         />
-        <Button label="Save" className="bg-primary" />
+        <Button
+          label="Save"
+          className="bg-primary"
+          onClick={() => {
+            saveForm();
+          }}
+        />
       </div>
     </div>
   );

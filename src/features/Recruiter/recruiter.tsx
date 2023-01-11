@@ -31,6 +31,35 @@ export const RecruitersGetValue: any = createAsyncThunk(
   }
 );
 
+export const RecruiterTableDelete = createAsyncThunk(
+  "auth/recruiterDeleteApi",
+  async (para1: any, thunkAPI) => {
+    try {
+      const response = await axios.delete(
+        `http://54.152.227.71/api/auth/deleteuser/${para1}`
+      );
+
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const RecruiterTableEdit = createAsyncThunk(
+  "auth/recruiterEditApi",
+  async (para1: any, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `http://54.152.227.71/api/auth/updateuser/${para1}`
+      );
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const userReducer = createSlice({
   name: "recruiter",
   initialState: initialState,
