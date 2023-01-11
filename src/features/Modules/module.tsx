@@ -4,13 +4,14 @@ import { BASEURL } from "../../components/Constant/const";
 
 interface userReducerState {
   logInVerificationPage: null;
-
   error: any;
   isLoading: boolean;
   roles: null;
   status: string;
-
+  rolesDelete: null;
   rolesGet: null;
+  rolesUpdate: null;
+  rolesGetForms: null;
 }
 
 const initiallogInVerificationPage: userReducerState = {
@@ -20,6 +21,9 @@ const initiallogInVerificationPage: userReducerState = {
   roles: null,
   isLoading: false,
   rolesGet: null,
+  rolesDelete: null,
+  rolesUpdate: null,
+  rolesGetForms: null,
 };
 
 export const NewModuleCreation: any = createAsyncThunk(
@@ -30,7 +34,6 @@ export const NewModuleCreation: any = createAsyncThunk(
         `${BASEURL}/api/forms/createforms`,
         para1
       );
-
       return response;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error);
@@ -44,6 +47,50 @@ export const ModuleNameGet: any = createAsyncThunk(
     try {
       const response = await axios.get(`${BASEURL}/api/forms/getmodule`);
 
+      return response;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const ModuleNameDelete: any = createAsyncThunk(
+  "module/moduleCreation",
+  async (para1, thunkAPI) => {
+    try {
+      const response = await axios.delete(
+        `${BASEURL}/api/forms/deleteforms/${para1}`
+      );
+
+      return response;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const ModuleNameUpdate: any = createAsyncThunk(
+  "module/moduleCreation",
+  async (para1, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        `${BASEURL}/api/forms/updateforms/${para1}`
+      );
+      return response;
+    } catch (error: any) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const ModuleNameGetForms: any = createAsyncThunk(
+  "module/moduleCreation",
+  async (para1, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `${BASEURL}/api/forms/getforms/${para1}`
+      );
+      console.log("getforms", response);
       return response;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error);
@@ -82,6 +129,17 @@ export const userReducer = createSlice({
     },
     [ModuleNameGet.rejected]: (state: any, action: any) => {
       state.status = "error";
+    },
+    [ModuleNameDelete]: (state: any, action: any) => {
+      state.rolesDelete = action.payload.data.user;
+    },
+    [ModuleNameUpdate.fulfilled]: (state: any, action: any) => {
+      // console.log("ModuleNameUpdate", action.payload);
+      // state.rolesUpdate = action.payload;
+    },
+    [ModuleNameGetForms.fulfilled]: (state: any, action: any) => {
+      // console.log("ModuleNameGetForms", action.payload);
+      // state.rolesGetForms = action.payload.data.user;
     },
   },
 });
