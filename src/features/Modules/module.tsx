@@ -9,6 +9,8 @@ interface userReducerState {
   isLoading: boolean;
   roles: null;
   status: string;
+
+  rolesGet: null;
 }
 
 const initiallogInVerificationPage: userReducerState = {
@@ -17,6 +19,7 @@ const initiallogInVerificationPage: userReducerState = {
   error: "",
   roles: null,
   isLoading: false,
+  rolesGet: null,
 };
 
 export const NewModuleCreation: any = createAsyncThunk(
@@ -69,6 +72,15 @@ export const userReducer = createSlice({
       state.roles = action.payload;
     },
     [NewModuleCreation.rejected]: (state: any, action: any) => {
+      state.status = "error";
+    },
+    [ModuleNameGet.pending]: (state: any) => {
+      state.isLoading = true;
+    },
+    [ModuleNameGet.fulfilled]: (state: any, action: any) => {
+      state.rolesGet = action.payload.data.user;
+    },
+    [ModuleNameGet.rejected]: (state: any, action: any) => {
       state.status = "error";
     },
   },

@@ -38,6 +38,8 @@ import NavBar from "./navBar";
 import CreateForm from "./createForm";
 import Settings from "./Settings/index";
 import ModuleScreen from "./Modules/modules";
+import { Route, Routes } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -85,6 +87,7 @@ const move = (
 };
 
 const SuperAdmin = () => {
+  const routeParams = useParams();
   const [id, setId] = useState();
 
   const [complete, setCompleted] = useState<any>({
@@ -96,7 +99,6 @@ const SuperAdmin = () => {
   }, [complete]);
 
   const handleClick = (e: any) => {
-    console.log("main, , ", e);
     setId(e);
   };
 
@@ -153,7 +155,12 @@ const SuperAdmin = () => {
           }
         }}
       >
-        <NavBar handleClick={handleClick} />
+        {/* <NavBar handleClick={handleClick} /> */}
+        {window.location.pathname == "/super-admin/create-form" ? (
+          ""
+        ) : (
+          <NavBar handleClick={handleClick} />
+        )}
         {/* <SettingsModules handleClick={handleClick} someProps="hssjs" /> */}
         <div className="layout h-full">
           <div className="sideContent">
@@ -161,7 +168,7 @@ const SuperAdmin = () => {
           </div>
           <div style={{ background: "#FAFAFB", height: "100vh" }}>
             <div className="mainContent">
-              {id === 1 ? (
+              {/* {id === 1 ? (
                 <CreateRecruiterForm />
               ) : id === 2 ? (
                 <CreateRecrutierTable />
@@ -181,7 +188,27 @@ const SuperAdmin = () => {
                 <ModuleScreen />
               ) : (
                 ""
+              )} */}
+
+              {window.location.pathname == "/super-admin" ? (
+                <h2 className=" flex align-items-center justify-content-center">
+                  Dashboard
+                </h2>
+              ) : (
+                ""
               )}
+              {window.location.pathname == "/super-admin/create-form" ? (
+                <CreateForm />
+              ) : (
+                ""
+              )}
+
+              {/* <StatusTable />
+              <Settings /> */}
+
+              {/* <Routes>
+                <Route path="/super-admin/settings" element={<Settings />} />
+              </Routes> */}
             </div>
           </div>
         </div>

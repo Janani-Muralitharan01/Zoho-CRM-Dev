@@ -7,7 +7,7 @@ import "./NavBar.css";
 import Cookies from "js-cookie";
 import { logOut } from "../../../features/Auth/logOut";
 import SuperAdminSideBar from "../superAdminSideBar/index";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../app/hooks";
 import Dashboard from "../../../assets/dashboard.svg";
 import CreateRecruiter from "../../../assets/createRecruiter.png";
@@ -18,15 +18,21 @@ import Contact from "../../../assets/contact.png";
 import Create from "../../../assets/create.png";
 import { useNavigate } from "react-router-dom";
 import { ModuleNameGet } from "../../../features/Modules/module";
+import { Link } from "react-router-dom";
 
 const NavBar = (props: any) => {
+  const [state, setState] = useState<any>([]);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    let res = dispatch(ModuleNameGet());
-    console.log("ddddd", res);
+    GetModuleName();
   }, []);
+
+  const GetModuleName = async () => {
+    let res = await dispatch(ModuleNameGet());
+    setState(res.payload.data.user);
+  };
 
   return (
     <div className="p-2 flex justify-content-between align-items-center NavBar_Main">
@@ -42,13 +48,20 @@ const NavBar = (props: any) => {
             <p>Dashboard</p>
           </div>
 
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(1)}
-          >
-            <img src={Create} width={16} height={16} className="mr-2 ml-4" />
-            <div> Recruiter</div>
-          </div>
+          {state
+            ? state.map((x: any, index: any) => {
+                return (
+                  <div
+                    key={index}
+                    className="flex align-items-center mt-2 white-space-nowrap ml-2"
+                  >
+                    <div> {x.modulename}</div>
+                  </div>
+                );
+              })
+            : ""}
+
+          {/*  
           <div
             className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
             onClick={(e: any) => props.handleClick(2)}
@@ -98,14 +111,17 @@ const NavBar = (props: any) => {
           >
             <img src={Contact} width={16} height={16} className="mr-2 ml-4" />
             <div>Status</div>
-          </div>
+          </div> */}
         </section>
       </section>
 
       <section className="">
         <i
           className="pi pi-cog ml-3 mr-2 pog"
-          onClick={(e: any) => props.handleClick(9)}
+          onClick={(e: any) => {
+            // props.handleClick(9);
+            navigate("/super-admin/settings");
+          }}
         ></i>
         <img src={Bell} width={26} height={26} alt="Bell" />
 

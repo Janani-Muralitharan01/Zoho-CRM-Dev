@@ -11,6 +11,9 @@ import { NewModuleCreation } from "../../../features/Modules/module";
 import { object } from "yup";
 import { useAppDispatch } from "../../../app/hooks";
 import SingleLine from "../Dialogs/singleLine";
+import { Toast } from "primereact/toast";
+import { useNavigate } from "react-router";
+import { LoginUserDetails } from "../../../features/Auth/userDetails";
 
 const DropArea = () => {
   const [uidv4, setuidv4] = useState<any>();
@@ -22,10 +25,14 @@ const DropArea = () => {
   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
   const [selectedCity1, setSelectedCity1] = useState(null);
   const dispatch = useAppDispatch();
+  const toast: any = useRef(null);
+  const navigate = useNavigate();
+
+  console.log(count?.userValue?.roles?.id, "count33333333", typeof count);
 
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
-    console.log("count", count);
+
     let index: any;
     let inputName: any;
     Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
@@ -43,6 +50,14 @@ const DropArea = () => {
       count.dragAndDrop.initialStartDragSuperAdmin
     );
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
+
+  useEffect(() => {
+    GetModuleName();
+  }, []);
+
+  const GetModuleName = async () => {
+    let res = await dispatch(LoginUserDetails());
+  };
 
   const handleChange = (e: any, i: number) => {
     let index: any;
@@ -102,7 +117,7 @@ const DropArea = () => {
     }
   };
 
-  const saveForm = () => {
+  const saveForm = async () => {
     let val: any = {};
 
     Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
@@ -120,17 +135,22 @@ const DropArea = () => {
     );
     let payload: object = {
       modulename: moduleName,
-      recuriter: "63bcea642d87e52932899f8a",
+      recuriter: count?.userValue?.roles?.id,
       moduleelements: {
         [formName]: val,
       },
     };
     console.log("count", count);
-    dispatch(NewModuleCreation(payload));
+    let res = await dispatch(NewModuleCreation(payload));
+    console.log("saveeeeeee", res);
+    if (res.payload.status == 200) {
+      navigate("/super-admin");
+    }
   };
 
   return (
     <div className="">
+      <Toast ref={toast} />
       <div className="ml-8 pl-2">
         <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
           Module Name
