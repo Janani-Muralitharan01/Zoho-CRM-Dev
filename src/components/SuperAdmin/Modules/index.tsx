@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { ModuleNameGet } from "../../../features/Modules/module";
 import NavBar from "../navBar";
+import ModuleSideBar from "./moduleSidebar"
 
 const SettingsModules = (props: any) => {
   const [value3, setValue3] = useState("");
@@ -35,15 +36,21 @@ const SettingsModules = (props: any) => {
   };
 
   return (
-    <div>
+    <div style={{background: 'rgb(250, 250, 251)',height: '100vh'}}>
+    <div >
       <NavBar />
-      <TabView
+      <div className="flex mt-3 create_form_main">
+        <div  style={{    background: 'gainsboro'}}><ModuleSideBar/></div>
+        
+        <div className="create_form_main_division ml-3">
+        <TabView
         className="tabview"
         activeIndex={activeIndex1}
         onTabChange={(e) => setActiveIndex1(e.index)}
       >
         <TabPanel header="Modules">
           <div>
+          
             <div className="flex justify-content-between">
               <span className="p-input-icon-left">
                 <i className="pi pi-search" />
@@ -55,7 +62,7 @@ const SettingsModules = (props: any) => {
               </span>
               <span>
                 <Button
-                  label="New module 2"
+                  label="New module"
                   icon="pi pi-plus"
                   onClick={NextPage}
                 />
@@ -83,6 +90,10 @@ const SettingsModules = (props: any) => {
         <TabPanel header="Tab Groups"></TabPanel>
         <TabPanel header="WebTabs"></TabPanel>
       </TabView>
+        </div>
+      </div>
+      
+    </div>
     </div>
   );
 };

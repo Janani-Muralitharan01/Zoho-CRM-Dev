@@ -1,6 +1,7 @@
 import SideBar from "./sideBar";
 import FormSideBar from "../formSidebar/index";
 import DropArea from "./dropArea";
+import { InputText } from 'primereact/inputtext';
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
 import QuickAction from "./quickAction";
@@ -15,6 +16,7 @@ interface itemProps {
 }
 
 const CreateForm = () => {
+  const [value2, setValue2] = useState('');
   const [page, setpage] = useState(<DropArea />);
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.logIn);
@@ -45,7 +47,12 @@ const CreateForm = () => {
   return (
     <div className="mx-3">
       <div className="flex align-items-center justify-content-start">
-        <h2 className="create_form_main_head ml-2">Create Form</h2>
+        <div className="mt-3 mb-4 flex">
+        
+                    <InputText id="username" value={value2} placeholder="Enter Your Module Name" onChange={(e) => setValue2(e.target.value)} style={{background: 'rgb(250, 250, 251)',border: 'none'}} />
+                    
+               
+        </div>
       </div>
       <div>
         <TopBars items={items} pageClick={pageClick} />

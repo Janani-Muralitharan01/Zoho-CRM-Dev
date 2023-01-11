@@ -32,7 +32,7 @@ const TopBars = (props: any) => {
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
   // const TopBars = (props: any) => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(3);
   const status = (e: any) => {
     setActiveIndex(e.index);
     props.pageClick(e);
