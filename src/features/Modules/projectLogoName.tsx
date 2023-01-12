@@ -22,10 +22,9 @@ export const ProjectLogoName: any = createAsyncThunk(
     try {
       const response: any = await axios.post(
         `http://54.152.227.71/api/profilelogo/createlogo`,
-        para1,
-       
+        para1
       );
-    console.log(response,"response")
+
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -36,7 +35,9 @@ export const LogoNameGet: any = createAsyncThunk(
   "module/moduleCreation",
   async (para1, thunkAPI) => {
     try {
-      const response = await axios.get(` http://54.152.227.71/api/profilelogo/getuserlogo/${para1}`);
+      const response = await axios.get(
+        ` http://54.152.227.71/api/profilelogo/getuserlogo/${para1}`
+      );
 
       return response;
     } catch (error: any) {
@@ -49,7 +50,7 @@ const userReducer = createSlice({
   name: "recruiter",
   initialState: initialState,
   reducers: {
-     CreateProjectLogoName: (state: any, action) => {
+    CreateProjectLogoName: (state: any, action) => {
       state = "";
     },
   },

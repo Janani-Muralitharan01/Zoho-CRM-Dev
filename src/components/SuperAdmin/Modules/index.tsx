@@ -28,7 +28,7 @@ const SettingsModules = (props: any) => {
   const navigate = useNavigate();
   const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
-  console.log("id",id)
+
   const NextPage = () => {
     navigate("/super-admin/create-form");
   };
@@ -69,7 +69,6 @@ const SettingsModules = (props: any) => {
   ];
 
   const editPolicy = (data: any) => {
-    console.log(data,"data")
     return (
       <div className="speeddial-linear-demo ">
         <SpeedDial
