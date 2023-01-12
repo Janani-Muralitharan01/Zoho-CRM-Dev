@@ -34,6 +34,7 @@ export const userReducer = createSlice({
       state.DialogOpenIndex = action.payload;
     },
     dragAndDropValueSuperAdmin: (state: any, action) => {
+      // console.log("storeee", action.payload);
       state.initialStartDragSuperAdmin = action.payload;
     },
     dragAndDropDialogIndexSuperAdmin: (state: any, action) => {

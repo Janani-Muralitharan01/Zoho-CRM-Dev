@@ -41,6 +41,7 @@ import ModuleScreen from "./Modules/modules";
 import { Route, Routes } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { pickListDragableIdStore } from "../../features/counter/dragAndDrop";
+import { ModuleNameGetForms } from "../../features/Modules/module";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -95,20 +96,54 @@ const SuperAdmin = () => {
     [uuidv4()]: COMPLETE,
   });
   const [indexId, setIndexId] = useState<any>();
+  const count: any = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(dragAndDropValueSuperAdmin(complete));
-    let value;
-    {
-      Object.keys(complete || {}).map((list: any, i: number) => {
-        complete[list].map((x: any) => {
-          if (x.subName === "Pick List") {
-            dispatch(pickListDragableIdStore(x.id));
+    if (window.location.pathname !== "/super-admin/edit") {
+      dispatch(dragAndDropValueSuperAdmin(complete));
+    }
+
+    if (
+      window.location.pathname === "/super-admin/edit" &&
+      count.module.rolesGetForms !== undefined
+    ) {
+      let totalValue = count.module?.rolesGetForms;
+      let keyValue;
+      for (let key in totalValue[0]?.moduleelements) {
+        keyValue = totalValue[0]?.moduleelements[key];
+      }
+      let arrayValue = [];
+      let arrayVal: any = [];
+      for (let val in keyValue) {
+        arrayValue.push(keyValue[val]);
+        arrayVal.push(val);
+      }
+      let lastValue: any = [];
+      arrayVal.map((x: any) => {
+        ITEMS.map((i: any) => {
+          if (x == i.names) {
+            lastValue.push(i);
           }
         });
       });
+
+      for (let key in complete) {
+        setCompleted({ [key]: lastValue });
+      }
+
+      dispatch(dragAndDropValueSuperAdmin(complete));
     }
+
+    Object.keys(complete || {}).map((list: any, i: number) => {
+      complete[list].map((x: any) => {
+        if (x.subName === "Pick List") {
+          dispatch(pickListDragableIdStore(x.id));
+        }
+      });
+    });
   }, [complete]);
+
+  function toAddData() {}
 
   const handleClick = (e: any) => {
     setId(e);

@@ -17,7 +17,7 @@ import {
 } from "../../../features/Modules/module";
 import { SpeedDial } from "primereact/speeddial";
 import NavBar from "../navBar";
-import ModuleSideBar from "./moduleSidebar"
+import ModuleSideBar from "./moduleSidebar";
 import "./Modules.css";
 
 const SettingsModules = (props: any) => {
@@ -83,64 +83,70 @@ const SettingsModules = (props: any) => {
   };
 
   return (
-    <div style={{background: 'rgb(250, 250, 251)',height: '100vh'}}>
-    <div >
-      <NavBar />
-      <div className="flex mt-3 create_form_main">
-        <div  style={{    background: 'gainsboro'}}><ModuleSideBar/></div>
-        
-        <div className="create_form_main_division ml-3">
-        <TabView
-        className="tabview"
-        activeIndex={activeIndex1}
-        onTabChange={(e) => setActiveIndex1(e.index)}
-      >
-        <TabPanel header="Modules">
-          <div>
-          
-            <div className="flex justify-content-between">
-              <span className="p-input-icon-left">
-                <i className="pi pi-search" />
-                <InputText
-                  value={value3}
-                  onChange={(e) => setValue3(e.target.value)}
-                  placeholder="Search"
-                />
-              </span>
-              <span>
-                <Button
-                  label="New module"
-                  icon="pi pi-plus"
-                  onClick={NextPage}
-                />
-              </span>
-            </div>
-            <div>
-              <DataTable
-                value={state}
-                paginator
-                responsiveLayout="scroll"
-                currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
-                rows={5}
-                rowsPerPageOptions={[5, 10, 15]}
-                selectionMode="single"
-                dataKey="id"
-              >
-                <Column field="modulename" header="Display in Tab As"></Column>
-                <Column field="modulename" header="Module Name"></Column>
-                <Column field="Last Modified" header="Last Modified"></Column>
-                <Column body={editPolicy} header="Actions"></Column>
-              </DataTable>
-            </div>
+    <div style={{ background: "rgb(250, 250, 251)", height: "100vh" }}>
+      <div>
+        <NavBar />
+        <div className="flex mt-3 create_form_main">
+          <div style={{ background: "gainsboro" }}>
+            <ModuleSideBar />
           </div>
-        </TabPanel>
-        <TabPanel header="Tab Groups"></TabPanel>
-        <TabPanel header="WebTabs"></TabPanel>
-      </TabView>
+
+          <div className="create_form_main_division ml-3">
+            <TabView
+              className="tabview"
+              activeIndex={activeIndex1}
+              onTabChange={(e) => setActiveIndex1(e.index)}
+            >
+              <TabPanel header="Modules">
+                <div>
+                  <div className="flex justify-content-between">
+                    <span className="p-input-icon-left">
+                      <i className="pi pi-search" />
+                      <InputText
+                        value={value3}
+                        onChange={(e) => setValue3(e.target.value)}
+                        placeholder="Search"
+                      />
+                    </span>
+                    <span>
+                      <Button
+                        label="New module"
+                        icon="pi pi-plus"
+                        onClick={NextPage}
+                      />
+                    </span>
+                  </div>
+                  <div>
+                    <DataTable
+                      value={state}
+                      paginator
+                      responsiveLayout="scroll"
+                      currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
+                      rows={5}
+                      rowsPerPageOptions={[5, 10, 15]}
+                      selectionMode="single"
+                      dataKey="id"
+                    >
+                      <Column
+                        field="modulename"
+                        header="Display in Tab As"
+                      ></Column>
+                      <Column field="modulename" header="Module Name"></Column>
+                      <Column
+                        field="Last Modified"
+                        header="Last Modified"
+                      ></Column>
+                      <Column body={editPolicy} header="Actions"></Column>
+                    </DataTable>
+                  </div>
+                </div>
+              </TabPanel>
+              <TabPanel header="Tab Groups"></TabPanel>
+              <TabPanel header="WebTabs"></TabPanel>
+            </TabView>
+          </div>
         </div>
       </div>
-      
-    </div>
     </div>
   );
 };

@@ -30,9 +30,30 @@ const DropArea = () => {
   const toast: any = useRef(null);
   const navigate = useNavigate();
   const [list1, setList1] = useState<any>([]);
+  const [editArray, setEditArray] = useState<any>();
 
   useEffect(() => {
-    if (!count.module.rolesGetForms) {
+    if (
+      !count.module.rolesGetForms &&
+      window.location.pathname !== "/super-admin/edit"
+    ) {
+      setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
+    }
+
+    if (window.location.pathname == "/super-admin/edit") {
+      // let totalValue = count.module.rolesGetForms[0].moduleelements;
+      // let keyValue;
+      // for (let key in totalValue) {
+      //   keyValue = totalValue[key];
+      //   setEditArray(totalValue[key]);
+      // }
+      // let arrayValue = [];
+      // let arrayVal = [];
+      // for (let val in keyValue) {
+      //   arrayValue.push(keyValue[val]);
+      //   arrayVal.push(val);
+      // }
+
       setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
     }
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
