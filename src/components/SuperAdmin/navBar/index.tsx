@@ -87,6 +87,7 @@ const NavBar = (props: any) => {
     setText(value.payload.data.data[0].tittle);
 
     setimgShow(value.payload.data.data[0].profile);
+    title.current?.hide();
   };
   const NavbarEdit = async (x: any) => {
     let res = await dispatch(ModuleNameGetForms(x._id));
