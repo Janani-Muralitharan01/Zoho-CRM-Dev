@@ -3,10 +3,12 @@ import Vector from "../../../assets/Vector.png";
 import Bell from "../../../assets/Bell.svg";
 import Email from "../../../assets/email.png";
 import Profile from "../../../assets/profile.png";
+import { FileUpload } from "primereact/fileupload";
 import "./NavBar.css";
+import { Toast } from "primereact/toast";
 import CreateForm from "../createForm/index";
 import Cookies from "js-cookie";
-
+import { Button } from "primereact/button";
 import { logOut } from "../../../features/Auth/logOut";
 import SuperAdminSideBar from "../superAdminSideBar/index";
 import React, { useEffect, useState, useRef } from "react";
@@ -21,15 +23,29 @@ import Create from "../../../assets/create.png";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useNavigate } from "react-router-dom";
 import { ModuleNameGet } from "../../../features/Modules/module";
+import {
+  ProjectLogoName,
+  LogoNameGet,
+} from "../../../features/Modules/projectLogoName";
 import { Link } from "react-router-dom";
 
 const NavBar = (props: any) => {
+  const [text, setText] = useState("Req-Portal");
   const [value3, setValue3] = useState("");
+  const [valuein, setvaluein] = useState("");
+  const [file, setFile] = useState<any>();
+  const [getData, setgetData] = useState<any>();
   const [state, setState] = useState<any>([]);
   const [displayNav, setdisplayNav] = useState();
   const dispatch = useAppDispatch();
+  const [imgShow, setimgShow] = useState<any>(Vector);
+
   const navigate = useNavigate();
+
+  const toast: any = useRef(null);
   const op = useRef<OverlayPanel>(null);
+  const title = useRef<OverlayPanel>(null);
+
   useEffect(() => {
     GetModuleName();
   }, []);
@@ -38,29 +54,75 @@ const NavBar = (props: any) => {
     let res = await dispatch(ModuleNameGet());
     setState(res.payload.data.user);
   };
+
   const ShowNav = (items: any) => {
     setdisplayNav(items);
   };
   const NextPage = () => {
     navigate("/super-admin/create-form");
   };
+  function handleChange(event: any) {
+    const upload = event.target.files[0];
 
+    setFile(upload);
+  }
+
+  const ChangeSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("tittle", valuein);
+    formData.append("profile", file);
+    let value = await dispatch(ProjectLogoName(formData));
+
+    setgetData(value.payload.data.data[0]);
+
+    setText(value.payload.data.data[0].tittle);
+
+    setimgShow(value.payload.data.data[0].profile);
+  };
   return (
     <div className="p-2 flex justify-content-between align-items-center NavBar_Main">
+      <Toast ref={toast} position="top-center"></Toast>
       <section className="flex NavBar_Division  align-items-center">
-        <img src={Vector} alt="Vector" width={30} height={30} />
-        <p className="font-bold text-2xl line-height-1 white-space-nowrap ml-1">
-          Req-Portal
-        </p>
+        <img src={imgShow} alt="Vector" width={30} height={30} />
+        <div onClick={(e) => title.current?.toggle(e)}>
+          <p className="font-bold text-2xl line-height-1 white-space-nowrap ml-1">
+            {text}
+          </p>
+        </div>
 
-        <section className="flex">
+        <OverlayPanel
+          ref={title}
+          showCloseIcon
+          id="overlay_panel"
+          style={{ width: "350px" }}
+          className="overlaypanel-demo"
+        >
+          <div>
+            <form>
+              <InputText type="file" onChange={handleChange} />
+              <InputText
+                value={valuein}
+                onChange={(e) => setvaluein(e.target.value)}
+                placeholder="Enter Product Name"
+                className="w-12 mt-2"
+                style={{ width: "148px" }}
+              />
+              <div className="flex justify-content-end" style={{ gap: "17px" }}>
+                <Button className="mt-2">Cancel</Button>
+                <Button type="submit" className="mt-2 " onClick={ChangeSubmit}>
+                  Change
+                </Button>
+              </div>
+            </form>
+          </div>
+        </OverlayPanel>
+        <section className="flex  ">
           <div className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick">
             <img src={Dashboard} width={16} height={16} className="mr-2 ml-4" />
             <p>Dashboard</p>
           </div>
-          <span className="nav_text  flex align-items-center mt-2 white-space-nowrap ml-2">
-            {displayNav}
-          </span>
           {state
             ? state.map((x: any, index: any) => {
                 return (
@@ -72,7 +134,9 @@ const NavBar = (props: any) => {
                       {" "}
                       {index <= 5 ? (
                         <div>
-                          <div className="nav_text">{x.modulename} </div>
+                          <div className="nav_text capitalize">
+                            {x.modulename}{" "}
+                          </div>
                         </div>
                       ) : (
                         ""
@@ -82,9 +146,13 @@ const NavBar = (props: any) => {
                 );
               })
             : ""}
-
-          <div onClick={(e) => op.current?.toggle(e)}>
-            <i className="pi pi-angle-double-right mr-6 mt-4"></i>
+          <div className="flex relative" style={{ right: "86px" }}>
+            <span className="nav_text  flex align-items-center mt-2 white-space-nowrap capitalize">
+              {displayNav}
+            </span>
+            <div onClick={(e) => op.current?.toggle(e)}>
+              <i className="pi pi-angle-double-right mr-6 mt-4"></i>
+            </div>
           </div>
           <OverlayPanel
             ref={op}
@@ -113,7 +181,7 @@ const NavBar = (props: any) => {
                             {index >= 0 ? (
                               <div>
                                 <div
-                                  className="nav_text_overlay"
+                                  className="nav_text_overlay capitalize"
                                   onClick={() => ShowNav(x.modulename)}
                                 >
                                   {x.modulename}{" "}
@@ -137,57 +205,6 @@ const NavBar = (props: any) => {
               </div>
             </div>
           </OverlayPanel>
-          {/*  
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(2)}
-          >
-            <img src={Recruiter} width={16} height={16} className="mr-2 ml-4" />
-            <div>Recruiters</div>
-          </div>
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(3)}
-          >
-            <img src={Create} width={16} height={16} className="mr-2 ml-4" />
-            <div> Candidate</div>
-          </div>
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(4)}
-          >
-            <img src={Contact} width={16} height={16} className="mr-2 ml-4" />
-            <div>Candidate</div>
-          </div>
-
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(5)}
-          >
-            <img src={Create} width={16} height={16} className="mr-2 ml-4" />
-            <div> Form</div>
-          </div>
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(6)}
-          >
-            <img src={Contact} width={16} height={16} className="mr-2 ml-4" />
-            <div> Submission</div>
-          </div>
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(7)}
-          >
-            <img src={Create} width={16} height={16} className="mr-2 ml-4" />
-            <div>Interviews</div>
-          </div>
-          <div
-            className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick"
-            onClick={(e: any) => props.handleClick(8)}
-          >
-            <img src={Contact} width={16} height={16} className="mr-2 ml-4" />
-            <div>Status</div>
-          </div> */}
         </section>
       </section>
 
@@ -201,7 +218,6 @@ const NavBar = (props: any) => {
         ></i>
         <img src={Bell} width={26} height={26} alt="Bell" />
 
-        {/* <img src={Email} width={26} height={26} alt="Email" className="ml-4" /> */}
         <img
           src={Profile}
           width={26}
