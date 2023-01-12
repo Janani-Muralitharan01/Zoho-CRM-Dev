@@ -90,7 +90,7 @@ export const ModuleNameGetForms: any = createAsyncThunk(
       const response = await axios.get(
         `${BASEURL}/api/forms/getforms/${para1}`
       );
-      console.log("getforms", response);
+
       return response;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error);
@@ -134,12 +134,10 @@ export const userReducer = createSlice({
       state.rolesDelete = action.payload.data.user;
     },
     [ModuleNameUpdate.fulfilled]: (state: any, action: any) => {
-      // console.log("ModuleNameUpdate", action.payload);
       // state.rolesUpdate = action.payload;
     },
     [ModuleNameGetForms.fulfilled]: (state: any, action: any) => {
-      // console.log("ModuleNameGetForms", action.payload);
-      // state.rolesGetForms = action.payload.data.user;
+      state.rolesGetForms = action.payload.data.data;
     },
   },
 });

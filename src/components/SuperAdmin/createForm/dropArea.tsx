@@ -14,6 +14,7 @@ import SingleLine from "../Dialogs/singleLine";
 import { Toast } from "primereact/toast";
 import { useNavigate } from "react-router";
 import { LoginUserDetails } from "../../../features/Auth/userDetails";
+import { Dropdown } from "primereact/dropdown";
 
 const DropArea = () => {
   const [uidv4, setuidv4] = useState<any>();
@@ -24,26 +25,40 @@ const DropArea = () => {
   const [sidebar, setSidebar] = useState(false);
   const [date, setDate] = useState<Date | Date[] | undefined>(new Date());
   const [selectedCity1, setSelectedCity1] = useState(null);
+  const [pickList, setPickList] = useState<any>();
   const dispatch = useAppDispatch();
   const toast: any = useRef(null);
   const navigate = useNavigate();
+  const [list1, setList1] = useState<any>([]);
 
   useEffect(() => {
-    setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
+    if (!count.module.rolesGetForms) {
+      setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
+    }
+  }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
+  const add = async () => {
     let index: any;
-    let inputName: any;
+    let inputName: any[] = [];
     Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
       (x: any) => {
         index = x;
       }
     );
+
     if (index != null) {
       [count.dragAndDrop.initialStartDragSuperAdmin].map((x: any) => {
         inputName = x[index];
       });
     }
-  }, [count.dragAndDrop.initialStartDragSuperAdmin]);
+
+    inputName = inputName.map((x: any, idx: any) => {
+      if (x.id === count.dragAndDrop.pickListDragableId) {
+        return { ...x, picklist: count.dragAndDrop.PickListData };
+      }
+      return x;
+    });
+  };
 
   useEffect(() => {
     GetModuleName();
@@ -120,6 +135,23 @@ const DropArea = () => {
       navigate("/super-admin");
     }
   };
+  useEffect(() => {
+    if (count.module.rolesGetForms) {
+      let val = Object.keys(count.module.rolesGetForms[0]?.moduleelements);
+      setFormName(val);
+      setModuleName(count.module.rolesGetForms[0]?.modulename);
+
+      // setuidv4(count.module.rolesGetForms[0]?.moduleelements);
+    }
+  }, [count.module.rolesGetForms]);
+
+  var pickListValue: any = [];
+
+  useEffect(() => {
+    setList1(count.dragAndDrop.PickListData);
+
+    add();
+  }, [count.dragAndDrop.PickListData]);
 
   return (
     <div className="">
@@ -202,20 +234,42 @@ const DropArea = () => {
                                   {...provided.dragHandleProps}
                                 >
                                   <div className=" py-1">
-                                    <input
-                                      type="text"
-                                      name="names"
-                                      style={{
-                                        height: "44px",
-                                        border: "1px solid lightgrey",
-                                        color: "#8083A3",
-                                      }}
-                                      value={item.names}
-                                      onChange={(e) => {
-                                        handleChange(e, index);
-                                      }}
-                                      className=" w-30rem my-auto border-round-md  p-3"
-                                    />
+                                    {item.subName === "Pick List" ? (
+                                      <>
+                                        <Dropdown
+                                          value={pickList}
+                                          options={list1}
+                                          onChange={(e) => {
+                                            handleChange(e, index);
+                                            setPickList(e.value);
+                                          }}
+                                          optionLabel="value"
+                                          placeholder="Pick List"
+                                          style={{
+                                            height: "44px",
+                                            border: "1px solid lightgrey",
+                                            color: "#8083A3",
+                                          }}
+                                          className=" w-30rem my-auto border-round-md"
+                                        />
+                                      </>
+                                    ) : (
+                                      <input
+                                        type="text"
+                                        name="names"
+                                        style={{
+                                          height: "44px",
+                                          border: "1px solid lightgrey",
+                                          color: "#8083A3",
+                                        }}
+                                        value={item.names}
+                                        onChange={(e) => {
+                                          handleChange(e, index);
+                                        }}
+                                        className=" w-30rem my-auto border-round-md  p-3"
+                                      />
+                                    )}
+
                                     <section
                                       className="grey py-2 font-semibold"
                                       style={{ color: "#333333" }}

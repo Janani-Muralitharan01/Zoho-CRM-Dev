@@ -40,6 +40,7 @@ import Settings from "./Settings/index";
 import ModuleScreen from "./Modules/modules";
 import { Route, Routes } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { pickListDragableIdStore } from "../../features/counter/dragAndDrop";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -93,9 +94,20 @@ const SuperAdmin = () => {
   const [complete, setCompleted] = useState<any>({
     [uuidv4()]: COMPLETE,
   });
+  const [indexId, setIndexId] = useState<any>();
 
   useEffect(() => {
     dispatch(dragAndDropValueSuperAdmin(complete));
+    let value;
+    {
+      Object.keys(complete || {}).map((list: any, i: number) => {
+        complete[list].map((x: any) => {
+          if (x.subName === "Pick List") {
+            dispatch(pickListDragableIdStore(x.id));
+          }
+        });
+      });
+    }
   }, [complete]);
 
   const handleClick = (e: any) => {
@@ -137,6 +149,7 @@ const SuperAdmin = () => {
 
               let indexOfDragable = result ? result.source.index : "";
               dispatch(dragAndDropDialogIndexSuperAdmin(indexOfDragable));
+              setIndexId(indexOfDragable);
 
               break;
 
@@ -202,7 +215,11 @@ const SuperAdmin = () => {
               ) : (
                 ""
               )}
-
+              {window.location.pathname == "/super-admin/edit" ? (
+                <CreateForm />
+              ) : (
+                ""
+              )}
               {/* <StatusTable />
               <Settings /> */}
 

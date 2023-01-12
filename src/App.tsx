@@ -66,6 +66,7 @@ function App() {
                 <Route path="/selection" element={<Selection />} />
                 <Route path="/super-admin">
                   <Route index={true} element={<SuperAdmin />} />
+                  <Route path="edit" element={<SuperAdmin />} />
                   <Route index={false} path="Settings" element={<Settings />} />
                   <Route
                     path="Settings/Modules"

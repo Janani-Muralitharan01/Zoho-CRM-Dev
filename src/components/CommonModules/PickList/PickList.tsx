@@ -7,8 +7,9 @@ import { InputText } from "primereact/inputtext";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { ColorPicker } from "primereact/colorpicker";
 import { InputTextarea } from "primereact/inputtextarea";
-
 import "./PickList.css";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { pickListDropDownData } from "../../../features/counter/dragAndDrop";
 
 interface PickListProps {
   pickListDialogVisible: boolean;
@@ -40,6 +41,8 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
   ]);
   const [Multiselect, setMultiselect] = useState<any>([]);
   const [color2, setColor2] = useState("");
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.logIn);
   const op: any = useRef(null);
   const Days = [
     {
@@ -575,7 +578,7 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
               );
             })}
           </section>
-          <p className="text-sm">Select default value </p>
+          {/* <p className="text-sm">Select default value </p>
           <Dropdown
             value={selectedCity1}
             options={arr}
@@ -618,8 +621,8 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
             {order == "Entered order"
               ? "Values will be sorted alphabetically in respective languages."
               : "The order customized here will be followed in List views, reports and dashboards where sorting is applied for the picklist field."}
-          </p>
-          <section>
+          </p> */}
+          {/* <section>
             <p>
               <Checkbox
                 inputId="binary"
@@ -649,10 +652,16 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
               ></input>
               Show Tooltip{" "}
             </p>
-          </section>
+          </section> */}
           <div className="currencyProperties_cancel">
             <p className="">Don't save this field.</p>
-            <Button label="Done" onClick={() => setState(!state)} />
+            <Button
+              label="Done"
+              onClick={() => {
+                setState(!state);
+                dispatch(pickListDropDownData(arr));
+              }}
+            />
           </div>
         </Dialog>
       )}

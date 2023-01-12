@@ -45,9 +45,13 @@ const SettingsModules = (props: any) => {
     {
       label: "Update",
       icon: "pi pi-pencil",
-      command: (y: any) => {
-        dispatch(ModuleNameGetForms(id));
-        console.log("count", count);
+      command: async (y: any) => {
+        let res = await dispatch(ModuleNameGetForms(id));
+
+        if (res.payload.status === 200) {
+          setId(null);
+          navigate("/super-admin/edit");
+        }
       },
     },
     {
