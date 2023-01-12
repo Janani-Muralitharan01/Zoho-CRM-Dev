@@ -45,7 +45,7 @@ const NavBar = (props: any) => {
   const toast: any = useRef(null);
   const op = useRef<OverlayPanel>(null);
   const title = useRef<OverlayPanel>(null);
-
+  console.log(title,"title")
   useEffect(() => {
     GetModuleName();
   }, []);
@@ -57,7 +57,7 @@ const NavBar = (props: any) => {
 
   const ShowNav = (items: any) => {
     setdisplayNav(items);
-    console.log(items, 'x.modulename');
+   
   };
   const NextPage = () => {
     navigate('/super-admin/create-form');
@@ -83,6 +83,7 @@ const NavBar = (props: any) => {
     setText(value.payload.data.data[0].tittle);
 
     setimgShow(value.payload.data.data[0].profile);
+    title.current?.hide()
   };
   return (
     <div className="p-2 flex justify-content-between align-items-center NavBar_Main">
