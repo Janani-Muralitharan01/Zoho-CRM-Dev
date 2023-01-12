@@ -22,12 +22,14 @@ import Contact from "../../../assets/contact.png";
 import Create from "../../../assets/create.png";
 import { OverlayPanel } from "primereact/overlaypanel";
 import { useNavigate } from "react-router-dom";
-import { ModuleNameGet } from "../../../features/Modules/module";
+import {
+  ModuleNameGet,
+  ModuleNameGetForms,
+} from "../../../features/Modules/module";
 import {
   ProjectLogoName,
   LogoNameGet,
 } from "../../../features/Modules/projectLogoName";
-import { Link } from "react-router-dom";
 
 const NavBar = (props: any) => {
   const [text, setText] = useState("Req-Portal");
@@ -55,8 +57,13 @@ const NavBar = (props: any) => {
     setState(res.payload.data.user);
   };
 
-  const ShowNav = (items: any) => {
+  const ShowNav = async (items: any, id: string) => {
     setdisplayNav(items);
+    let res = await dispatch(ModuleNameGetForms(id));
+
+    if (res.payload.status === 200) {
+      navigate("/super-admin/edit");
+    }
   };
   const NextPage = () => {
     navigate("/super-admin/create-form");
@@ -80,6 +87,12 @@ const NavBar = (props: any) => {
     setText(value.payload.data.data[0].tittle);
 
     setimgShow(value.payload.data.data[0].profile);
+  };
+  const NavbarEdit = async (x: any) => {
+    let res = await dispatch(ModuleNameGetForms(x._id));
+    if (res.payload.status === 200) {
+      navigate("/super-admin/edit");
+    }
   };
   return (
     <div className="p-2 flex justify-content-between align-items-center NavBar_Main">
@@ -134,8 +147,11 @@ const NavBar = (props: any) => {
                       {" "}
                       {index <= 5 ? (
                         <div>
-                          <div className="nav_text capitalize">
-                            {x.modulename}{" "}
+                          <div
+                            className="nav_text capitalize"
+                            onClick={(e: any) => NavbarEdit(x)}
+                          >
+                            {x.modulename}
                           </div>
                         </div>
                       ) : (
@@ -182,7 +198,7 @@ const NavBar = (props: any) => {
                               <div>
                                 <div
                                   className="nav_text_overlay capitalize"
-                                  onClick={() => ShowNav(x.modulename)}
+                                  onClick={() => ShowNav(x.modulename, x._id)}
                                 >
                                   {x.modulename}{" "}
                                 </div>
