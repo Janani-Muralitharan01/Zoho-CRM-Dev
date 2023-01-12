@@ -9,17 +9,24 @@ import { Column } from "primereact/column";
 import { Dropdown } from "primereact/dropdown";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { ModuleNameGet } from "../../../features/Modules/module";
+import {
+  ModuleNameGet,
+  ModuleNameDelete,
+  ModuleNameUpdate,
+  ModuleNameGetForms,
+} from "../../../features/Modules/module";
+import { SpeedDial } from "primereact/speeddial";
 import NavBar from "../navBar";
 import ModuleSideBar from "./moduleSidebar"
+import "./Modules.css";
 
 const SettingsModules = (props: any) => {
   const [value3, setValue3] = useState("");
   const [activeIndex1, setActiveIndex1] = useState(0);
   const [state, setState] = useState<any>([]);
-  const [id, setId] = useState();
+  const [id, setId] = useState<any>();
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
 
   const NextPage = () => {
@@ -33,6 +40,42 @@ const SettingsModules = (props: any) => {
   const GetModuleName = async () => {
     let res = await dispatch(ModuleNameGet());
     setState(res.payload.data.user);
+  };
+
+  const items = [
+    {
+      label: "Update",
+      icon: "pi pi-pencil",
+      command: (y: any) => {
+        dispatch(ModuleNameGetForms(id));
+        console.log("count", count);
+      },
+    },
+    {
+      label: "Delete",
+      icon: "pi pi-trash",
+      command: async (y: any) => {
+        let res = await dispatch(ModuleNameDelete(id));
+        if (res.payload.status == 202) {
+          setId(null);
+          GetModuleName();
+        }
+      },
+    },
+  ];
+
+  const editPolicy = (data: any) => {
+    return (
+      <div className="speeddial-linear-demo ">
+        <SpeedDial
+          model={items}
+          onClick={(x: any) => {
+            setId(data._id);
+          }}
+          direction="right"
+        />
+      </div>
+    );
   };
 
   return (
@@ -82,7 +125,7 @@ const SettingsModules = (props: any) => {
                 <Column field="modulename" header="Display in Tab As"></Column>
                 <Column field="modulename" header="Module Name"></Column>
                 <Column field="Last Modified" header="Last Modified"></Column>
-                <Column field="Actions" header="Actions"></Column>
+                <Column body={editPolicy} header="Actions"></Column>
               </DataTable>
             </div>
           </div>

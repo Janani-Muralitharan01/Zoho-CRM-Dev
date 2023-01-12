@@ -28,8 +28,6 @@ const DropArea = () => {
   const toast: any = useRef(null);
   const navigate = useNavigate();
 
-  console.log(count?.userValue?.roles?.id, "count33333333", typeof count);
-
   useEffect(() => {
     setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
 
@@ -45,10 +43,6 @@ const DropArea = () => {
         inputName = x[index];
       });
     }
-    console.log(
-      "count.dragAndDrop.initialStartDragSuperAdmin",
-      count.dragAndDrop.initialStartDragSuperAdmin
-    );
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
   useEffect(() => {
@@ -91,29 +85,8 @@ const DropArea = () => {
       if (value.names === "Pick List") {
         return <Picklist pickListDialogVisible={true} />;
       } else if (value.names === "Single Line") {
-        console.log("fff");
         return <SingleLine SingleLineDialogVisible={true} />;
       }
-    }
-  };
-
-  const Extract = () => {
-    {
-      Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
-        (list: any, i: number) => {
-          count.dragAndDrop.initialStartDragSuperAdmin[list].map(
-            (i: any, index: any) => {
-              array.push({
-                [i.name]: {
-                  type: i.name,
-                  fieldname: i.name,
-                  defaultvalue: i.name,
-                },
-              });
-            }
-          );
-        }
-      );
     }
   };
 
@@ -140,9 +113,9 @@ const DropArea = () => {
         [formName]: val,
       },
     };
-    console.log("count", count);
+
     let res = await dispatch(NewModuleCreation(payload));
-    console.log("saveeeeeee", res);
+
     if (res.payload.status == 200) {
       navigate("/super-admin");
     }
