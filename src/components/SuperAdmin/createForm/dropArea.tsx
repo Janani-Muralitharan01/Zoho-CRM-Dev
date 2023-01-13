@@ -315,10 +315,10 @@ const DropArea = () => {
                               )}
                             </Draggable>
 
-                            {count.dragAndDrop.DialogIndex == 4 &&
-                            item.names == "Pick List"
+                            {count.dragAndDrop.DialogIndex == 5 &&
+                            item.subName == "Pick List"
                               ? openDialog()
-                              : item.names == "Single Line"
+                              : item.subName == "Single Line"
                               ? openDialog()
                               : ""}
                           </>
