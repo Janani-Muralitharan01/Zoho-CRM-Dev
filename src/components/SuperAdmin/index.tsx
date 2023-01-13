@@ -89,7 +89,7 @@ const move = (
 };
 
 const SuperAdmin = () => {
-  const routeParams = useParams();
+  const { editId } = useParams();
   const [id, setId] = useState();
 
   const [complete, setCompleted] = useState<any>({
@@ -99,12 +99,19 @@ const SuperAdmin = () => {
   const count: any = useSelector((state) => state);
 
   useEffect(() => {
-    if (window.location.pathname !== "/super-admin/edit") {
+    if (window.location.pathname !== `/super-admin/edit/${editId}`) {
       dispatch(dragAndDropValueSuperAdmin(complete));
     }
 
     if (
-      window.location.pathname === "/super-admin/edit" &&
+      window.location.pathname === `/super-admin/edit/${editId}` &&
+      count.module.rolesGetForms === undefined
+    ) {
+      dispatch(dragAndDropValueSuperAdmin(complete));
+    }
+
+    if (
+      window.location.pathname === `/super-admin/edit/${editId}` &&
       count.module.rolesGetForms !== undefined
     ) {
       let totalValue = count.module?.rolesGetForms;
@@ -250,7 +257,7 @@ const SuperAdmin = () => {
               ) : (
                 ""
               )}
-              {window.location.pathname == "/super-admin/edit" ? (
+              {window.location.pathname == `/super-admin/edit/${editId}` ? (
                 <CreateForm />
               ) : (
                 ""

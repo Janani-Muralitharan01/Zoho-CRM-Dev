@@ -62,7 +62,7 @@ const NavBar = (props: any) => {
     let res = await dispatch(ModuleNameGetForms(id));
 
     if (res.payload.status === 200) {
-      navigate("/super-admin/edit");
+      // navigate(`/super-admin/edit/${id}`);
     }
   };
   const NextPage = () => {
@@ -92,7 +92,7 @@ const NavBar = (props: any) => {
   const NavbarEdit = async (x: any) => {
     let res = await dispatch(ModuleNameGetForms(x._id));
     if (res.payload.status === 200) {
-      navigate("/super-admin/edit");
+      // navigate(`/super-admin/edit/${x._id}`);
     }
   };
   return (

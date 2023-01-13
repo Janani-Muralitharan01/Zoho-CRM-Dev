@@ -7,7 +7,10 @@ import { Calendar } from "primereact/calendar";
 import { dragAndDropDialogIndexSuperAdmin } from "../../../features/counter/dragAndDrop";
 import { ITEMS } from "../../Constant/const";
 import Picklist from "../../CommonModules/PickList/PickList";
-import { NewModuleCreation } from "../../../features/Modules/module";
+import {
+  NewModuleCreation,
+  ModuleNameUpdate,
+} from "../../../features/Modules/module";
 import { object } from "yup";
 import { useAppDispatch } from "../../../app/hooks";
 import SingleLine from "../Dialogs/singleLine";
@@ -15,8 +18,10 @@ import { Toast } from "primereact/toast";
 import { useNavigate } from "react-router";
 import { LoginUserDetails } from "../../../features/Auth/userDetails";
 import { Dropdown } from "primereact/dropdown";
+import { useParams } from "react-router-dom";
 
 const DropArea = () => {
+  let { editId } = useParams();
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
   const [formName, setFormName] = useState<any>();
@@ -35,12 +40,12 @@ const DropArea = () => {
   useEffect(() => {
     if (
       !count.module.rolesGetForms &&
-      window.location.pathname !== "/super-admin/edit"
+      window.location.pathname !== `/super-admin/edit/${editId}`
     ) {
       setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
     }
 
-    if (window.location.pathname == "/super-admin/edit") {
+    if (window.location.pathname == `/super-admin/edit/${editId}`) {
       // let totalValue = count.module.rolesGetForms[0].moduleelements;
       // let keyValue;
       // for (let key in totalValue) {
@@ -149,8 +154,16 @@ const DropArea = () => {
         [formName]: val,
       },
     };
-
-    let res = await dispatch(NewModuleCreation(payload));
+    let res;
+    if (window.location.pathname === `/super-admin/edit/${editId}`) {
+      let value = {
+        payload: payload,
+        editId: editId,
+      };
+      res = await dispatch(ModuleNameUpdate(value));
+    } else {
+      res = await dispatch(NewModuleCreation(payload));
+    }
 
     if (res.payload.status == 200) {
       navigate("/super-admin");

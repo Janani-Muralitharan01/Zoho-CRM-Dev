@@ -49,7 +49,7 @@ function App() {
 
   return (
     <>
-      {/* {count ? (
+      {count ? (
         <>
           <div className={"loaderTrue " + (show ? "flex" : "hidden")}>
             <ProgressSpinner
@@ -57,8 +57,8 @@ function App() {
               strokeWidth="8"
               className=""
             />
-          </div> */}
-          {/* <section className={"" + (show ? "hidden" : "block")}> */}
+          </div>
+          <section className={"" + (show ? "hidden" : "block")}>
             <Routes>
               <Route element={<AuthRoute />}>
                 {/* <NavBar /> */}
@@ -66,7 +66,7 @@ function App() {
                 <Route path="/selection" element={<Selection />} />
                 <Route path="/super-admin">
                   <Route index={true} element={<SuperAdmin />} />
-                  <Route path="edit" element={<SuperAdmin />} />
+                  <Route path="edit/:editId" element={<SuperAdmin />} />
                   <Route index={false} path="Settings" element={<Settings />} />
                   <Route
                     path="Settings/Modules"
@@ -82,12 +82,12 @@ function App() {
                 element={<CreateRecruiterForm />}
               />
             </Routes>
-          {/* </section> */}
+          </section>
         </>
-  //     ) : (
-  //       ""
-  //     )}
-    // </>
+      ) : (
+        ""
+      )}
+    </>
   );
 }
 
