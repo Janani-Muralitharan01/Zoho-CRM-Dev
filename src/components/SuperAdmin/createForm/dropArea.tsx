@@ -20,11 +20,16 @@ import { LoginUserDetails } from "../../../features/Auth/userDetails";
 import { Dropdown } from "primereact/dropdown";
 import { useParams } from "react-router-dom";
 
-const DropArea = () => {
+interface formModel {
+  name: string;
+  id: string;
+}
+
+const DropArea = (props: any) => {
   let { editId } = useParams();
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
-  const [formName, setFormName] = useState<any>();
+  const [formName, setFormName] = useState<any>([{ name: "", id: "" }]);
   const [moduleName, setModuleName] = useState<any>();
   const [array, setArray] = useState<any>([]);
   const [sidebar, setSidebar] = useState(false);
@@ -36,6 +41,17 @@ const DropArea = () => {
   const navigate = useNavigate();
   const [list1, setList1] = useState<any>([]);
   const [editArray, setEditArray] = useState<any>();
+  const [finaValue, setFinalValue] = useState<object>();
+
+  useEffect(() => {
+    setModuleName(props.moduleValue);
+  }, [props.moduleValue]);
+
+  useEffect(() => {
+    if (count.dragAndDrop.newSectionIndex >= formName.length) {
+      setFormName([...formName, { name: "" }]);
+    }
+  }, [count.dragAndDrop.newSectionIndex]);
 
   useEffect(() => {
     if (
@@ -132,28 +148,23 @@ const DropArea = () => {
   };
 
   const saveForm = async () => {
-    let val: any = {};
+    let val: object = {};
 
-    Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
-      (list: any, i: number) => {
-        count.dragAndDrop.initialStartDragSuperAdmin[list].map(
-          (i: any, index: any) => {
-            val[i.names] = {
-              type: i.names,
-              fieldname: i.names,
-              defaultvalue: i.names,
-            };
-          }
-        );
-      }
+    const value = Object.assign(
+      {},
+      count.dragAndDrop.initialStartDragSuperAdmin
     );
+    formName.map((f: formModel, i: number) => {
+      value[f.name] = value[f.id];
+      delete value[f.id];
+    });
+
     let payload: object = {
       modulename: moduleName,
       recuriter: count?.userValue?.roles?.id,
-      moduleelements: {
-        [formName]: val,
-      },
+      moduleelements: value,
     };
+
     let res;
     if (window.location.pathname === `/super-admin/edit/${editId}`) {
       let value = {
@@ -187,11 +198,18 @@ const DropArea = () => {
     add();
   }, [count.dragAndDrop.PickListData]);
 
+  let handleChangeForm = (i: number, e: any, list: any) => {
+    let newFormValues = [...formName];
+    newFormValues[i].name = e.target.value;
+    newFormValues[i].id = list;
+    setFormName(newFormValues);
+  };
+
   return (
     <div className="">
       <Toast ref={toast} />
       <div className="ml-8 pl-2">
-        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
+        {/* <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
           Module Name
         </div>
         <input
@@ -206,23 +224,7 @@ const DropArea = () => {
           }}
           value={moduleName}
           onChange={(e) => setModuleName(e.target.value)}
-        />
-        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
-          Form Name
-        </div>
-        <input
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm uppercase text-900"
-          p-3
-          style={{
-            height: "52px",
-            border: "1px solid lightgrey",
-            color: "#333333",
-            background: "#CCCCCC",
-          }}
-          value={formName}
-          onChange={(e) => setFormName(e.target.value)}
-        />
+        /> */}
       </div>
       <div className="ml-8 pl-2">
         <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
@@ -251,9 +253,35 @@ const DropArea = () => {
               <Droppable key={list} droppableId={list}>
                 {(provided, snapshot) => (
                   <div className="" ref={provided.innerRef}>
-                    {uidv4[list].length
-                      ? uidv4[list].map((item: any, index: number) => (
+                    <section className="ml-8 pl-2 mt-2">
+                      <input
+                        placeholder="Untiled form"
+                        className=" w-30rem my-auto  text-sm  text-900 border-none"
+                        style={{
+                          height: "52px",
+                          color: "#333333",
+                        }}
+                        value={formName.name}
+                        onChange={(e) => handleChangeForm(i, e, list)}
+                      />
+                    </section>
+                    {
+                      uidv4[list].length ? (
+                        uidv4[list].map((item: any, index: number) => (
                           <>
+                            {/* <section className="ml-8 pl-2 mt-2">
+                              <input
+                                placeholder="Untiled form"
+                                className=" w-30rem my-auto  text-sm  text-900"
+                                style={{
+                                  height: "52px",
+                                  color: "#333333",
+                                }}
+                                value={formName.name}
+                                onChange={(e) => handleChangeForm(i, e)}
+                              />
+                            </section> */}
+
                             <Draggable
                               key={item.id}
                               draggableId={item.id}
@@ -323,10 +351,32 @@ const DropArea = () => {
                               : ""}
                           </>
                         ))
-                      : !provided.placeholder && (
-                          <span className="Appp">Drop items here</span>
-                        )}
-                    {provided.placeholder}
+                      ) : (
+                        // !provided.placeholder && (
+                        <div className="pt-4 ml-8 pl-2">
+                          {/* {formName.map((x: any) => {
+                            return ( */}
+
+                          {/* <input
+                            placeholder="Untiled form"
+                            className=" w-30rem my-auto  text-sm  text-900"
+                            style={{
+                              height: "52px",
+                              color: "#333333",
+                            }}
+                            value={formName.name}
+                            onChange={(e) => handleChangeForm(i, e)}
+                          /> */}
+
+                          {/* );
+                          })} */}
+
+                          <span className="mt-3">+ Drop items here</span>
+                        </div>
+                      )
+                      // )
+                    }
+                    {/* {provided.placeholder} */}
                   </div>
                 )}
               </Droppable>

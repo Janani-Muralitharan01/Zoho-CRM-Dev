@@ -1,14 +1,6 @@
 import "./index.css";
 import React, { useState, useEffect } from "react";
-import SuperAdminSideBar from "./superAdminSideBar";
-import CreateRecruiterForm from "./createRecruiterForm";
-import CreateRecrutierTable from "./createRecruiterTable";
-import CandidateTable from "./CandidateTable";
-import StatusTable from "./StatusTable";
-import Dashboard from "../layouts/Dashboard-Main/dashboard";
-import FormCreation from "./formCreation";
-import SideBar from "../layouts/Sidebar/sidebar";
-import SettingsModules from "../SuperAdmin/Modules/index";
+
 import {
   DragDropContext,
   Draggable,
@@ -31,17 +23,13 @@ import {
   dragAndDropDialogIndexSuperAdmin,
 } from "../../features/counter/dragAndDrop";
 import { useSelector, useDispatch } from "react-redux";
-// import NavBar from "../layouts/Navbar/navbar";
-import FormSubmission from "./formSubmission";
-import CandidateList from "./candidateList";
 import NavBar from "./navBar";
 import CreateForm from "./createForm";
-import Settings from "./Settings/index";
-import ModuleScreen from "./Modules/modules";
-import { Route, Routes } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { pickListDragableIdStore } from "../../features/counter/dragAndDrop";
 import { ModuleNameGetForms } from "../../features/Modules/module";
+import { newSectionIndexData } from "../../features/counter/dragAndDrop";
+import { Button } from "primereact/button";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -93,7 +81,7 @@ const SuperAdmin = () => {
   const [id, setId] = useState();
 
   const [complete, setCompleted] = useState<any>({
-    [uuidv4()]: COMPLETE,
+    [uuidv4()]: [],
   });
   const [indexId, setIndexId] = useState<any>();
   const count: any = useSelector((state) => state);
@@ -156,6 +144,12 @@ const SuperAdmin = () => {
     setId(e);
   };
 
+  const addList = () => {
+    setCompleted({ ...complete, [uuidv4()]: [] });
+    let lent = Object.keys(complete).length;
+    dispatch(newSectionIndexData(lent));
+  };
+
   const dispatch = useDispatch();
 
   return (
@@ -181,6 +175,7 @@ const SuperAdmin = () => {
               break;
             case "CHECKSUPERDRAGITEMS":
               setCompleted({
+                ...complete,
                 [destination.droppableId]: copy(
                   ITEMS,
                   complete[destination.droppableId],
@@ -253,7 +248,15 @@ const SuperAdmin = () => {
                 ""
               )}
               {window.location.pathname == "/super-admin/create-form" ? (
-                <CreateForm />
+                <>
+                  <CreateForm />
+                  <div className="w-4 -mt-8  flex justify-content-center">
+                    <Button
+                      label="+ Add New Section"
+                      onClick={() => addList()}
+                    />
+                  </div>
+                </>
               ) : (
                 ""
               )}

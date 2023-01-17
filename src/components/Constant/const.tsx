@@ -231,11 +231,11 @@ export const COMPLETE = [
   //   subName: "Untitled Owner",
   //   id: uuidv4(),
   // },
-  {
-    names: "Untitled Name",
-    subName: "Untitled Name",
-    id: uuidv4(),
-  },
+  // {
+  //   names: "Untitled Name",
+  //   subName: "Untitled Name",
+  //   id: uuidv4(),
+  // },
   // {
   //   names: "Created By",
   //   subName: "Created By",

@@ -1,7 +1,7 @@
 import SideBar from "./sideBar";
 import FormSideBar from "../formSidebar/index";
 import DropArea from "./dropArea";
-import { InputText } from 'primereact/inputtext';
+import { InputText } from "primereact/inputtext";
 import TopBars from "./topBars";
 import AddInputs from "./addInputs";
 import QuickAction from "./quickAction";
@@ -16,8 +16,9 @@ interface itemProps {
 }
 
 const CreateForm = () => {
-  const [value2, setValue2] = useState('');
-  const [page, setpage] = useState(<DropArea />);
+  const [value2, setValue2] = useState("");
+  const [page, setpage] = useState(<DropArea moduleValue={value2} />);
+  const [index, setIndex] = useState<any>("");
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.logIn);
   const items: itemProps[] = [
@@ -30,28 +31,19 @@ const CreateForm = () => {
   ];
 
   const pageClick = (e: any) => {
-    let get: any;
-
-    if (e.index === 0) {
-      get = <DropArea />;
-    } else if (e.index === 1) {
-      get = <AddInputs />;
-    } else if (e.index === 4) {
-      get = <QuickAction />;
-    } else {
-      get = <DropArea />;
-    }
-    setpage(get);
+    setIndex(e.index);
   };
 
   return (
     <div className="mx-3">
       <div className="flex align-items-center justify-content-start">
         <div className="mt-3 mb-4 flex">
-        
-                    <InputText id="username" value={value2} placeholder="Enter Your Module Name" onChange={(e) => setValue2(e.target.value)} style={{background: 'rgb(250, 250, 251)',border: 'none'}} />
-                    
-               
+          <InputText
+            value={value2}
+            placeholder="Enter Your Module Name"
+            onChange={(e) => setValue2(e.target.value)}
+            style={{ background: "rgb(250, 250, 251)", border: "none" }}
+          />
         </div>
       </div>
       <div>
@@ -59,7 +51,18 @@ const CreateForm = () => {
       </div>
       <div className="flex mt-3 create_form_main">
         <SideBar />
-        <div className="create_form_main_division">{page}</div>
+
+        <div className="create_form_main_division">
+          {index === 0 ? (
+            <DropArea moduleValue={value2} />
+          ) : index === 1 ? (
+            <AddInputs />
+          ) : index === 2 ? (
+            <QuickAction />
+          ) : (
+            <DropArea moduleValue={value2} />
+          )}
+        </div>
       </div>
     </div>
   );
