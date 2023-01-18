@@ -9,6 +9,8 @@ import Arrow from "../../../assets/arrow.png";
 import "./CreateForm.css";
 import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { ModuleNameGetForms } from "../../../features/Modules/module";
+import { useParams } from "react-router-dom";
 
 interface itemProps {
   label: string;
@@ -20,7 +22,8 @@ const CreateForm = () => {
   const [page, setpage] = useState(<DropArea moduleValue={value2} />);
   const [index, setIndex] = useState<any>("");
   const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.logIn);
+  const user: any = useAppSelector((state) => state);
+  const { editId } = useParams();
   const items: itemProps[] = [
     { label: "Back", icon: "pi pi-fw pi-arrow-circle-left" },
     { label: "Add Inputs", icon: "pi pi-fw pi-plus" },
@@ -33,6 +36,19 @@ const CreateForm = () => {
   const pageClick = (e: any) => {
     setIndex(e.index);
   };
+
+  useEffect(() => {
+    if (window.location.pathname === `/super-admin/edit/${editId}`) {
+      if (user.module.rolesGetForms) {
+        setValue2(user.module.rolesGetForms[0]?.modulename);
+      }
+    }
+  }, [user.module.rolesGetForms]);
+  useEffect(() => {
+    if (window.location.pathname === `/super-admin/edit/${editId}`) {
+      dispatch(ModuleNameGetForms(editId));
+    }
+  }, []);
 
   return (
     <div className="mx-3">

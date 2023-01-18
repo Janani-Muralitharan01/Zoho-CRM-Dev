@@ -167,11 +167,12 @@ const DropArea = (props: any) => {
 
     let res;
     if (window.location.pathname === `/super-admin/edit/${editId}`) {
-      let value = {
+      let val = {
         payload: payload,
         editId: editId,
       };
-      res = await dispatch(ModuleNameUpdate(value));
+
+      res = await dispatch(ModuleNameUpdate(val));
     } else {
       res = await dispatch(NewModuleCreation(payload));
     }
@@ -183,7 +184,14 @@ const DropArea = (props: any) => {
   useEffect(() => {
     if (count.module.rolesGetForms) {
       let val = Object.keys(count.module.rolesGetForms[0]?.moduleelements);
-      setFormName(val);
+      // setFormName(val);
+
+      let val1: any = [];
+      val.map((x, i) => {
+        val1.push({ name: x, id: "" });
+      });
+
+      setFormName(val1);
       setModuleName(count.module.rolesGetForms[0]?.modulename);
 
       // setuidv4(count.module.rolesGetForms[0]?.moduleelements);
@@ -200,6 +208,7 @@ const DropArea = (props: any) => {
 
   let handleChangeForm = (i: number, e: any, list: any) => {
     let newFormValues = [...formName];
+
     newFormValues[i].name = e.target.value;
     newFormValues[i].id = list;
     setFormName(newFormValues);

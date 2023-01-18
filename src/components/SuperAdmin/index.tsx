@@ -103,28 +103,42 @@ const SuperAdmin = () => {
       count.module.rolesGetForms !== undefined
     ) {
       let totalValue = count.module?.rolesGetForms;
-      let keyValue;
-      for (let key in totalValue[0]?.moduleelements) {
-        keyValue = totalValue[0]?.moduleelements[key];
-      }
-      let arrayValue = [];
-      let arrayVal: any = [];
-      for (let val in keyValue) {
-        arrayValue.push(keyValue[val]);
-        arrayVal.push(val);
-      }
-      let lastValue: any = [];
-      arrayVal.map((x: any) => {
-        ITEMS.map((i: any) => {
-          if (x == i.names) {
-            lastValue.push(i);
-          }
-        });
-      });
 
-      for (let key in complete) {
-        setCompleted({ [key]: lastValue });
+      const value = Object.assign({}, totalValue[0]?.moduleelements);
+
+      for (let key in value) {
+        value[uuidv4()] = value[key];
+        delete value[key];
       }
+      setCompleted(value);
+
+      // let keyValue;
+      // for (let key in totalValue[0]?.moduleelements) {
+      //   keyValue = totalValue[0]?.moduleelements[key];
+
+      // }
+
+      // let arrayValue = [];
+      // let arrayVal: any = [];
+      // for (let val in keyValue) {
+      //   arrayValue.push(keyValue[val]);
+      //   // arrayVal.push(val);
+      //   arrayVal.push(keyValue[val].subName || keyValue[val].fieldname);
+      // }
+
+      // let lastValue: any = [];
+      // arrayVal.map((x: any) => {
+      //   ITEMS.map((i: any) => {
+      //     if (x == i.names) {
+      //       lastValue.push(i);
+      //     }
+      //   });
+      // });
+
+      // for (let key in complete) {
+
+      //   setCompleted({ [key]: lastValue });
+      // }
 
       dispatch(dragAndDropValueSuperAdmin(complete));
     }
