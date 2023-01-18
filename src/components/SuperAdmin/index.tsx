@@ -9,7 +9,7 @@ import Dashboard from "../layouts/Dashboard-Main/dashboard";
 import FormCreation from "./formCreation";
 import SideBar from "../layouts/Sidebar/sidebar";
 import SettingsModules from "../SuperAdmin/Modules/index";
-import LayoutPage from "../SuperAdmin/Layout/index"
+import LayoutPage from "../SuperAdmin/Layout/index";
 import {
   DragDropContext,
   Draggable,
@@ -32,17 +32,13 @@ import {
   dragAndDropDialogIndexSuperAdmin,
 } from "../../features/counter/dragAndDrop";
 import { useSelector, useDispatch } from "react-redux";
-// import NavBar from "../layouts/Navbar/navbar";
-import FormSubmission from "./formSubmission";
-import CandidateList from "./candidateList";
 import NavBar from "./navBar";
 import CreateForm from "./createForm";
-import Settings from "./Settings/index";
-import ModuleScreen from "./Modules/modules";
-import { Route, Routes } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { pickListDragableIdStore } from "../../features/counter/dragAndDrop";
 import { ModuleNameGetForms } from "../../features/Modules/module";
+import { newSectionIndexData } from "../../features/counter/dragAndDrop";
+import { Button } from "primereact/button";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -90,47 +86,68 @@ const move = (
 };
 
 const SuperAdmin = () => {
-  const routeParams = useParams();
+  const { editId } = useParams();
   const [id, setId] = useState();
 
   const [complete, setCompleted] = useState<any>({
-    [uuidv4()]: COMPLETE,
+    [uuidv4()]: [],
   });
   const [indexId, setIndexId] = useState<any>();
   const count: any = useSelector((state) => state);
 
   useEffect(() => {
-    if (window.location.pathname !== "/super-admin/edit") {
+    if (window.location.pathname !== `/super-admin/edit/${editId}`) {
       dispatch(dragAndDropValueSuperAdmin(complete));
     }
 
     if (
-      window.location.pathname === "/super-admin/edit" &&
+      window.location.pathname === `/super-admin/edit/${editId}` &&
+      count.module.rolesGetForms === undefined
+    ) {
+      dispatch(dragAndDropValueSuperAdmin(complete));
+    }
+
+    if (
+      window.location.pathname === `/super-admin/edit/${editId}` &&
       count.module.rolesGetForms !== undefined
     ) {
       let totalValue = count.module?.rolesGetForms;
-      let keyValue;
-      for (let key in totalValue[0]?.moduleelements) {
-        keyValue = totalValue[0]?.moduleelements[key];
-      }
-      let arrayValue = [];
-      let arrayVal: any = [];
-      for (let val in keyValue) {
-        arrayValue.push(keyValue[val]);
-        arrayVal.push(val);
-      }
-      let lastValue: any = [];
-      arrayVal.map((x: any) => {
-        ITEMS.map((i: any) => {
-          if (x == i.names) {
-            lastValue.push(i);
-          }
-        });
-      });
 
-      for (let key in complete) {
-        setCompleted({ [key]: lastValue });
+      const value = Object.assign({}, totalValue[0]?.moduleelements);
+
+      for (let key in value) {
+        value[uuidv4()] = value[key];
+        delete value[key];
       }
+      setCompleted(value);
+
+      // let keyValue;
+      // for (let key in totalValue[0]?.moduleelements) {
+      //   keyValue = totalValue[0]?.moduleelements[key];
+
+      // }
+
+      // let arrayValue = [];
+      // let arrayVal: any = [];
+      // for (let val in keyValue) {
+      //   arrayValue.push(keyValue[val]);
+      //   // arrayVal.push(val);
+      //   arrayVal.push(keyValue[val].subName || keyValue[val].fieldname);
+      // }
+
+      // let lastValue: any = [];
+      // arrayVal.map((x: any) => {
+      //   ITEMS.map((i: any) => {
+      //     if (x == i.names) {
+      //       lastValue.push(i);
+      //     }
+      //   });
+      // });
+
+      // for (let key in complete) {
+
+      //   setCompleted({ [key]: lastValue });
+      // }
 
       dispatch(dragAndDropValueSuperAdmin(complete));
     }
@@ -148,6 +165,12 @@ const SuperAdmin = () => {
 
   const handleClick = (e: any) => {
     setId(e);
+  };
+
+  const addList = () => {
+    setCompleted({ ...complete, [uuidv4()]: [] });
+    let lent = Object.keys(complete).length;
+    dispatch(newSectionIndexData(lent));
   };
 
   const dispatch = useDispatch();
@@ -175,6 +198,7 @@ const SuperAdmin = () => {
               break;
             case "CHECKSUPERDRAGITEMS":
               setCompleted({
+                ...complete,
                 [destination.droppableId]: copy(
                   ITEMS,
                   complete[destination.droppableId],
@@ -238,8 +262,9 @@ const SuperAdmin = () => {
               ) : (
                 ""
               )} */}
-              
-              {window.location.pathname == "/super-admin/Settings/Modules/layoutpage" ? (
+
+              {window.location.pathname ==
+              "/super-admin/Settings/Modules/layoutpage" ? (
                 <CreateForm />
               ) : (
                 ""
@@ -253,12 +278,28 @@ const SuperAdmin = () => {
                 ""
               )}
               {window.location.pathname == "/super-admin/create-form" ? (
-                <CreateForm />
+                <>
+                  <CreateForm />
+                  <div className="w-4 -mt-8  flex justify-content-center">
+                    <Button
+                      label="+ Add New Section"
+                      onClick={() => addList()}
+                    />
+                  </div>
+                </>
               ) : (
                 ""
               )}
-              {window.location.pathname == "/super-admin/edit" ? (
-                <CreateForm />
+              {window.location.pathname == `/super-admin/edit/${editId}` ? (
+                <>
+                  <CreateForm />
+                  <div className="w-4 -mt-8  flex justify-content-center">
+                    <Button
+                      label="+ Add New Section"
+                      onClick={() => addList()}
+                    />
+                  </div>
+                </>
               ) : (
                 ""
               )}

@@ -7,7 +7,10 @@ import { Calendar } from "primereact/calendar";
 import { dragAndDropDialogIndexSuperAdmin } from "../../../features/counter/dragAndDrop";
 import { ITEMS } from "../../Constant/const";
 import Picklist from "../../CommonModules/PickList/PickList";
-import { NewModuleCreation } from "../../../features/Modules/module";
+import {
+  NewModuleCreation,
+  ModuleNameUpdate,
+} from "../../../features/Modules/module";
 import { object } from "yup";
 import { useAppDispatch } from "../../../app/hooks";
 import SingleLine from "../Dialogs/singleLine";
@@ -15,11 +18,18 @@ import { Toast } from "primereact/toast";
 import { useNavigate } from "react-router";
 import { LoginUserDetails } from "../../../features/Auth/userDetails";
 import { Dropdown } from "primereact/dropdown";
+import { useParams } from "react-router-dom";
 
-const DropArea = () => {
+interface formModel {
+  name: string;
+  id: string;
+}
+
+const DropArea = (props: any) => {
+  let { editId } = useParams();
   const [uidv4, setuidv4] = useState<any>();
   const count: any = useSelector((state) => state);
-  const [formName, setFormName] = useState<any>();
+  const [formName, setFormName] = useState<any>([{ name: "", id: "" }]);
   const [moduleName, setModuleName] = useState<any>();
   const [array, setArray] = useState<any>([]);
   const [sidebar, setSidebar] = useState(false);
@@ -31,16 +41,27 @@ const DropArea = () => {
   const navigate = useNavigate();
   const [list1, setList1] = useState<any>([]);
   const [editArray, setEditArray] = useState<any>();
+  const [finaValue, setFinalValue] = useState<object>();
+
+  useEffect(() => {
+    setModuleName(props.moduleValue);
+  }, [props.moduleValue]);
+
+  useEffect(() => {
+    if (count.dragAndDrop.newSectionIndex >= formName.length) {
+      setFormName([...formName, { name: "" }]);
+    }
+  }, [count.dragAndDrop.newSectionIndex]);
 
   useEffect(() => {
     if (
       !count.module.rolesGetForms &&
-      window.location.pathname !== "/super-admin/edit"
+      window.location.pathname !== `/super-admin/edit/${editId}`
     ) {
       setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
     }
 
-    if (window.location.pathname == "/super-admin/edit") {
+    if (window.location.pathname == `/super-admin/edit/${editId}`) {
       // let totalValue = count.module.rolesGetForms[0].moduleelements;
       // let keyValue;
       // for (let key in totalValue) {
@@ -127,30 +148,34 @@ const DropArea = () => {
   };
 
   const saveForm = async () => {
-    let val: any = {};
+    let val: object = {};
 
-    Object.keys(count.dragAndDrop.initialStartDragSuperAdmin || {}).map(
-      (list: any, i: number) => {
-        count.dragAndDrop.initialStartDragSuperAdmin[list].map(
-          (i: any, index: any) => {
-            val[i.names] = {
-              type: i.names,
-              fieldname: i.names,
-              defaultvalue: i.names,
-            };
-          }
-        );
-      }
+    const value = Object.assign(
+      {},
+      count.dragAndDrop.initialStartDragSuperAdmin
     );
+    formName.map((f: formModel, i: number) => {
+      value[f.name] = value[f.id];
+      delete value[f.id];
+    });
+
     let payload: object = {
       modulename: moduleName,
       recuriter: count?.userValue?.roles?.id,
-      moduleelements: {
-        [formName]: val,
-      },
+      moduleelements: value,
     };
 
-    let res = await dispatch(NewModuleCreation(payload));
+    let res;
+    if (window.location.pathname === `/super-admin/edit/${editId}`) {
+      let val = {
+        payload: payload,
+        editId: editId,
+      };
+
+      res = await dispatch(ModuleNameUpdate(val));
+    } else {
+      res = await dispatch(NewModuleCreation(payload));
+    }
 
     if (res.payload.status == 200) {
       navigate("/super-admin");
@@ -159,7 +184,14 @@ const DropArea = () => {
   useEffect(() => {
     if (count.module.rolesGetForms) {
       let val = Object.keys(count.module.rolesGetForms[0]?.moduleelements);
-      setFormName(val);
+      // setFormName(val);
+
+      let val1: any = [];
+      val.map((x, i) => {
+        val1.push({ name: x, id: "" });
+      });
+
+      setFormName(val1);
       setModuleName(count.module.rolesGetForms[0]?.modulename);
 
       // setuidv4(count.module.rolesGetForms[0]?.moduleelements);
@@ -174,11 +206,19 @@ const DropArea = () => {
     add();
   }, [count.dragAndDrop.PickListData]);
 
+  let handleChangeForm = (i: number, e: any, list: any) => {
+    let newFormValues = [...formName];
+
+    newFormValues[i].name = e.target.value;
+    newFormValues[i].id = list;
+    setFormName(newFormValues);
+  };
+
   return (
     <div className="">
       <Toast ref={toast} />
       <div className="ml-8 pl-2">
-        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
+        {/* <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
           Module Name
         </div>
         <input
@@ -193,25 +233,9 @@ const DropArea = () => {
           }}
           value={moduleName}
           onChange={(e) => setModuleName(e.target.value)}
-        />
-        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
-          Form Name
-        </div>
-        <input
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm uppercase text-900"
-          p-3
-          style={{
-            height: "52px",
-            border: "1px solid lightgrey",
-            color: "#333333",
-            background: "#CCCCCC",
-          }}
-          value={formName}
-          onChange={(e) => setFormName(e.target.value)}
-        />
+        /> */}
       </div>
-      <div className="ml-8 pl-2">
+      {/* <div className="ml-8 ">
         <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
           Submit Form Date
         </div>
@@ -230,17 +254,50 @@ const DropArea = () => {
             background: "#CCCCCC",
           }}
         />
-      </div>
+      </div> */}
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
             <div>
               <Droppable key={list} droppableId={list}>
                 {(provided, snapshot) => (
-                  <div className="" ref={provided.innerRef}>
-                    {uidv4[list].length
-                      ? uidv4[list].map((item: any, index: number) => (
-                          <>
+                  <div
+                    className=" border-dashed border-2 w-30rem ml-8 mt-2"
+                    ref={provided.innerRef}
+                  >
+                    <section className="mt-2 p-2  mx-auto">
+                      <input
+                        placeholder="Untitled form"
+                        className="  mx-auto  text-sm w-28rem  text-900 border-none"
+                        style={{
+                          height: "48px",
+                          color: "#333333",
+                        }}
+                        value={formName.name}
+                        onChange={(e) => handleChangeForm(i, e, list)}
+                      />
+                    </section>
+
+                    {
+                      uidv4[list].length ? (
+                        uidv4[list].map((item: any, index: number) => (
+                          <div
+                            //  className=" border-dashed border-2 w-30rem ml-8 mt-1"
+                            className="p-2"
+                          >
+                            {/* <section className="ml-8 pl-2 mt-2">
+                              <input
+                                placeholder="Untiled form"
+                                className=" w-30rem my-auto  text-sm  text-900"
+                                style={{
+                                  height: "52px",
+                                  color: "#333333",
+                                }}
+                                value={formName.name}
+                                onChange={(e) => handleChangeForm(i, e)}
+                              />
+                            </section> */}
+
                             <Draggable
                               key={item.id}
                               draggableId={item.id}
@@ -248,13 +305,19 @@ const DropArea = () => {
                             >
                               {(provided, snapshot) => (
                                 <div
-                                  className=" px-2 mt-3 ml-8 mr-8"
+                                  className=" cardQuickPreview  py-1 px-2 w-28rem"
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   style={provided.draggableProps.style}
                                   {...provided.dragHandleProps}
                                 >
-                                  <div className=" py-1">
+                                  <div className="names flex justify-content-between align-items-center">
+                                    <section
+                                      className="grey font-semibold  "
+                                      // style={{ color: "#333333" }}
+                                    >
+                                      {item.subName}
+                                    </section>
                                     {item.subName === "Pick List" ? (
                                       <>
                                         <Dropdown
@@ -271,7 +334,7 @@ const DropArea = () => {
                                             border: "1px solid lightgrey",
                                             color: "#8083A3",
                                           }}
-                                          className=" w-30rem my-auto border-round-md"
+                                          className="  mx-auto my-auto border-round-md"
                                         />
                                       </>
                                     ) : (
@@ -281,39 +344,47 @@ const DropArea = () => {
                                         style={{
                                           height: "44px",
                                           border: "1px solid lightgrey",
-                                          color: "#8083A3",
+                                          // color: "#8083A3",
                                         }}
                                         value={item.names}
                                         onChange={(e) => {
                                           handleChange(e, index);
                                         }}
-                                        className=" w-30rem my-auto border-round-md  p-3"
+                                        className=" text-yellow-600  my-auto border-round-md "
                                       />
                                     )}
 
-                                    <section
+                                    <p className="delete">
+                                      <i className="pi pi-ellipsis-v"></i>
+                                    </p>
+
+                                    {/* <section
                                       className="grey py-2 font-semibold"
                                       style={{ color: "#333333" }}
                                     >
                                       {item.subName}
-                                    </section>
+                                    </section> */}
                                   </div>
                                 </div>
                               )}
                             </Draggable>
 
-                            {count.dragAndDrop.DialogIndex == 4 &&
-                            item.names == "Pick List"
+                            {count.dragAndDrop.DialogIndex == 5 &&
+                            item.subName == "Pick List"
                               ? openDialog()
-                              : item.names == "Single Line"
+                              : item.subName == "Single Line"
                               ? openDialog()
                               : ""}
-                          </>
+                          </div>
                         ))
-                      : !provided.placeholder && (
-                          <span className="Appp">Drop items here</span>
-                        )}
-                    {provided.placeholder}
+                      ) : (
+                        // !provided.placeholder && (
+                        <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2">
+                          <p className="">+ Drop items here</p>
+                        </div>
+                      )
+                      // )
+                    }
                   </div>
                 )}
               </Droppable>

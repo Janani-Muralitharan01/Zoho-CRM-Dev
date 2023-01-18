@@ -71,10 +71,11 @@ export const ModuleNameDelete: any = createAsyncThunk(
 
 export const ModuleNameUpdate: any = createAsyncThunk(
   "module/moduleCreation",
-  async (para1, thunkAPI) => {
+  async (para1: any, thunkAPI) => {
     try {
-      const response = await axios.put(
-        `${BASEURL}/api/forms/updateforms/${para1}`
+      const response: Object = await axios.put(
+        `${BASEURL}/api/forms/updateforms/${para1.editId}`,
+        para1.payload
       );
       return response;
     } catch (error: any) {

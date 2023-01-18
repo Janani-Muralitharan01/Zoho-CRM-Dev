@@ -53,7 +53,7 @@ const SettingsModules = (props: any) => {
 
         if (res.payload.status === 200) {
           setId(null);
-          navigate("/super-admin/edit");
+          navigate(`/super-admin/edit/${id}`);
         }
       },
     },

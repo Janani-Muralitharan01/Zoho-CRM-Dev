@@ -79,8 +79,7 @@ const NavBar = (props: any) => {
     let res = await dispatch(ModuleNameGetForms(id));
 
     if (res.payload.status === 200) {
-      navigate("/super-admin/edit");
-      
+      // navigate(`/super-admin/edit/${id}`);
     }
   };
   const NextPage = () => {
