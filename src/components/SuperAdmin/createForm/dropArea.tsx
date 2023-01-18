@@ -305,16 +305,16 @@ const DropArea = (props: any) => {
                             >
                               {(provided, snapshot) => (
                                 <div
-                                  className="   mt-1 w-28rem  mr-8"
+                                  className=" cardQuickPreview  py-1 px-2 w-28rem"
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   style={provided.draggableProps.style}
                                   {...provided.dragHandleProps}
                                 >
-                                  <div className="">
+                                  <div className="names flex justify-content-between align-items-center">
                                     <section
-                                      className="grey font-semibold"
-                                      style={{ color: "#333333" }}
+                                      className="grey font-semibold  "
+                                      // style={{ color: "#333333" }}
                                     >
                                       {item.subName}
                                     </section>
@@ -334,7 +334,7 @@ const DropArea = (props: any) => {
                                             border: "1px solid lightgrey",
                                             color: "#8083A3",
                                           }}
-                                          className=" w-28rem mx-auto my-auto border-round-md"
+                                          className="  mx-auto my-auto border-round-md"
                                         />
                                       </>
                                     ) : (
@@ -344,15 +344,19 @@ const DropArea = (props: any) => {
                                         style={{
                                           height: "44px",
                                           border: "1px solid lightgrey",
-                                          color: "#8083A3",
+                                          // color: "#8083A3",
                                         }}
                                         value={item.names}
                                         onChange={(e) => {
                                           handleChange(e, index);
                                         }}
-                                        className=" w-28rem  my-auto border-round-md  p-3"
+                                        className=" text-yellow-600  my-auto border-round-md "
                                       />
                                     )}
+
+                                    <p className="delete">
+                                      <i className="pi pi-ellipsis-v"></i>
+                                    </p>
 
                                     {/* <section
                                       className="grey py-2 font-semibold"
