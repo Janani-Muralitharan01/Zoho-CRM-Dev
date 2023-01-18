@@ -19,14 +19,14 @@
 }
 .nav_text {
   font-size: 15px;
-  color: olivedrab;
+  font-weight: 600;
   cursor: pointer;
   font-family: 'Plus Jakarta Sans';
   padding: 2px 18px 2px 17px;
 }
 .nav_text_overlay {
   font-size: 15px;
-  color: olivedrab;
+  font-weight: 600;
   cursor: pointer;
   font-family: 'Plus Jakarta Sans';
   padding: 20px 18px 2px 17px;

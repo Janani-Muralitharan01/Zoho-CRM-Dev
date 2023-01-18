@@ -36,7 +36,7 @@ export const LogoNameGet: any = createAsyncThunk(
   async (para1, thunkAPI) => {
     try {
       const response = await axios.get(
-        ` http://54.152.227.71/api/profilelogo/getuserlogo/${para1}`
+        ` http://54.152.227.71/api/profilelogo/currentuserlogo`
       );
 
       return response;

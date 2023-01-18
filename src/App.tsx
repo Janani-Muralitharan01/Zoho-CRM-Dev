@@ -61,9 +61,10 @@ function App() {
             />
           </div> */}
           {/* <section className={"" + (show ? "hidden" : "block")}> */}
+         
             <Routes>
               <Route element={<AuthRoute />}>
-                {/* <NavBar /> */}
+              
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/selection" element={<Selection />} />
                 <Route path="/super-admin">

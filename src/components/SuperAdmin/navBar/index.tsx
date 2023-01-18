@@ -51,10 +51,27 @@ const NavBar = (props: any) => {
   useEffect(() => {
     GetModuleName();
   }, []);
+  useEffect(() => {
+    GetHeadingName();
+  }, []);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    NavbarEdit;
+  }, []);
 
   const GetModuleName = async () => {
     let res = await dispatch(ModuleNameGet());
-    setState(res.payload.data.user);
+    
+     setState(res.payload.data.user);
+  };
+
+  const GetHeadingName = async () => {
+    let res = await dispatch(LogoNameGet());
+    console.log(res,"resres")
+    setText(res.payload.data.data.title);
+    setimgShow(res.payload.data.data.profile);
+    //setState(res.payload.data.user);
   };
 
   const ShowNav = async (items: any, id: string) => {
@@ -82,16 +99,15 @@ const NavBar = (props: any) => {
     formData.append("title", valuein);
     formData.append("profile", file);
     let value = await dispatch(ProjectLogoName(formData));
-
+    GetHeadingName()
     setgetData(value.payload.data.data[0]);
-
-    setText(value.payload.data.data[0].title);
-
-    setimgShow(value.payload.data.data[0].profile);
     title.current?.hide();
   };
   const NavbarEdit = async (x: any) => {
+     setdisplayNav(x.modulename);
+     localStorage.setItem('moduleName', x.modulename)
     let res = await dispatch(ModuleNameGetForms(x._id));
+    
     console.log(res.payload.data.data[0].moduleelements.personalform,"https://meet.google.com/fuf-phhc-sk")
     if (res.payload.status === 200) {
       navigate("/super-admin/Table-List");
@@ -167,7 +183,7 @@ const NavBar = (props: any) => {
             : ""}
           <div className="flex " style={{ right: "86px" }}>
             <span className="nav_text  flex align-items-center mt-2 white-space-nowrap capitalize">
-              {displayNav}
+              {displayNav || localStorage.getItem('moduleName')}
             </span>
             <div onClick={(e) => op.current?.toggle(e)}>
               <i className="pi pi-angle-double-right mr-6 mt-4"></i>
