@@ -6,6 +6,7 @@ import { Button } from "primereact/button";
 import { useNavigate } from "react-router";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+
 import { Dropdown } from "primereact/dropdown";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,13 +20,14 @@ import { SpeedDial } from "primereact/speeddial";
 import NavBar from "../navBar";
 import ModuleSideBar from "./moduleSidebar";
 import "./Modules.css";
+import { Link } from "react-router-dom";
 
 const SettingsModules = (props: any) => {
   const [value3, setValue3] = useState("");
   const [activeIndex1, setActiveIndex1] = useState(0);
   const [state, setState] = useState<any>([]);
   const [id, setId] = useState<any>();
-  const navigate = useNavigate();
+  const navigate:any = useNavigate();
   const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
 
@@ -67,7 +69,17 @@ const SettingsModules = (props: any) => {
       },
     },
   ];
-
+  const layoutPagelick = (rowdata:any) => {
+    console.log(rowdata,"rowdata")
+    return(
+      <div > 
+      <Link to="/super-admin/Settings/Modules/layoutpage" state={{ from: rowdata.modulename }}>
+      <span className="text-blue-500">{rowdata.modulename}</span></Link>
+      </div>
+      
+    )
+    
+  };
   const editPolicy = (data: any) => {
     return (
       <div className="speeddial-linear-demo ">
@@ -130,6 +142,9 @@ const SettingsModules = (props: any) => {
                       <Column
                         field="modulename"
                         header="Display in Tab As"
+                        className="text-primary"
+                        body={layoutPagelick}
+                       
                       ></Column>
                       <Column field="modulename" header="Module Name"></Column>
                       <Column

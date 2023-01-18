@@ -183,7 +183,7 @@ const UntitleImage = () => {
       <Sidebar
         visible={sidebar}
         position="top"
-        style={{ width: '92vw', height: '50vw' }}
+        style={{ width: '100vw', height: '100vw' }}
         onHide={() => setSidebar(!sidebar)}
       >
         <div>
