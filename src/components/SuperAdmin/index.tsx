@@ -275,7 +275,15 @@ const SuperAdmin = () => {
                 ""
               )}
               {window.location.pathname == `/super-admin/edit/${editId}` ? (
-                <CreateForm />
+                <>
+                  <CreateForm />
+                  <div className="w-4 -mt-8  flex justify-content-center">
+                    <Button
+                      label="+ Add New Section"
+                      onClick={() => addList()}
+                    />
+                  </div>
+                </>
               ) : (
                 ""
               )}

@@ -235,7 +235,7 @@ const DropArea = (props: any) => {
           onChange={(e) => setModuleName(e.target.value)}
         /> */}
       </div>
-      <div className="ml-8 pl-2">
+      {/* <div className="ml-8 ">
         <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
           Submit Form Date
         </div>
@@ -254,30 +254,37 @@ const DropArea = (props: any) => {
             background: "#CCCCCC",
           }}
         />
-      </div>
+      </div> */}
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
             <div>
               <Droppable key={list} droppableId={list}>
                 {(provided, snapshot) => (
-                  <div className="" ref={provided.innerRef}>
-                    <section className="ml-8 pl-2 mt-2">
+                  <div
+                    className=" border-dashed border-2 w-30rem ml-8 mt-2"
+                    ref={provided.innerRef}
+                  >
+                    <section className="mt-2 p-2  mx-auto">
                       <input
-                        placeholder="Untiled form"
-                        className=" w-30rem my-auto  text-sm  text-900 border-none"
+                        placeholder="Untitled form"
+                        className="  mx-auto  text-sm w-28rem  text-900 border-none"
                         style={{
-                          height: "52px",
+                          height: "48px",
                           color: "#333333",
                         }}
                         value={formName.name}
                         onChange={(e) => handleChangeForm(i, e, list)}
                       />
                     </section>
+
                     {
                       uidv4[list].length ? (
                         uidv4[list].map((item: any, index: number) => (
-                          <>
+                          <div
+                            //  className=" border-dashed border-2 w-30rem ml-8 mt-1"
+                            className="p-2"
+                          >
                             {/* <section className="ml-8 pl-2 mt-2">
                               <input
                                 placeholder="Untiled form"
@@ -298,13 +305,19 @@ const DropArea = (props: any) => {
                             >
                               {(provided, snapshot) => (
                                 <div
-                                  className=" px-2 mt-3 ml-8 mr-8"
+                                  className="   mt-1 w-28rem  mr-8"
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   style={provided.draggableProps.style}
                                   {...provided.dragHandleProps}
                                 >
-                                  <div className=" py-1">
+                                  <div className="">
+                                    <section
+                                      className="grey font-semibold"
+                                      style={{ color: "#333333" }}
+                                    >
+                                      {item.subName}
+                                    </section>
                                     {item.subName === "Pick List" ? (
                                       <>
                                         <Dropdown
@@ -321,7 +334,7 @@ const DropArea = (props: any) => {
                                             border: "1px solid lightgrey",
                                             color: "#8083A3",
                                           }}
-                                          className=" w-30rem my-auto border-round-md"
+                                          className=" w-28rem mx-auto my-auto border-round-md"
                                         />
                                       </>
                                     ) : (
@@ -337,16 +350,16 @@ const DropArea = (props: any) => {
                                         onChange={(e) => {
                                           handleChange(e, index);
                                         }}
-                                        className=" w-30rem my-auto border-round-md  p-3"
+                                        className=" w-28rem  my-auto border-round-md  p-3"
                                       />
                                     )}
 
-                                    <section
+                                    {/* <section
                                       className="grey py-2 font-semibold"
                                       style={{ color: "#333333" }}
                                     >
                                       {item.subName}
-                                    </section>
+                                    </section> */}
                                   </div>
                                 </div>
                               )}
@@ -358,34 +371,16 @@ const DropArea = (props: any) => {
                               : item.subName == "Single Line"
                               ? openDialog()
                               : ""}
-                          </>
+                          </div>
                         ))
                       ) : (
                         // !provided.placeholder && (
-                        <div className="pt-4 ml-8 pl-2">
-                          {/* {formName.map((x: any) => {
-                            return ( */}
-
-                          {/* <input
-                            placeholder="Untiled form"
-                            className=" w-30rem my-auto  text-sm  text-900"
-                            style={{
-                              height: "52px",
-                              color: "#333333",
-                            }}
-                            value={formName.name}
-                            onChange={(e) => handleChangeForm(i, e)}
-                          /> */}
-
-                          {/* );
-                          })} */}
-
-                          <span className="mt-3">+ Drop items here</span>
+                        <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2">
+                          <p className="">+ Drop items here</p>
                         </div>
                       )
                       // )
                     }
-                    {/* {provided.placeholder} */}
                   </div>
                 )}
               </Droppable>
