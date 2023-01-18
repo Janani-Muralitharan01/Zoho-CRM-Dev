@@ -44,18 +44,22 @@ const FieldListTablePage = (props: any) => {
   }, []);
 
   const GetModuleName = async () => {
-    await setState(count?.module?.rolesGetForms[0].moduleelements);
+    const value = count?.module?.rolesGetForms && count?.module?.rolesGetForms[0].moduleelements ? count?.module?.rolesGetForms[0].moduleelements : []
+    await setState(value);
     // const forms = count?.module?.rolesGetForms && count?.module?.rolesGetForms[0] ? count?.module?.rolesGetForms[0].moduleelements: [];
     // setForms(forms);
   };
   useEffect(() => {
     // console.log("usee",count?.module?.rolesGetForms[0].moduleelements)
-      Object.keys(count?.module?.rolesGetForms[0].moduleelements || []).map((list, index) => {
-        
-          Object.keys(count?.module?.rolesGetForms[0].moduleelements[list] || []).map((heading: any, index: any) => {
+    const value = count?.module?.rolesGetForms && count?.module?.rolesGetForms[0].moduleelements ? count?.module?.rolesGetForms[0].moduleelements : [] 
+      Object.keys(value).map((list, index) => {
+        console.log({list})
+          Object.keys(value[list] || []).map((heading: any, index: any) => {
             // const data = <div>{heading} </div>
-            // console.log(heading, 'heading');
-            forms.push(heading);
+            
+            console.log(heading, 'heading');
+            console.log('checkng',value[list][heading])
+            forms.push(value[list][heading]);
             //  setTableData(forms)
             // console.log(forms, 'formsforms');
           });
@@ -64,30 +68,40 @@ const FieldListTablePage = (props: any) => {
        setForms(forms)
   }, []);
 
-  useEffect(() => {
-    console.log("helooooowwwwwwwwwwww",state,count)
-    let view:any = [];
-    view.push(count?.module?.rolesGetForms[0]?.moduleelements)
-    view?.map((list:any, index:any) => {
-      console.log(list,"list")
-      let viewssss:any = [];
-      viewssss.push(list?.personalform)
-      viewssss?.map((heading: any, index: any) => {
-            // const data = <div>{heading} </div>
-            // for(let keydata in heading){
-            //   let getdataaa = {}
-              
-
-            // }
-            console.log(heading, 'heading');
-             Get.push(heading);
-            //  setTableData(forms)
-            console.log(Get, 'formsforms');
-           });
+  // useEffect(() => {
+  //   // console.log("helooooowwwwwwwwwwww",state,count)
+  //   let view:any = [];
+  //   view.push(count?.module?.rolesGetForms[0]?.moduleelements)
+  //   view?.map((list:any, index:any) => {
+ 
+  //     // let viewssss:any = [];
+  //     for(let keydata in list){
         
-      });
-        setGet(Get)
-  }, []);
+  //     // viewssss.push(list[keydata])
+      
+      
+  //     Object.keys(list[keydata])?.map((heading: any, index: any) => {
+  //           // const data = <div>{heading} </div>
+  //         //   let viewonce:any = [];
+  //         //   for(let field in heading){
+  //         //   console.log(field,"fieldfieldfieldfield")
+  //         //   viewonce.push(heading[field])
+  //         //   viewonce?.map((lastData: any, index: any) => {
+  //          console.log(heading,"headingheading")
+         
+  //         //   })
+  //         //   }
+  //         Get.push(heading);
+           
+            
+  //           //  setTableData(forms)
+  //           //console.log(Get, 'formsforms');
+  //          });
+  //         }
+        
+  //     });
+  //       setGet(Get)
+  // }, []);
 
 
   // useEffect(() => {
@@ -133,7 +147,7 @@ const FieldListTablePage = (props: any) => {
 
                 
                 <DataTable
-                  value={Get}
+                  value={forms}
                   paginator
                   responsiveLayout="scroll"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
@@ -142,12 +156,13 @@ const FieldListTablePage = (props: any) => {
                   selectionMode="single"
                   
                 >
-                  {forms.map((getname: any) => {
-                  //  console.log(state,"state")
+                  {forms.map((form: any) => {
+                   console.log(form,"getname")
+                    console.log('form', forms)
                     return (
                       <Column
-                        field={getname.defaultvalue}
-                        header={getname}
+                        field={form.names}
+                        header={form.names}
                        body={layoutPagelick}
                       ></Column>
                     );
