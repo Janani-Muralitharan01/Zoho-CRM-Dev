@@ -63,6 +63,7 @@ const NavBar = (props: any) => {
 
     if (res.payload.status === 200) {
       navigate("/super-admin/edit");
+      
     }
   };
   const NextPage = () => {
@@ -78,21 +79,22 @@ const NavBar = (props: any) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("tittle", valuein);
+    formData.append("title", valuein);
     formData.append("profile", file);
     let value = await dispatch(ProjectLogoName(formData));
 
     setgetData(value.payload.data.data[0]);
 
-    setText(value.payload.data.data[0].tittle);
+    setText(value.payload.data.data[0].title);
 
     setimgShow(value.payload.data.data[0].profile);
     title.current?.hide();
   };
   const NavbarEdit = async (x: any) => {
     let res = await dispatch(ModuleNameGetForms(x._id));
+    console.log(res.payload.data.data[0].moduleelements.personalform,"https://meet.google.com/fuf-phhc-sk")
     if (res.payload.status === 200) {
-      navigate("/super-admin/edit");
+      navigate("/super-admin/Table-List");
     }
   };
   return (
@@ -135,7 +137,7 @@ const NavBar = (props: any) => {
         <section className="flex  ">
           <div className="flex align-items-center mt-2 super_Admin_Sidebar_Dashboard sideBarOnClick">
             <img src={Dashboard} width={16} height={16} className="mr-2 ml-4" />
-            <p>Dashboard</p>
+            <p className=" font-bold">Dashboard</p>
           </div>
           {state
             ? state.map((x: any, index: any) => {
@@ -146,7 +148,7 @@ const NavBar = (props: any) => {
                   >
                     <div>
                       {" "}
-                      {index <= 5 ? (
+                      {index <= 4 ? (
                         <div>
                           <div
                             className="nav_text capitalize"
@@ -163,7 +165,7 @@ const NavBar = (props: any) => {
                 );
               })
             : ""}
-          <div className="flex relative" style={{ right: "86px" }}>
+          <div className="flex " style={{ right: "86px" }}>
             <span className="nav_text  flex align-items-center mt-2 white-space-nowrap capitalize">
               {displayNav}
             </span>
@@ -195,11 +197,11 @@ const NavBar = (props: any) => {
                         <div key={index} className="">
                           <div className="">
                             {" "}
-                            {index >= 0 ? (
+                            {index >= 5 ? (
                               <div>
                                 <div
                                   className="nav_text_overlay capitalize"
-                                  onClick={() => ShowNav(x.modulename, x._id)}
+                                  onClick={(e: any) => NavbarEdit(x)}
                                 >
                                   {x.modulename}{" "}
                                 </div>

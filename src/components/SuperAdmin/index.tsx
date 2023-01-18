@@ -9,6 +9,7 @@ import Dashboard from "../layouts/Dashboard-Main/dashboard";
 import FormCreation from "./formCreation";
 import SideBar from "../layouts/Sidebar/sidebar";
 import SettingsModules from "../SuperAdmin/Modules/index";
+import LayoutPage from "../SuperAdmin/Layout/index"
 import {
   DragDropContext,
   Draggable,
@@ -204,7 +205,7 @@ const SuperAdmin = () => {
         }}
       >
         {/* <NavBar handleClick={handleClick} /> */}
-        {window.location.pathname == "/super-admin/create-form" ? (
+        {window.location.pathname == "/super-admin/LayoutPage" ? (
           ""
         ) : (
           <NavBar handleClick={handleClick} />
@@ -237,6 +238,12 @@ const SuperAdmin = () => {
               ) : (
                 ""
               )} */}
+              
+              {window.location.pathname == "/super-admin/Settings/Modules/layoutpage" ? (
+                <CreateForm />
+              ) : (
+                ""
+              )}
 
               {window.location.pathname == "/super-admin" ? (
                 <h2 className=" flex align-items-center justify-content-center">
