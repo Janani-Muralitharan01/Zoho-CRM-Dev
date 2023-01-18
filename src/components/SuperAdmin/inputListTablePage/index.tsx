@@ -1,29 +1,29 @@
-import { TabView, TabPanel } from 'primereact/tabview';
-import { useEffect, useState } from 'react';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { useNavigate } from 'react-router';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Dropdown } from 'primereact/dropdown';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { useSelector, useDispatch } from 'react-redux';
+import { TabView, TabPanel } from "primereact/tabview";
+import { useEffect, useState } from "react";
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+import { useNavigate } from "react-router";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Dropdown } from "primereact/dropdown";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { useSelector, useDispatch } from "react-redux";
 import {
   ModuleNameGet,
   ModuleNameDelete,
   ModuleNameUpdate,
   ModuleNameGetForms,
-} from '../../../features/Modules/module';
-import { SpeedDial } from 'primereact/speeddial';
-import NavBar from '../navBar';
-import ModuleSideBar from '../Modules/moduleSidebar';
+} from "../../../features/Modules/module";
+import { SpeedDial } from "primereact/speeddial";
+import NavBar from "../navBar";
+import ModuleSideBar from "../Modules/moduleSidebar";
 
-import { Link } from 'react-router-dom';
-import React from 'react';
+import { Link } from "react-router-dom";
+import React from "react";
 
 //rolesGetForms
 const FieldListTablePage = (props: any) => {
-  const [value3, setValue3] = useState('');
+  const [value3, setValue3] = useState("");
   const [getdata, setgetdata] = useState();
   const [activeIndex1, setActiveIndex1] = useState(0);
   const [state, setState] = useState<any>([]);
@@ -37,82 +37,76 @@ const FieldListTablePage = (props: any) => {
 
   const user: any = useAppSelector((state) => state);
 
-   console.log(count, 'statestatestate');
-
   useEffect(() => {
     GetModuleName();
   }, []);
 
   const GetModuleName = async () => {
-    const value = count?.module?.rolesGetForms && count?.module?.rolesGetForms[0].moduleelements ? count?.module?.rolesGetForms[0].moduleelements : []
+    const value =
+      count?.module?.rolesGetForms &&
+      count?.module?.rolesGetForms[0].moduleelements
+        ? count?.module?.rolesGetForms[0].moduleelements
+        : [];
     await setState(value);
     // const forms = count?.module?.rolesGetForms && count?.module?.rolesGetForms[0] ? count?.module?.rolesGetForms[0].moduleelements: [];
     // setForms(forms);
   };
   useEffect(() => {
-    // console.log("usee",count?.module?.rolesGetForms[0].moduleelements)
-    const value = count?.module?.rolesGetForms && count?.module?.rolesGetForms[0].moduleelements ? count?.module?.rolesGetForms[0].moduleelements : [] 
-      Object.keys(value).map((list, index) => {
-        console.log({list})
-          Object.keys(value[list] || []).map((heading: any, index: any) => {
-            // const data = <div>{heading} </div>
-            
-            console.log(heading, 'heading');
-            console.log('checkng',value[list][heading])
-            forms.push(value[list][heading]);
-            //  setTableData(forms)
-            // console.log(forms, 'formsforms');
-          });
-        
+    const value =
+      count?.module?.rolesGetForms &&
+      count?.module?.rolesGetForms[0].moduleelements
+        ? count?.module?.rolesGetForms[0].moduleelements
+        : [];
+    Object.keys(value).map((list, index) => {
+      Object.keys(value[list] || []).map((heading: any, index: any) => {
+        // const data = <div>{heading} </div>
+
+        forms.push(value[list][heading]);
+        //  setTableData(forms)
       });
-       setForms(forms)
+    });
+    setForms(forms);
   }, []);
 
   // useEffect(() => {
-  //   // console.log("helooooowwwwwwwwwwww",state,count)
+
   //   let view:any = [];
   //   view.push(count?.module?.rolesGetForms[0]?.moduleelements)
   //   view?.map((list:any, index:any) => {
- 
+
   //     // let viewssss:any = [];
   //     for(let keydata in list){
-        
+
   //     // viewssss.push(list[keydata])
-      
-      
+
   //     Object.keys(list[keydata])?.map((heading: any, index: any) => {
   //           // const data = <div>{heading} </div>
   //         //   let viewonce:any = [];
   //         //   for(let field in heading){
-  //         //   console.log(field,"fieldfieldfieldfield")
+
   //         //   viewonce.push(heading[field])
   //         //   viewonce?.map((lastData: any, index: any) => {
-  //          console.log(heading,"headingheading")
-         
+
   //         //   })
   //         //   }
   //         Get.push(heading);
-           
-            
+
   //           //  setTableData(forms)
-  //           //console.log(Get, 'formsforms');
+
   //          });
   //         }
-        
+
   //     });
   //       setGet(Get)
   // }, []);
-
 
   // useEffect(() => {
   //   let outData = []
   //   outData.push(Get)
   //   outData?.map((getthis:any)=>{
-  //   console.log(getthis,"getthisgetthisgetthis")
+
   //   })
   // },[])
-
-
 
   // const gettableValue = () => {
   //   {
@@ -123,29 +117,25 @@ const FieldListTablePage = (props: any) => {
   // };
 
   const layoutPagelick = (rowdata: any) => {
-    console.log(rowdata, 'rowdata');
     return (
       <div>
-       
         <span className="text-blue-500">untitle</span>
       </div>
     );
   };
 
   return (
-    <div style={{ background: 'rgb(250, 250, 251)', height: '100vh' }}>
+    <div style={{ background: "rgb(250, 250, 251)", height: "100vh" }}>
       <div>
         <NavBar />
         <div className="flex mt-3 create_form_main">
-          <div style={{ background: 'gainsboro' }}>
+          <div style={{ background: "gainsboro" }}>
             <ModuleSideBar />
           </div>
 
           <div className="create_form_main_division ml-3">
             <div>
               <div>
-
-                
                 <DataTable
                   value={forms}
                   paginator
@@ -154,16 +144,13 @@ const FieldListTablePage = (props: any) => {
                   rows={5}
                   rowsPerPageOptions={[5, 10, 15]}
                   selectionMode="single"
-                  
                 >
                   {forms.map((form: any) => {
-                   console.log(form,"getname")
-                    console.log('form', forms)
                     return (
                       <Column
                         field={form.names}
                         header={form.names}
-                       body={layoutPagelick}
+                        body={layoutPagelick}
                       ></Column>
                     );
                   })}

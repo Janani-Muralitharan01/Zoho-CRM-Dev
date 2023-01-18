@@ -27,7 +27,7 @@ const SettingsModules = (props: any) => {
   const [activeIndex1, setActiveIndex1] = useState(0);
   const [state, setState] = useState<any>([]);
   const [id, setId] = useState<any>();
-  const navigate:any = useNavigate();
+  const navigate: any = useNavigate();
   const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
 
@@ -69,16 +69,17 @@ const SettingsModules = (props: any) => {
       },
     },
   ];
-  const layoutPagelick = (rowdata:any) => {
-    console.log(rowdata,"rowdata")
-    return(
-      <div > 
-      <Link to="/super-admin/Settings/Modules/layoutpage" state={{ from: rowdata.modulename }}>
-      <span className="text-blue-500">{rowdata.modulename}</span></Link>
+  const layoutPagelick = (rowdata: any) => {
+    return (
+      <div>
+        <Link
+          to="/super-admin/Settings/Modules/layoutpage"
+          state={{ from: rowdata.modulename }}
+        >
+          <span className="text-blue-500">{rowdata.modulename}</span>
+        </Link>
       </div>
-      
-    )
-    
+    );
   };
   const editPolicy = (data: any) => {
     return (
@@ -144,7 +145,6 @@ const SettingsModules = (props: any) => {
                         header="Display in Tab As"
                         className="text-primary"
                         body={layoutPagelick}
-                       
                       ></Column>
                       <Column field="modulename" header="Module Name"></Column>
                       <Column

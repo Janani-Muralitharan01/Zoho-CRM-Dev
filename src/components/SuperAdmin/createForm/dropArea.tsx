@@ -154,13 +154,12 @@ const DropArea = (props: any) => {
       {},
       count.dragAndDrop.initialStartDragSuperAdmin
     );
-    console.log({value});
+
     formName.map((f: formModel, i: number) => {
       value[f.name] = value[f.id];
       delete value[f.id];
     });
 
-    console.log({value});
     let payload: object = {
       modulename: moduleName,
       recuriter: count?.userValue?.roles?.id,
@@ -185,11 +184,13 @@ const DropArea = (props: any) => {
   };
   useEffect(() => {
     if (count.module.rolesGetForms) {
-      let val:any = Object.keys(count.module.rolesGetForms[0]?.moduleelements ||[]);
+      let val: any = Object.keys(
+        count.module.rolesGetForms[0]?.moduleelements || []
+      );
       // setFormName(val);
 
       let val1: any = [];
-      val.map((x:any, i:any) => {
+      val.map((x: any, i: any) => {
         val1.push({ name: x, id: "" });
       });
 

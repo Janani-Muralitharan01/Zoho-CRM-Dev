@@ -62,15 +62,15 @@ const NavBar = (props: any) => {
 
   const GetModuleName = async () => {
     let res = await dispatch(ModuleNameGet());
-    
-     setState(res.payload.data.user);
+
+    setState(res.payload.data.user);
   };
 
   const GetHeadingName = async () => {
     let res = await dispatch(LogoNameGet());
-    console.log(res,"resres")
+
     setText(res.payload.data.data[0].title || "Req-Portal");
-    setimgShow(res.payload.data.data[0].profile || {imgShow});
+    setimgShow(res.payload.data.data[0].profile || { imgShow });
     //setState(res.payload.data.user);
   };
 
@@ -98,16 +98,14 @@ const NavBar = (props: any) => {
     formData.append("title", valuein);
     formData.append("profile", file);
     let value = await dispatch(ProjectLogoName(formData));
-    GetHeadingName()
+    GetHeadingName();
     setgetData(value.payload.data.data[0]);
     title.current?.hide();
   };
   const NavbarEdit = async (x: any) => {
-     setdisplayNav(x.modulename);
-     localStorage.setItem('moduleName', x.modulename)
+    setdisplayNav(x.modulename);
+    localStorage.setItem("moduleName", x.modulename);
     let res = await dispatch(ModuleNameGetForms(x._id));
-    
-    console.log(res.payload.data.data[0].moduleelements.personalform,"https://meet.google.com/fuf-phhc-sk")
     if (res.payload.status === 200) {
       navigate("/super-admin/Table-List");
     }
@@ -182,7 +180,7 @@ const NavBar = (props: any) => {
             : ""}
           <div className="flex " style={{ right: "86px" }}>
             <span className="nav_text  flex align-items-center mt-2 white-space-nowrap capitalize">
-              {displayNav || localStorage.getItem('moduleName')}
+              {displayNav || localStorage.getItem("moduleName")}
             </span>
             <div onClick={(e) => op.current?.toggle(e)}>
               <i className="pi pi-angle-double-right mr-6 mt-4"></i>
