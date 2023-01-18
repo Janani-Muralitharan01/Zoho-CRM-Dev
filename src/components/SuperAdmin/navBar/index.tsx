@@ -69,8 +69,8 @@ const NavBar = (props: any) => {
   const GetHeadingName = async () => {
     let res = await dispatch(LogoNameGet());
     console.log(res,"resres")
-    setText(res.payload.data.data.title);
-    setimgShow(res.payload.data.data.profile);
+    setText(res.payload.data.data[0].title || "Req-Portal");
+    setimgShow(res.payload.data.data[0].profile || {imgShow});
     //setState(res.payload.data.user);
   };
 
