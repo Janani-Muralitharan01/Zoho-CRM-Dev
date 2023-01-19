@@ -14,7 +14,7 @@ import {
   ModuleNameGet,
   ModuleNameDelete,
   ModuleNameUpdate,
-  ModuleNameGetForms,
+  ModuleNameGetFormsaa,
 } from "../../../features/Modules/module";
 import { SpeedDial } from "primereact/speeddial";
 import NavBar from "../navBar";
@@ -49,7 +49,7 @@ const SettingsModules = (props: any) => {
       label: "Update",
       icon: "pi pi-pencil",
       command: async (y: any) => {
-        let res = await dispatch(ModuleNameGetForms(id));
+        let res = await dispatch(ModuleNameGetFormsaa(id));
 
         if (res.payload.status === 200) {
           setId(null);

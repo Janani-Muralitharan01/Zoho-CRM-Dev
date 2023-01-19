@@ -36,7 +36,7 @@ import NavBar from "./navBar";
 import CreateForm from "./createForm";
 import { useParams } from "react-router-dom";
 import { pickListDragableIdStore } from "../../features/counter/dragAndDrop";
-import { ModuleNameGetForms } from "../../features/Modules/module";
+import { ModuleNameGetFormsaa } from "../../features/Modules/module";
 import { newSectionIndexData } from "../../features/counter/dragAndDrop";
 import { Button } from "primereact/button";
 
@@ -109,13 +109,8 @@ const SuperAdmin = () => {
       dispatch(dragAndDropValueSuperAdmin(complete));
     }
 
-    if (
-      window.location.pathname === `/super-admin/edit/${editId}` &&
-      count.module.rolesGetForms !== undefined
-    ) {
+    if (window.location.pathname === `/super-admin/edit/${editId}`) {
       let totalValue = count.module?.rolesGetForms;
-
-      console.log("totalValue", count.module);
 
       const value = Object.assign({}, totalValue[0]?.moduleelements);
 
@@ -123,7 +118,11 @@ const SuperAdmin = () => {
         value[uuidv4()] = value[key];
         delete value[key];
       }
-      setCompleted(value);
+
+      if (Object.values(complete)[0] === Object.values(value)[0]) {
+      } else {
+        setCompleted(value);
+      }
 
       // let keyValue;
       // for (let key in totalValue[0]?.moduleelements) {

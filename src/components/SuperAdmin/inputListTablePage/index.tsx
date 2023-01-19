@@ -12,7 +12,6 @@ import {
   ModuleNameGet,
   ModuleNameDelete,
   ModuleNameUpdate,
-  ModuleNameGetForms,
 } from "../../../features/Modules/module";
 import { SpeedDial } from "primereact/speeddial";
 import NavBar from "../navBar";

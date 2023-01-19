@@ -9,7 +9,7 @@ import Arrow from "../../../assets/arrow.png";
 import "./CreateForm.css";
 import React, { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { ModuleNameGetForms } from "../../../features/Modules/module";
+import { ModuleNameGetFormsaa } from "../../../features/Modules/module";
 import { useParams } from "react-router-dom";
 
 interface itemProps {
@@ -46,7 +46,7 @@ const CreateForm = () => {
   }, [user.module.rolesGetForms]);
   useEffect(() => {
     if (window.location.pathname === `/super-admin/edit/${editId}`) {
-      dispatch(ModuleNameGetForms(editId));
+      dispatch(ModuleNameGetFormsaa(editId));
     }
   }, []);
 

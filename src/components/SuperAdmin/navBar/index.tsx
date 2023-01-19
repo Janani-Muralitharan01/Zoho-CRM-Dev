@@ -24,7 +24,7 @@ import { OverlayPanel } from "primereact/overlaypanel";
 import { useNavigate } from "react-router-dom";
 import {
   ModuleNameGet,
-  ModuleNameGetForms,
+  ModuleNameGetFormsaa,
 } from "../../../features/Modules/module";
 import {
   ProjectLogoName,
@@ -76,7 +76,7 @@ const NavBar = (props: any) => {
 
   const ShowNav = async (items: any, id: string) => {
     setdisplayNav(items);
-    let res = await dispatch(ModuleNameGetForms(id));
+    let res = await dispatch(ModuleNameGetFormsaa(id));
 
     if (res.payload.status === 200) {
       // navigate(`/super-admin/edit/${id}`);
@@ -105,7 +105,7 @@ const NavBar = (props: any) => {
   const NavbarEdit = async (x: any) => {
     setdisplayNav(x.modulename);
     localStorage.setItem("moduleName", x.modulename);
-    let res = await dispatch(ModuleNameGetForms(x._id));
+    let res = await dispatch(ModuleNameGetFormsaa(x._id));
     if (res.payload.status === 200) {
       navigate("/super-admin/Table-List");
     }

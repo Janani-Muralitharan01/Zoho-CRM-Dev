@@ -84,14 +84,14 @@ export const ModuleNameUpdate: any = createAsyncThunk(
   }
 );
 
-export const ModuleNameGetForms: any = createAsyncThunk(
-  "module/moduleCreation",
+export const ModuleNameGetFormsaa: any = createAsyncThunk(
+  "app/moduleCreationn",
   async (para1, thunkAPI) => {
     try {
       const response: any = await axios.get(
         `${BASEURL}/api/forms/getforms/${para1}`
       );
-      console.log("response", response);
+
       return response;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(error);
@@ -122,10 +122,10 @@ export const userReducer = createSlice({
     [NewModuleCreation.rejected]: (state: any, action: any) => {
       state.status = "error";
     },
-    [ModuleNameGetForms.fulfilled]: (state: any, action: any) => {
-      console.log("action.payload.data.data", action.payload.data.data);
+    [ModuleNameGetFormsaa.fulfilled]: (state: any, action: any) => {
       state.rolesGetForms = action.payload.data.data;
     },
+
     [ModuleNameGet.pending]: (state: any) => {
       state.isLoading = true;
     },

@@ -117,7 +117,7 @@ const DropArea = (props: any) => {
     let inputName: any[] = [];
 
     // Object.keys(uidv4 || {}).map((x: any) => {
-    //   console.log("xxxxx", x);
+
     //   index = x;
     // });
 
@@ -174,37 +174,59 @@ const DropArea = (props: any) => {
       delete value[f.id];
     });
 
-    console.log("uidv4", uidv4);
+    // let resp: any = {};
 
-    console.log(formName, "value", value);
+    // {
+    //   Object.keys(value || {}).map((list: any, i: number) => {
+    //     value[list].map((x: any) => {
+    //       resp[list] = {
+    //         [x.subName]: {
+    //           type: x.names,
+    //           fieldname: x.subName,
+    //           defaultvalue: x.names,
+    //         },
+    //       };
+    //     });
+    //   });
+    // }
 
-    let resp: any = {};
-    // const value = Object.assign({}, uidv4);
+    // let response = Object.assign({}, value);
 
-    {
-      Object.keys(value || {}).map((list: any, i: number) => {
-        console.log(list, " value[list]", value[list]);
-        value[list].map((x: any) => {
-          resp[list] = {
-            [x.subName]: {
-              type: x.names,
-              fieldname: x.names,
-              defaultvalue: x.names,
-            },
-          };
-        });
+    let response: any = { ...value };
+
+    // Object.defineProperties(response, { ...value, writable: true });
+
+    Object.keys(response || {}).map((list: any, i: number) => {
+      response[list] = response[list].map((x: any) => {
+        return {
+          type: x.names,
+          fieldname: x.subName,
+          defaultvalue: x.names,
+        };
       });
-    }
+    });
 
-    console.log("resp", resp);
+    // response[list].map((x: any, idx: number) => {
+    //   response[list][idx] = {
+    //     type: x.names,
+    //     fieldname: x.subName,
+    //     defaultvalue: x.names,
+    //   };
+    // });
+
+    // resp[list] = {
+    //   [x.subName]: {
+    //     type: x.names,
+    //     fieldname: x.names,
+    //     defaultvalue: x.names,
+    //   },
+    // };
 
     let payload: object = {
       modulename: moduleName,
       recuriter: count?.userValue?.roles?.id,
-      moduleelements: resp,
+      moduleelements: response,
     };
-
-    console.log("payload", payload);
 
     let res;
     if (window.location.pathname === `/super-admin/edit/${editId}`) {
@@ -251,7 +273,6 @@ const DropArea = (props: any) => {
 
   let handleChangeForm = (i: number, e: any, list: any) => {
     let newFormValues = [...formName];
-
     newFormValues[i].name = e.target.value;
     newFormValues[i].id = list;
     setFormName(newFormValues);
@@ -273,16 +294,29 @@ const DropArea = (props: any) => {
                     ref={provided.innerRef}
                   >
                     <section className="mt-2 p-2  mx-auto">
-                      <input
-                        placeholder="Untitled form"
-                        className="  mx-auto  text-sm w-28rem  text-900 border-none"
-                        style={{
-                          height: "48px",
-                          color: "#333333",
-                        }}
-                        value={formName.name}
-                        onChange={(e) => handleChangeForm(i, e, list)}
-                      />
+                      {/* <section className="mt-2 p-2 ml-8   "> */}
+                      {formName.map((x: any, idx: number) => {
+                        return (
+                          <div>
+                            {i == idx ? (
+                              <input
+                                placeholder="Untitled form"
+                                className="  mx-auto  text-sm w-28rem  text-900 "
+                                style={{
+                                  height: "48px",
+                                  color: "#333333",
+                                }}
+                                value={x.name}
+                                onChange={(e) => handleChangeForm(i, e, list)}
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </div>
+                        );
+                      })}
+
+                      {/* </section> */}
                     </section>
 
                     {
@@ -323,7 +357,7 @@ const DropArea = (props: any) => {
                                       className="grey font-semibold  "
                                       // style={{ color: "#333333" }}
                                     >
-                                      {item.subName}
+                                      {item.subName || item.fieldname}
                                     </section>
                                     {item.subName === "Pick List" ? (
                                       <>
@@ -353,7 +387,7 @@ const DropArea = (props: any) => {
                                           border: "1px solid lightgrey",
                                           // color: "#8083A3",
                                         }}
-                                        value={item.names}
+                                        value={item.names || item.type}
                                         onChange={(e) => {
                                           handleChange(e, index, list);
                                         }}
