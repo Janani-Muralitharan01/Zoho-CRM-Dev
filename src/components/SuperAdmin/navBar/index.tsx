@@ -157,11 +157,11 @@ const NavBar = (props: any) => {
                 return (
                   <div
                     key={index}
-                    className="flex align-items-center mt-2 white-space-nowrap ml-2"
+                    className="flex align-items-center mt-2 white-space-nowrap "
                   >
                     <div>
                       {" "}
-                      {index <= 4 ? (
+                      {index <= 5 ? (
                         <div>
                           <div
                             className="nav_text capitalize"
@@ -190,7 +190,7 @@ const NavBar = (props: any) => {
             ref={op}
             showCloseIcon
             id="overlay_panel"
-            style={{ width: "210px" }}
+            style={{ width: "275px" }}
             className="overlaypanel-demo"
           >
             <div>
@@ -210,7 +210,7 @@ const NavBar = (props: any) => {
                         <div key={index} className="">
                           <div className="">
                             {" "}
-                            {index >= 5 ? (
+                            {index >= 6 ? (
                               <div>
                                 <div
                                   className="nav_text_overlay capitalize"
