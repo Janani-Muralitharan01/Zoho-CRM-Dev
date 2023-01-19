@@ -297,7 +297,7 @@ const DropArea = (props: any) => {
                       {/* <section className="mt-2 p-2 ml-8   "> */}
                       {formName.map((x: any, idx: number) => {
                         return (
-                          <div>
+                          <div key={idx}>
                             {i == idx ? (
                               <input
                                 placeholder="Untitled form"
