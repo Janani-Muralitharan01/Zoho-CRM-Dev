@@ -290,7 +290,7 @@ const DropArea = (props: any) => {
               <Droppable key={list} droppableId={list}>
                 {(provided, snapshot) => (
                   <div
-                    className=" border-dashed border-2 w-30rem ml-8 mt-2"
+                    className=" border-dashed border-2 w-30rem ml-8 mt-2 border-round-md"
                     ref={provided.innerRef}
                   >
                     <section className="mt-2 p-2  mx-auto">
@@ -420,7 +420,7 @@ const DropArea = (props: any) => {
                         ))
                       ) : (
                         // !provided.placeholder && (
-                        <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2">
+                        <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2 mb-2">
                           <p className="">+ Drop items here</p>
                         </div>
                       )
