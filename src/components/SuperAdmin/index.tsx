@@ -95,6 +95,8 @@ const SuperAdmin = () => {
   const [indexId, setIndexId] = useState<any>();
   const count: any = useSelector((state) => state);
 
+  useEffect(() => {});
+
   useEffect(() => {
     if (window.location.pathname !== `/super-admin/edit/${editId}`) {
       dispatch(dragAndDropValueSuperAdmin(complete));
@@ -112,6 +114,8 @@ const SuperAdmin = () => {
       count.module.rolesGetForms !== undefined
     ) {
       let totalValue = count.module?.rolesGetForms;
+
+      console.log("totalValue", count.module);
 
       const value = Object.assign({}, totalValue[0]?.moduleelements);
 

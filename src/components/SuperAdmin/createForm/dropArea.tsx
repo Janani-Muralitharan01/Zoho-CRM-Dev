@@ -19,6 +19,7 @@ import { useNavigate } from "react-router";
 import { LoginUserDetails } from "../../../features/Auth/userDetails";
 import { Dropdown } from "primereact/dropdown";
 import { useParams } from "react-router-dom";
+import _ from "lodash";
 
 interface formModel {
   name: string;
@@ -41,7 +42,7 @@ const DropArea = (props: any) => {
   const navigate = useNavigate();
   const [list1, setList1] = useState<any>([]);
   const [editArray, setEditArray] = useState<any>();
-  const [finaValue, setFinalValue] = useState<object>();
+  const [finaValue, setFinalValue] = useState<any>({});
 
   useEffect(() => {
     setModuleName(props.moduleValue);
@@ -110,17 +111,26 @@ const DropArea = (props: any) => {
     let res = await dispatch(LoginUserDetails());
   };
 
-  const handleChange = (e: any, i: number) => {
-    let index: any;
+  const handleChange = (e: any, i: number, list: any) => {
+    // let index: any;
+    let index: string = list;
     let inputName: any[] = [];
-    Object.keys(uidv4 || {}).map((x: any) => {
-      index = x;
-    });
+
+    // Object.keys(uidv4 || {}).map((x: any) => {
+    //   console.log("xxxxx", x);
+    //   index = x;
+    // });
+
+    let val1 = Object.keys(uidv4);
+
+    let val2 = val1.indexOf(list);
+
     if (index != null) {
       [uidv4].map((x: any) => {
         inputName = x[index];
       });
     }
+
     inputName = inputName.map((x: any, idx: any) => {
       if (idx === i) {
         return { ...x, names: e.target.value };
@@ -128,7 +138,14 @@ const DropArea = (props: any) => {
       return x;
     });
 
-    setuidv4({ [index]: inputName });
+    let value = Object.assign({}, uidv4);
+    let omiter = _.omit(value, list);
+    const obj = { [index]: inputName };
+    // const obj1 = Object.assign(obj, omiter);
+    let keyValues = Object.entries(omiter);
+    keyValues.splice(val2, 0, [list, inputName]);
+    let newObj = Object.fromEntries(keyValues);
+    setuidv4(newObj);
   };
 
   const onCityChange = (e: any) => {
@@ -150,21 +167,44 @@ const DropArea = (props: any) => {
   const saveForm = async () => {
     let val: object = {};
 
-    const value = Object.assign(
-      {},
-      count.dragAndDrop.initialStartDragSuperAdmin
-    );
+    const value = Object.assign({}, uidv4);
 
     formName.map((f: formModel, i: number) => {
       value[f.name] = value[f.id];
       delete value[f.id];
     });
 
+    console.log("uidv4", uidv4);
+
+    console.log(formName, "value", value);
+
+    let resp: any = {};
+    // const value = Object.assign({}, uidv4);
+
+    {
+      Object.keys(value || {}).map((list: any, i: number) => {
+        console.log(list, " value[list]", value[list]);
+        value[list].map((x: any) => {
+          resp[list] = {
+            [x.subName]: {
+              type: x.names,
+              fieldname: x.names,
+              defaultvalue: x.names,
+            },
+          };
+        });
+      });
+    }
+
+    console.log("resp", resp);
+
     let payload: object = {
       modulename: moduleName,
       recuriter: count?.userValue?.roles?.id,
-      moduleelements: value,
+      moduleelements: resp,
     };
+
+    console.log("payload", payload);
 
     let res;
     if (window.location.pathname === `/super-admin/edit/${editId}`) {
@@ -220,44 +260,8 @@ const DropArea = (props: any) => {
   return (
     <div className="">
       <Toast ref={toast} />
-      <div className="ml-8 pl-2">
-        {/* <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
-          Module Name
-        </div>
-        <input
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm uppercase text-900"
-          p-3
-          style={{
-            height: "52px",
-            border: "1px solid lightgrey",
-            color: "#333333",
-            background: "#CCCCCC",
-          }}
-          value={moduleName}
-          onChange={(e) => setModuleName(e.target.value)}
-        /> */}
-      </div>
-      {/* <div className="ml-8 ">
-        <div className="grey py-2 font-semibold" style={{ color: "#333333" }}>
-          Submit Form Date
-        </div>
-        <Calendar
-          placeholder="Untiled form"
-          className=" w-30rem my-auto border-round-md text-sm"
-          value={date}
-          onChange={(e) => setDate(e.value)}
-          dateFormat="dd-mm-yy"
-          p-3
-          disabled
-          style={{
-            height: "52px",
-            border: "1px solid lightgrey",
-            color: "#333333",
-            background: "#CCCCCC",
-          }}
-        />
-      </div> */}
+      <div className="ml-8 pl-2"></div>
+
       <div className="FormDiv1">
         {Object.keys(uidv4 || {}).map((list: any, i: number) => {
           return (
@@ -327,7 +331,7 @@ const DropArea = (props: any) => {
                                           value={pickList}
                                           options={list1}
                                           onChange={(e) => {
-                                            handleChange(e, index);
+                                            handleChange(e, index, list);
                                             setPickList(e.value);
                                           }}
                                           optionLabel="value"
@@ -351,7 +355,7 @@ const DropArea = (props: any) => {
                                         }}
                                         value={item.names}
                                         onChange={(e) => {
-                                          handleChange(e, index);
+                                          handleChange(e, index, list);
                                         }}
                                         className=" text-yellow-600  my-auto border-round-md "
                                       />
