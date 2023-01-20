@@ -23,21 +23,41 @@ import React from "react";
 
 //rolesGetForms
 const FieldListTablePage = (props: any) => {
-  const [value3, setValue3] = useState("");
-  const [getdata, setgetdata] = useState();
-  const [activeIndex1, setActiveIndex1] = useState(0);
+  const [value, setValue] = useState("");
+  const [getdata, setgetdata] = useState(false);
+  const [modulename, setmodulename] = useState('');
   const [state, setState] = useState<any>([]);
+  const [id, setid] = useState<any>();
   const [Get, setGet] = useState<any>([]);
+  const [DataGet, setDataGet] = useState<any>([]);
+  const [Getdata, setGetdata] = useState<any>([]);
   const [forms, setForms] = useState<any>([]);
+  const [formData, setformData] = useState<any>([]);
   const [selectedProducts, setSelectedProducts] = useState(null);
 
   const [TableData, setTableData] = useState<any>([]);
   const navigate: any = useNavigate();
   const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
-
+  
   const user: any = useAppSelector((state) => state);
-
+useEffect(()=>{
+  let recuriter = count?.module?.rolesGetForms &&
+  count?.module?.rolesGetForms[0].recuriter
+    ? count?.module?.rolesGetForms[0].recuriter
+    : [];
+    let modulename = count?.module?.rolesGetForms &&
+  count?.module?.rolesGetForms[0].modulename
+    ? count?.module?.rolesGetForms[0].modulename
+    : [];
+    let id = count?.module?.rolesGetForms &&
+  count?.module?.rolesGetForms[0]._id
+    ? count?.module?.rolesGetForms[0]._id
+    : [];
+  setValue(recuriter)
+  setmodulename(modulename)
+  setid(id)
+})
   const formArray = [
     {
       color: "red",
@@ -108,13 +128,16 @@ const FieldListTablePage = (props: any) => {
       count?.module?.rolesGetForms[0].moduleelements
         ? count?.module?.rolesGetForms[0].moduleelements
         : [];
+        
     Object.keys(value).map((list, index) => {
+      
       Object.keys(value[list] || []).map((heading: any, index: any) => {
+        formData.push(list)
         Get.push({
+          formData:list,
           DataHeader: value[list][heading].fieldname,
           value: value[list][heading].defaultvalue,
         });
-
         TableData.push(heading);
         forms.push(value[list][heading]);
         //  setTableData(forms)
@@ -123,7 +146,41 @@ const FieldListTablePage = (props: any) => {
     setGet(Get);
     setForms(forms);
     setTableData(TableData);
+    setformData(formData)
   }, []);
+
+  
+
+  useEffect(()=>{
+    const tableData =
+    count?.module?.rolesGetForms &&
+    count?.module?.rolesGetForms[0].tableData
+      ? count?.module?.rolesGetForms[0].tableData
+      : [];
+      Getdata.push(tableData)
+      Object.keys(tableData).map((list:any, index) => {
+ 
+  tableData[list] .map((Zero: any, index: any) => {
+  
+    
+    Object.keys(Zero.data).map((onnsss:any, index) => {
+  
+  DataGet.push(onnsss)
+    })
+    
+    // Object.values(Zero.data).map((jackk:any, index) => {
+      
+    //   DataGet.push(onnsss)
+    //     })
+    // Object.keys(tableData[list][Zero]).map((Data:any, index) => {
+    // })
+  
+  })
+      })
+      setDataGet(DataGet)
+     
+      setGetdata(Getdata)
+  },[]);
 
   const onColumnToggle = (event: any) => {
     let selectedColumns = event.value;
@@ -134,9 +191,12 @@ const FieldListTablePage = (props: any) => {
     );
     setSelectedColumns(orderedSelectedColumns);
   };
+  const clickNextPage =()=>{
+    setgetdata(!getdata)
+  }
 
   const header = (
-    <div style={{ textAlign: "left" }}>
+    <div className="flex justify-content-between">
       <MultiSelect
         value={selectedColumns}
         options={columns}
@@ -144,6 +204,13 @@ const FieldListTablePage = (props: any) => {
         onChange={onColumnToggle}
         style={{ width: "20em" }}
       />
+<Link
+          to="/super-admin/CustomModule/being"
+          state={{ from:Get ,form:value,name:modulename,id:id}}
+        >
+          <Button label="Create a module"/>
+        </Link>
+     
     </div>
   );
 
@@ -151,9 +218,10 @@ const FieldListTablePage = (props: any) => {
     return <Column key={col.field} field={col.field} header={col.header} />;
   });
   const layoutPagelick = (rowdata: any) => {
+    
     return (
       <div>
-        <span className="text-blue-500">{rowdata.value}</span>
+        <span className="text-blue-500">ssss</span>
       </div>
     );
   };
@@ -171,7 +239,7 @@ const FieldListTablePage = (props: any) => {
             <div>
               <div>
                 <DataTable
-                  value={Get}
+                  value={Getdata}
                   paginator
                   responsiveLayout="scroll"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
@@ -190,70 +258,21 @@ const FieldListTablePage = (props: any) => {
                     exportable={false}
                   ></Column>
 
-                  {Get.map((form: any) => {
+                  {Object.values(DataGet).map((form: any) => {
                     return (
                       <Column
                         sortable
                         filter
                         filterPlaceholder="Search by name"
                         style={{ minWidth: "12rem" }}
-                        field="value"
-                        header={form.DataHeader}
+                        body={form}
+                        header={form}
                       ></Column>
                     );
                   })}
 
                   {columnComponents}
                 </DataTable>
-
-                {/* <table className='flex'>
-         
-         {Object.keys(state || []).map((list, index) => {
-        return (
-          
-          < >
-            {Object.keys(state[list]|| []).map((heading: any, index: any) => {
-             
-
-              
-               return(
-                
-                <div>
-                  
-                <tr >
-                <th >{heading}</th>
-                
-              </tr>
-               <tr>
-                <td>Anom</td>
-                <td>19</td>
-                <td>Male</td>
-              </tr>
-              <tr>
-                <td>Megha</td>
-                <td>19</td>
-                <td>Female</td>
-              </tr>
-              <tr>
-                <td>Subham</td>
-                <td>25</td>
-                <td>Male</td>                </tr> 
-              </div>
-               )
-            
-                
-                
-              
-            })}
-
-            
-          </>
-        );
-      })}
-         
-        
-       
-      </table> */}
               </div>
             </div>
           </div>
