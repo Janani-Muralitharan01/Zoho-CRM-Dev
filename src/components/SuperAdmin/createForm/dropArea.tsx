@@ -77,6 +77,10 @@ const DropArea = (props: any) => {
       // }
 
       setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
+      // console.log(
+      //   "count.dragAndDrop.initialStartDragSuperAdmin",
+      //   count.dragAndDrop.initialStartDragSuperAdmin
+      // );
     }
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
@@ -169,10 +173,16 @@ const DropArea = (props: any) => {
 
     const value = Object.assign({}, uidv4);
 
+    console.log("formName", formName);
+
+    console.log("value", value);
+
     formName.map((f: formModel, i: number) => {
       value[f.name] = value[f.id];
       delete value[f.id];
     });
+
+    console.log("value", value);
 
     // let resp: any = {};
 
@@ -190,7 +200,10 @@ const DropArea = (props: any) => {
     //   });
     // }
 
+    console.log("formName1234567890", formName);
+
     // let response = Object.assign({}, value);
+    console.log("...value...value...value", value);
 
     let response: any = { ...value };
 
@@ -277,7 +290,7 @@ const DropArea = (props: any) => {
     newFormValues[i].id = list;
     setFormName(newFormValues);
   };
-
+  console.log("uidv4", uidv4);
   return (
     <div className="">
       <Toast ref={toast} />
@@ -295,26 +308,30 @@ const DropArea = (props: any) => {
                   >
                     <section className="mt-2 p-2  mx-auto">
                       {/* <section className="mt-2 p-2 ml-8   "> */}
-                      {formName.map((x: any, idx: number) => {
-                        return (
-                          <div key={idx}>
-                            {i == idx ? (
-                              <input
-                                placeholder="Untitled form"
-                                className="  mx-auto  text-sm w-28rem  text-900 "
-                                style={{
-                                  height: "48px",
-                                  color: "#333333",
-                                }}
-                                value={x.name}
-                                onChange={(e) => handleChangeForm(i, e, list)}
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        );
-                      })}
+                      {formName.length
+                        ? formName.map((x: any, idx: number) => {
+                            return (
+                              <div key={idx}>
+                                {i == idx ? (
+                                  <input
+                                    placeholder="Untitled form"
+                                    className="  mx-auto  text-sm w-28rem  text-900 "
+                                    style={{
+                                      height: "48px",
+                                      color: "#333333",
+                                    }}
+                                    value={x.name}
+                                    onChange={(e) =>
+                                      handleChangeForm(i, e, list)
+                                    }
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            );
+                          })
+                        : ""}
 
                       {/* </section> */}
                     </section>

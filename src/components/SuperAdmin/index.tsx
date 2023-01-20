@@ -39,6 +39,7 @@ import { pickListDragableIdStore } from "../../features/counter/dragAndDrop";
 import { ModuleNameGetFormsaa } from "../../features/Modules/module";
 import { newSectionIndexData } from "../../features/counter/dragAndDrop";
 import { Button } from "primereact/button";
+import { type } from "os";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -58,6 +59,14 @@ const copy = (
   droppableSource: DraggableLocation,
   droppableDestination: DraggableLocation
 ) => {
+  console.log(
+    "destination",
+    destination,
+    "droppableSource",
+    droppableSource,
+    "droppableDestination",
+    droppableDestination
+  );
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
   const item: any = sourceClone[droppableSource.index];
@@ -94,8 +103,17 @@ const SuperAdmin = () => {
   });
   const [indexId, setIndexId] = useState<any>();
   const count: any = useSelector((state) => state);
+  const [sample, setSample] = useState<any>({});
 
-  useEffect(() => {});
+  const addList = () => {
+    setCompleted({ ...complete, [uuidv4()]: [] });
+    let lent = Object.keys(complete).length;
+    dispatch(newSectionIndexData(lent));
+  };
+
+  useEffect(() => {
+    console.log("useeffect", complete);
+  }, [complete]);
 
   useEffect(() => {
     if (window.location.pathname !== `/super-admin/edit/${editId}`) {
@@ -112,31 +130,49 @@ const SuperAdmin = () => {
     if (window.location.pathname === `/super-admin/edit/${editId}`) {
       let totalValue = count.module?.rolesGetForms;
 
-      const value = Object.assign({}, totalValue[0]?.moduleelements);
+      let value = Object.assign({}, totalValue[0]?.moduleelements);
+      const value1 = Object.assign({}, complete);
+
+      let res1 = Object.keys(value);
+      let res2 = Object.keys(value1);
+
+      res1.map((x, i) => {
+        if (res2.length === i) {
+          let ab: any = [uuidv4()];
+          complete[ab] = [];
+        }
+      });
 
       for (let key in value) {
         value[uuidv4()] = value[key];
         delete value[key];
       }
 
-      if (Object.values(complete)[0] === Object.values(value)[0]) {
+      console.log("value", value);
+      console.log("complete", complete);
+
+      let keyss = Object.keys(complete);
+
+      let valuess = Object.values(value);
+      console.log("valuess", valuess);
+      console.log("keyss", keyss);
+      let resObj: any = {};
+      keyss.map((ke: any, idx: any) => {
+        resObj[ke] = valuess[idx];
+      });
+
+      console.log(resObj, "resObj");
+
+      if (Object.values(complete)[0] === Object.values(resObj)[0]) {
+        console.log(
+          "iffff",
+          Object.values(complete)[0],
+          Object.values(value)[0]
+        );
       } else {
-        setCompleted(value);
+        console.log("else", resObj);
+        setCompleted(resObj);
       }
-
-      // let keyValue;
-      // for (let key in totalValue[0]?.moduleelements) {
-      //   keyValue = totalValue[0]?.moduleelements[key];
-
-      // }
-
-      // let arrayValue = [];
-      // let arrayVal: any = [];
-      // for (let val in keyValue) {
-      //   arrayValue.push(keyValue[val]);
-      //   // arrayVal.push(val);
-      //   arrayVal.push(keyValue[val].subName || keyValue[val].fieldname);
-      // }
 
       // let lastValue: any = [];
       // arrayVal.map((x: any) => {
@@ -152,16 +188,19 @@ const SuperAdmin = () => {
       //   setCompleted({ [key]: lastValue });
       // }
 
+      // let lent = Object.keys(complete).length;
+      // dispatch(newSectionIndexData(lent));
+
       dispatch(dragAndDropValueSuperAdmin(complete));
     }
 
-    Object.keys(complete || {}).map((list: any, i: number) => {
-      complete[list].map((x: any) => {
-        if (x.subName === "Pick List") {
-          dispatch(pickListDragableIdStore(x.id));
-        }
-      });
-    });
+    // Object.keys(complete || {}).map((list: any, i: number) => {
+    //   complete[list].map((x: any) => {
+    //     if (x.subName === "Pick List") {
+    //       dispatch(pickListDragableIdStore(x.id));
+    //     }
+    //   });
+    // });
   }, [complete]);
 
   function toAddData() {}
@@ -170,18 +209,13 @@ const SuperAdmin = () => {
     setId(e);
   };
 
-  const addList = () => {
-    setCompleted({ ...complete, [uuidv4()]: [] });
-    let lent = Object.keys(complete).length;
-    dispatch(newSectionIndexData(lent));
-  };
-
   const dispatch = useDispatch();
 
   return (
     <div>
       <DragDropContext
         onDragEnd={(result) => {
+          console.log("result", result);
           const { source, destination } = result;
           if (!destination) {
             return;

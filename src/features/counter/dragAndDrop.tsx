@@ -4,7 +4,7 @@ interface userReducerState {
   initialStateDrag: null;
   initialStateQuickDrag: null;
   DialogOpenIndex: null;
-  initialStartDragSuperAdmin: null;
+  initialStartDragSuperAdmin: any;
   DialogIndex: null;
   PickListData: null;
   pickListDragableId: null;
