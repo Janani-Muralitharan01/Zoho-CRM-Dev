@@ -190,7 +190,7 @@ const UntitleImage = () => {
           <div className="flex  justify-content-center">
             <div className="dropdownBorderStyle">
               <span className="flex">
-                Preview layout as
+                2
                 <Dropdown
                   className="ml-2"
                   value={selectedCity1}
