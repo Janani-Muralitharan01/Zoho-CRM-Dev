@@ -29,6 +29,7 @@ import {
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
   dragAndDropValueSuperAdmin,
+  formEditIdDragAndDrop,
   dragAndDropDialogIndexSuperAdmin,
 } from "../../features/counter/dragAndDrop";
 import { useSelector, useDispatch } from "react-redux";
@@ -59,19 +60,12 @@ const copy = (
   droppableSource: DraggableLocation,
   droppableDestination: DraggableLocation
 ) => {
-  console.log(
-    "destination",
-    destination,
-    "droppableSource",
-    droppableSource,
-    "droppableDestination",
-    droppableDestination
-  );
   const sourceClone = Array.from(source);
   const destClone = Array.from(destination);
   const item: any = sourceClone[droppableSource.index];
 
   destClone.splice(droppableDestination.index, 0, { ...item, id: uuidv4() });
+
   return destClone;
 };
 
@@ -106,14 +100,16 @@ const SuperAdmin = () => {
   const [sample, setSample] = useState<any>({});
 
   const addList = () => {
+    // let ab: any = [uuidv4()];
+    // complete[ab] = [];
     setCompleted({ ...complete, [uuidv4()]: [] });
+
     let lent = Object.keys(complete).length;
+
     dispatch(newSectionIndexData(lent));
   };
 
-  useEffect(() => {
-    console.log("useeffect", complete);
-  }, [complete]);
+  React.useMemo(() => {}, [complete]);
 
   useEffect(() => {
     if (window.location.pathname !== `/super-admin/edit/${editId}`) {
@@ -137,61 +133,87 @@ const SuperAdmin = () => {
       let res2 = Object.keys(value1);
 
       res1.map((x, i) => {
-        if (res2.length === i) {
+        if (i + 1 < res1.length && res2.length < res1.length) {
           let ab: any = [uuidv4()];
           complete[ab] = [];
         }
       });
+
+      dispatch(formEditIdDragAndDrop(res2));
 
       for (let key in value) {
         value[uuidv4()] = value[key];
         delete value[key];
       }
 
-      console.log("value", value);
-      console.log("complete", complete);
-
       let keyss = Object.keys(complete);
 
       let valuess = Object.values(value);
-      console.log("valuess", valuess);
-      console.log("keyss", keyss);
-      let resObj: any = {};
-      keyss.map((ke: any, idx: any) => {
-        resObj[ke] = valuess[idx];
+
+      let app: any = [];
+
+      valuess.map((x: any, i) => {
+        x = x.map((y: any, o: number) => {
+          return {
+            names: y.type,
+            subName: y.fieldname,
+            id: uuidv4(),
+          };
+        });
+
+        app.push([x]);
       });
 
-      console.log(resObj, "resObj");
+      let resObj: any = {};
+      keyss.map((ke: any, idx: any) => {
+        if (app[idx] === undefined) {
+          resObj[ke] = [];
+        } else {
+          resObj[ke] = app[idx][0];
+        }
+      });
 
-      if (Object.values(complete)[0] === Object.values(resObj)[0]) {
-        console.log(
-          "iffff",
-          Object.values(complete)[0],
-          Object.values(value)[0]
-        );
-      } else {
-        console.log("else", resObj);
-        setCompleted(resObj);
+      let resObj1: any = [];
+      Object.keys(resObj || {}).map((list: any, i: number) => {
+        resObj[list].map((x: any) => {
+          resObj1.push({
+            names: x.names,
+            subName: x.subName,
+          });
+        });
+      });
+
+      let complete1: any = [];
+      Object.keys(complete || {}).map((list: any, i: number) => {
+        complete[list].map((x: any) => {
+          complete1.push({
+            names: x.names,
+            subName: x.subName,
+          });
+        });
+      });
+
+      let c1 = JSON.stringify(resObj1);
+      let c2 = JSON.stringify(complete1);
+
+      let a1 = JSON.stringify(resObj);
+      let a2 = JSON.stringify(complete);
+
+      if (a1 !== a2) {
+        if (a1.length > a2.length) {
+          setCompleted(resObj);
+          dispatch(dragAndDropValueSuperAdmin(resObj));
+        }
+        if (a2.length > a1.length) {
+          setCompleted(complete);
+          dispatch(dragAndDropValueSuperAdmin(complete));
+        }
       }
+      if (a1 === a2) {
+        setCompleted(complete);
 
-      // let lastValue: any = [];
-      // arrayVal.map((x: any) => {
-      //   ITEMS.map((i: any) => {
-      //     if (x == i.names) {
-      //       lastValue.push(i);
-      //     }
-      //   });
-      // });
-
-      // for (let key in complete) {
-
-      //   setCompleted({ [key]: lastValue });
-      // }
-
-      // let lent = Object.keys(complete).length;
-      // dispatch(newSectionIndexData(lent));
-
-      dispatch(dragAndDropValueSuperAdmin(complete));
+        // dispatch(dragAndDropValueSuperAdmin(complete));
+      }
     }
 
     // Object.keys(complete || {}).map((list: any, i: number) => {
@@ -215,7 +237,6 @@ const SuperAdmin = () => {
     <div>
       <DragDropContext
         onDragEnd={(result) => {
-          console.log("result", result);
           const { source, destination } = result;
           if (!destination) {
             return;

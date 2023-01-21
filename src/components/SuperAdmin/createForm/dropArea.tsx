@@ -50,7 +50,7 @@ const DropArea = (props: any) => {
 
   useEffect(() => {
     if (count.dragAndDrop.newSectionIndex >= formName.length) {
-      setFormName([...formName, { name: "" }]);
+      setFormName([...formName, { name: "", id: "" }]);
     }
   }, [count.dragAndDrop.newSectionIndex]);
 
@@ -77,10 +77,6 @@ const DropArea = (props: any) => {
       // }
 
       setuidv4(count.dragAndDrop.initialStartDragSuperAdmin);
-      // console.log(
-      //   "count.dragAndDrop.initialStartDragSuperAdmin",
-      //   count.dragAndDrop.initialStartDragSuperAdmin
-      // );
     }
   }, [count.dragAndDrop.initialStartDragSuperAdmin]);
 
@@ -119,22 +115,13 @@ const DropArea = (props: any) => {
     // let index: any;
     let index: string = list;
     let inputName: any[] = [];
-
-    // Object.keys(uidv4 || {}).map((x: any) => {
-
-    //   index = x;
-    // });
-
     let val1 = Object.keys(uidv4);
-
     let val2 = val1.indexOf(list);
-
     if (index != null) {
       [uidv4].map((x: any) => {
         inputName = x[index];
       });
     }
-
     inputName = inputName.map((x: any, idx: any) => {
       if (idx === i) {
         return { ...x, names: e.target.value };
@@ -145,7 +132,6 @@ const DropArea = (props: any) => {
     let value = Object.assign({}, uidv4);
     let omiter = _.omit(value, list);
     const obj = { [index]: inputName };
-    // const obj1 = Object.assign(obj, omiter);
     let keyValues = Object.entries(omiter);
     keyValues.splice(val2, 0, [list, inputName]);
     let newObj = Object.fromEntries(keyValues);
@@ -173,16 +159,10 @@ const DropArea = (props: any) => {
 
     const value = Object.assign({}, uidv4);
 
-    console.log("formName", formName);
-
-    console.log("value", value);
-
     formName.map((f: formModel, i: number) => {
       value[f.name] = value[f.id];
       delete value[f.id];
     });
-
-    console.log("value", value);
 
     // let resp: any = {};
 
@@ -200,10 +180,7 @@ const DropArea = (props: any) => {
     //   });
     // }
 
-    console.log("formName1234567890", formName);
-
     // let response = Object.assign({}, value);
-    console.log("...value...value...value", value);
 
     let response: any = { ...value };
 
@@ -262,8 +239,6 @@ const DropArea = (props: any) => {
       let val: any = Object.keys(
         count.module.rolesGetForms[0]?.moduleelements || []
       );
-      // setFormName(val);
-
       let val1: any = [];
       val.map((x: any, i: any) => {
         val1.push({ name: x, id: "" });
@@ -271,8 +246,23 @@ const DropArea = (props: any) => {
 
       setFormName(val1);
       setModuleName(count.module.rolesGetForms[0]?.modulename);
+    }
 
-      // setuidv4(count.module.rolesGetForms[0]?.moduleelements);
+    if (
+      count.dragAndDrop.EditIdDragAndDrop !== null &&
+      count.module.rolesGetForms !== null &&
+      formName.length > 1
+    ) {
+      let value: any = count.dragAndDrop.EditIdDragAndDrop;
+
+      const upd_obj = formName.map((obj: any, i: number) => {
+        if (obj.id == "") {
+          return { name: obj.name, id: value[i] };
+        }
+        return obj;
+      });
+
+      setFormName(upd_obj);
     }
   }, [count.module.rolesGetForms]);
 
@@ -290,7 +280,7 @@ const DropArea = (props: any) => {
     newFormValues[i].id = list;
     setFormName(newFormValues);
   };
-  console.log("uidv4", uidv4);
+
   return (
     <div className="">
       <Toast ref={toast} />
@@ -438,7 +428,9 @@ const DropArea = (props: any) => {
                       ) : (
                         // !provided.placeholder && (
                         <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2 mb-2">
-                          <p className="">+ Drop items here</p>
+                          <p className="">
+                            + Drop items here{provided.placeholder}
+                          </p>
                         </div>
                       )
                       // )

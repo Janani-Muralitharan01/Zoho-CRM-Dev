@@ -40,9 +40,7 @@ const TopBars = (props: any) => {
       setPreview(true);
     }
   };
-  {
-    console.log("previewData", previewData);
-  }
+
   return (
     <div>
       <TabMenu
