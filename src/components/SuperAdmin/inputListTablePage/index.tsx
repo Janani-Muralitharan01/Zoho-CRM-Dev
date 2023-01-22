@@ -25,7 +25,7 @@ import React from "react";
 const FieldListTablePage = (props: any) => {
   const [value, setValue] = useState("");
   const [getdata, setgetdata] = useState(false);
-  const [modulename, setmodulename] = useState('');
+  const [modulename, setmodulename] = useState("");
   const [state, setState] = useState<any>([]);
   const [id, setid] = useState<any>();
   const [Get, setGet] = useState<any>([]);
@@ -39,25 +39,25 @@ const FieldListTablePage = (props: any) => {
   const navigate: any = useNavigate();
   const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
-  
+
   const user: any = useAppSelector((state) => state);
-useEffect(()=>{
-  let recuriter = count?.module?.rolesGetForms &&
-  count?.module?.rolesGetForms[0].recuriter
-    ? count?.module?.rolesGetForms[0].recuriter
-    : [];
-    let modulename = count?.module?.rolesGetForms &&
-  count?.module?.rolesGetForms[0].modulename
-    ? count?.module?.rolesGetForms[0].modulename
-    : [];
-    let id = count?.module?.rolesGetForms &&
-  count?.module?.rolesGetForms[0]._id
-    ? count?.module?.rolesGetForms[0]._id
-    : [];
-  setValue(recuriter)
-  setmodulename(modulename)
-  setid(id)
-})
+  useEffect(() => {
+    let recuriter =
+      count?.module?.rolesGetForms && count?.module?.rolesGetForms[0].recuriter
+        ? count?.module?.rolesGetForms[0].recuriter
+        : [];
+    let modulename =
+      count?.module?.rolesGetForms && count?.module?.rolesGetForms[0].modulename
+        ? count?.module?.rolesGetForms[0].modulename
+        : [];
+    let id =
+      count?.module?.rolesGetForms && count?.module?.rolesGetForms[0]._id
+        ? count?.module?.rolesGetForms[0]._id
+        : [];
+    setValue(recuriter);
+    setmodulename(modulename);
+    setid(id);
+  });
   const formArray = [
     {
       color: "red",
@@ -128,13 +128,12 @@ useEffect(()=>{
       count?.module?.rolesGetForms[0].moduleelements
         ? count?.module?.rolesGetForms[0].moduleelements
         : [];
-        
+
     Object.keys(value).map((list, index) => {
-      
       Object.keys(value[list] || []).map((heading: any, index: any) => {
-        formData.push(list)
+        formData.push(list);
         Get.push({
-          formData:list,
+          formData: list,
           DataHeader: value[list][heading].fieldname,
           value: value[list][heading].defaultvalue,
         });
@@ -146,41 +145,33 @@ useEffect(()=>{
     setGet(Get);
     setForms(forms);
     setTableData(TableData);
-    setformData(formData)
+    setformData(formData);
   }, []);
 
-  
-
-  useEffect(()=>{
+  useEffect(() => {
     const tableData =
-    count?.module?.rolesGetForms &&
-    count?.module?.rolesGetForms[0].tableData
-      ? count?.module?.rolesGetForms[0].tableData
-      : [];
-      Getdata.push(tableData)
-      Object.keys(tableData).map((list:any, index) => {
- 
-  tableData[list] .map((Zero: any, index: any) => {
-  
-    
-    Object.keys(Zero.data).map((onnsss:any, index) => {
-  
-  DataGet.push(onnsss)
-    })
-    
-    // Object.values(Zero.data).map((jackk:any, index) => {
-      
-    //   DataGet.push(onnsss)
-    //     })
-    // Object.keys(tableData[list][Zero]).map((Data:any, index) => {
-    // })
-  
-  })
-      })
-      setDataGet(DataGet)
-     
-      setGetdata(Getdata)
-  },[]);
+      count?.module?.rolesGetForms && count?.module?.rolesGetForms[0].tableData
+        ? count?.module?.rolesGetForms[0].tableData
+        : [];
+    Getdata.push(tableData);
+    Object.keys(tableData).map((list: any, index) => {
+      tableData[list].map((Zero: any, index: any) => {
+        Object.keys(Zero.data).map((onnsss: any, index) => {
+          DataGet.push(onnsss);
+        });
+
+        // Object.values(Zero.data).map((jackk:any, index) => {
+
+        //   DataGet.push(onnsss)
+        //     })
+        // Object.keys(tableData[list][Zero]).map((Data:any, index) => {
+        // })
+      });
+    });
+    setDataGet(DataGet);
+
+    setGetdata(Getdata);
+  }, []);
 
   const onColumnToggle = (event: any) => {
     let selectedColumns = event.value;
@@ -191,9 +182,9 @@ useEffect(()=>{
     );
     setSelectedColumns(orderedSelectedColumns);
   };
-  const clickNextPage =()=>{
-    setgetdata(!getdata)
-  }
+  const clickNextPage = () => {
+    setgetdata(!getdata);
+  };
 
   const header = (
     <div className="flex justify-content-between">
@@ -204,13 +195,12 @@ useEffect(()=>{
         onChange={onColumnToggle}
         style={{ width: "20em" }}
       />
-<Link
-          to="/super-admin/CustomModule/being"
-          state={{ from:Get ,form:value,name:modulename,id:id}}
-        >
-          <Button label="Create a module"/>
-        </Link>
-     
+      <Link
+        to="/super-admin/CustomModule/being"
+        state={{ from: Get, form: value, name: modulename, id: id }}
+      >
+        <Button label="Create a Lead" />
+      </Link>
     </div>
   );
 
@@ -218,7 +208,6 @@ useEffect(()=>{
     return <Column key={col.field} field={col.field} header={col.header} />;
   });
   const layoutPagelick = (rowdata: any) => {
-    
     return (
       <div>
         <span className="text-blue-500">ssss</span>

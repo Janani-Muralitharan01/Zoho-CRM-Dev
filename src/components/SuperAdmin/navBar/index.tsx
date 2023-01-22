@@ -104,12 +104,13 @@ const NavBar = (props: any) => {
   };
   const NavbarEdit = async (x: any) => {
     setdisplayNav(x.modulename);
-    localStorage.setItem("moduleName", x.modulename);
+    // localStorage.setItem("moduleName", x.modulename);
     let res = await dispatch(ModuleNameGetFormsaa(x._id));
     if (res.payload.status === 200) {
       navigate("/super-admin/Table-List");
     }
   };
+
   return (
     <div className="p-2 flex justify-content-between align-items-center NavBar_Main">
       <Toast ref={toast} position="top-center"></Toast>
@@ -180,7 +181,7 @@ const NavBar = (props: any) => {
             : ""}
           <div className="flex " style={{ right: "86px" }}>
             <span className="nav_text  flex align-items-center mt-2 white-space-nowrap capitalize">
-              {displayNav || localStorage.getItem("moduleName")}
+              {displayNav}
             </span>
             <div onClick={(e) => op.current?.toggle(e)}>
               <i className="pi pi-angle-double-right mr-6 mt-4"></i>
