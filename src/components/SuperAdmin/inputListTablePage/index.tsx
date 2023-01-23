@@ -173,6 +173,7 @@ useEffect(()=>{
     //   DataGet.push(onnsss)
     //     })
     // Object.keys(tableData[list][Zero]).map((Data:any, index) => {
+
     // })
   
   })
