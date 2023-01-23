@@ -123,7 +123,7 @@ const SettingsModules = (props: any) => {
                     </span>
                     <span>
                       <Button
-                        label="New module"
+                        label="New Module"
                         icon="pi pi-plus"
                         onClick={NextPage}
                       />

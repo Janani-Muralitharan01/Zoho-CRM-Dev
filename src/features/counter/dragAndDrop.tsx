@@ -4,11 +4,12 @@ interface userReducerState {
   initialStateDrag: null;
   initialStateQuickDrag: null;
   DialogOpenIndex: null;
-  initialStartDragSuperAdmin: null;
+  initialStartDragSuperAdmin: any;
   DialogIndex: null;
   PickListData: null;
   pickListDragableId: null;
   newSectionIndex: null;
+  EditIdDragAndDrop: null;
 }
 
 const initialDragAndDrop: userReducerState = {
@@ -20,6 +21,7 @@ const initialDragAndDrop: userReducerState = {
   PickListData: null,
   pickListDragableId: null,
   newSectionIndex: null,
+  EditIdDragAndDrop: null,
 };
 
 export const userReducer = createSlice({
@@ -50,6 +52,9 @@ export const userReducer = createSlice({
     newSectionIndexData: (state, action) => {
       state.newSectionIndex = action.payload;
     },
+    formEditIdDragAndDrop: (state, action) => {
+      state.EditIdDragAndDrop = action.payload;
+    },
   },
 });
 export const {
@@ -57,6 +62,7 @@ export const {
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
   dragAndDropValueSuperAdmin,
+  formEditIdDragAndDrop,
   dragAndDropDialogIndexSuperAdmin,
   pickListDropDownData,
   pickListDragableIdStore,

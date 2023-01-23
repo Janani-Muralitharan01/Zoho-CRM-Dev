@@ -20,6 +20,7 @@ import { LoginUserDetails } from "../../../features/Auth/userDetails";
 import { Dropdown } from "primereact/dropdown";
 import { useParams } from "react-router-dom";
 import _ from "lodash";
+import { ModuleNameGet } from "../../../features/Modules/module";
 
 interface formModel {
   name: string;
@@ -50,7 +51,7 @@ const DropArea = (props: any) => {
 
   useEffect(() => {
     if (count.dragAndDrop.newSectionIndex >= formName.length) {
-      setFormName([...formName, { name: "" }]);
+      setFormName([...formName, { name: "", id: "" }]);
     }
   }, [count.dragAndDrop.newSectionIndex]);
 
@@ -115,22 +116,13 @@ const DropArea = (props: any) => {
     // let index: any;
     let index: string = list;
     let inputName: any[] = [];
-
-    // Object.keys(uidv4 || {}).map((x: any) => {
-
-    //   index = x;
-    // });
-
     let val1 = Object.keys(uidv4);
-
     let val2 = val1.indexOf(list);
-
     if (index != null) {
       [uidv4].map((x: any) => {
         inputName = x[index];
       });
     }
-
     inputName = inputName.map((x: any, idx: any) => {
       if (idx === i) {
         return { ...x, names: e.target.value };
@@ -141,7 +133,6 @@ const DropArea = (props: any) => {
     let value = Object.assign({}, uidv4);
     let omiter = _.omit(value, list);
     const obj = { [index]: inputName };
-    // const obj1 = Object.assign(obj, omiter);
     let keyValues = Object.entries(omiter);
     keyValues.splice(val2, 0, [list, inputName]);
     let newObj = Object.fromEntries(keyValues);
@@ -236,8 +227,14 @@ const DropArea = (props: any) => {
       };
 
       res = await dispatch(ModuleNameUpdate(val));
+      if (res.payload.status == 200) {
+        dispatch(ModuleNameGet());
+      }
     } else {
       res = await dispatch(NewModuleCreation(payload));
+      if (res.payload.status == 200) {
+        dispatch(ModuleNameGet());
+      }
     }
 
     if (res.payload.status == 200) {
@@ -249,8 +246,6 @@ const DropArea = (props: any) => {
       let val: any = Object.keys(
         count.module.rolesGetForms[0]?.moduleelements || []
       );
-      // setFormName(val);
-
       let val1: any = [];
       val.map((x: any, i: any) => {
         val1.push({ name: x, id: "" });
@@ -258,8 +253,23 @@ const DropArea = (props: any) => {
 
       setFormName(val1);
       setModuleName(count.module.rolesGetForms[0]?.modulename);
+    }
 
-      // setuidv4(count.module.rolesGetForms[0]?.moduleelements);
+    if (
+      count.dragAndDrop.EditIdDragAndDrop !== null &&
+      count.module.rolesGetForms !== null &&
+      formName.length > 1
+    ) {
+      let value: any = count.dragAndDrop.EditIdDragAndDrop;
+
+      const upd_obj = formName.map((obj: any, i: number) => {
+        if (obj.id == "") {
+          return { name: obj.name, id: value[i] };
+        }
+        return obj;
+      });
+
+      setFormName(upd_obj);
     }
   }, [count.module.rolesGetForms]);
 
@@ -290,31 +300,35 @@ const DropArea = (props: any) => {
               <Droppable key={list} droppableId={list}>
                 {(provided, snapshot) => (
                   <div
-                    className=" border-dashed border-2 w-30rem ml-8 mt-2"
+                    className=" border-dashed border-2 w-30rem ml-8 mt-2 border-round-md"
                     ref={provided.innerRef}
                   >
                     <section className="mt-2 p-2  mx-auto">
                       {/* <section className="mt-2 p-2 ml-8   "> */}
-                      {formName.map((x: any, idx: number) => {
-                        return (
-                          <div>
-                            {i == idx ? (
-                              <input
-                                placeholder="Untitled form"
-                                className="  mx-auto  text-sm w-28rem  text-900 "
-                                style={{
-                                  height: "48px",
-                                  color: "#333333",
-                                }}
-                                value={x.name}
-                                onChange={(e) => handleChangeForm(i, e, list)}
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </div>
-                        );
-                      })}
+                      {formName.length
+                        ? formName.map((x: any, idx: number) => {
+                            return (
+                              <div key={idx}>
+                                {i == idx ? (
+                                  <input
+                                    placeholder="Untitled form"
+                                    className="  mx-auto  text-sm w-28rem  text-900 "
+                                    style={{
+                                      height: "48px",
+                                      color: "#333333",
+                                    }}
+                                    value={x.name}
+                                    onChange={(e) =>
+                                      handleChangeForm(i, e, list)
+                                    }
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            );
+                          })
+                        : ""}
 
                       {/* </section> */}
                     </section>
@@ -420,8 +434,10 @@ const DropArea = (props: any) => {
                         ))
                       ) : (
                         // !provided.placeholder && (
-                        <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2">
-                          <p className="">+ Drop items here</p>
+                        <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2 mb-2">
+                          <p className="">
+                            + Drop items here{provided.placeholder}
+                          </p>
                         </div>
                       )
                       // )

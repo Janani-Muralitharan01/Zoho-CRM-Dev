@@ -29,6 +29,7 @@ import {
   quickDragAndDropValue,
   dragAndDropDialogOpenIndex,
   dragAndDropValueSuperAdmin,
+  formEditIdDragAndDrop,
   dragAndDropDialogIndexSuperAdmin,
 } from "../../features/counter/dragAndDrop";
 import { useSelector, useDispatch } from "react-redux";
@@ -39,6 +40,7 @@ import { pickListDragableIdStore } from "../../features/counter/dragAndDrop";
 import { ModuleNameGetFormsaa } from "../../features/Modules/module";
 import { newSectionIndexData } from "../../features/counter/dragAndDrop";
 import { Button } from "primereact/button";
+import { type } from "os";
 
 const reorder = (
   list: Iterable<unknown> | ArrayLike<unknown>,
@@ -63,6 +65,7 @@ const copy = (
   const item: any = sourceClone[droppableSource.index];
 
   destClone.splice(droppableDestination.index, 0, { ...item, id: uuidv4() });
+
   return destClone;
 };
 
@@ -94,8 +97,19 @@ const SuperAdmin = () => {
   });
   const [indexId, setIndexId] = useState<any>();
   const count: any = useSelector((state) => state);
+  const [sample, setSample] = useState<any>({});
 
-  useEffect(() => {});
+  const addList = () => {
+    // let ab: any = [uuidv4()];
+    // complete[ab] = [];
+    setCompleted({ ...complete, [uuidv4()]: [] });
+
+    let lent = Object.keys(complete).length;
+
+    dispatch(newSectionIndexData(lent));
+  };
+
+  React.useMemo(() => {}, [complete]);
 
   useEffect(() => {
     if (window.location.pathname !== `/super-admin/edit/${editId}`) {
@@ -112,68 +126,109 @@ const SuperAdmin = () => {
     if (window.location.pathname === `/super-admin/edit/${editId}`) {
       let totalValue = count.module?.rolesGetForms;
 
-      const value = Object.assign({}, totalValue[0]?.moduleelements);
+      let value = Object.assign({}, totalValue[0]?.moduleelements);
+      const value1 = Object.assign({}, complete);
+
+      let res1 = Object.keys(value);
+      let res2 = Object.keys(value1);
+
+      res1.map((x, i) => {
+        if (i + 1 < res1.length && res2.length < res1.length) {
+          let ab: any = [uuidv4()];
+          complete[ab] = [];
+        }
+      });
+
+      dispatch(formEditIdDragAndDrop(res2));
 
       for (let key in value) {
         value[uuidv4()] = value[key];
         delete value[key];
       }
 
-      if (Object.values(complete)[0] === Object.values(value)[0]) {
-      } else {
-        setCompleted(value);
-      }
+      let keyss = Object.keys(complete);
 
-      // let keyValue;
-      // for (let key in totalValue[0]?.moduleelements) {
-      //   keyValue = totalValue[0]?.moduleelements[key];
+      let valuess = Object.values(value);
 
-      // }
+      let app: any = [];
 
-      // let arrayValue = [];
-      // let arrayVal: any = [];
-      // for (let val in keyValue) {
-      //   arrayValue.push(keyValue[val]);
-      //   // arrayVal.push(val);
-      //   arrayVal.push(keyValue[val].subName || keyValue[val].fieldname);
-      // }
+      valuess.map((x: any, i) => {
+        x = x.map((y: any, o: number) => {
+          return {
+            names: y.type,
+            subName: y.fieldname,
+            id: uuidv4(),
+          };
+        });
 
-      // let lastValue: any = [];
-      // arrayVal.map((x: any) => {
-      //   ITEMS.map((i: any) => {
-      //     if (x == i.names) {
-      //       lastValue.push(i);
-      //     }
-      //   });
-      // });
+        app.push([x]);
+      });
 
-      // for (let key in complete) {
-
-      //   setCompleted({ [key]: lastValue });
-      // }
-
-      dispatch(dragAndDropValueSuperAdmin(complete));
-    }
-
-    Object.keys(complete || {}).map((list: any, i: number) => {
-      complete[list].map((x: any) => {
-        if (x.subName === "Pick List") {
-          dispatch(pickListDragableIdStore(x.id));
+      let resObj: any = {};
+      keyss.map((ke: any, idx: any) => {
+        if (app[idx] === undefined) {
+          resObj[ke] = [];
+        } else {
+          resObj[ke] = app[idx][0];
         }
       });
-    });
+
+      let resObj1: any = [];
+      Object.keys(resObj || {}).map((list: any, i: number) => {
+        resObj[list].map((x: any) => {
+          resObj1.push({
+            names: x.names,
+            subName: x.subName,
+          });
+        });
+      });
+
+      let complete1: any = [];
+      Object.keys(complete || {}).map((list: any, i: number) => {
+        complete[list].map((x: any) => {
+          complete1.push({
+            names: x.names,
+            subName: x.subName,
+          });
+        });
+      });
+
+      let c1 = JSON.stringify(resObj1);
+      let c2 = JSON.stringify(complete1);
+
+      let a1 = JSON.stringify(resObj);
+      let a2 = JSON.stringify(complete);
+
+      if (a1 !== a2) {
+        if (a1.length > a2.length) {
+          setCompleted(resObj);
+          dispatch(dragAndDropValueSuperAdmin(resObj));
+        }
+        if (a2.length > a1.length) {
+          setCompleted(complete);
+          dispatch(dragAndDropValueSuperAdmin(complete));
+        }
+      }
+      if (a1 === a2) {
+        setCompleted(complete);
+
+        // dispatch(dragAndDropValueSuperAdmin(complete));
+      }
+    }
+
+    // Object.keys(complete || {}).map((list: any, i: number) => {
+    //   complete[list].map((x: any) => {
+    //     if (x.subName === "Pick List") {
+    //       dispatch(pickListDragableIdStore(x.id));
+    //     }
+    //   });
+    // });
   }, [complete]);
 
   function toAddData() {}
 
   const handleClick = (e: any) => {
     setId(e);
-  };
-
-  const addList = () => {
-    setCompleted({ ...complete, [uuidv4()]: [] });
-    let lent = Object.keys(complete).length;
-    dispatch(newSectionIndexData(lent));
   };
 
   const dispatch = useDispatch();

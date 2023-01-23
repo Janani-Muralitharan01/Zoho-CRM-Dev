@@ -20,12 +20,16 @@ import TablePageSideBar from "./listTableSidebar";
 import "./tablePage.css";
 import { Link } from "react-router-dom";
 import React from "react";
+import { useParams } from "react-router-dom";
+import { ModuleNameGetFormsaa } from "../../../features/Modules/module";
+import { leadGenerationTableGet } from "../../../features/Modules/leadGeneration";
+import { LoginUserDetails } from "../../../features/Auth/userDetails";
 
 //rolesGetForms
 const FieldListTablePage = (props: any) => {
   const [value, setValue] = useState("");
-  const [getdata, setgetdata] = useState(false);
-  const [modulename, setmodulename] = useState('');
+  const [getdata, setgetdata] = useState<any>();
+  const [modulename, setmodulename] = useState("");
   const [state, setState] = useState<any>([]);
   const [id, setid] = useState<any>();
   const [Get, setGet] = useState<any>([]);
@@ -36,58 +40,83 @@ const FieldListTablePage = (props: any) => {
   const [selectedProducts, setSelectedProducts] = useState(null);
 
   const [TableData, setTableData] = useState<any>([]);
+  const [moduleElements, setModuleElements] = useState<any>();
   const navigate: any = useNavigate();
   const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
-  
+  let { editTableId } = useParams();
+
   const user: any = useAppSelector((state) => state);
-useEffect(()=>{
-  let recuriter = count?.module?.rolesGetForms &&
-  count?.module?.rolesGetForms[0].recuriter
-    ? count?.module?.rolesGetForms[0].recuriter
-    : [];
-    let modulename = count?.module?.rolesGetForms &&
-  count?.module?.rolesGetForms[0].modulename
-    ? count?.module?.rolesGetForms[0].modulename
-    : [];
-    let id = count?.module?.rolesGetForms &&
-  count?.module?.rolesGetForms[0]._id
-    ? count?.module?.rolesGetForms[0]._id
-    : [];
-  setValue(recuriter)
-  setmodulename(modulename)
-  setid(id)
-})
-  const formArray = [
-    {
-      color: "red",
-      value: "#f00",
-    },
-    {
-      color: "green",
-      value: "#0f0",
-    },
-    {
-      color: "blue",
-      value: "#00f",
-    },
-    {
-      color: "cyan",
-      value: "#0ff",
-    },
-    {
-      color: "magenta",
-      value: "#f0f",
-    },
-    {
-      color: "yellow",
-      value: "#ff0",
-    },
-    {
-      color: "black",
-      value: "#000",
-    },
-  ];
+
+  async function firstGetApi() {
+    let app = {};
+    let res = await dispatch(ModuleNameGetFormsaa(editTableId));
+
+    let response = await dispatch(leadGenerationTableGet(editTableId));
+
+    let resp = response.payload.data;
+    resp = resp.map((x: any, i: number) => {
+      // for(let key in x){
+      //   app{[key]: x[key]}
+      // }
+      return x.tableData.tableData[0];
+    });
+
+    setgetdata(resp);
+
+    // let resultId = response.payload.data[0].recuriter;
+
+    // setid(resultId);
+
+    const value = res.payload.data.data
+      ? res.payload.data.data[0].moduleelements
+      : [];
+
+    Object.keys(value).map((list, index) => {
+      Object.keys(value[list] || []).map((heading: any, index: any) => {
+        formData.push(list);
+        Get.push({
+          formData: list,
+          DataHeader: value[list][heading].fieldname,
+          value: value[list][heading].defaultvalue,
+        });
+        TableData.push(heading);
+        forms.push(value[list][heading]);
+      });
+    });
+
+    setGet(Get);
+    setForms(forms);
+    setTableData(TableData);
+    setformData(formData);
+
+    // let recuriter =
+    //   res.payload.data.data && res.payload.data.data[0].recuriter
+    //     ? res.payload.data.data[0].recuriter
+    //     : [];
+    // let modulename =
+    //   res.payload.data.data && res.payload.data.data[0].modulename
+    //     ? res.payload.data.data[0].modulename
+    //     : [];
+    // let id =
+    //   res.payload.data.data && res.payload.data.data[0]._id
+    //     ? res.payload.data.data[0]._id
+    //     : [];
+    // let moduleElement =
+    //   res.payload.data.data && res.payload.data.data[0]._id
+    //     ? res.payload.data.data[0].moduleelements
+    //     : [];
+
+    // setModuleElements(moduleElement);
+    // setValue(recuriter);
+    // setmodulename(modulename);
+    // setid(id);
+  }
+
+  useEffect(() => {
+    firstGetApi();
+  }, []);
+
   const columns = [
     { field: "Single Line", header: "Single Line" },
     { field: "Multi-Line", header: "Multi-Line" },
@@ -107,81 +136,9 @@ useEffect(()=>{
     { field: "Image Upload", header: "Image Upload" },
   ];
   const [selectedColumns, setSelectedColumns] = useState(columns);
-  useEffect(() => {
-    GetModuleName();
-  }, []);
-
-  const GetModuleName = async () => {
-    const value =
-      count?.module?.rolesGetForms &&
-      count?.module?.rolesGetForms[0].moduleelements
-        ? count?.module?.rolesGetForms[0].moduleelements
-        : [];
-    await setState(value);
-    // const forms = count?.module?.rolesGetForms && count?.module?.rolesGetForms[0] ? count?.module?.rolesGetForms[0].moduleelements: [];
-    // setForms(forms);
-  };
-
-  useEffect(() => {
-    const value =
-      count?.module?.rolesGetForms &&
-      count?.module?.rolesGetForms[0].moduleelements
-        ? count?.module?.rolesGetForms[0].moduleelements
-        : [];
-        
-    Object.keys(value).map((list, index) => {
-      
-      Object.keys(value[list] || []).map((heading: any, index: any) => {
-        formData.push(list)
-        Get.push({
-          formData:list,
-          DataHeader: value[list][heading].fieldname,
-          value: value[list][heading].defaultvalue,
-        });
-        TableData.push(heading);
-        forms.push(value[list][heading]);
-        //  setTableData(forms)
-      });
-    });
-    setGet(Get);
-    setForms(forms);
-    setTableData(TableData);
-    setformData(formData)
-  }, []);
-
-  
-
-  useEffect(()=>{
-    const tableData =
-    count?.module?.rolesGetForms &&
-    count?.module?.rolesGetForms[0].tableData
-      ? count?.module?.rolesGetForms[0].tableData
-      : [];
-      Getdata.push(tableData)
-      Object.keys(tableData).map((list:any, index) => {
- 
-  tableData[list] .map((Zero: any, index: any) => {
-  
-    
-    Object.keys(Zero.data).map((onnsss:any, index) => {
-  
-  DataGet.push(onnsss)
-    })
-    
-    // Object.values(Zero.data).map((jackk:any, index) => {
-      
-    //   DataGet.push(onnsss)
-    //     })
-    // Object.keys(tableData[list][Zero]).map((Data:any, index) => {
-
-    // })
-  
-  })
-      })
-      setDataGet(DataGet)
-     
-      setGetdata(Getdata)
-  },[]);
+  // useEffect(() => {
+  //   GetModuleName();
+  // }, []);
 
   const onColumnToggle = (event: any) => {
     let selectedColumns = event.value;
@@ -192,9 +149,6 @@ useEffect(()=>{
     );
     setSelectedColumns(orderedSelectedColumns);
   };
-  const clickNextPage =()=>{
-    setgetdata(!getdata)
-  }
 
   const header = (
     <div className="flex justify-content-between">
@@ -205,27 +159,27 @@ useEffect(()=>{
         onChange={onColumnToggle}
         style={{ width: "20em" }}
       />
-<Link
-          to="/super-admin/CustomModule/being"
-          state={{ from:Get ,form:value,name:modulename,id:id}}
-        >
-          <Button label="Create a module"/>
-        </Link>
-     
+      <Link
+        to="/super-admin/CustomModule/being"
+        state={{
+          from: Get,
+          // form: value,
+          // name: modulename,
+          id: id,
+          recId: editTableId,
+          // moduleElements: moduleElements,
+        }}
+      >
+        <Button label="Create a Lead" />
+      </Link>
+
+      {/* <Button label="Create a Lead" onClick={()=> navigate("/super-admin/CustomModule/being")} /> */}
     </div>
   );
 
   const columnComponents = selectedColumns.map((col) => {
     return <Column key={col.field} field={col.field} header={col.header} />;
   });
-  const layoutPagelick = (rowdata: any) => {
-    
-    return (
-      <div>
-        <span className="text-blue-500">ssss</span>
-      </div>
-    );
-  };
 
   return (
     <div style={{ background: "rgb(250, 250, 251)", height: "100vh" }}>
@@ -240,7 +194,7 @@ useEffect(()=>{
             <div>
               <div>
                 <DataTable
-                  value={Getdata}
+                  value={getdata}
                   paginator
                   responsiveLayout="scroll"
                   currentPageReportTemplate="Showing {first} to {last} of {totalRecords}"
@@ -258,21 +212,22 @@ useEffect(()=>{
                     headerStyle={{ width: "3rem" }}
                     exportable={false}
                   ></Column>
-
-                  {Object.values(DataGet).map((form: any) => {
-                    return (
-                      <Column
-                        sortable
-                        filter
-                        filterPlaceholder="Search by name"
-                        style={{ minWidth: "12rem" }}
-                        body={form}
-                        header={form}
-                      ></Column>
-                    );
-                  })}
-
-                  {columnComponents}
+                  <Column field="Single Line" header="Single Line"></Column>
+                  <Column field="Multi-Line" header="Multi-Line"></Column>
+                  <Column field="Email" header="Email"></Column>
+                  <Column field="Phone" header="Phone"></Column>
+                  <Column field="Pick List" header="Pick List"></Column>
+                  <Column field="Date" header="Date"></Column>
+                  <Column field="Date/Time" header="Date/Time"></Column>
+                  <Column field="Number" header="Number"></Column>
+                  <Column field="Currency" header="Currency"></Column>
+                  <Column field="Decimal" header="Decimal"></Column>
+                  <Column field="Percent" header="Percent"></Column>
+                  <Column field="Long integer" header="Long integer"></Column>
+                  <Column field="Checkbox" header="Checkbox"></Column>
+                  <Column field="URL" header="URL"></Column>
+                  <Column field="File Upload" header="File Upload"></Column>
+                  <Column field="Image Upload" header="Image Upload"></Column>
                 </DataTable>
               </div>
             </div>
