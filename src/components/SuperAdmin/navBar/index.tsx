@@ -12,7 +12,7 @@ import { Button } from "primereact/button";
 import { logOut } from "../../../features/Auth/logOut";
 import SuperAdminSideBar from "../superAdminSideBar/index";
 import React, { useEffect, useState, useRef } from "react";
-import { useAppDispatch } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import Dashboard from "../../../assets/dashboard.svg";
 import CreateRecruiter from "../../../assets/createRecruiter.png";
 import Recruiter from "../../../assets/recruiter.png";
@@ -43,6 +43,7 @@ const NavBar = (props: any) => {
   const [imgShow, setimgShow] = useState<any>(Vector);
 
   const navigate = useNavigate();
+  const user: any = useAppSelector((state) => state);
 
   const toast: any = useRef(null);
   const op = useRef<OverlayPanel>(null);
@@ -62,7 +63,6 @@ const NavBar = (props: any) => {
 
   const GetModuleName = async () => {
     let res = await dispatch(ModuleNameGet());
-
     setState(res.payload.data.user);
   };
 
@@ -107,7 +107,7 @@ const NavBar = (props: any) => {
     // localStorage.setItem("moduleName", x.modulename);
     let res = await dispatch(ModuleNameGetFormsaa(x._id));
     if (res.payload.status === 200) {
-      navigate("/super-admin/Table-List");
+      navigate(`/super-admin/Table-List/${x._id}`);
     }
   };
 

@@ -20,6 +20,7 @@ import { LoginUserDetails } from "../../../features/Auth/userDetails";
 import { Dropdown } from "primereact/dropdown";
 import { useParams } from "react-router-dom";
 import _ from "lodash";
+import { ModuleNameGet } from "../../../features/Modules/module";
 
 interface formModel {
   name: string;
@@ -226,8 +227,14 @@ const DropArea = (props: any) => {
       };
 
       res = await dispatch(ModuleNameUpdate(val));
+      if (res.payload.status == 200) {
+        dispatch(ModuleNameGet());
+      }
     } else {
       res = await dispatch(NewModuleCreation(payload));
+      if (res.payload.status == 200) {
+        dispatch(ModuleNameGet());
+      }
     }
 
     if (res.payload.status == 200) {

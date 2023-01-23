@@ -17,7 +17,12 @@ import { useLocation } from "react-router-dom";
 import {
   NewModuleCreation,
   ModuleNameGetFormsaa,
+  ModuleNameUpdate,
 } from "../../../features/Modules/module";
+import { useNavigate } from "react-router-dom";
+import { leadGenerationTable } from "../../../features/Modules/leadGeneration";
+import { LoginUserDetails } from "../../../features/Auth/userDetails";
+import { leadGenerationTableGet } from "../../../features/Modules/leadGeneration";
 
 const CustomModule = (props: any) => {
   const [state, setState] = React.useState<any>([]);
@@ -31,6 +36,10 @@ const CustomModule = (props: any) => {
   const { form } = location.state;
   const { name } = location.state;
   const { id } = location.state;
+  const { recId } = location.state;
+  const { moduleElements } = location.state;
+  const navigate = useNavigate();
+  const [ids, setIds] = useState<any>();
 
   function handleChange(evt: any) {
     const value = evt.target.value;
@@ -40,25 +49,46 @@ const CustomModule = (props: any) => {
     });
   }
 
-  //   useEffect(() => {
-  //      // eslint-disable-next-line no-lone-blocks
-  //      {from?.map((item: any, index: number) => {
-  //           state.push(item.DataHeader)
-  //      })}
-  //      setState(state)
-  //   }, []);
   const saveForm = async () => {
-    let payload: object = {
-      _id: id,
-      modulename: name,
-      recuriter: form,
-      tableDate: {
-        tableData: [{ data: state }],
+    // let payload: object = {
+    //   payload: {
+    //     _id: id,
+    //     modulename: name,
+    //     moduleElements: moduleElements,
+    //     recuriter: form,
+    //     tableData: {
+    //       tableData: [{ data: state }],
+    //     },
+    //   },
+    //   editId: id,
+    // };
+
+    let payload = {
+      recuriter: ids,
+      moduleId: recId,
+      tableData: {
+        tableData: [state],
       },
     };
-    const res = await dispatch(NewModuleCreation(payload));
-    let back = await dispatch(ModuleNameGetFormsaa(id));
+
+    // let res = await dispatch(leadGenerationTable(val));
+
+    const res = await dispatch(leadGenerationTable(payload));
+
+    if (res.payload.status == "Form-tableData created successfully") {
+      navigate(-1);
+      await dispatch(leadGenerationTableGet(id));
+    }
   };
+
+  useEffect(() => {
+    apple();
+  }, []);
+
+  async function apple() {
+    let value = await dispatch(LoginUserDetails());
+    setIds(value.payload.user.id);
+  }
 
   return (
     <div>
@@ -75,10 +105,7 @@ const CustomModule = (props: any) => {
           <span className="contactuntitle">Untitled Information</span>
           <div>
             <div>
-              {/* {Object.keys(previewData || []).map((list: any, i: number) => {
-                  return ( */}
               <div className="previewCardAligment">
-                {/* {form} */}
                 {from?.map((item: any, index: number) => {
                   return (
                     <div key={index}>
@@ -94,11 +121,6 @@ const CustomModule = (props: any) => {
                                 onChange={handleChange}
                                 className="mt-3"
                               />
-                            </span>
-                          ) : item.DataHeader === "Lookup" ? (
-                            <span className="p-input-icon-right ">
-                              <i className="pi pi-euro mt-0" />
-                              <InputText className="mt-3" />
                             </span>
                           ) : item.DataHeader === "Currency" ? (
                             <span className="p-input-icon-left">
@@ -116,6 +138,15 @@ const CustomModule = (props: any) => {
                                 name={item.DataHeader}
                                 value={state.Percent}
                                 onChange={handleChange}
+                                placeholder="Percent"
+                              />
+                            </p>
+                          ) : item.DataHeader === "Single Line" ? (
+                            <p>
+                              <InputText
+                                name={item.DataHeader}
+                                value={state.SingleLine}
+                                onChange={handleChange}
                               />
                             </p>
                           ) : item.DataHeader === "Untitled Name" ? (
@@ -126,26 +157,10 @@ const CustomModule = (props: any) => {
                                 onChange={handleChange}
                               />
                             </p>
-                          ) : item.DataHeader === "Created By" ? (
-                            <p>
-                              <InputText
-                                name={item.DataHeader}
-                                value={state.Created}
-                                onChange={handleChange}
-                              />
-                            </p>
-                          ) : item.DataHeader === "Secondary Email" ? (
-                            <p>
-                              <InputText
-                                name={item.DataHeader}
-                                value={state.Email}
-                                onChange={handleChange}
-                              />
-                            </p>
                           ) : item.DataHeader === "Image Upload" ? (
                             <p>
                               <Button
-                                label="+ New Image"
+                                label="+ Image Upload"
                                 className="bg-blue-100 text-primary"
                               />
                             </p>
@@ -159,36 +174,20 @@ const CustomModule = (props: any) => {
                             </p>
                           ) : item.DataHeader === "File Upload" ? (
                             <p>
-                              {/* <Dropdown
-                                      className="mr-6"
-                                      value={selectedCity1}
-                                      options={fileUpload}
-                                      onChange={onCityChange}
-                                      optionLabel="name"
-                                      style={{ width: "99%" }}
-                                      placeholder="Select a file"
-                                    /> */}
-                            </p>
-                          ) : item.DataHeader === "Email Opt Out" ? (
-                            <p>
-                              <Checkbox value={item.value} />
-                            </p>
-                          ) : item.DataHeader === "Modified By" ? (
-                            <p>
-                              <InputText
-                                name={item.DataHeader}
-                                value={state.Email}
-                                onChange={handleChange}
+                              <Button
+                                label="+ File Upload"
+                                className="bg-blue-100 text-primary"
                               />
                             </p>
                           ) : item.DataHeader === "Date/Time" ? (
                             <p>
                               <Calendar
                                 name={item.DataHeader}
-                                value={state.Email}
+                                value={state.DateTime}
                                 showTime
                                 showSeconds
                                 placeholder="Enter the date"
+                                onChange={handleChange}
                               />
                             </p>
                           ) : item.DataHeader === "Decimal" ? (
@@ -196,6 +195,14 @@ const CustomModule = (props: any) => {
                               <InputText
                                 name={item.DataHeader}
                                 value={state.Decimal}
+                                onChange={handleChange}
+                              />
+                            </p>
+                          ) : item.DataHeader === "Long integer" ? (
+                            <p>
+                              <InputText
+                                name={item.DataHeader}
+                                value={state.LongInteger}
                                 onChange={handleChange}
                               />
                             </p>
@@ -224,6 +231,8 @@ const CustomModule = (props: any) => {
                                 placeholder="DD/MM/YY   "
                               />
                             </p>
+                          ) : item.DataHeader === "Pick List" ? (
+                            <p>Pick List</p>
                           ) : item.DataHeader === "Checkbox" ? (
                             <div className="grid p-fluid">
                               <div className="col-12">
@@ -250,34 +259,17 @@ const CustomModule = (props: any) => {
                                 placeholder="(999) 999-9999"
                               ></InputMask>
                             </p>
-                          ) : item.DataHeader === "Long integer" ? (
-                            <p>
-                              <InputText value={item.DataHeader} />
-                            </p>
                           ) : item.DataHeader === "Number" ? (
                             <p>
-                              <InputText value={item.DataHeader} />
+                              <InputText
+                                name={item.DataHeader}
+                                value={item.Number}
+                                onChange={handleChange}
+                                placeholder="Number"
+                              />
                             </p>
-                          ) : item.DataHeader === "User" ? (
-                            <span className="p-input-icon-right ">
-                              {/* <Dropdown
-                                      className="mr-6"
-                                      value={selectedCity1}
-                                      options={cities}
-                                      onChange={onCityChange}
-                                      optionLabel="name"
-                                      style={{ width: "99%" }}
-                                      placeholder="Select a City"
-                                    /> */}
-                            </span>
                           ) : (
-                            <InputText
-                              type="text"
-                              name="DataHeader"
-                              value={item.DataHeader}
-                              onChange={(e) => {}}
-                              className="h-2rem my-auto"
-                            />
+                            ""
                           )}
                         </div>
                       </div>
@@ -289,6 +281,7 @@ const CustomModule = (props: any) => {
                 <Button
                   label="Cancel"
                   className="surface-300 border-300 text-color mr-5"
+                  onClick={() => navigate(-1)}
                 />
                 <Button
                   label="Save"

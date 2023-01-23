@@ -13,9 +13,9 @@ import Settings from "./components/SuperAdmin/Settings/index";
 import SettingsModules from "./components/SuperAdmin/Modules/index";
 import CreateForm from "./components/SuperAdmin/createForm/index";
 import NavigateFile from "./components/SuperAdmin/createForm/navigateFile";
-import LayoutPage from "./components/SuperAdmin/Layout/index"
-import FieldListTablePage from "./components/SuperAdmin/inputListTablePage/index"
-import CustomModule from "./components/SuperAdmin/CustomModule/index"
+import LayoutPage from "./components/SuperAdmin/Layout/index";
+import FieldListTablePage from "./components/SuperAdmin/inputListTablePage/index";
+import CustomModule from "./components/SuperAdmin/CustomModule/index";
 
 // import axios from "./components/Constant/Api";
 import axios from "axios";
@@ -64,7 +64,6 @@ function App() {
           <section className={"" + (show ? "hidden" : "block")}>
             <Routes>
               <Route element={<AuthRoute />}>
-              
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/selection" element={<Selection />} />
                 <Route path="/super-admin">
@@ -75,23 +74,20 @@ function App() {
                     path="Settings/Modules"
                     element={<SettingsModules />}
                   />
-                   <Route
-                path="Settings/Modules/layoutpage"
-                element={<LayoutPage />}
-              />
-               <Route
-                path="CustomModule/being"
-                element={<CustomModule />}
-              />
+                  <Route
+                    path="Settings/Modules/layoutpage"
+                    element={<LayoutPage />}
+                  />
+                  <Route
+                    path="Table-List/:editTableId"
+                    element={<FieldListTablePage />}
+                  />
+                  <Route path="CustomModule/being" element={<CustomModule />} />
                   <Route path="create-form" element={<SuperAdmin />} />
-                  <Route path="Table-List" element={<FieldListTablePage />} />
-                  <Route path="Table-List" element={<FieldListTablePage />} />
                 </Route>
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/" element={<SignUp />} />
-             
-             
             </Routes>
           </section>
         </>
