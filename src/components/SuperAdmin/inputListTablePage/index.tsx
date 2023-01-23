@@ -38,27 +38,26 @@ const FieldListTablePage = (props: any) => {
   const [forms, setForms] = useState<any>([]);
   const [formData, setformData] = useState<any>([]);
   const [selectedProducts, setSelectedProducts] = useState(null);
-
   const [TableData, setTableData] = useState<any>([]);
   const [moduleElements, setModuleElements] = useState<any>();
   const navigate: any = useNavigate();
   const dispatch: any = useAppDispatch();
   const count: any = useSelector((state) => state);
   let { editTableId } = useParams();
-
   const user: any = useAppSelector((state) => state);
+  const [buttonName, setButtonName] = useState<any>();
 
   async function firstGetApi() {
     let app = {};
     let res = await dispatch(ModuleNameGetFormsaa(editTableId));
+    if (res) {
+      setButtonName(res?.payload?.data?.data[0]?.modulename);
+    }
 
     let response = await dispatch(leadGenerationTableGet(editTableId));
 
     let resp = response.payload.data;
     resp = resp.map((x: any, i: number) => {
-      // for(let key in x){
-      //   app{[key]: x[key]}
-      // }
       return x.tableData.tableData[0];
     });
 
@@ -170,7 +169,7 @@ const FieldListTablePage = (props: any) => {
           // moduleElements: moduleElements,
         }}
       >
-        <Button label="Create a Lead" />
+        <Button label={`Create a ${buttonName}`} />
       </Link>
 
       {/* <Button label="Create a Lead" onClick={()=> navigate("/super-admin/CustomModule/being")} /> */}
