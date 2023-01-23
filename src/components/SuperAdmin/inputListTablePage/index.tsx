@@ -115,7 +115,8 @@ const FieldListTablePage = (props: any) => {
 
   useEffect(() => {
     firstGetApi();
-  }, []);
+   
+  }, [editTableId]);
 
   const columns = [
     { field: "Single Line", header: "Single Line" },
