@@ -1,3 +1,4 @@
+import "./CreateForm.css"
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -42,6 +43,7 @@ const DropArea = (props: any) => {
   const toast: any = useRef(null);
   const navigate = useNavigate();
   const [list1, setList1] = useState<any>([]);
+  const [store, setstore] = useState<any>([]);
   const [editArray, setEditArray] = useState<any>();
   const [finaValue, setFinalValue] = useState<any>({});
 
@@ -277,8 +279,18 @@ const DropArea = (props: any) => {
 
   useEffect(() => {
     setList1(count.dragAndDrop.PickListData);
+    console.log(count.dragAndDrop,"count.dragAndDrop.PickListData")
+    store.push(count.dragAndDrop.PickListData)
 
     add();
+    console.log(store,"storestorestore")
+    const val = (store).map((list:any)=>{
+      console.log(list,"listlistlistlist")
+      return list
+    })
+    setstore(val)
+    console.log(store,"storestorestore123455")
+  
   }, [count.dragAndDrop.PickListData]);
 
   let handleChangeForm = (i: number, e: any, list: any) => {
@@ -299,39 +311,41 @@ const DropArea = (props: any) => {
             <div>
               <Droppable key={list} droppableId={list}>
                 {(provided, snapshot) => (
+                  <div className="border-dotted border-400 mt-4 ml-3 mr-3">
+                   <section className="mt-2 p-2  mx-auto">
+                   {/* <section className="mt-2 p-2 ml-8   "> */}
+                   {formName.length
+                     ? formName.map((x: any, idx: number) => {
+                         return (
+                           <div key={idx} className="ml-3">
+                             {i == idx ? (
+                               <input
+                                 placeholder="Untitled form"
+                                 className="  mx-auto  text-sm w-25rem  text-900 "
+                                 style={{
+                                   height: "48px",
+                                   color: "#333333",
+                                 }}
+                                 value={x.name}
+                                 onChange={(e) =>
+                                   handleChangeForm(i, e, list)
+                                 }
+                               />
+                             ) : (
+                               ""
+                             )}
+                           </div>
+                         );
+                       })
+                     : ""}
+
+                   {/* </section> */}
+                 </section>
                   <div
-                    className=" border-dashed border-2 w-30rem ml-8 mt-2 border-round-md"
+                  className="dragCard"
                     ref={provided.innerRef}
                   >
-                    <section className="mt-2 p-2  mx-auto">
-                      {/* <section className="mt-2 p-2 ml-8   "> */}
-                      {formName.length
-                        ? formName.map((x: any, idx: number) => {
-                            return (
-                              <div key={idx}>
-                                {i == idx ? (
-                                  <input
-                                    placeholder="Untitled form"
-                                    className="  mx-auto  text-sm w-28rem  text-900 "
-                                    style={{
-                                      height: "48px",
-                                      color: "#333333",
-                                    }}
-                                    value={x.name}
-                                    onChange={(e) =>
-                                      handleChangeForm(i, e, list)
-                                    }
-                                  />
-                                ) : (
-                                  ""
-                                )}
-                              </div>
-                            );
-                          })
-                        : ""}
-
-                      {/* </section> */}
-                    </section>
+                   
 
                     {
                       uidv4[list].length ? (
@@ -360,24 +374,19 @@ const DropArea = (props: any) => {
                             >
                               {(provided, snapshot) => (
                                 <div
-                                  className=" cardQuickPreview  py-1 px-2 w-28rem"
+                                className="Dropcard px-2"
                                   ref={provided.innerRef}
                                   {...provided.draggableProps}
                                   style={provided.draggableProps.style}
                                   {...provided.dragHandleProps}
                                 >
                                   <div className="names flex justify-content-between align-items-center">
-                                    <section
-                                      className="grey font-semibold  "
-                                      // style={{ color: "#333333" }}
-                                    >
-                                      {item.subName || item.fieldname}
-                                    </section>
+                                    
                                     {item.subName === "Pick List" ? (
                                       <>
                                         <Dropdown
                                           value={pickList}
-                                          options={list1}
+                                          options={store}
                                           onChange={(e) => {
                                             handleChange(e, index, list);
                                             setPickList(e.value);
@@ -389,13 +398,13 @@ const DropArea = (props: any) => {
                                             border: "1px solid lightgrey",
                                             color: "#8083A3",
                                           }}
-                                          className="  mx-auto my-auto border-round-md"
+                                          className="  mx-auto border-0"
                                         />
                                       </>
                                     ) : (
                                       <input
                                         type="text"
-                                        name="names"
+                                        name="names "
                                         style={{
                                           height: "44px",
                                           border: "1px solid lightgrey",
@@ -405,9 +414,16 @@ const DropArea = (props: any) => {
                                         onChange={(e) => {
                                           handleChange(e, index, list);
                                         }}
-                                        className=" text-yellow-600  my-auto border-round-md "
+                                        className=" text-500  border-0 "
                                       />
                                     )}
+                                    <section
+                                      className="grey font-semibold  "
+                                      style={{ border: '1px solid gray',
+                                        width: '150px',padding: '4px'}}
+                                    >
+                                      {item.subName || item.fieldname}
+                                    </section>
 
                                     <p className="delete">
                                       <i className="pi pi-ellipsis-v"></i>
@@ -434,7 +450,7 @@ const DropArea = (props: any) => {
                         ))
                       ) : (
                         // !provided.placeholder && (
-                        <div className="w-28rem mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2 mb-2">
+                        <div className=" mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2 mb-2" style={{width: '199%'}}>
                           <p className="">
                             + Drop items here{provided.placeholder}
                           </p>
@@ -442,6 +458,7 @@ const DropArea = (props: any) => {
                       )
                       // )
                     }
+                  </div>
                   </div>
                 )}
               </Droppable>

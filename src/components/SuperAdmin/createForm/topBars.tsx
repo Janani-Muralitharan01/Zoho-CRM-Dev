@@ -52,14 +52,14 @@ const TopBars = (props: any) => {
       <Sidebar
         visible={preview}
         position="top"
-        style={{ width: "92vw", height: "50vw" }}
+        style={{ width: "100vw", height: "70vw" }}
         onHide={() => setPreview(!preview)}
       >
         <div>
           <div className="flex  justify-content-center">
             <div className="dropdownBorderStyle">
               <span className="flex">
-                Preview layout as2
+                Preview layout as
                 <Dropdown
                   className="ml-2"
                   value={selectedCity1}

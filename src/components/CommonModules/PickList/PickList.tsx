@@ -198,7 +198,6 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
       setpicklist(Continent);
     }
   }
-
   // function ClickMonths (){
   //   setDays(false)
   //   setMonths(!Months)
@@ -263,6 +262,7 @@ const Picklist: React.FC<PickListProps> = ({ pickListDialogVisible }) => {
 
     const index = e.target.id;
     setArr((s) => {
+     
       const newArr = s.slice();
       newArr[index].value = e.target.value;
 

@@ -6,7 +6,7 @@ interface userReducerState {
   DialogOpenIndex: null;
   initialStartDragSuperAdmin: any;
   DialogIndex: null;
-  PickListData: null;
+  PickListData: any;
   pickListDragableId: null;
   newSectionIndex: null;
   EditIdDragAndDrop: null;
@@ -18,7 +18,7 @@ const initialDragAndDrop: userReducerState = {
   DialogOpenIndex: null,
   initialStartDragSuperAdmin: null,
   DialogIndex: null,
-  PickListData: null,
+  PickListData: [],
   pickListDragableId: null,
   newSectionIndex: null,
   EditIdDragAndDrop: null,
