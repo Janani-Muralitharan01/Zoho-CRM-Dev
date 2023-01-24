@@ -425,9 +425,7 @@ const DropArea = (props: any) => {
                                       {item.subName || item.fieldname}
                                     </section>
 
-                                    <section className="grey font-semibold  ">
-                                      {item.subName || item.fieldname}
-                                    </section>
+                                   
 
                                     <p className="delete">
                                       <i className="pi pi-ellipsis-v"></i>
