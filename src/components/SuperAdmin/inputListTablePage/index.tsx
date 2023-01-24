@@ -28,9 +28,8 @@ import { LoginUserDetails } from "../../../features/Auth/userDetails";
 //rolesGetForms
 const FieldListTablePage = (props: any) => {
   const [value, setValue] = useState("");
-  const [getdata, setgetdata] = useState<any>();
+  const [getdata, setgetdata] = useState<any>([]);
   const [modulename, setmodulename] = useState("");
-  const [state, setState] = useState<any>([]);
   const [id, setid] = useState<any>();
   const [Get, setGet] = useState<any>([]);
   const [DataGet, setDataGet] = useState<any>([]);
@@ -46,6 +45,9 @@ const FieldListTablePage = (props: any) => {
   let { editTableId } = useParams();
   const user: any = useAppSelector((state) => state);
   const [buttonName, setButtonName] = useState<any>();
+  const [coloumnData, setColoumnData] = useState<any>();
+
+  const [selectedColumns, setSelectedColumns] = useState<any>(null);
 
   async function firstGetApi() {
     let app = {};
@@ -88,33 +90,10 @@ const FieldListTablePage = (props: any) => {
     setForms(forms);
     setTableData(TableData);
     setformData(formData);
-
-    // let recuriter =
-    //   res.payload.data.data && res.payload.data.data[0].recuriter
-    //     ? res.payload.data.data[0].recuriter
-    //     : [];
-    // let modulename =
-    //   res.payload.data.data && res.payload.data.data[0].modulename
-    //     ? res.payload.data.data[0].modulename
-    //     : [];
-    // let id =
-    //   res.payload.data.data && res.payload.data.data[0]._id
-    //     ? res.payload.data.data[0]._id
-    //     : [];
-    // let moduleElement =
-    //   res.payload.data.data && res.payload.data.data[0]._id
-    //     ? res.payload.data.data[0].moduleelements
-    //     : [];
-
-    // setModuleElements(moduleElement);
-    // setValue(recuriter);
-    // setmodulename(modulename);
-    // setid(id);
   }
 
   useEffect(() => {
     firstGetApi();
-   
   }, [editTableId]);
 
   const columns = [
@@ -135,12 +114,49 @@ const FieldListTablePage = (props: any) => {
     { field: "File Upload", header: "File Upload" },
     { field: "Image Upload", header: "Image Upload" },
   ];
-  const [selectedColumns, setSelectedColumns] = useState(columns);
+
   // useEffect(() => {
   //   GetModuleName();
   // }, []);
+  const [singleLine, setSingleLine] = useState<any>("");
+  const [multiLine, setMultipleLine] = useState<any>("");
+  const [email, setEmail] = useState<any>("");
+  const [phone, setPhone] = useState<any>("");
+  const [pickList, setPickList] = useState<any>("");
+  const [date, setDate] = useState<any>("");
+  const [dateTime, setDateTime] = useState<any>("");
+  const [number, setNumber] = useState<any>("");
+  const [currency, setCurrency] = useState<any>("");
+  const [decimal, setDecimal] = useState<any>("");
+  const [percent, setPercent] = useState<any>("");
+  const [longInteger, setInteger] = useState<any>("");
+  const [checkbox, setCheckbox] = useState<any>("");
+  const [url, setURL] = useState<any>("");
+  const [fileUpload, setFileUpload] = useState<any>("");
+  const [imageUpload, setImageUpload] = useState<any>("");
 
-  const onColumnToggle = (event: any) => {
+  if (selectedColumns === null) {
+    setSelectedColumns(columns);
+
+    setSingleLine("Single Line");
+    setMultipleLine("Multi-Line");
+    setEmail("Email");
+    setPhone("Phone");
+    setPickList("Pick List");
+    setDate("Date");
+    setDateTime("Date/Time");
+    setCurrency("Currency");
+    setNumber("Number");
+    setDecimal("Decimal");
+    setInteger("Long integer");
+    setPercent("Percent");
+    setCheckbox("Checkbox");
+    setURL("URL");
+    setFileUpload("File Upload");
+    setImageUpload("Image Upload");
+  }
+
+  function onColumnToggle(event: any) {
     let selectedColumns = event.value;
     let orderedSelectedColumns = columns.filter((col) =>
       selectedColumns.some(
@@ -148,7 +164,96 @@ const FieldListTablePage = (props: any) => {
       )
     );
     setSelectedColumns(orderedSelectedColumns);
-  };
+
+    orderedSelectedColumns.map((x: any, i: number) => {
+      if (x.field === "Single Line") {
+        setSingleLine("Single Line");
+      } else if (x.field === "Multi-Line") {
+        setMultipleLine("Multi-Line");
+      } else if (x.field === "Email") {
+        setEmail("Email");
+      } else if (x.field === "Phone") {
+        setPhone("Phone");
+      } else if (x.field === "Pick List") {
+        setPickList("Pick List");
+      } else if (x.field === "Date") {
+        setDate("Date");
+      } else if (x.field === "Date/Time") {
+        setDateTime("Date/Time");
+      } else if (x.field === "Number") {
+        setNumber("Number");
+      } else if (x.field === "Currency") {
+        setCurrency("Currency");
+      } else if (x.field === "Decimal") {
+        setDecimal("Decimal");
+      } else if (x.field === "Percent") {
+        setPercent("Percent");
+      } else if (x.field === "Long integer") {
+        setInteger("Long integer");
+      } else if (x.field === "Checkbox") {
+        setCheckbox("Checkbox");
+      } else if (x.field === "URL") {
+        setURL("URL");
+      } else if (x.field === "File Upload") {
+        setFileUpload("File Upload");
+      } else if (x.field === "Image Upload") {
+        setImageUpload("Image Upload");
+      }
+    });
+
+    const isSameUser = (columns: any, orderedSelectedColumns: any) =>
+      columns.field === orderedSelectedColumns.field &&
+      columns.header === orderedSelectedColumns.header;
+
+    const onlyInLeft = (left: any, right: any, compareFunction: any) =>
+      left.filter(
+        (leftValue: any) =>
+          !right.some((rightValue: any) =>
+            compareFunction(leftValue, rightValue)
+          )
+      );
+
+    const onlyInA = onlyInLeft(columns, orderedSelectedColumns, isSameUser);
+    const onlyInB = onlyInLeft(orderedSelectedColumns, columns, isSameUser);
+
+    const result = [...onlyInA, ...onlyInB];
+
+    result.map((x: any, i: number) => {
+      if (x.field === "Single Line") {
+        setSingleLine("");
+      } else if (x.field === "Multi-Line") {
+        setMultipleLine("");
+      } else if (x.field === "Email") {
+        setEmail("");
+      } else if (x.field === "Phone") {
+        setPhone("");
+      } else if (x.field === "Pick List") {
+        setPickList("");
+      } else if (x.field === "Date") {
+        setDate("");
+      } else if (x.field === "Date/Time") {
+        setDateTime("");
+      } else if (x.field === "Number") {
+        setNumber("");
+      } else if (x.field === "Currency") {
+        setCurrency("");
+      } else if (x.field === "Decimal") {
+        setDecimal("");
+      } else if (x.field === "Percent") {
+        setPercent("");
+      } else if (x.field === "Long integer") {
+        setInteger("");
+      } else if (x.field === "Checkbox") {
+        setCheckbox("");
+      } else if (x.field === "URL") {
+        setURL("");
+      } else if (x.field === "File Upload") {
+        setFileUpload("");
+      } else if (x.field === "Image Upload") {
+        setImageUpload("");
+      }
+    });
+  }
 
   const header = (
     <div className="flex justify-content-between">
@@ -163,23 +268,14 @@ const FieldListTablePage = (props: any) => {
         to="/super-admin/CustomModule/being"
         state={{
           from: Get,
-          // form: value,
-          // name: modulename,
           id: id,
           recId: editTableId,
-          // moduleElements: moduleElements,
         }}
       >
         <Button label={`Create a ${buttonName}`} />
       </Link>
-
-      {/* <Button label="Create a Lead" onClick={()=> navigate("/super-admin/CustomModule/being")} /> */}
     </div>
   );
-
-  const columnComponents = selectedColumns.map((col) => {
-    return <Column key={col.field} field={col.field} header={col.header} />;
-  });
 
   return (
     <div style={{ background: "rgb(250, 250, 251)", height: "100vh" }}>
@@ -212,7 +308,57 @@ const FieldListTablePage = (props: any) => {
                     headerStyle={{ width: "3rem" }}
                     exportable={false}
                   ></Column>
-                  <Column field="Single Line" header="Single Line"></Column>
+
+                  {singleLine == "Single Line" ? (
+                    <Column field="Single Line" header="Single Line"></Column>
+                  ) : null}
+                  {multiLine == "Multi-Line" ? (
+                    <Column field="Multi-Line" header="Multi-Line"></Column>
+                  ) : null}
+                  {email == "Email" ? (
+                    <Column field="Email" header="Email"></Column>
+                  ) : null}
+                  {phone == "Phone" ? (
+                    <Column field="Phone" header="Phone"></Column>
+                  ) : null}
+                  {pickList == "Pick List" ? (
+                    <Column field="Pick List" header="Pick List"></Column>
+                  ) : null}
+                  {date == "Date" ? (
+                    <Column field="Date" header="Date"></Column>
+                  ) : null}
+                  {dateTime == "Date/Time" ? (
+                    <Column field="Date/Time" header="Date/Time"></Column>
+                  ) : null}
+                  {number == "Number" ? (
+                    <Column field="Number" header="Number"></Column>
+                  ) : null}
+                  {currency == "Currency" ? (
+                    <Column field="Currency" header="Currency"></Column>
+                  ) : null}
+                  {decimal == "Decimal" ? (
+                    <Column field="Decimal" header="Decimal"></Column>
+                  ) : null}
+                  {percent == "Percent" ? (
+                    <Column field="Percent" header="Percent"></Column>
+                  ) : null}
+                  {longInteger == "Long integer" ? (
+                    <Column field="Long integer" header="Long integer"></Column>
+                  ) : null}
+                  {checkbox == "Checkbox" ? (
+                    <Column field="Checkbox" header="Checkbox"></Column>
+                  ) : null}
+                  {url == "URL" ? (
+                    <Column field="URL" header="URL"></Column>
+                  ) : null}
+                  {fileUpload == "File Upload" ? (
+                    <Column field="File Upload" header="File Upload"></Column>
+                  ) : null}
+                  {imageUpload == "Image Upload" ? (
+                    <Column field="Image Upload" header="Image Upload"></Column>
+                  ) : null}
+
+                  {/* <Column field="Single Line" header="Single Line"></Column>
                   <Column field="Multi-Line" header="Multi-Line"></Column>
                   <Column field="Email" header="Email"></Column>
                   <Column field="Phone" header="Phone"></Column>
@@ -227,7 +373,7 @@ const FieldListTablePage = (props: any) => {
                   <Column field="Checkbox" header="Checkbox"></Column>
                   <Column field="URL" header="URL"></Column>
                   <Column field="File Upload" header="File Upload"></Column>
-                  <Column field="Image Upload" header="Image Upload"></Column>
+                  <Column field="Image Upload" header="Image Upload"></Column> */}
                 </DataTable>
               </div>
             </div>
