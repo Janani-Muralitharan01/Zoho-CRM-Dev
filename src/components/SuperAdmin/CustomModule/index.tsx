@@ -102,7 +102,7 @@ const CustomModule = (props: any) => {
               style={{ width: " 56px", height: "50px" }}
             ></img>
           </span>
-          <span className="contactuntitle">Untitled Information 34</span>
+          <span className="contactuntitle">Untitled Information </span>
           <div>
             <div>
               <div className="previewCardAligment">

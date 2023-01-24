@@ -46,7 +46,7 @@ const FieldListTablePage = (props: any) => {
   const user: any = useAppSelector((state) => state);
   const [buttonName, setButtonName] = useState<any>();
   const [coloumnData, setColoumnData] = useState<any>();
-
+  const [duplicate, setDuplicate] = useState<any>();
   const [selectedColumns, setSelectedColumns] = useState<any>(null);
 
   async function firstGetApi() {
@@ -135,25 +135,62 @@ const FieldListTablePage = (props: any) => {
   const [fileUpload, setFileUpload] = useState<any>("");
   const [imageUpload, setImageUpload] = useState<any>("");
 
-  if (selectedColumns === null) {
-    setSelectedColumns(columns);
+  function removeDuplicates(result: any) {
+    return result.filter(
+      (item: any, index: number) => result.indexOf(item) === index
+    );
+  }
 
-    setSingleLine("Single Line");
-    setMultipleLine("Multi-Line");
-    setEmail("Email");
-    setPhone("Phone");
-    setPickList("Pick List");
-    setDate("Date");
-    setDateTime("Date/Time");
-    setCurrency("Currency");
-    setNumber("Number");
-    setDecimal("Decimal");
-    setInteger("Long integer");
-    setPercent("Percent");
-    setCheckbox("Checkbox");
-    setURL("URL");
-    setFileUpload("File Upload");
-    setImageUpload("Image Upload");
+  if (getdata.length > 0) {
+    if (selectedColumns === null) {
+      // setSelectedColumns(columns);
+
+      let result = getdata.flatMap(Object.keys);
+      let res = removeDuplicates(result);
+      setDuplicate(res);
+
+      let dup: any = [];
+      res.map((x: any, i: number) => {
+        dup.push({ field: x, header: x });
+      });
+      setSelectedColumns(dup);
+
+      res.map((x: any, i: number) => {
+        if (x === "Single Line") {
+          setSingleLine("Single Line");
+        } else if (x === "Multi-Line") {
+          setMultipleLine("Multi-Line");
+        } else if (x === "Email") {
+          setEmail("Email");
+        } else if (x === "Phone") {
+          setPhone("Phone");
+        } else if (x === "Pick List") {
+          setPickList("Pick List");
+        } else if (x === "Date") {
+          setDate("Date");
+        } else if (x === "Date/Time") {
+          setDateTime("Date/Time");
+        } else if (x === "Number") {
+          setNumber("Number");
+        } else if (x === "Currency") {
+          setCurrency("Currency");
+        } else if (x === "Decimal") {
+          setDecimal("Decimal");
+        } else if (x === "Percent") {
+          setPercent("Percent");
+        } else if (x === "Long integer") {
+          setInteger("Long integer");
+        } else if (x === "Checkbox") {
+          setCheckbox("Checkbox");
+        } else if (x === "URL") {
+          setURL("URL");
+        } else if (x === "File Upload") {
+          setFileUpload("File Upload");
+        } else if (x === "Image Upload") {
+          setImageUpload("Image Upload");
+        }
+      });
+    }
   }
 
   function onColumnToggle(event: any) {
@@ -163,6 +200,12 @@ const FieldListTablePage = (props: any) => {
         (sCol: { field: string }) => sCol.field === col.field
       )
     );
+
+    setSelectedColumns(selectedColumns);
+    let dup: any = [];
+    duplicate.map((x: any, i: number) => {
+      dup.push({ field: x, header: x });
+    });
     setSelectedColumns(orderedSelectedColumns);
 
     orderedSelectedColumns.map((x: any, i: number) => {
