@@ -148,7 +148,7 @@ const SettingsModules = (props: any) => {
                       ></Column>
                       <Column field="modulename" header="Module Name"></Column>
                       <Column
-                        field="Last Modified"
+                        field="created_at"
                         header="Last Modified"
                       ></Column>
                       <Column body={editPolicy} header="Actions"></Column>

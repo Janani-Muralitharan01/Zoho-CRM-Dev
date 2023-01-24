@@ -102,7 +102,7 @@ const CustomModule = (props: any) => {
               style={{ width: " 56px", height: "50px" }}
             ></img>
           </span>
-          <span className="contactuntitle">Untitled Information</span>
+          <span className="contactuntitle">Untitled Information 34</span>
           <div>
             <div>
               <div className="previewCardAligment">
@@ -111,7 +111,7 @@ const CustomModule = (props: any) => {
                     <div key={index}>
                       <div className="card border-0 mt-3 ml-7">
                         <div className="names">
-                          <p className="grey">{item.DataHeader}</p>
+                          <p className="grey">{item.value}</p>
                           {item.DataHeader === "Untitled Owner" ? (
                             <span className="p-input-icon-right ">
                               <i className="pi pi-lock mt-0" />
