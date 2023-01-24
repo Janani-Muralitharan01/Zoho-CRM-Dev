@@ -367,12 +367,6 @@ const DropArea = (props: any) => {
                                   {...provided.dragHandleProps}
                                 >
                                   <div className="names flex justify-content-between align-items-center">
-                                    <section
-                                      className="grey font-semibold  "
-                                      // style={{ color: "#333333" }}
-                                    >
-                                      {item.subName || item.fieldname}
-                                    </section>
                                     {item.subName === "Pick List" ? (
                                       <>
                                         <Dropdown
@@ -384,12 +378,12 @@ const DropArea = (props: any) => {
                                           }}
                                           optionLabel="value"
                                           placeholder="Pick List"
-                                          style={{
-                                            height: "44px",
-                                            border: "1px solid lightgrey",
-                                            color: "#8083A3",
-                                          }}
-                                          className="  mx-auto my-auto border-round-md"
+                                          // style={{
+                                          //   height: "44px",
+                                          //   border: "1px solid lightgrey",
+                                          //   color: "#8083A3",
+                                          // }}
+                                          // className="  mx-auto my-auto border-round-md"
                                         />
                                       </>
                                     ) : (
@@ -409,16 +403,13 @@ const DropArea = (props: any) => {
                                       />
                                     )}
 
+                                    <section className="grey font-semibold  ">
+                                      {item.subName || item.fieldname}
+                                    </section>
+
                                     <p className="delete">
                                       <i className="pi pi-ellipsis-v"></i>
                                     </p>
-
-                                    {/* <section
-                                      className="grey py-2 font-semibold"
-                                      style={{ color: "#333333" }}
-                                    >
-                                      {item.subName}
-                                    </section> */}
                                   </div>
                                 </div>
                               )}
