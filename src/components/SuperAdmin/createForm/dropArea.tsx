@@ -1,4 +1,4 @@
-import "./CreateForm.css"
+import "./CreateForm.css";
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -279,18 +279,12 @@ const DropArea = (props: any) => {
 
   useEffect(() => {
     setList1(count.dragAndDrop.PickListData);
-    console.log(count.dragAndDrop,"count.dragAndDrop.PickListData")
-    store.push(count.dragAndDrop.PickListData)
-
+    store.push(count.dragAndDrop.PickListData);
     add();
-    console.log(store,"storestorestore")
-    const val = (store).map((list:any)=>{
-      console.log(list,"listlistlistlist")
-      return list
-    })
-    setstore(val)
-    console.log(store,"storestorestore123455")
-  
+    const val = store.map((list: any) => {
+      return list;
+    });
+    setstore(val);
   }, [count.dragAndDrop.PickListData]);
 
   let handleChangeForm = (i: number, e: any, list: any) => {
@@ -312,49 +306,44 @@ const DropArea = (props: any) => {
               <Droppable key={list} droppableId={list}>
                 {(provided, snapshot) => (
                   <div className="border-dotted border-400 mt-4 ml-3 mr-3">
-                   <section className="mt-2 p-2  mx-auto">
-                   {/* <section className="mt-2 p-2 ml-8   "> */}
-                   {formName.length
-                     ? formName.map((x: any, idx: number) => {
-                         return (
-                           <div key={idx} className="ml-3">
-                             {i == idx ? (
-                               <input
-                                 placeholder="Untitled form"
-                                 className="  mx-auto  text-sm w-25rem  text-900 "
-                                 style={{
-                                   height: "48px",
-                                   color: "#333333",
-                                 }}
-                                 value={x.name}
-                                 onChange={(e) =>
-                                   handleChangeForm(i, e, list)
-                                 }
-                               />
-                             ) : (
-                               ""
-                             )}
-                           </div>
-                         );
-                       })
-                     : ""}
+                    <section className="mt-2 p-2  mx-auto">
+                      {/* <section className="mt-2 p-2 ml-8   "> */}
+                      {formName.length
+                        ? formName.map((x: any, idx: number) => {
+                            return (
+                              <div key={idx} className="ml-3">
+                                {i == idx ? (
+                                  <input
+                                    placeholder="Untitled form"
+                                    className="  mx-auto  text-sm w-25rem  text-900 "
+                                    style={{
+                                      height: "48px",
+                                      color: "#333333",
+                                    }}
+                                    value={x.name}
+                                    onChange={(e) =>
+                                      handleChangeForm(i, e, list)
+                                    }
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            );
+                          })
+                        : ""}
 
-                   {/* </section> */}
-                 </section>
-                  <div
-                  className="dragCard"
-                    ref={provided.innerRef}
-                  >
-                   
-
-                    {
-                      uidv4[list].length ? (
-                        uidv4[list].map((item: any, index: number) => (
-                          <div
-                            //  className=" border-dashed border-2 w-30rem ml-8 mt-1"
-                            className="p-2"
-                          >
-                            {/* <section className="ml-8 pl-2 mt-2">
+                      {/* </section> */}
+                    </section>
+                    <div className="dragCard" ref={provided.innerRef}>
+                      {
+                        uidv4[list].length ? (
+                          uidv4[list].map((item: any, index: number) => (
+                            <div
+                              //  className=" border-dashed border-2 w-30rem ml-8 mt-1"
+                              className="p-2"
+                            >
+                              {/* <section className="ml-8 pl-2 mt-2">
                               <input
                                 placeholder="Untiled form"
                                 className=" w-30rem my-auto  text-sm  text-900"
@@ -367,93 +356,96 @@ const DropArea = (props: any) => {
                               />
                             </section> */}
 
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={index}
-                            >
-                              {(provided, snapshot) => (
-                                <div
-                                className="Dropcard px-2"
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  style={provided.draggableProps.style}
-                                  {...provided.dragHandleProps}
-                                >
-                                  <div className="names flex justify-content-between align-items-center">
-                                    
-                                    {item.subName === "Pick List" ? (
-                                      <>
-                                        <Dropdown
-                                          value={pickList}
-                                          options={store}
-                                          onChange={(e) => {
-                                            handleChange(e, index, list);
-                                            setPickList(e.value);
-                                          }}
-                                          optionLabel="value"
-                                          placeholder="Pick List"
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.id}
+                                index={index}
+                              >
+                                {(provided, snapshot) => (
+                                  <div
+                                    className="Dropcard px-2"
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    style={provided.draggableProps.style}
+                                    {...provided.dragHandleProps}
+                                  >
+                                    <div className="names flex justify-content-between align-items-center">
+                                      {item.subName === "Pick List" ? (
+                                        <>
+                                          <Dropdown
+                                            value={pickList}
+                                            options={store}
+                                            onChange={(e) => {
+                                              handleChange(e, index, list);
+                                              setPickList(e.value);
+                                            }}
+                                            optionLabel="value"
+                                            placeholder="Pick List"
+                                            style={{
+                                              height: "44px",
+                                              border: "1px solid lightgrey",
+                                              color: "#8083A3",
+                                            }}
+                                            className="   border-0"
+                                          />
+                                        </>
+                                      ) : (
+                                        <input
+                                          type="text"
+                                          name="names "
                                           style={{
                                             height: "44px",
                                             border: "1px solid lightgrey",
-                                            color: "#8083A3",
+                                            // color: "#8083A3",
                                           }}
-                                          className="  mx-auto border-0"
+                                          value={item.names || item.type}
+                                          onChange={(e) => {
+                                            handleChange(e, index, list);
+                                          }}
+                                          className=" text-500  border-0 "
                                         />
-                                      </>
-                                    ) : (
-                                      <input
-                                        type="text"
-                                        name="names "
+                                      )}
+                                      <section
+                                        className="grey font-semibold  "
                                         style={{
-                                          height: "44px",
-                                          border: "1px solid lightgrey",
-                                          // color: "#8083A3",
+                                          // border: "1px solid gray",
+                                          width: "150px",
+                                          padding: "4px",
                                         }}
-                                        value={item.names || item.type}
-                                        onChange={(e) => {
-                                          handleChange(e, index, list);
-                                        }}
-                                        className=" text-500  border-0 "
-                                      />
-                                    )}
-                                    <section
-                                      className="grey font-semibold  "
-                                      style={{ border: '1px solid gray',
-                                        width: '150px',padding: '4px'}}
-                                    >
-                                      {item.subName || item.fieldname}
-                                    </section>
+                                      >
+                                        {item.subName || item.fieldname}
+                                      </section>
 
-                                   
-
-                                    <p className="delete">
-                                      <i className="pi pi-ellipsis-v"></i>
-                                    </p>
+                                      <p className="delete">
+                                        <i className="pi pi-ellipsis-v"></i>
+                                      </p>
+                                    </div>
                                   </div>
-                                </div>
-                              )}
-                            </Draggable>
+                                )}
+                              </Draggable>
 
-                            {count.dragAndDrop.DialogIndex == 5 &&
-                            item.subName == "Pick List"
-                              ? openDialog()
-                              : item.subName == "Single Line"
-                              ? openDialog()
-                              : ""}
+                              {count.dragAndDrop.DialogIndex == 5 &&
+                              item.subName == "Pick List"
+                                ? openDialog()
+                                : item.subName == "Single Line"
+                                ? openDialog()
+                                : ""}
+                            </div>
+                          ))
+                        ) : (
+                          // !provided.placeholder && (
+                          <div
+                            className=" mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2 mb-2"
+                            style={{ width: "199%" }}
+                          >
+                            <p className="">
+                              + Drop items here{provided.placeholder}
+                            </p>
                           </div>
-                        ))
-                      ) : (
-                        // !provided.placeholder && (
-                        <div className=" mx-auto pt-4 p-2 surface-300 border-round-sm h-6rem  flex justify-content-center  mt-2 mb-2" style={{width: '199%'}}>
-                          <p className="">
-                            + Drop items here{provided.placeholder}
-                          </p>
-                        </div>
-                      )
-                      // )
-                    }
-                  </div>
+                        )
+                        // )
+                      }
+                    </div>
                   </div>
                 )}
               </Droppable>
